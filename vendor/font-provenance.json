@@ -1,0 +1,23 @@
+{
+  "roboto": {
+    "version": "5.2.8",
+    "matches": {
+      "roboto-latin-400-normal.woff2": true,
+      "roboto-latin-500-normal.woff2": true,
+      "roboto-latin-700-normal.woff2": true
+    }
+  },
+  "roboto-mono": {
+    "version": "5.2.8",
+    "matches": {
+      "roboto-mono-latin-500-normal.woff2": true
+    }
+  },
+  "noto-sans-thai": {
+    "version": "5.2.8",
+    "matches": {
+      "noto-sans-thai-thai-400-normal.woff2": true,
+      "noto-sans-thai-thai-500-normal.woff2": true
+    }
+  }
+}

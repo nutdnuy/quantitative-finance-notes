@@ -1,0 +1,206 @@
+[
+  {
+    "date": "1995-03-01",
+    "printed_price": 2.11,
+    "book_printed_return": null,
+    "reconstructed_return": null
+  },
+  {
+    "date": "1995-03-02",
+    "printed_price": 1.9,
+    "book_printed_return": -0.1,
+    "reconstructed_return": -0.09952606635071093
+  },
+  {
+    "date": "1995-03-03",
+    "printed_price": 2.18,
+    "book_printed_return": 0.149906,
+    "reconstructed_return": 0.14736842105263182
+  },
+  {
+    "date": "1995-03-06",
+    "printed_price": 2.16,
+    "book_printed_return": -0.01081,
+    "reconstructed_return": -0.00917431192660556
+  },
+  {
+    "date": "1995-03-07",
+    "printed_price": 1.91,
+    "book_printed_return": -0.11258,
+    "reconstructed_return": -0.11574074074074081
+  },
+  {
+    "date": "1995-03-08",
+    "printed_price": 1.86,
+    "book_printed_return": -0.02985,
+    "reconstructed_return": -0.02617801047120405
+  },
+  {
+    "date": "1995-03-09",
+    "printed_price": 1.97,
+    "book_printed_return": 0.061538,
+    "reconstructed_return": 0.05913978494623651
+  },
+  {
+    "date": "1995-03-10",
+    "printed_price": 2.27,
+    "book_printed_return": 0.15,
+    "reconstructed_return": 0.15228426395939088
+  },
+  {
+    "date": "1995-03-13",
+    "printed_price": 2.49,
+    "book_printed_return": 0.099874,
+    "reconstructed_return": 0.09691629955947145
+  },
+  {
+    "date": "1995-03-14",
+    "printed_price": 2.76,
+    "book_printed_return": 0.108565,
+    "reconstructed_return": 0.10843373493975883
+  },
+  {
+    "date": "1995-03-15",
+    "printed_price": 2.61,
+    "book_printed_return": -0.05426,
+    "reconstructed_return": -0.05434782608695654
+  },
+  {
+    "date": "1995-03-16",
+    "printed_price": 2.67,
+    "book_printed_return": 0.021858,
+    "reconstructed_return": 0.02298850574712641
+  },
+  {
+    "date": "1995-03-17",
+    "printed_price": 2.64,
+    "book_printed_return": -0.0107,
+    "reconstructed_return": -0.011235955056179692
+  },
+  {
+    "date": "1995-03-20",
+    "printed_price": 2.6,
+    "book_printed_return": -0.01622,
+    "reconstructed_return": -0.015151515151515138
+  },
+  {
+    "date": "1995-03-21",
+    "printed_price": 2.59,
+    "book_printed_return": -0.00275,
+    "reconstructed_return": -0.0038461538461539435
+  },
+  {
+    "date": "1995-03-22",
+    "printed_price": 2.59,
+    "book_printed_return": -0.00275,
+    "reconstructed_return": 0.0
+  },
+  {
+    "date": "1995-03-23",
+    "printed_price": 2.55,
+    "book_printed_return": -0.01232,
+    "reconstructed_return": -0.015444015444015413
+  },
+  {
+    "date": "1995-03-24",
+    "printed_price": 2.73,
+    "book_printed_return": 0.069307,
+    "reconstructed_return": 0.07058823529411762
+  },
+  {
+    "date": "1995-03-27",
+    "printed_price": 2.91,
+    "book_printed_return": 0.064815,
+    "reconstructed_return": 0.06593406593406592
+  },
+  {
+    "date": "1995-03-28",
+    "printed_price": 2.92,
+    "book_printed_return": 0.002899,
+    "reconstructed_return": 0.0034364261168384758
+  },
+  {
+    "date": "1995-03-29",
+    "printed_price": 2.92,
+    "book_printed_return": 0.0,
+    "reconstructed_return": 0.0
+  },
+  {
+    "date": "1995-03-30",
+    "printed_price": 3.12,
+    "book_printed_return": 0.069364,
+    "reconstructed_return": 0.06849315068493156
+  },
+  {
+    "date": "1995-03-31",
+    "printed_price": 3.14,
+    "book_printed_return": 0.005405,
+    "reconstructed_return": 0.0064102564102563875
+  },
+  {
+    "date": "1995-04-03",
+    "printed_price": 3.13,
+    "book_printed_return": -0.00269,
+    "reconstructed_return": -0.0031847133757962887
+  },
+  {
+    "date": "1995-04-04",
+    "printed_price": 3.24,
+    "book_printed_return": 0.037736,
+    "reconstructed_return": 0.03514376996805124
+  },
+  {
+    "date": "1995-04-05",
+    "printed_price": 3.25,
+    "book_printed_return": 0.002597,
+    "reconstructed_return": 0.0030864197530864335
+  },
+  {
+    "date": "1995-04-06",
+    "printed_price": 3.28,
+    "book_printed_return": 0.007772,
+    "reconstructed_return": 0.009230769230769154
+  },
+  {
+    "date": "1995-04-07",
+    "printed_price": 3.21,
+    "book_printed_return": -0.02057,
+    "reconstructed_return": -0.021341463414634054
+  },
+  {
+    "date": "1995-04-10",
+    "printed_price": 3.02,
+    "book_printed_return": -0.06037,
+    "reconstructed_return": -0.05919003115264798
+  },
+  {
+    "date": "1995-04-11",
+    "printed_price": 3.08,
+    "book_printed_return": 0.019553,
+    "reconstructed_return": 0.019867549668874274
+  },
+  {
+    "date": "1995-04-12",
+    "printed_price": 3.19,
+    "book_printed_return": 0.035616,
+    "reconstructed_return": 0.03571428571428559
+  },
+  {
+    "date": "1995-04-17",
+    "printed_price": 3.21,
+    "book_printed_return": 0.007936,
+    "reconstructed_return": 0.006269592476489061
+  },
+  {
+    "date": "1995-04-18",
+    "printed_price": 3.17,
+    "book_printed_return": -0.01312,
+    "reconstructed_return": -0.012461059190031154
+  },
+  {
+    "date": "1995-04-19",
+    "printed_price": 3.24,
+    "book_printed_return": 0.021277,
+    "reconstructed_return": 0.02208201892744488
+  }
+]

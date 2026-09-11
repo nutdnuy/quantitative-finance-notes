@@ -1,0 +1,10 @@
+# หน้าแรกของหนังสือ (ไม่ต้องใส่ .md)
+format: jb-book
+root: intro
+options:
+  numbered: false
+
+# เพิ่มหัวข้อด้วยการเพิ่มไฟล์ Markdown แล้วเพิ่มรายการ file ด้านล่าง
+chapters:
+  - file: random-assets
+    title: พฤติกรรมแบบสุ่มของสินทรัพย์

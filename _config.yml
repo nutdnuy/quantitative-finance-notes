@@ -1,0 +1,16 @@
+# แก้ชื่อเว็บและรูปด้านบนที่ไฟล์นี้ แล้วบันทึก
+# โครงสร้างไฟล์อิงแนวทาง Jupyter Book; เว็บนี้ใช้ตัวสร้างใน build.cjs
+
+title: Quantitative Finance Notes
+author: Nuth
+language: th
+logo: assets/images/welcome-paths.png
+logo_alt: เส้นทางสุ่มสีม่วง เทา และ teal แผ่ออกจากจุดเริ่มต้นเดียวบนพื้นขาว
+
+# ไฟล์สำหรับดาวน์โหลดจากแถบด้านข้าง
+notebook: notebooks/random-assets.ipynb
+
+# ลิงก์สำหรับเปิดไฟล์ต้นทางบน GitHub
+repository:
+  url: https://github.com/nutdnuy/quantitative-finance-notes
+  branch: main

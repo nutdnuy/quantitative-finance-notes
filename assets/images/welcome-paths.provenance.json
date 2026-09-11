@@ -1,0 +1,15 @@
+{
+  "type": "conceptual cover artwork",
+  "route": "image-generator-only",
+  "tool": "built-in image_gen",
+  "created": "2026-09-11",
+  "dimensions": [
+    1536,
+    1024
+  ],
+  "prompt": "welcome-paths.prompt.txt",
+  "reference": "User-supplied image of stochastic price paths; used as a visual reference, not a dataset",
+  "meaning": "Many possible trajectories from one common start",
+  "not_evidence": "This image is not calculated market data or a model result. Interactive lesson figures remain data-driven.",
+  "source_asset": "exec-ebe26351-1f86-4bbc-8aa0-827167799e2b.png"
+}

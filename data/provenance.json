@@ -1,0 +1,10 @@
+{
+  "source": "User-supplied Paul Wilmott on Quantitative Finance, second edition (2006), Figure 3.3, printed page 60 / PDF page 81",
+  "observation_count": 34,
+  "reconstructed_return_count": 33,
+  "start": "1995-03-01",
+  "end": "1995-04-19",
+  "rounding": "Prices printed to two decimal places. Reconstructed returns intentionally recomputed and may differ from source return column.",
+  "reported_full_series_daily_mean": 0.002916,
+  "reported_full_series_daily_sd": 0.024521
+}

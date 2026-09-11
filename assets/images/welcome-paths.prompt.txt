@@ -1,0 +1,9 @@
+Use the attached image as a visual reference for its central idea: many irregular stochastic paths start together at the left and disperse toward the right. Create an ORIGINAL polished editorial artwork from that idea for a quantitative-finance book cover image.
+
+Make an airy, elegant field of about 45 very fine ink-like paths on a completely clean white background. The paths begin at one compact point around the left fifth of the composition, jitter and cross in a naturally irregular Brownian-motion-like manner, and fan out toward the right into a broad asymmetric constellation of possible futures. Keep small angular fluctuations within each line, avoiding smooth sine waves. Some paths rise, some fall; most cluster near the middle. A few well-separated paths should give the composition breathing room. Use depth only through subtle differences in line weight and opacity, with crisp fine drawing.
+
+Palette: mostly warm graphite and soft silver-grey paths, with a controlled minority of saturated deep violet (#6200EE) and dark teal (#00796B), plus a few muted lavender strands. High contrast where paths overlap. Do not use rainbow colours or bright red/yellow.
+
+Landscape 3:2 framing with generous white margins on ALL sides. The entire fan must remain visible, no endpoint cropped, no black outer frame. The composition should also remain recognizable at a small sidebar size. Quiet, precise, beautiful mathematical editorial art; flat linework rather than a sculpture or 3D object.
+
+No axes, grid, ticks, labels, numbers, formulas, words, logos, watermark, arrows, planets, nodes or decorative dots. No luminous effects, neon, glow or coloured background. This is a conceptual cover artwork inspired by stochastic trajectories, not a reproduction of the original data chart.

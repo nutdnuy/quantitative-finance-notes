@@ -1,0 +1,9 @@
+{
+  "react": "19.2.6",
+  "react-dom": "19.2.6",
+  "scheduler": "0.27.0",
+  "motion": "12.43.0",
+  "motion-dom": "12.43.0",
+  "motion-utils": "12.39.0",
+  "framer-motion": "12.43.0"
+}
