@@ -178,6 +178,17 @@ display(chart(series,"3.9 One Wiener path, several observation grids","Years","X
 # ก้าวหยาบได้จากการรวม increments บนเส้นละเอียดเดียวกัน จุดร่วมจึงไม่เปลี่ยน
 '''
 thai_funds = json.loads((root / 'data/thai-funds-spiva-2025.json').read_text())
+mc_code = '''# Monte Carlo GBM: adjust mu, sigma and count, then rerun
+mu, sigma, count, seed = .10, .25, 1000, 73
+rng = np.random.default_rng(seed)
+shocks = rng.standard_normal((count,52))
+paths = 100*np.exp(np.cumsum((mu-.5*sigma**2)/52+sigma/np.sqrt(52)*shocks,axis=1))
+paths = np.column_stack([np.full(count,100.),paths])
+terminal = paths[:,-1]
+print(f"Mean={terminal.mean():.2f}, theoretical={100*np.exp(mu):.2f}, SE={terminal.std(ddof=1)/np.sqrt(count):.2f}")
+print(f"Fraction below 100: {np.mean(terminal<100):.1%}; conditional on this model")
+display(chart([dict(x=np.linspace(0,1,53),y=p,label="Sample path",color="#00796b") for p in paths[:20]],"Monte Carlo: 20 of all simulated paths","Years","Price"))
+'''
 experiments['model'] = "# SPIVA Asia Ex-Japan Year-End 2025, Report 1a, p. 9\nfund_data = " + repr(thai_funds) + "\n" + '''
 print(f"{fund_data['category']} / {fund_data['benchmark']} / {fund_data['as_of']}")
 for row in fund_data['rows']:
@@ -219,7 +230,7 @@ for section_id, body in sections:
     body = re.sub(r'<div class="download-panel">[\s\S]*$', '', body)
     md(clean(body))
     if section_id in experiments:
-        code(experiments[section_id])
+        code((mc_code + '\n' if section_id == 'model' else '') + experiments[section_id])
 notebook = {"cells":cells,"metadata":{"kernelspec":{"display_name":"Python 3","language":"python","name":"python3"},"language_info":{"name":"python","version":"3.12"}},"nbformat":4,"nbformat_minor":4}
 (root/'notebooks/random-assets.ipynb').write_text(json.dumps(notebook,ensure_ascii=False,indent=1))
 summary = {"status":"passed","source_sections":len(sections),"cells":len(cells),"executed_code_cells":execution_count,"svg_outputs":sum(1 for c in cells for o in c.get('outputs',[]) if 'image/svg+xml' in o.get('data',{})),"data":{"printed_prices":len(perez),"reconstructed_returns":len(perez)-1},"execution":"Every code cell executed with NumPy. A lightweight IPython.display capture adapter collected SVG outputs; the full Jupyter UI was not tested."}
