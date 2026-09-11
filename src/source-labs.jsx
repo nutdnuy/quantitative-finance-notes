@@ -2,7 +2,6 @@ import React, {useMemo,useState} from 'react';
 import {format,Range,LabTitle,Chart} from './ui.jsx';
 import {mean,stdev,histogram,normalPdf,eulerPath,nestedWiener} from './math.mjs';
 import perez from '../data/perez-companc-table-3-3.json';
-import thaiFunds from '../data/thai-funds-spiva-2025.json';
 import CountUp from './components/CountUp.jsx';
 
 export function ComparisonLab(){
@@ -69,13 +68,4 @@ export function WienerLab(){
   <div className="results three"><div><span>ขนาดก้าว δt</span><strong>{format(d.dt,4)}</strong><p>1 / {steps} ปี</p></div><div><span>SD ต่อก้าว √δt</span><strong>{format(d.incrementSD,4)}</strong><p>ย่อเมื่อเพิ่มจำนวนก้าว</p></div><div><span>ความแปรปรวนรวม 1 ปี</span><strong>1</strong><p>{steps} × {format(d.dt,6)}</p></div></div>
   <p className="lab-note">ความแปรปรวนรวมเป็นค่าทฤษฎี ไม่ใช่ค่าที่ประมาณจากเส้นเดียว · กราฟเชื่อมจุดตัวอย่าง ไม่ได้แสดงทุกจุดของเส้นทางต่อเนื่อง</p><div className="lab-actions"><button onClick={()=>setSeed(seed+1)}>สุ่ม Wiener process ใหม่</button><span className="seed">seed {seed}</span></div>
   </div>;
-}
-
-export function FundsLab(){
-  const rows=thaiFunds.rows;
-  return <div className="lab"><LabTitle number="3.10" title="กองทุนหุ้นไทยทำผลตอบแทนเทียบดัชนีได้แค่ไหน">กองทุนเชิงรุกกลุ่ม Thailand Large-Cap · S&amp;P Thailand BMI · สิ้นสุด 31 ธันวาคม 2025</LabTitle>
-  <div className="fund-chart" role="img" aria-label={rows.map(r=>`${r.years} ปี: ต่ำกว่าดัชนี ${r.underperforming_pct.toFixed(1)}% ไม่ต่ำกว่าดัชนี ${(100-r.underperforming_pct).toFixed(1)}%`).join(' · ')}>{rows.map(({years,underperforming_pct:below})=><div key={years}><span>{years} ปี</span><div className="fund-track"><div className="underperform" style={{width:`${below}%`}}/><div className="outperform" style={{width:`${100-below}%`}}/></div><span>ต่ำกว่า {below.toFixed(1)}%<br/><small>ไม่ต่ำกว่า {(100-below).toFixed(1)}%</small></span></div>)}</div>
-  <div className="legend"><span className="under-key">ต่ำกว่าดัชนี</span><span className="normal-key">ไม่ต่ำกว่าดัชนี</span></div>
-  <p className="lab-note">แสดงสัดส่วนจำนวนกองทุน ไม่ใช่อัตราผลตอบแทน · แท่งรวม 100% โดยส่วน “ไม่ต่ำกว่า” คำนวณจาก 100 ลบส่วนที่ต่ำกว่า · ผลตอบแทนดัชนีรวมเงินปันผล วัดเป็นเงินบาท · รายงานคำนึงถึงกองทุนที่ปิดหรือควบรวมระหว่างช่วงศึกษา และไม่มีข้อมูลช่วง 10 ปี</p>
-  <p className="lab-note">ที่มา: S&amp;P Dow Jones Indices / Morningstar, <a href={thaiFunds.source_url}>SPIVA Asia Ex-Japan Year-End 2025, Report 1a หน้า 9</a></p></div>;
 }

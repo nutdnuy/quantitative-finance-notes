@@ -202,7 +202,6 @@ for steps, color in [(4,"#00796b"),(64,"#6200ee")]:
 display(chart(series,"3.9 One Wiener path, several observation grids","Years","X(t)"))
 # ก้าวหยาบได้จากการรวม increments บนเส้นละเอียดเดียวกัน จุดร่วมจึงไม่เปลี่ยน
 '''
-thai_funds = json.loads((root / 'data/thai-funds-spiva-2025.json').read_text())
 mc_code = '''# Monte Carlo GBM: adjust mu, sigma and count, then rerun
 mu, sigma, count, seed = .10, .25, 1000, 73
 rng = np.random.default_rng(seed)
@@ -214,17 +213,7 @@ print(f"Mean={terminal.mean():.2f}, theoretical={100*np.exp(mu):.2f}, SE={termin
 print(f"Fraction below 100: {np.mean(terminal<100):.1%}; conditional on this model")
 display(chart([dict(x=np.linspace(0,1,253),y=p,label="Sample path",color=["#6200ee","#00796b","#1976d2","#d84315","#c2185b"][i%5]) for i,p in enumerate(paths[:100])],"Monte Carlo: 100 of all simulated paths","Years","Price"))
 '''
-experiments['model'] = "# SPIVA Asia Ex-Japan Year-End 2025, Report 1a, p. 9\nfund_data = " + repr(thai_funds) + "\n" + '''
-print(f"{fund_data['category']} / {fund_data['benchmark']} / {fund_data['as_of']}")
-for row in fund_data['rows']:
-    below = row['underperforming_pct']
-    other = 100-below
-    assert np.isclose(below+other, 100)
-    print(f"{row['years']} ปี: ต่ำกว่าดัชนี {below:.1f}% / ไม่ต่ำกว่าดัชนี {other:.1f}%")
-print("สัดส่วนจำนวนกองทุน ไม่ใช่ผลตอบแทน; ส่วนไม่ต่ำกว่าคำนวณจาก 100 ลบส่วนที่ต่ำกว่า")
-print("ดัชนีรวมเงินปันผล วัดเป็นเงินบาท; ไม่มีตัวเลขช่วง 10 ปีในรายงานนี้")
-print(fund_data['source_url'])
-'''
+experiments['model'] = mc_code
 experiments['practice'] = '''# ส่วนต่อยอด: exact GBM
 S0, mu, sigma, years, steps, seed = 100., .15, .25, 1., 252, 73
 dt = years/steps
@@ -257,7 +246,7 @@ for section_id, body in sections:
         body += '\n\n' + '\n\n'.join(f'![Hedging stage {i}](assets/diagrams/hedge-day-{i}.svg)' for i in range(1,6))
     md(clean(body))
     if section_id in experiments:
-        code((mc_code + '\n' if section_id == 'model' else '') + experiments[section_id])
+        code(experiments[section_id])
 notebook = {"cells":cells,"metadata":{"kernelspec":{"display_name":"Python 3","language":"python","name":"python3"},"language_info":{"name":"python","version":"3.12"}},"nbformat":4,"nbformat_minor":4}
 (root/'notebooks/random-assets.ipynb').write_text(json.dumps(notebook,ensure_ascii=False,indent=1))
 summary = {"status":"passed","source_sections":len(sections),"cells":len(cells),"executed_code_cells":execution_count,"svg_outputs":sum(1 for c in cells for o in c.get('outputs',[]) if 'image/svg+xml' in o.get('data',{})),"data":{"printed_prices":len(perez),"reconstructed_returns":len(perez)-1},"execution":"Every code cell executed with NumPy. A lightweight IPython.display capture adapter collected SVG outputs; the full Jupyter UI was not tested."}
