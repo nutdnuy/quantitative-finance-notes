@@ -1,5 +1,9 @@
 # Sources and notices
 
+## Technical-analysis satire
+
+`assets/images/technical-lightning-satire.png` is an original image made with the built-in Image Generator on 2026-09-11. Route: image-generator-only for the requested satirical illustration; native HTML integration. Brief: a fictional Thai town under violet lightning, teal parallel channel annotations and coral arrows, with the exact captions “เมื่อเห็นกราฟในทุกอย่าง” and “แนวรับแข็งมาก… เสาไฟยังอยู่”. The user supplied a lightning meme as a conceptual reference; its photograph was not copied. This is humor about pattern finding, not financial data or a documentary weather photograph.
+
 ## Educational references
 
 - Louis Bachelier, *Théorie de la spéculation* (1900), Annales scientifiques de l'École Normale Supérieure, 3e série, 17, pp. 21–86, https://www.numdam.org/item/ASENS_1900_3_17__21_0/. The revised opening paraphrases the introductory idea of studying the probability of price changes rather than exact future prices. It identifies this work as one of the foundations of quantitative finance, without attributing the later GBM model to Bachelier.
