@@ -181,13 +181,13 @@ thai_funds = json.loads((root / 'data/thai-funds-spiva-2025.json').read_text())
 mc_code = '''# Monte Carlo GBM: adjust mu, sigma and count, then rerun
 mu, sigma, count, seed = .10, .25, 1000, 73
 rng = np.random.default_rng(seed)
-shocks = rng.standard_normal((count,52))
-paths = 100*np.exp(np.cumsum((mu-.5*sigma**2)/52+sigma/np.sqrt(52)*shocks,axis=1))
+shocks = rng.standard_normal((count,252))
+paths = 100*np.exp(np.cumsum((mu-.5*sigma**2)/252+sigma/np.sqrt(252)*shocks,axis=1))
 paths = np.column_stack([np.full(count,100.),paths])
 terminal = paths[:,-1]
 print(f"Mean={terminal.mean():.2f}, theoretical={100*np.exp(mu):.2f}, SE={terminal.std(ddof=1)/np.sqrt(count):.2f}")
 print(f"Fraction below 100: {np.mean(terminal<100):.1%}; conditional on this model")
-display(chart([dict(x=np.linspace(0,1,53),y=p,label="Sample path",color="#00796b") for p in paths[:20]],"Monte Carlo: 20 of all simulated paths","Years","Price"))
+display(chart([dict(x=np.linspace(0,1,253),y=p,label="Sample path",color=["#6200ee","#00796b","#1976d2","#d84315","#c2185b"][i%5]) for i,p in enumerate(paths[:100])],"Monte Carlo: 100 of all simulated paths","Years","Price"))
 '''
 experiments['model'] = "# SPIVA Asia Ex-Japan Year-End 2025, Report 1a, p. 9\nfund_data = " + repr(thai_funds) + "\n" + '''
 print(f"{fund_data['category']} / {fund_data['benchmark']} / {fund_data['as_of']}")

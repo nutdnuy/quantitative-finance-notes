@@ -1,4 +1,5 @@
 const fs=require('node:fs');
+const {createHash}=require('node:crypto');
 const path=require('node:path');
 const yaml=require('yaml');
 const esbuild=require('esbuild');
@@ -52,6 +53,14 @@ async function build(){
  fs.writeFileSync(path.join(root,'search-index.js'),'window.QFSearchIndex='+JSON.stringify(search).replaceAll('<','\\u003c')+';');
  await esbuild.build({entryPoints:[path.join(root,'src/labs.jsx')],outfile:path.join(root,'app.js'),bundle:true,format:'iife',jsx:'automatic',minify:true,define:{'process.env.NODE_ENV':'"production"'},legalComments:'linked',target:['es2022']});
  fs.copyFileSync(path.join(root,'src/site.js'),path.join(root,'site.js'));
+ const assets=['app.js','site.js','search-index.js','style.css','book.css'];
+ const htmlFiles=new Set(pages.map(p=>p.href));
+ for(const p of pages)if(p.home)htmlFiles.add(p.file+'.html');
+ for(const file of htmlFiles){
+  const target=path.join(root,file);let html=fs.readFileSync(target,'utf8');
+  for(const asset of assets){const hash=createHash('sha256').update(fs.readFileSync(path.join(root,asset))).digest('hex').slice(0,12);html=html.replaceAll('"'+asset+'"','"'+asset+'?v='+hash+'"');}
+  fs.writeFileSync(target,html);
+ }
  fs.writeFileSync(path.join(root,'build-manifest.json'),JSON.stringify({pages:pages.map(({file,href,title})=>({file,href,title})),searchEntries:search.length},null,2));
  console.log(`Built ${pages.length} pages; Welcome is the first page. Sources: _config.yml, _toc.yml, Markdown.`);
 }
