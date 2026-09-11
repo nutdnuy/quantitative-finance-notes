@@ -24,10 +24,10 @@ sys.modules["IPython"], sys.modules["IPython.display"] = ipython, display_module
 
 def md(source):
     attachments = {}
-    satire_path = root / 'assets/images/technical-lightning-satire.png'
-    if '](assets/images/technical-lightning-satire.png)' in source:
-        attachments['technical-lightning-satire.png'] = {'image/png': base64.b64encode(satire_path.read_bytes()).decode()}
-        source = source.replace('](assets/images/technical-lightning-satire.png)', '](attachment:technical-lightning-satire.png)')
+    satire_path = root / 'assets/images/technical-lightning-satire-light.png'
+    if '](assets/images/technical-lightning-satire-light.png)' in source:
+        attachments['technical-lightning-satire-light.png'] = {'image/png': base64.b64encode(satire_path.read_bytes()).decode()}
+        source = source.replace('](assets/images/technical-lightning-satire-light.png)', '](attachment:technical-lightning-satire-light.png)')
     image_path = root / 'assets/diagrams/call-probability-tree.svg'
     if '](assets/diagrams/call-probability-tree.svg)' in source:
         attachments['call-probability-tree.svg'] = {'image/svg+xml': base64.b64encode(image_path.read_bytes()).decode()}

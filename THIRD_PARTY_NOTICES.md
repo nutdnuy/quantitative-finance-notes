@@ -2,6 +2,8 @@
 
 ## Technical-analysis satire
 
+The displayed light-theme revision is `assets/images/technical-lightning-satire-light.png`, edited with the built-in Image Generator. Brief: wide 16:9 editorial illustration, off-white background, pale lavender clouds, purple lightning, teal trend lines and small coral arrows; no embedded text. The humorous Thai caption is editable Markdown. The original dark version below is retained as an unused earlier asset.
+
 `assets/images/technical-lightning-satire.png` is an original image made with the built-in Image Generator on 2026-09-11. Route: image-generator-only for the requested satirical illustration; native HTML integration. Brief: a fictional Thai town under violet lightning, teal parallel channel annotations and coral arrows, with the exact captions “เมื่อเห็นกราฟในทุกอย่าง” and “แนวรับแข็งมาก… เสาไฟยังอยู่”. The user supplied a lightning meme as a conceptual reference; its photograph was not copied. This is humor about pattern finding, not financial data or a documentary weather photograph.
 
 ## Educational references
