@@ -1,4 +1,5 @@
 """Build the source-aligned Thai notebook and execute its NumPy cells."""
+import base64
 import contextlib
 import io
 import json
@@ -22,7 +23,13 @@ display_module.display, display_module.SVG = display, SVG
 sys.modules["IPython"], sys.modules["IPython.display"] = ipython, display_module
 
 def md(source):
-    cells.append({"cell_type":"markdown","metadata":{},"source":source})
+    attachments = {}
+    image_path = root / 'assets/diagrams/call-probability-tree.svg'
+    if '](assets/diagrams/call-probability-tree.svg)' in source:
+        attachments['call-probability-tree.svg'] = {'image/svg+xml': base64.b64encode(image_path.read_bytes()).decode()}
+        source = source.replace('](assets/diagrams/call-probability-tree.svg)', '](attachment:call-probability-tree.svg)')
+    source = source.replace('](assets/diagrams/call-probability-tree.excalidraw)', '](https://nutdnuy.github.io/quantitative-finance-notes/assets/diagrams/call-probability-tree.excalidraw)')
+    cells.append({"cell_type":"markdown","metadata":{},"source":source, **({'attachments':attachments} if attachments else {})})
 
 def code(source):
     global active_outputs, execution_count
@@ -92,15 +99,22 @@ def chart(series, title, x_label, y_label, y_limits=None):
 ''')
 
 experiments = {}
-experiments['average'] = '''# ตัวอย่างต้นฉบับ: ราคาเริ่มต้น 100, ปลายปี 50 หรือ 150 ดอลลาร์
-future, p, K = np.array([50., 150.]), np.array([.5, .5]), 100.
+experiments['average'] = '''# ตัวอย่างปรับใหม่: p ขาลง 0.4, ขาขึ้น 0.6; risk-neutral q เมื่อ r=0
+future, p, K = np.array([50., 150.]), np.array([.4, .6]), 100.
 payoff = np.maximum(future-K, 0)
 expected_price, expected_payoff = p@future, p@payoff
 payoff_at_mean = max(expected_price-K, 0)
 print(f"E[S] = {expected_price:.2f}, E[f(S)] = {expected_payoff:.2f}, f(E[S]) = {payoff_at_mean:.2f} USD")
-assert expected_payoff == 25 and payoff_at_mean == 0
+assert expected_payoff == 30 and payoff_at_mean == 10
+q_up = (100-50)/(150-50)
+call_price = q_up*payoff[1] + (1-q_up)*payoff[0]
+delta = (payoff[1]-payoff[0])/(future[1]-future[0])
+loan = delta*future[0]-payoff[0]
+assert call_price == 25 and delta*100-loan == call_price
+assert np.allclose(delta*future-loan, payoff)
+print(f"q_up={q_up:.1f}, Call price={call_price:.2f}, replicate with {delta} shares and borrow {loan}")
 x = np.linspace(0, 200, 201)
-display(chart([dict(x=x,y=np.maximum(x-K,0),label="Call payoff, K=100",color="#6200ee"), dict(x=future,y=payoff,label="Secant: midpoint (100,25)",color="#00796b")], "3.3 Average the payoffs, not the prices", "Terminal price (USD)", "Payoff (USD)"))
+display(chart([dict(x=x,y=np.maximum(x-K,0),label="Call payoff, K=100",color="#6200ee"), dict(x=future,y=payoff,label="Secant: P-weighted point (110,30)",color="#00796b")], "3.3 Average the payoffs, not the prices", "Terminal price (USD)", "Payoff (USD)"))
 '''
 experiments['returns'] = '''# ตัวอย่าง A/B ตามต้นฉบับ: เพิ่มขึ้นหุ้นละ 10 ดอลลาร์เท่ากัน
 for name, price in [("A",100), ("B",1000)]:

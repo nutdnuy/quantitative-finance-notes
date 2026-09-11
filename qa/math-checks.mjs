@@ -26,5 +26,6 @@ assert.deepEqual(simulate(params),simulate(params));assert.notDeepEqual(simulate
 for(const p of simulate({...params,mu:-.1,sigma:.6}))assert.ok(p.every(v=>Number.isFinite(v)&&v>0));
 const terminal=simulate({...params,seed:912,count:100000,steps:1}).map(p=>p.at(-1));
 const se=stdev(terminal)/Math.sqrt(terminal.length);assert.ok(Math.abs(mean(terminal)-theory.expected)<4*se);
+close(jensen(50,100,100,.6).expected,30);close(jensen(50,100,100,.6).atMean,10);close(jensen(50,100,100,.6).expectedPrice,110);
 const result={status:'passed',checks:['Source Jensen example and convexity','34 printed prices / 33 reconstructed returns; source rounding distinction','Histogram total area 1 for every supported bin count; standardized mean 0 / sample SD 1','Source annualization','Euler recurrence and source parameters','Nested Wiener shared points, endpoint and theoretical variance','Rolling-window shock exit','GBM source initial price, exact moments, zero-volatility limit, reproducibility and positivity','100000-draw Monte Carlo mean within 4 standard errors'],monteCarlo:{mean:mean(terminal),theory:theory.expected,standardError:se}};
 fs.writeFileSync(new URL('math-report.json',import.meta.url),JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));

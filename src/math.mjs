@@ -3,10 +3,11 @@ export function stdev(a) {
   const m = mean(a);
   return Math.sqrt(a.reduce((s, v) => s + (v - m) ** 2, 0) / (a.length - 1));
 }
-export function jensen(spread, strike, center = 100) {
+export function jensen(spread, strike, center = 100, upProbability = 0.5) {
   const low = center - spread, high = center + spread;
   const lowPay = Math.max(low - strike, 0), highPay = Math.max(high - strike, 0);
-  return { low, high, lowPay, highPay, expected: (lowPay + highPay) / 2, atMean: Math.max(center - strike, 0) };
+  const expectedPrice = (1-upProbability)*low + upProbability*high;
+  return { low, high, lowPay, highPay, expectedPrice, expected: (1-upProbability)*lowPay + upProbability*highPay, atMean: Math.max(expectedPrice - strike, 0) };
 }
 export function normalGenerator(seed) {
   let state = seed >>> 0;

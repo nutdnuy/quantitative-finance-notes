@@ -33,3 +33,6 @@ Design authority: QuantCorner / QuantSeras Material 2. Thai content and the ligh
 The editable `intro.md`, `_config.yml`, `_toc.yml` and Notebook organization is informed by the inspected QuantGirl UQF repository. The local builder is custom Node.js code; it is not the Jupyter Book runtime. No QuantGirl website prose or code is reproduced.
 
 The search icon is Tabler Icons `search`, native 24px outline and 2px stroke, from commit `6d128ed935d4546607b1e4d5d08c8b27bdbe7758`. MIT license is retained in `vendor/tabler-LICENSE.txt`; the source SVG is in `assets/icons/search.svg`. Adaptation is limited to currentColor, display sizing and decorative accessibility attributes.
+
+## One-step Call tree
+The editable Excalidraw scene and matching native SVG in `assets/diagrams/` are newly drawn. The user-provided tree image informed the branching layout only; no source image or logo is reused. The lesson now uses physical up/down probabilities 0.6/0.4 and derives risk-neutral weights 0.5/0.5 with zero interest. The replication argument is checked against Clare Wallace, Durham University, The one-period binomial model, https://maths.dur.ac.uk/users/clare.wallace/MF/Chapter2.html.
