@@ -509,7 +509,7 @@ $$
 
 </details>
 
-<div class="download-panel"><div><strong>โค้ดและข้อมูลประกอบบท</strong><p>Notebook เรียงตามตัวอย่างในฉบับนี้ พร้อมข้อมูลตาราง Perez Companc ที่ถอดจากหน้า 60</p></div><a class="button primary" href="notebooks/random-assets.ipynb" download>ดาวน์โหลด Notebook</a><a class="button" href="data/perez-companc-table-3-3.csv" download>ข้อมูลตาราง 3.3</a><a class="button" href="random-assets.md" download>ต้นฉบับภาษาไทย</a></div>
+
 
 </section>
 <section id="sources" class="sources">
