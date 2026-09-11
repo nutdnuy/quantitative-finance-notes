@@ -8,7 +8,7 @@ import { jensen, theoretical, simulate, rollingExample, mean, stdev, histogram, 
 import perez from '../data/perez-companc-table-3-3.json';
 
 import { format, Range, LabTitle, Chart } from './ui.jsx';
-import { ComparisonLab, ReturnsLab, DistributionLab, StepLab, WienerLab, FundsLab } from './source-labs.jsx';
+import { ComparisonLab, ReturnsLab, DistributionLab, WienerLab, FundsLab } from './source-labs.jsx';
 
 function JensenLab() {
   const [spread, setSpread] = useState(50), [strike, setStrike] = useState(100), d = jensen(spread, strike);
@@ -75,7 +75,7 @@ function ExerciseLab() {
     <div><h4>2% บอกขนาดการแกว่ง</h4><p>มันไม่ใช่ผลตอบแทนที่จะได้ และไม่ใช่ขาดทุนสูงสุด ถ้าช็อกข้ามวันพึ่งพากัน ต้องรวม covariance ด้วย คำตอบ 2% ผูกอยู่กับสมมติฐานของโจทย์นี้</p></div>
   </Stepper></div>;
 }
-for (const [id, Component] of [['jensen-lab', JensenLab], ['comparison-lab',ComparisonLab], ['returns-lab',ReturnsLab], ['distribution-lab',DistributionLab], ['scaling-lab', ScalingLab], ['rolling-lab', RollingLab], ['step-lab',StepLab], ['wiener-lab',WienerLab], ['funds-lab',FundsLab], ['gbm-lab', GbmLab], ['exercise-lab', ExerciseLab]]) {
+for (const [id, Component] of [['jensen-lab', JensenLab], ['comparison-lab',ComparisonLab], ['returns-lab',ReturnsLab], ['distribution-lab',DistributionLab], ['scaling-lab', ScalingLab], ['rolling-lab', RollingLab], ['wiener-lab',WienerLab], ['funds-lab',FundsLab], ['gbm-lab', GbmLab], ['exercise-lab', ExerciseLab]]) {
   const target = document.getElementById(id);
   if (target) createRoot(target).render(<MotionConfig reducedMotion="user"><Component /></MotionConfig>);
 }

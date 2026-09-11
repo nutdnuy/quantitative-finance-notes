@@ -2,6 +2,8 @@
 
 ## Educational references
 
+- Louis Bachelier, *Théorie de la spéculation* (1900), Annales scientifiques de l'École Normale Supérieure, 3e série, 17, pp. 21–86, https://www.numdam.org/item/ASENS_1900_3_17__21_0/. The revised opening paraphrases the introductory idea of studying the probability of price changes rather than exact future prices. It identifies this work as one of the foundations of quantitative finance, without attributing the later GBM model to Bachelier.
+- Options Industry Council, *Options Basics*, https://www.optionseducation.org/optionsoverview/options-basics. Reference for option rights, strike, expiration and premium. The introductory 120-baht strike / 8-baht premium example is newly constructed for this lesson.
 - Paul Wilmott, *Paul Wilmott on Quantitative Finance*, second edition, John Wiley & Sons, 2006. Chapter 3, “The Random Behavior of Assets,” printed pp. 55–70. User-supplied PDF, consulted locally. The revised Thai manuscript translates and adapts the chapter's sequence, explanations, examples, numbers, and equations. It is not an authorized publisher edition. The PDF pages and original chart images are not bundled.
 - Figure 3.3, p. 60: 34 visible Perez Companc prices and the printed return column transcribed into `data/`. Reconstructed returns use the rounded prices. They are distinguished from the printed returns and from statistics reported for the full original series.
 - Figure 3.11, p. 70: historical fund-performance percentages, credited in the book to Virgin Direct, period ending December 1998. Recreated as native bars, with historical context and source limitations stated.

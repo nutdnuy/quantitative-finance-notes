@@ -46,7 +46,7 @@ def clean(source):
 
 md('''# พฤติกรรมแบบสุ่มของสินทรัพย์
 
-ฉบับภาษาไทยอิงลำดับ 3.1–3.11 และเนื้อหาใน Paul Wilmott, *Paul Wilmott on Quantitative Finance*, 2nd ed. (2006), printed pp. 55–70 พร้อมโค้ดและภาพประกอบเพิ่มเพื่อทดลองแนวคิด
+สมุดบันทึกประกอบบทเรียน เริ่มจากแนวคิดเรื่องความน่าจะเป็นของราคา พื้นฐาน Option และ payoff แล้วศึกษาผลตอบแทน ความผันผวน และ Wiener process แหล่งอ้างอิงอยู่ท้าย Notebook
 
 ใช้ Python 3, NumPy และ Jupyter/IPython แล้วเลือก **Run All** ข้อมูล Perez Companc จากตารางรูป 3.3 ฝังอยู่ใน Notebook จึงไม่ต้องดาวน์โหลดข้อมูลตลาดหรือไฟล์ประกอบ ตัวเลขที่รายงานสำหรับอนุกรมเต็มในหนังสือแยกจากสถิติของตารางย่อย 34 ราคาอย่างชัดเจน
 
@@ -152,21 +152,6 @@ print(f"ช็อกวันที่ 35 หลุดจากหน้าต�
 assert rolling[exit_day-2] > rolling[exit_day-1]
 display(chart([dict(x=np.arange(1,101),y=rolling*100,label="Rolling sample SD",color="#6200ee")], "3.7 Plateauing effect (synthetic returns)", "Day", "Annualized volatility (%)"))
 '''
-experiments['randomwalk'] = '''# พารามิเตอร์ตามรูป 3.10; สุ่ม phi ชุดใหม่ด้วย NumPy
-S0, mu, sigma, dt, steps, seed = 100., .15, .25, .01, 100, 73
-rng = np.random.default_rng(seed)
-phi = rng.standard_normal(steps)
-euler = np.r_[S0,S0*np.cumprod(1+mu*dt+sigma*np.sqrt(dt)*phi)]
-for i in range(5):
-    drift = mu*euler[i]*dt
-    shock = sigma*euler[i]*np.sqrt(dt)*phi[i]
-    assert np.isclose(euler[i]+drift+shock,euler[i+1])
-    print(f"ก้าว {i+1}: {euler[i]:.4f} + ({drift:.4f}) + ({shock:.4f}) = {euler[i+1]:.4f}; phi={phi[i]:.4f}")
-display(chart([dict(x=np.arange(steps+1)*dt,y=euler,label="Euler / equation (3.6)",color="#6200ee")], "3.8 Build a random walk one step at a time", "Years", "Simulated price"))
-# วิธีเก่าในหนังสือ: ผลรวม Uniform 12 ตัวลบ 6 มี mean=0, variance=1 แต่ไม่ใช่ Normal แบบ exact
-approx_phi = rng.uniform(0,1,(100000,12)).sum(axis=1)-6
-print(f"Uniform-sum approximation: sample mean={approx_phi.mean():.4f}, variance={approx_phi.var():.4f}; bounded [-6,6]")
-'''
 experiments['wiener'] = '''rng = np.random.default_rng(73)
 fine = np.r_[0,np.cumsum(rng.standard_normal(1024)/np.sqrt(1024))]
 series = [dict(x=np.linspace(0,1,1025),y=fine,label="1024 steps",color="#b0b0b0",stroke=1)]
@@ -187,7 +172,7 @@ for t,a,b in zip(horizons,above,below):
 assert np.all(above+below==100)
 print("ข้อมูลประวัติศาสตร์ตามหนังสือ ไม่ใช่สถิติปัจจุบัน; รูปไม่ระบุจำนวนกองทุนและวิธีวัดผลครบถ้วน")
 '''
-experiments['practice'] = '''# ส่วนต่อยอด: exact GBM (อยู่นอกลำดับหลัก 3.1–3.11)
+experiments['practice'] = '''# ส่วนต่อยอด: exact GBM
 S0, mu, sigma, years, steps, seed = 100., .15, .25, 1., 252, 73
 dt = years/steps
 rng = np.random.default_rng(seed)
@@ -208,6 +193,9 @@ series += [dict(x=t,y=S0*np.exp(mu*t),label="Theoretical mean",color="#6200ee"),
 display(chart(series,"Extension: 40 of 20,000 exact GBM paths","Years","Simulated price"))
 '''
 source = (root/'random-assets.md').read_text()
+opening = source.split('<section', 1)[0]
+opening = re.sub(r'^---\n[\s\S]*?\n---\n', '', opening)
+md(clean(opening))
 sections = re.findall(r'<section id="([^"]+)"[^>]*>([\s\S]*?)</section>', source)
 for section_id, body in sections:
     # Download links are web-only; data already embedded in this notebook.
