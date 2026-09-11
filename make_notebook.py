@@ -28,6 +28,12 @@ def md(source):
     if '](assets/images/technical-lightning-satire-light.png)' in source:
         attachments['technical-lightning-satire-light.png'] = {'image/png': base64.b64encode(satire_path.read_bytes()).decode()}
         source = source.replace('](assets/images/technical-lightning-satire-light.png)', '](attachment:technical-lightning-satire-light.png)')
+    for i in range(1,6):
+        relative = f'assets/diagrams/hedge-day-{i}.svg'
+        if f']({relative})' in source:
+            key = f'hedge-day-{i}.svg'
+            attachments[key] = {'image/svg+xml': base64.b64encode((root/relative).read_bytes()).decode()}
+            source = source.replace(f']({relative})', f'](attachment:{key})')
     image_path = root / 'assets/diagrams/call-probability-tree.svg'
     if '](assets/diagrams/call-probability-tree.svg)' in source:
         attachments['call-probability-tree.svg'] = {'image/svg+xml': base64.b64encode(image_path.read_bytes()).decode()}
@@ -110,15 +116,30 @@ expected_price, expected_payoff = p@future, p@payoff
 payoff_at_mean = max(expected_price-K, 0)
 print(f"E[S] = {expected_price:.2f}, E[f(S)] = {expected_payoff:.2f}, f(E[S]) = {payoff_at_mean:.2f} USD")
 assert expected_payoff == 30 and payoff_at_mean == 10
-q_up = (100-50)/(150-50)
-call_price = q_up*payoff[1] + (1-q_up)*payoff[0]
-delta = (payoff[1]-payoff[0])/(future[1]-future[0])
-loan = delta*future[0]-payoff[0]
-assert call_price == 25 and delta*100-loan == call_price
-assert np.allclose(delta*future-loan, payoff)
-print(f"q_up={q_up:.1f}, Call price={call_price:.2f}, replicate with {delta} shares and borrow {loan}")
 x = np.linspace(0, 200, 201)
 display(chart([dict(x=x,y=np.maximum(x-K,0),label="Call payoff, K=100",color="#6200ee"), dict(x=future,y=payoff,label="Secant: P-weighted point (110,30)",color="#00796b")], "3.3 Average the payoffs, not the prices", "Terminal price (USD)", "Payoff (USD)"))
+'''
+experiments['hedging'] = '''# One-day hedge: long one call, short h shares
+S0, up, down, K = 100., 101., 99., 100.
+Cu, Cd = max(up-K,0), max(down-K,0)
+h = (Cu-Cd)/(up-down)
+Hu, Hd = Cu-h*up, Cd-h*down
+assert h == .5 and Hu == Hd == -49.5
+for daily_rate in [0., .0001]:
+    V = h*S0 + Hd/(1+daily_rate)
+    q = (S0*(1+daily_rate)-down)/(up-down)
+    assert 0 < q < 1
+    assert np.isclose(V, (q*Cu+(1-q)*Cd)/(1+daily_rate))
+    print(f"daily rate={daily_rate}, hedge={h}, terminal hedge={Hu}, V={V:.6f}, q={q:.6f}")
+assert np.isclose(.6-50+49.5,.1)
+assert np.isclose(-.4+50-49.5,.1)
+for ST in [up,down]:
+    C = max(ST-K,0)
+    assert np.isclose(.5*ST-C-49.5,0) # sell overpriced call
+    assert np.isclose(C-.5*ST+49.5,0) # buy underpriced call
+for p_up in [.1,.6,.7,.9]:
+    print(f"p_up={p_up}: expected payoff={p_up*Cu+(1-p_up)*Cd}, no-arbitrage price=0.5 at zero interest")
+assert .5*max(102-K,0)+.5*max(98-K,0) == 1
 '''
 experiments['returns'] = '''# ตัวอย่าง A/B ตามต้นฉบับ: เพิ่มขึ้นหุ้นละ 10 ดอลลาร์เท่ากัน
 for name, price in [("A",100), ("B",1000)]:
@@ -232,6 +253,8 @@ sections = re.findall(r'<section id="([^"]+)"[^>]*>([\s\S]*?)</section>', source
 for section_id, body in sections:
     # Download links are web-only; data already embedded in this notebook.
     body = re.sub(r'<div class="download-panel">[\s\S]*$', '', body)
+    if section_id == 'hedging':
+        body += '\n\n' + '\n\n'.join(f'![Hedging stage {i}](assets/diagrams/hedge-day-{i}.svg)' for i in range(1,6))
     md(clean(body))
     if section_id in experiments:
         code((mc_code + '\n' if section_id == 'model' else '') + experiments[section_id])

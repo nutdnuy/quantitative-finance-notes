@@ -13,3 +13,5 @@
 .option-tree{overflow-x:auto;margin:28px 0;background:#fff;border:1px solid #ddd;border-radius:4px}.option-tree img{display:block;width:100%;min-width:600px;height:auto}.option-tree p{margin:0}
 
 img[src*="technical-lightning-satire"]{display:block;width:100%;height:auto;border-radius:4px;margin:24px 0}
+
+.hedge-steps{display:flex;flex-wrap:wrap;gap:8px}.hedge-steps button[aria-current="step"]{color:var(--primary);border-color:var(--primary)}.hedge-lesson .option-tree img{min-width:660px}.hedge-explanation{min-height:5em}.hedge-experiment{margin-top:28px}

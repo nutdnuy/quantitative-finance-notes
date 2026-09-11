@@ -1,3 +1,4 @@
+import HedgingLab from './hedging.jsx';
 import MonteCarloLab from './monte-carlo.jsx';
 import React, { useState, useEffect, useMemo, useRef, useId } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -76,7 +77,7 @@ function ExerciseLab() {
     <div><h4>2% บอกขนาดการแกว่ง</h4><p>มันไม่ใช่ผลตอบแทนที่จะได้ และไม่ใช่ขาดทุนสูงสุด ถ้าช็อกข้ามวันพึ่งพากัน ต้องรวม covariance ด้วย คำตอบ 2% ผูกอยู่กับสมมติฐานของโจทย์นี้</p></div>
   </Stepper></div>;
 }
-for (const [id, Component] of [['monte-carlo-lab', MonteCarloLab], ['jensen-lab', JensenLab], ['comparison-lab',ComparisonLab], ['returns-lab',ReturnsLab], ['distribution-lab',DistributionLab], ['scaling-lab', ScalingLab], ['rolling-lab', RollingLab], ['wiener-lab',WienerLab], ['funds-lab',FundsLab], ['gbm-lab', GbmLab], ['exercise-lab', ExerciseLab]]) {
+for (const [id, Component] of [['hedging-lab', HedgingLab], ['monte-carlo-lab', MonteCarloLab], ['jensen-lab', JensenLab], ['comparison-lab',ComparisonLab], ['returns-lab',ReturnsLab], ['distribution-lab',DistributionLab], ['scaling-lab', ScalingLab], ['rolling-lab', RollingLab], ['wiener-lab',WienerLab], ['funds-lab',FundsLab], ['gbm-lab', GbmLab], ['exercise-lab', ExerciseLab]]) {
   const target = document.getElementById(id);
   if (target) createRoot(target).render(<MotionConfig reducedMotion="user"><Component /></MotionConfig>);
 }

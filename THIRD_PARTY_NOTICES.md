@@ -1,5 +1,9 @@
 # Sources and notices
 
+## One-day hedging walkthrough
+
+The displayed hedge lesson now uses 100 → 101/99 over one day, K=100, physical probabilities 0.6/0.4, and initially zero interest. Five newly authored editable Excalidraw scenes and SVG previews (`assets/diagrams/hedge-day-1` through `hedge-day-5`) progressively reveal payoff, long-call/short-half-share hedge, its fixed terminal liability, price, and risk-neutral weights. The user supplied CQF lecture screenshots (shown as JA251.2 Notes.pdf) as a teaching-sequence reference. No screenshot, logo or verbatim lecture prose is republished. Calculations and both arbitrage directions are verified in the executable Notebook. The former 50/150 one-year tree is retained as an unused asset; that price example remains only for Jensen's inequality.
+
 ## Technical-analysis satire
 
 The displayed light-theme revision is `assets/images/technical-lightning-satire-light.png`, edited with the built-in Image Generator. Brief: wide 16:9 editorial illustration, off-white background, pale lavender clouds, purple lightning, teal trend lines and small coral arrows; no embedded text. The humorous Thai caption is editable Markdown. The original dark version below is retained as an unused earlier asset.
