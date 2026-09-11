@@ -457,7 +457,7 @@ $$
 
 ### ชนะตลาดได้ แปลว่าเป็นฝีมือเสมอไปไหม
 
-เมื่อความสุ่มเข้ามามีส่วนกับผลตอบแทน คำถามหนึ่งที่ตามมาคือ ถ้ากองทุนทำผลตอบแทนได้ดีกว่าตลาด เราจะแยกได้อย่างไรว่าส่วนไหนมาจากฝีมือ และส่วนไหนมาจากจังหวะที่เข้าทาง? ลองดูข้อมูลประวัติศาสตร์จาก Virgin Direct ที่เปรียบเทียบกองทุนกับ UK All Share Index โดยมีจุดสิ้นสุดการวัดผลในเดือนธันวาคม 1998 กราฟแสดงสัดส่วนกองทุนที่ชนะและแพ้ดัชนีในแต่ละช่วงถือครอง
+ถ้ากองทุนทำผลตอบแทนได้ดีกว่าตลาด เราจะแยกได้อย่างไรว่าส่วนไหนมาจากฝีมือ และส่วนไหนมาจากจังหวะที่เข้าทาง? ลองเริ่มจากข้อมูลใกล้ตัวอย่างกองทุนหุ้นไทย กราฟนี้ใช้กลุ่มกองทุนเชิงรุกที่ SPIVA จัดเป็น Thailand Large-Cap เปรียบเทียบกับ S&P Thailand BMI ในช่วง 1, 3 และ 5 ปีที่สิ้นสุดวันที่ 31 ธันวาคม 2025 จึงเป็นข้อมูลเฉพาะกลุ่มนี้ ไม่ได้ครอบคลุมกองทุนไทยทุกประเภท
 
 <div id="funds-lab" class="interactive-mount"></div>
 
@@ -517,7 +517,9 @@ $$
 ## อ้างอิง
 
 - Louis Bachelier (1900), [*Théorie de la spéculation*](https://www.numdam.org/item/ASENS_1900_3_17__21_0/): แนวคิดเปิดบทเรื่องความน่าจะเป็นและราคา
-- Paul Wilmott (2006), *Paul Wilmott on Quantitative Finance*, 2nd ed., บท 3 หน้า 55–70: เนื้อหาที่นำมาแปลและเรียบเรียง สมการ ตัวอย่าง 50/150 และหุ้น A/B; ข้อมูล Perez Companc และกองทุนเป็นข้อมูลประวัติศาสตร์ตามหนังสือ
+- Paul Wilmott (2006), *Paul Wilmott on Quantitative Finance*, 2nd ed., บท 3 หน้า 55–70: เนื้อหาที่นำมาแปลและเรียบเรียง สมการ ตัวอย่าง 50/150 และหุ้น A/B; ข้อมูล Perez Companc เป็นข้อมูลประวัติศาสตร์ตามหนังสือ
 - Options Industry Council, [Options Basics](https://www.optionseducation.org/optionsoverview/options-basics): สิทธิซื้อ/ขาย ราคาใช้สิทธิ วันหมดอายุ และ premium
+
+- S&P Dow Jones Indices / Morningstar, [SPIVA Asia Ex-Japan Year-End 2025](https://www.spglobal.com/spdji/en/documents/spiva/spiva-asia-ex-japan-year-end-2025.pdf), Report 1a หน้า 9: สัดส่วนกองทุนกลุ่ม Thailand Large-Cap ที่ทำผลตอบแทนต่ำกว่า S&P Thailand BMI
 
 </section>

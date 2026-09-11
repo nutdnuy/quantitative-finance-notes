@@ -163,14 +163,17 @@ for steps, color in [(4,"#00796b"),(64,"#6200ee")]:
 display(chart(series,"3.9 One Wiener path, several observation grids","Years","X(t)"))
 # ก้าวหยาบได้จากการรวม increments บนเส้นละเอียดเดียวกัน จุดร่วมจึงไม่เปลี่ยน
 '''
-experiments['model'] = '''# Virgin Direct, cutoff December 1998, as reproduced in figure 3.11
-horizons = np.array([1,3,5,10])
-above = np.array([9,6,5,1])
-below = 100-above
-for t,a,b in zip(horizons,above,below):
-    print(f"{t:2} ปี: สูงกว่าดัชนี {a}% / ต่ำกว่าดัชนี {b}%")
-assert np.all(above+below==100)
-print("ข้อมูลประวัติศาสตร์ตามหนังสือ ไม่ใช่สถิติปัจจุบัน; รูปไม่ระบุจำนวนกองทุนและวิธีวัดผลครบถ้วน")
+thai_funds = json.loads((root / 'data/thai-funds-spiva-2025.json').read_text())
+experiments['model'] = "# SPIVA Asia Ex-Japan Year-End 2025, Report 1a, p. 9\nfund_data = " + repr(thai_funds) + "\n" + '''
+print(f"{fund_data['category']} / {fund_data['benchmark']} / {fund_data['as_of']}")
+for row in fund_data['rows']:
+    below = row['underperforming_pct']
+    other = 100-below
+    assert np.isclose(below+other, 100)
+    print(f"{row['years']} ปี: ต่ำกว่าดัชนี {below:.1f}% / ไม่ต่ำกว่าดัชนี {other:.1f}%")
+print("สัดส่วนจำนวนกองทุน ไม่ใช่ผลตอบแทน; ส่วนไม่ต่ำกว่าคำนวณจาก 100 ลบส่วนที่ต่ำกว่า")
+print("ดัชนีรวมเงินปันผล วัดเป็นเงินบาท; ไม่มีตัวเลขช่วง 10 ปีในรายงานนี้")
+print(fund_data['source_url'])
 '''
 experiments['practice'] = '''# ส่วนต่อยอด: exact GBM
 S0, mu, sigma, years, steps, seed = 100., .15, .25, 1., 252, 73

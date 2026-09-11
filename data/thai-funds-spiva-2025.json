@@ -1,0 +1,25 @@
+{
+  "source_title": "SPIVA Asia Ex-Japan Year-End 2025",
+  "source_url": "https://www.spglobal.com/spdji/en/documents/spiva/spiva-asia-ex-japan-year-end-2025.pdf",
+  "report": "Report 1a, page 9",
+  "as_of": "2025-12-31",
+  "category": "Thailand Large-Cap",
+  "benchmark": "S&P Thailand BMI",
+  "currency": "THB",
+  "index_return_basis": "total return",
+  "complement_method": "100 minus reported underperforming percentage; includes any ties",
+  "rows": [
+    {
+      "years": 1,
+      "underperforming_pct": 75.6
+    },
+    {
+      "years": 3,
+      "underperforming_pct": 76.7
+    },
+    {
+      "years": 5,
+      "underperforming_pct": 83.0
+    }
+  ]
+}
