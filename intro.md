@@ -33,6 +33,13 @@ description: Quant Corner Learning 101
 <a class="text-link" href="binomial-model.html">เปิดบท Binomial Model →</a>
 </div>
 
+<div class="reading-entry">
+<p class="eyebrow">ต่อจาก Binomial Model</p>
+<h3><a href="transition-density-functions.html">Transition Density Functions <span aria-hidden="true">↗</span></a></h3>
+<p>การเดินสุ่มสามทาง · Forward / Backward Kolmogorov · Gaussian · พื้นที่ใต้ความหนาแน่น</p>
+<a class="text-link" href="transition-density-functions.html">เปิดบท Transition Density Functions →</a>
+</div>
+
 ## อ่านไป ลองไป
 
 - **ดูความหมายก่อนแทนสูตร** — เริ่มจากตัวอย่างเล็ก ๆ แล้วค่อยเพิ่มรายละเอียด

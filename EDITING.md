@@ -11,12 +11,14 @@
 | ข้อความหน้า Welcome | `intro.md` |
 | เนื้อหาเรื่องพฤติกรรมแบบสุ่มของสินทรัพย์ | `random-assets.md` |
 | เนื้อหา Binomial Model | `binomial-model.md` |
+| เนื้อหา Transition Density Functions | `transition-density-functions.md` |
 | ความหมายและตัวอย่างคำศัพท์ | `glossary.md` |
 | ชื่อเว็บ ชื่อผู้เขียน รูปด้านบน ลิงก์ GitHub | `_config.yml` |
 | รายการและลำดับหัวข้อในสารบัญ | `_toc.yml` |
 | รูปด้านบน | `assets/images/welcome-paths.png` หรือเปลี่ยนค่า `logo` ใน `_config.yml` |
 | Notebook สำหรับทดลอง Python | `notebooks/random-assets.ipynb` |
 | Notebook และห้องทดลอง Binomial | `notebooks/binomial-model.ipynb`, `src/binomial.jsx`, `src/binomial.mjs` |
+| Notebook และห้องทดลอง Transition Density | `notebooks/transition-density-functions.ipynb`, `src/transition-density.jsx`, `src/transition-density.mjs` |
 | สีและหน้าตาของหน้า Welcome/สารบัญ | `book.css` |
 | หน้าตาบทเรียนและกราฟ | `style.css` |
 | พฤติกรรมกราฟแบบปรับค่าได้ | `src/labs.jsx`, `src/source-labs.jsx`, `src/math.mjs` |
@@ -112,3 +114,5 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 เปิด `notebooks/random-assets.ipynb` ด้วย Jupyter หรือ VS Code แล้วแก้โค้ดได้โดยตรง หากต้องการสร้าง Notebook ใหม่จากเนื้อหาเว็บ ใช้ Python ที่มี NumPy รัน `make_notebook.py` คำสั่งนี้จะเขียนทับ Notebook ที่สร้างไว้ จึงควรเก็บสำเนาการทดลองของคุณในชื่อใหม่ก่อน
 
 สำหรับ Binomial Model ใช้ `python3 scripts/make_binomial_notebook.py` เพื่อสร้าง `notebooks/binomial-model.ipynb` จาก `binomial-model.md` และรันเซลล์ตัวอย่างด้วย Python standard library หลังแก้เนื้อหาบทนี้ให้รันคำสั่งอีกครั้งเพื่อให้ข้อความ สมการ ภาพ และผลคำนวณตรงกัน คำสั่งเขียนทับเฉพาะ Notebook ชื่อนี้
+
+สำหรับ Transition Density Functions ใช้ `python3 scripts/make_transition_density_notebook.py` เพื่อสร้าง `notebooks/transition-density-functions.ipynb` จาก Markdown ของบทนี้และรันโค้ดด้วย Python standard library คำสั่งเขียนทับเฉพาะ Notebook ชื่อนี้ ให้รันอีกครั้งหลังแก้บทหรือภาพประกอบ และเก็บการทดลองส่วนตัวไว้ในชื่อไฟล์อื่น

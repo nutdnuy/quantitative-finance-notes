@@ -10,5 +10,7 @@ chapters:
     title: พฤติกรรมแบบสุ่มของสินทรัพย์
   - file: binomial-model
     title: Binomial Model
+  - file: transition-density-functions
+    title: Transition Density Functions
   - file: glossary
     title: อภิธานศัพท์

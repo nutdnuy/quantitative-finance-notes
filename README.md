@@ -14,6 +14,7 @@
 intro.md                       หน้า Welcome
 random-assets.md               บทเรียนเรื่องความสุ่มของสินทรัพย์
 binomial-model.md              บทเรียน Binomial Model และการคิดราคา Option ย้อนกลับ
+transition-density-functions.md  ความหนาแน่นการเปลี่ยนสถานะและสมการ Kolmogorov
 glossary.md                    อภิธานศัพท์ร่วมของซีรีส์
 AGENTS.md                      แนวทางทำงานสำหรับ AI ในโปรเจกต์นี้
 _config.yml                    ชื่อเว็บ ผู้เขียน รูป และลิงก์ repository
@@ -21,6 +22,7 @@ _toc.yml                       สารบัญและลำดับหน�
 templates/new-topic.md         แม่แบบเพิ่มหัวข้อ
 notebooks/random-assets.ipynb  Python Notebook
 notebooks/binomial-model.ipynb  Python Notebook ของบท Binomial Model
+notebooks/transition-density-functions.ipynb  Python Notebook ของบท Transition Density Functions
 assets/images/                 รูปและคำสั่งที่ใช้สร้างภาพ
 book.css                       หน้าตา Welcome และสารบัญ
 style.css                      หน้าตาบทเรียนและกราฟ
@@ -57,6 +59,10 @@ npm run build
 ไฟล์ HTML ไม่อยู่ใน Git; รัน build ก่อนเปิดไฟล์ในเครื่อง หรือใช้ `npm run build:pages` เพื่อสร้างโฟลเดอร์ `_site/` สำหรับโฮสต์เว็บโดยเฉพาะ ระบบจะตรวจลิงก์ รูป และฟอนต์ภายในก่อนเผยแพร่
 
 ## เนื้อหาและแหล่งที่มา
+
+บท **Transition Density Functions** ต่อจาก Binomial Model อ้างอิงเอกสารชื่อเดียวกันที่ผู้ใช้ให้ใน `JU241.3 Notes.pdf` อธิบายการเดินสุ่มสามทาง ความหนาแน่นแบบมีเงื่อนไข Forward/Backward Kolmogorov และ Gaussian พร้อมห้องทดลองพื้นที่ใต้โค้งและการย่อก้าวที่คงความแปรปรวน ดูขอบเขตและแหล่งที่มาในท้ายบทและ `data/transition-density-provenance.json`
+
+สร้างและรัน Notebook ด้วย `python3 scripts/make_transition_density_notebook.py` ใช้ Python standard library; ตรวจหน้าเว็บด้วย `node qa/transition-density-browser.cjs` ขณะเปิด preview ที่พอร์ต 8763
 
 บท **Binomial Model** ต่อจากบทความสุ่ม ครอบคลุมพอร์ตเลียนแบบ ดอกเบี้ย risk-neutral probability ต้นไม้หลายช่วงเวลา และ backward induction อ้างอิงเอกสาร *Binomial Model* ของหลักสูตร Certificate in Quantitative Finance ที่ผู้ใช้ให้มา พร้อมตัวอย่างสองก้าวและห้องทดลอง Call/Put ที่คำนวณขึ้นใหม่ ดูขอบเขตแหล่งที่มาในท้ายบทและ `data/binomial-provenance.json` ไม่รวม PDF ต้นฉบับไว้ใน repository
 

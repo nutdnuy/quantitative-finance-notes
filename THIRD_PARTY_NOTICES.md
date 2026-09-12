@@ -1,5 +1,13 @@
 # Sources and notices
 
+## Transition Density Functions chapter — 2026-09-12
+
+The user-supplied `JU241.3 Notes.pdf` is a 49-page lecture titled *Transition Density Functions*. No author or institution is identified on the inspected title page; attribution from the preceding Binomial lecture is not inherited. The source was consulted locally, and neither its PDF nor slide images are redistributed. The Thai prose is newly written around the source's symmetric trinomial walk, forward/backward equations, similarity reduction and Gaussian kernel. Discrete probability mass is distinguished from continuous density; Markov conditioning and the distributional Dirac initial condition are added clarifications.
+
+New hypothetical calculations, native charts, exact trinomial recurrence and executable Python examples are documented in `data/transition-density-provenance.json`. The diagrams are editable in `assets/diagrams/kolmogorov-directions.excalidraw`, with SVG exported from that scene by Excalidraw 0.18.1. All new chapter visuals use the `no-image-generator` route and the existing QuantCorner light book design. No source image, logo or new third-party icon was introduced.
+
+Supplementary mathematical references are Miranda Holmes-Cerfon, *Applied Stochastic Analysis, Lecture 6: Brownian motion* (Spring 2022), https://personal.math.ubc.ca/~holmescerfon/teaching/asa22/handout-Lecture6_2022.pdf; and Gilbert Strang, *The Heat Equation and Convection-Diffusion*, https://math.mit.edu/classes/18.086/2006/am54.pdf. The JavaScript complementary error function is independently implemented from NIST DLMF mathematical identities 7.6.2 (https://dlmf.nist.gov/7.6.E2) and 7.9.2 (https://dlmf.nist.gov/7.9.E2), not copied third-party software. Its numerical checks include independent reference values, quadrature, and comparison with Python's standard-library error function.
+
 ## Binomial Model chapter — 2026-09-12
 
 The user-supplied `JU241.2 Notes (1).pdf` is an 89-page lecture titled *Binomial Model* with the footer Certificate in Quantitative Finance. No individual author is identified on the inspected title page. The file was consulted locally as reference material; neither the PDF nor its slide images are republished. The Thai chapter explains the mathematical ideas in newly written prose, maps the source's v/p′ notation to d/q, and states assumptions and approximation limits. Source page ranges and supplementary university references are recorded at the end of `binomial-model.md` and in `data/binomial-provenance.json`.

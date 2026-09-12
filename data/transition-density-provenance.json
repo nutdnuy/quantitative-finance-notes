@@ -1,0 +1,154 @@
+{
+  "topic": "Transition Density Functions",
+  "source": {
+    "filename": "JU241.3 Notes.pdf",
+    "title": "Transition Density Functions",
+    "author": "Not identified on inspected title page",
+    "institution": "Not identified on inspected title page",
+    "page_count": 49,
+    "sha256": "bb36a3629709ea8940c8cab8f82ed35f5e62ce978ad4e150539343eefc2e3105",
+    "status": "Consulted locally only; source PDF and slide images not redistributed",
+    "coverage": {
+      "trinomial": [
+        4,
+        7
+      ],
+      "transition_density": [
+        8,
+        11
+      ],
+      "forward_equation": [
+        12,
+        20
+      ],
+      "backward_equation": [
+        21,
+        29
+      ],
+      "model_limitations": [
+        30,
+        30
+      ],
+      "similarity_reduction": [
+        31,
+        43
+      ],
+      "Gaussian_kernel": [
+        44,
+        47
+      ],
+      "illustration": [
+        48,
+        48
+      ]
+    }
+  },
+  "notation": {
+    "density": "k(y,t;z,T) maps source p(y,t;y-prime,t-prime)",
+    "discrete_transition_mass": "M_h(y,t;z,T)",
+    "elapsed_time": "tau = T - t > 0",
+    "step_size": "h maps source delta y",
+    "scaling": "alpha*h^2/dt tends to c^2",
+    "diffusion_sde": "dY = sqrt(2)*c*dW",
+    "variance": "2*c^2*tau"
+  },
+  "assumptions": [
+    "iid symmetric trinomial increments",
+    "0 < alpha < 1/2 for the displayed three-way walk",
+    "Markov property",
+    "Real-valued state on the whole real line, not a strictly positive stock-price model",
+    "Constant c > 0 and zero drift",
+    "Ordinary Gaussian density evaluated only for tau > 0",
+    "No implication of risk-neutral pricing"
+  ],
+  "examples": {
+    "two_step": {
+      "initial": 0,
+      "alpha": 0.2,
+      "h": 1,
+      "dt": 1,
+      "steps": 2,
+      "states": [
+        -2,
+        -1,
+        0,
+        1,
+        2
+      ],
+      "masses": [
+        0.04,
+        0.24,
+        0.44,
+        0.24,
+        0.04
+      ],
+      "mean": 0,
+      "variance": 0.8
+    },
+    "Gaussian_interval": {
+      "initial_y": 1,
+      "c": 1,
+      "a": 0,
+      "b": 2,
+      "times": [
+        0.25,
+        0.5,
+        1
+      ],
+      "probabilities": [
+        0.8427007929497149,
+        0.6826894921370859,
+        0.5204998778130465
+      ]
+    },
+    "refinement_lab": {
+      "initial_y": 0,
+      "c": 1,
+      "tau": 1,
+      "alpha_default": 0.2,
+      "steps": [
+        2,
+        5,
+        10,
+        20,
+        50,
+        100
+      ],
+      "dt": "1/N",
+      "h": "sqrt(dt/alpha)",
+      "fixed_variance": 2,
+      "histogram_height": "exact point probability divided by h; full trinomial support displayed",
+      "sampling": "Exact deterministic convolution; no Monte Carlo randomness or seed"
+    }
+  },
+  "added_clarifications": [
+    "Mass vs density and zero continuous point probability",
+    "Discrete backward recurrence is exact for M_h, not for finite-step Gaussian k",
+    "Dirac initial condition understood through integrals; source title mentions it but main pages do not develop it",
+    "Similarity integration constant zero by symmetry",
+    "Endpoint of open interval at zero elapsed time differs from one-sided Gaussian limit",
+    "Increasing N alone is not model validation"
+  ],
+  "visual": {
+    "route": "no-image-generator",
+    "design": "Existing Thai QuantCorner light book with optional dark theme",
+    "source": "assets/diagrams/kolmogorov-directions.excalidraw",
+    "export": "assets/diagrams/kolmogorov-directions.svg",
+    "exporter": "@excalidraw/excalidraw 0.18.1 exportToSvg",
+    "nodes": 8,
+    "edges": 6,
+    "direction": "All drawn arrows advance time; backward describes conditioning variables",
+    "charts": "Native React SVG tied to exact probability recurrence and Gaussian formula",
+    "image_generator_used": false
+  },
+  "numerical_sources": [
+    "https://dlmf.nist.gov/7.6.E2",
+    "https://dlmf.nist.gov/7.9.E2"
+  ],
+  "verification": {
+    "numerical": "npm test",
+    "browser": "node qa/transition-density-browser.cjs",
+    "notebook": "python3 scripts/make_transition_density_notebook.py",
+    "export": "npm run build:pages"
+  }
+}
