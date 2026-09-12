@@ -15,8 +15,36 @@ function openSearch(){dialog.showModal();search();input.focus();}
 document.getElementById('search-button').addEventListener('click',openSearch);
 document.getElementById('close-search').addEventListener('click',()=>dialog.close());
 input.addEventListener('input',search);
+results.addEventListener('click',event=>{
+ if(event.target.closest('a')){
+  dialog.close();
+  const field=document.getElementById('glossary-query');
+  if(field){field.value='';field.dispatchEvent(new Event('input'));}
+ }
+});
 dialog.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();dialog.close();}});
 document.addEventListener('keydown',event=>{if((event.metaKey||event.ctrlKey)&&event.key.toLowerCase()==='k'){event.preventDefault();if(!dialog.open)openSearch();}});
+// The glossary remains fully readable when JavaScript is unavailable.
+const glossaryInput=document.getElementById('glossary-query');
+if(glossaryInput){
+ const glossaryStatus=document.getElementById('glossary-status');
+ const groups=[...document.querySelectorAll('.glossary-group')];
+ const fold=s=>s.normalize('NFC').toLocaleLowerCase().replace(/[\u2010-\u2015-]/g,' ').replace(/\s+/g,' ').trim();
+ const terms=[...document.querySelectorAll('.glossary-term')].map(element=>({element,text:fold(element.textContent)}));
+ function filterGlossary(){
+  const words=fold(glossaryInput.value).split(' ').filter(Boolean);let count=0;
+  for(const term of terms){const match=words.every(word=>term.text.includes(word));term.element.hidden=!match;if(match)count++;}
+  for(const group of groups)group.hidden=![...group.querySelectorAll('.glossary-term')].some(term=>!term.hidden);
+  glossaryStatus.textContent=words.length?(count?`พบ ${count} คำ จากทั้งหมด ${terms.length} คำ`:'ไม่พบคำนี้ ลองใช้คำไทย ภาษาอังกฤษ หรือคำย่อ'):`มี ${terms.length} คำ จากบทเรียนพฤติกรรมแบบสุ่มของสินทรัพย์`;
+ }
+ document.querySelector('.glossary-search').hidden=false;
+ glossaryInput.addEventListener('input',filterGlossary);
+ window.addEventListener('hashchange',()=>{
+  const target=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if(target){glossaryInput.value='';filterGlossary();target.scrollIntoView();}
+ });
+ filterGlossary();
+}
 // Local preview reloads after a successful rebuild; exported files do not poll.
 if(location.protocol.startsWith('http')&&['127.0.0.1','localhost'].includes(location.hostname)){
  let version=null,enabled=true;

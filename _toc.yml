@@ -8,3 +8,5 @@ options:
 chapters:
   - file: random-assets
     title: พฤติกรรมแบบสุ่มของสินทรัพย์
+  - file: glossary
+    title: อภิธานศัพท์

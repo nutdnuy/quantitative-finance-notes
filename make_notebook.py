@@ -24,6 +24,7 @@ sys.modules["IPython"], sys.modules["IPython.display"] = ipython, display_module
 
 def md(source):
     attachments = {}
+    source = source.replace('](glossary.html#', '](https://nutdnuy.github.io/quantitative-finance-notes/glossary.html#')
     satire_path = root / 'assets/images/technical-lightning-satire-light.png'
     if '](assets/images/technical-lightning-satire-light.png)' in source:
         attachments['technical-lightning-satire-light.png'] = {'image/png': base64.b64encode(satire_path.read_bytes()).decode()}

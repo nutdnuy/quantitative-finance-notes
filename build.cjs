@@ -25,6 +25,7 @@ async function build(){
   const headings=[],ids=new Map();
   body=body.replace(/<h([1-3])>([\s\S]*?)<\/h\1>/g,(_,level,text)=>{let base=slug(text)||'heading',n=(ids.get(base)||0)+1;ids.set(base,n);const id=n===1?base:`${base}-${n}`;if(level==='2')headings.push({id,title:plain(text)});return `<h${level} id="${id}">${text}</h${level}>`;});
   body=body.replace(/href="([a-z0-9-]+)\.md(#[^"]*)?"(?! download)/g,(_,file,hash='')=>`href="${file===toc.root?'index':file}.html${hash}"`);
+  body=body.replace(/<a href="glossary\.html#[^"]+"/g,link=>link+' class="glossary-link"');
   return {file,href:index===0?'index.html':file+'.html',title:item.title||meta.title||file,description:meta.description||config.title,body,headings,home:index===0};
  });
  const icon=fs.readFileSync(path.join(root,'assets/icons/search.svg'),'utf8').replace(/<svg\b/,'<svg aria-hidden="true" focusable="false"');
@@ -33,6 +34,11 @@ async function build(){
   search.push({title:page.title,section:page.title,url:page.href,text:plain(page.body).slice(0,800)});
   const chunks=page.body.split(/(?=<h2\b)/);
   for(const chunk of chunks){const h=chunk.match(/^<h2 id="([^"]+)">([\s\S]*?)<\/h2>/);if(h)search.push({title:plain(h[2]),section:page.title,url:page.href+'#'+h[1],text:plain(chunk.replace(/<span class="katex">[\s\S]*?<\/span>/g,'')).slice(0,2500)});}
+  // Index definitions separately so search opens the exact term, even in long groups.
+  for(const term of page.body.matchAll(/<section\b(?=[^>]*class="glossary-term")(?=[^>]*id="([^"]+)")[^>]*>([\s\S]*?)<\/section>/g)){
+   const heading=term[2].match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/);
+   if(heading)search.push({title:plain(heading[1]),section:page.title,url:page.href+'#'+term[1],text:plain(term[2])});
+  }
   const nav=pages.map(p=>`<a class="book-link${p.file===page.file?' current':''}" href="${p.href}"${p.file===page.file?' aria-current="page"':''}>${escape(p.title)}</a>`).join('');
   const localNav=page.home?'':`<details class="page-contents" open><summary>ในหน้านี้</summary><nav aria-label="หัวข้อในหน้านี้">${page.headings.map(h=>`<a href="#${escape(h.id)}">${escape(h.title)}</a>`).join('')}</nav></details>`;
   const github=config.repository?.url?`<a href="${escape(config.repository.url)}">GitHub</a>`:'';
