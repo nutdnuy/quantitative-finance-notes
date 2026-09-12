@@ -11,6 +11,7 @@ import perez from '../data/perez-companc-table-3-3.json';
 
 import { format, Range, LabTitle, Chart } from './ui.jsx';
 import { ComparisonLab, ReturnsLab, DistributionLab, WienerLab } from './source-labs.jsx';
+import BinomialLab from './binomial.jsx';
 
 function JensenLab() {
   const [spread, setSpread] = useState(50), [strike, setStrike] = useState(100), d = jensen(spread, strike, 100, 0.6);
@@ -77,8 +78,7 @@ function ExerciseLab() {
     <div><h4>2% บอกขนาดการแกว่ง</h4><p>มันไม่ใช่ผลตอบแทนที่จะได้ และไม่ใช่ขาดทุนสูงสุด ถ้าช็อกข้ามวันพึ่งพากัน ต้องรวม covariance ด้วย คำตอบ 2% ผูกอยู่กับสมมติฐานของโจทย์นี้</p></div>
   </Stepper></div>;
 }
-for (const [id, Component] of [['hedging-lab', HedgingLab], ['monte-carlo-lab', MonteCarloLab], ['jensen-lab', JensenLab], ['comparison-lab',ComparisonLab], ['returns-lab',ReturnsLab], ['distribution-lab',DistributionLab], ['scaling-lab', ScalingLab], ['rolling-lab', RollingLab], ['wiener-lab',WienerLab], ['gbm-lab', GbmLab], ['exercise-lab', ExerciseLab]]) {
+for (const [id, Component] of [['binomial-lab', BinomialLab], ['hedging-lab', HedgingLab], ['monte-carlo-lab', MonteCarloLab], ['jensen-lab', JensenLab], ['comparison-lab',ComparisonLab], ['returns-lab',ReturnsLab], ['distribution-lab',DistributionLab], ['scaling-lab', ScalingLab], ['rolling-lab', RollingLab], ['wiener-lab',WienerLab], ['gbm-lab', GbmLab], ['exercise-lab', ExerciseLab]]) {
   const target = document.getElementById(id);
   if (target) createRoot(target).render(<MotionConfig reducedMotion="user"><Component /></MotionConfig>);
 }
-

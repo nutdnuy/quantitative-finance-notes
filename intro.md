@@ -26,6 +26,13 @@ description: Quant Corner Learning 101
 <a class="text-link" href="random-assets.html">เปิดบทเรียน →</a>
 </div>
 
+<div class="reading-entry">
+<p class="eyebrow">บทต่อไป</p>
+<h3><a href="binomial-model.html">Binomial Model <span aria-hidden="true">↗</span></a></h3>
+<p>พอร์ตเลียนแบบ · Risk-neutral probability · ต้นไม้หลายช่วงเวลา · Backward induction</p>
+<a class="text-link" href="binomial-model.html">เปิดบท Binomial Model →</a>
+</div>
+
 ## อ่านไป ลองไป
 
 - **ดูความหมายก่อนแทนสูตร** — เริ่มจากตัวอย่างเล็ก ๆ แล้วค่อยเพิ่มรายละเอียด

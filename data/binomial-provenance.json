@@ -1,0 +1,102 @@
+{
+  "topic": "Binomial Model",
+  "source_status": "User-supplied lecture consulted locally; source PDF and slide images are not redistributed.",
+  "source": {
+    "filename": "JU241.2 Notes (1).pdf",
+    "title": "Binomial Model",
+    "course_label": "Certificate in Quantitative Finance",
+    "author": "Not identified on the inspected title page",
+    "pages": 89,
+    "sha256": "f06d7095ce09c4084c6b8a3e4a140682b208bff6e38b24fe573e7ab17601ab94",
+    "coverage": {
+      "one_day_hedge": [
+        4,
+        20
+      ],
+      "asymmetric_move": [
+        31,
+        34
+      ],
+      "simple_interest_and_risk_neutrality": [
+        36,
+        49
+      ],
+      "general_formulas": [
+        50,
+        60
+      ],
+      "moment_approximation": [
+        62,
+        72
+      ],
+      "tree_and_backward_induction": [
+        74,
+        83
+      ],
+      "continuous_limit": [
+        84,
+        88
+      ]
+    }
+  },
+  "notation": {
+    "down_factor": "d (source uses v)",
+    "pricing_probability": "q (source uses p-prime)",
+    "physical_probability": "p",
+    "bank_factor": "R = 1 + r * dt; r annual decimal and dt in years; R compounds across steps"
+  },
+  "hypothetical_two_step_example": {
+    "S0": 100,
+    "K": 100,
+    "u": 1.1,
+    "d": 0.9,
+    "r": 0,
+    "T_years": 1,
+    "steps": 2,
+    "physical_p": 0.6,
+    "q": 0.5,
+    "terminal_stock_up_first": [
+      121,
+      99,
+      81
+    ],
+    "call_terminal_payoff_up_first": [
+      21,
+      0,
+      0
+    ],
+    "call_price": 5.25,
+    "put_price": 5.25,
+    "root_delta": 0.525,
+    "root_cash": -47.25,
+    "physical_expected_call_payoff": 7.56
+  },
+  "assumptions": [
+    "European exercise only",
+    "No dividends, fees, taxes, spread or default",
+    "Fractional shares, shorting, borrowing and lending at the same rate",
+    "Rebalancing at every tree step with self-financing strategy",
+    "Strict d < R < u; both real-world branches possible"
+  ],
+  "distinctions": [
+    "New two-step example is not a reproduction of the incompletely parameterized numerical tree on source pages 78-83",
+    "The symmetric 1 +/- sigma*sqrt(dt) moment construction is a short-step approximation, not exact finite-step GBM",
+    "Changing p alone leaves the fixed-tree replication price unchanged",
+    "Payoff, premium, liability and profit are distinct"
+  ],
+  "visual": {
+    "route": "no-image-generator",
+    "design_system": "QuantCorner / QuantSeras; existing Thai light book with optional dark theme",
+    "editable": "assets/diagrams/binomial-two-step.excalidraw",
+    "export": "assets/diagrams/binomial-two-step.svg",
+    "exporter": "@excalidraw/excalidraw 0.18.1 exportToSvg",
+    "layout": "Node positions for readability; not a scaled stock-price chart",
+    "image_generator_used": false
+  },
+  "verification": {
+    "numerical": "npm test",
+    "browser": "node qa/binomial-browser.cjs",
+    "notebook": "python3 scripts/make_binomial_notebook.py",
+    "pages": "npm run build:pages"
+  }
+}

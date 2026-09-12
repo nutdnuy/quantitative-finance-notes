@@ -8,5 +8,7 @@ options:
 chapters:
   - file: random-assets
     title: พฤติกรรมแบบสุ่มของสินทรัพย์
+  - file: binomial-model
+    title: Binomial Model
   - file: glossary
     title: อภิธานศัพท์

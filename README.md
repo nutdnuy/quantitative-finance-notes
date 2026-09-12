@@ -13,12 +13,14 @@
 ```text
 intro.md                       หน้า Welcome
 random-assets.md               บทเรียนเรื่องความสุ่มของสินทรัพย์
+binomial-model.md              บทเรียน Binomial Model และการคิดราคา Option ย้อนกลับ
 glossary.md                    อภิธานศัพท์ร่วมของซีรีส์
 AGENTS.md                      แนวทางทำงานสำหรับ AI ในโปรเจกต์นี้
 _config.yml                    ชื่อเว็บ ผู้เขียน รูป และลิงก์ repository
 _toc.yml                       สารบัญและลำดับหน้า
 templates/new-topic.md         แม่แบบเพิ่มหัวข้อ
 notebooks/random-assets.ipynb  Python Notebook
+notebooks/binomial-model.ipynb  Python Notebook ของบท Binomial Model
 assets/images/                 รูปและคำสั่งที่ใช้สร้างภาพ
 book.css                       หน้าตา Welcome และสารบัญ
 style.css                      หน้าตาบทเรียนและกราฟ
@@ -55,6 +57,10 @@ npm run build
 ไฟล์ HTML ไม่อยู่ใน Git; รัน build ก่อนเปิดไฟล์ในเครื่อง หรือใช้ `npm run build:pages` เพื่อสร้างโฟลเดอร์ `_site/` สำหรับโฮสต์เว็บโดยเฉพาะ ระบบจะตรวจลิงก์ รูป และฟอนต์ภายในก่อนเผยแพร่
 
 ## เนื้อหาและแหล่งที่มา
+
+บท **Binomial Model** ต่อจากบทความสุ่ม ครอบคลุมพอร์ตเลียนแบบ ดอกเบี้ย risk-neutral probability ต้นไม้หลายช่วงเวลา และ backward induction อ้างอิงเอกสาร *Binomial Model* ของหลักสูตร Certificate in Quantitative Finance ที่ผู้ใช้ให้มา พร้อมตัวอย่างสองก้าวและห้องทดลอง Call/Put ที่คำนวณขึ้นใหม่ ดูขอบเขตแหล่งที่มาในท้ายบทและ `data/binomial-provenance.json` ไม่รวม PDF ต้นฉบับไว้ใน repository
+
+สร้างและรัน Notebook บทนี้ด้วย `python3 scripts/make_binomial_notebook.py` ใช้เฉพาะ Python standard library; ตรวจห้องทดลองด้วย `node qa/binomial-browser.cjs` ขณะเปิด preview ที่พอร์ต 8763
 
 เนื้อหาเรื่องความสุ่มของสินทรัพย์มีส่วนที่แปลและเรียบเรียงจาก *Paul Wilmott on Quantitative Finance*, second edition (2006), chapter 3, printed pp. 55–70 จาก PDF ที่ผู้ใช้ให้มา ฉบับนี้เปิดด้วยแนวคิดของ Bachelier (1900) เพิ่มพื้นฐาน Option และตัวอย่างใหม่ก่อน Jensen’s inequality และตัดส่วนทดลองบนสเปรดชีตออก แหล่งอ้างอิงอยู่ท้ายบทเรียน ข้อมูลประวัติศาสตร์และตัวอย่างที่ยังใช้จากหนังสือคงตัวเลขเดิม ส่วน exact GBM เป็นภาคทดลองเพิ่มเติม
 

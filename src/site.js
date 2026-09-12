@@ -35,7 +35,7 @@ if(glossaryInput){
   const words=fold(glossaryInput.value).split(' ').filter(Boolean);let count=0;
   for(const term of terms){const match=words.every(word=>term.text.includes(word));term.element.hidden=!match;if(match)count++;}
   for(const group of groups)group.hidden=![...group.querySelectorAll('.glossary-term')].some(term=>!term.hidden);
-  glossaryStatus.textContent=words.length?(count?`พบ ${count} คำ จากทั้งหมด ${terms.length} คำ`:'ไม่พบคำนี้ ลองใช้คำไทย ภาษาอังกฤษ หรือคำย่อ'):`มี ${terms.length} คำ จากบทเรียนพฤติกรรมแบบสุ่มของสินทรัพย์`;
+  glossaryStatus.textContent=words.length?(count?`พบ ${count} คำ จากทั้งหมด ${terms.length} คำ`:'ไม่พบคำนี้ ลองใช้คำไทย ภาษาอังกฤษ หรือคำย่อ'):`มี ${terms.length} คำ ในอภิธานศัพท์`;
  }
  document.querySelector('.glossary-search').hidden=false;
  glossaryInput.addEventListener('input',filterGlossary);

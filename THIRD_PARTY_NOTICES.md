@@ -1,5 +1,11 @@
 # Sources and notices
 
+## Binomial Model chapter — 2026-09-12
+
+The user-supplied `JU241.2 Notes (1).pdf` is an 89-page lecture titled *Binomial Model* with the footer Certificate in Quantitative Finance. No individual author is identified on the inspected title page. The file was consulted locally as reference material; neither the PDF nor its slide images are republished. The Thai chapter explains the mathematical ideas in newly written prose, maps the source's v/p′ notation to d/q, and states assumptions and approximation limits. Source page ranges and supplementary university references are recorded at the end of `binomial-model.md` and in `data/binomial-provenance.json`.
+
+The two-step 100 → 110/90 → 121/99/81 example, European Call/Put lab, exercises and Python code are newly authored hypothetical examples. The diagram `assets/diagrams/binomial-two-step.excalidraw` is the editable source; its SVG was exported from that scene using Excalidraw 0.18.1 and retains native labels. The diagram, tables, equations and interface use the `no-image-generator` route with the existing QuantCorner light book design. No additional third-party icon, logo, source image or generated artwork was introduced.
+
 ## One-day hedging walkthrough
 
 The displayed hedge lesson now uses 100 → 101/99 over one day, K=100, physical probabilities 0.6/0.4, and initially zero interest. Five newly authored editable Excalidraw scenes and SVG previews (`assets/diagrams/hedge-day-1` through `hedge-day-5`) progressively reveal payoff, long-call/short-half-share hedge, its fixed terminal liability, price, and risk-neutral weights. The user supplied CQF lecture screenshots (shown as JA251.2 Notes.pdf) as a teaching-sequence reference. No screenshot, logo or verbatim lecture prose is republished. Calculations and both arbitrage directions are verified in the executable Notebook. The former 50/150 one-year tree is retained as an unused asset; that price example remains only for Jensen's inequality.

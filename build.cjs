@@ -26,7 +26,7 @@ async function build(){
   body=body.replace(/<h([1-3])>([\s\S]*?)<\/h\1>/g,(_,level,text)=>{let base=slug(text)||'heading',n=(ids.get(base)||0)+1;ids.set(base,n);const id=n===1?base:`${base}-${n}`;if(level==='2')headings.push({id,title:plain(text)});return `<h${level} id="${id}">${text}</h${level}>`;});
   body=body.replace(/href="([a-z0-9-]+)\.md(#[^"]*)?"(?! download)/g,(_,file,hash='')=>`href="${file===toc.root?'index':file}.html${hash}"`);
   body=body.replace(/<a href="glossary\.html#[^"]+"/g,link=>link+' class="glossary-link"');
-  return {file,href:index===0?'index.html':file+'.html',title:item.title||meta.title||file,description:meta.description||config.title,body,headings,home:index===0};
+  return {file,href:index===0?'index.html':file+'.html',title:item.title||meta.title||file,description:meta.description||config.title,notebook:meta.notebook||config.notebook,body,headings,home:index===0};
  });
  const icon=fs.readFileSync(path.join(root,'assets/icons/search.svg'),'utf8').replace(/<svg\b/,'<svg aria-hidden="true" focusable="false"');
  const search=[];
@@ -48,7 +48,7 @@ async function build(){
 <div class="book-layout"><aside id="book-sidebar" class="book-sidebar"><a href="index.html" class="cover-link" aria-label="กลับหน้า Welcome"><img class="book-cover" src="${escape(config.logo)}" alt="${escape(config.logo_alt)}" width="1536" height="1024"></a><a class="book-name" href="index.html">${escape(config.title)}</a>
 <button class="search-trigger" id="search-button">${icon}<span>Search</span><kbd>⌘ K</kbd></button>
 <nav class="book-nav" aria-label="สารบัญ">${nav}</nav>${localNav}
-<div class="book-sidebar-footer"><a href="${escape(config.notebook)}" download>ดาวน์โหลด Notebook</a><a href="${page.file}.md" download>ไฟล์ Markdown หน้านี้</a>${github}<button id="theme-button">พื้นหลังมืด</button></div></aside>
+<div class="book-sidebar-footer"><a href="${escape(page.notebook)}" download>ดาวน์โหลด Notebook</a><a href="${page.file}.md" download>ไฟล์ Markdown หน้านี้</a>${github}<button id="theme-button">พื้นหลังมืด</button></div></aside>
 <main class="book-main ${page.home?'welcome-main':'chapter'}" id="content"><div class="page-topline"><span>${escape(config.title)}</span><button id="print-button">พิมพ์หน้านี้</button></div>${page.home?`<img class="mobile-cover" src="${escape(config.logo)}" alt="${escape(config.logo_alt)}" width="1536" height="1024">`:''}${page.body}<footer class="book-footer">${escape(config.title)}<span>โดย ${escape(config.author)}</span></footer></main></div>
 <dialog id="search-dialog" aria-labelledby="search-title"><div class="search-dialog-heading"><h2 id="search-title">ค้นหาในสมุดบันทึก</h2><button id="close-search" aria-label="ปิดการค้นหา">ปิด</button></div><label for="search-input" class="sr-only">คำค้นหา</label><input id="search-input" type="search" placeholder="ลองค้นหา volatility หรือ ความผันผวน" autocomplete="off"><p id="search-status" role="status"></p><div id="search-results"></div></dialog>
 <script src="search-index.js" defer></script><script src="site.js" defer></script>${page.home?'':'<script src="app.js" defer></script>'}</body></html>`;

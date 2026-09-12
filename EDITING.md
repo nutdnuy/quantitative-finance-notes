@@ -10,11 +10,13 @@
 |---|---|
 | ข้อความหน้า Welcome | `intro.md` |
 | เนื้อหาเรื่องพฤติกรรมแบบสุ่มของสินทรัพย์ | `random-assets.md` |
+| เนื้อหา Binomial Model | `binomial-model.md` |
 | ความหมายและตัวอย่างคำศัพท์ | `glossary.md` |
 | ชื่อเว็บ ชื่อผู้เขียน รูปด้านบน ลิงก์ GitHub | `_config.yml` |
 | รายการและลำดับหัวข้อในสารบัญ | `_toc.yml` |
 | รูปด้านบน | `assets/images/welcome-paths.png` หรือเปลี่ยนค่า `logo` ใน `_config.yml` |
 | Notebook สำหรับทดลอง Python | `notebooks/random-assets.ipynb` |
+| Notebook และห้องทดลอง Binomial | `notebooks/binomial-model.ipynb`, `src/binomial.jsx`, `src/binomial.mjs` |
 | สีและหน้าตาของหน้า Welcome/สารบัญ | `book.css` |
 | หน้าตาบทเรียนและกราฟ | `style.css` |
 | พฤติกรรมกราฟแบบปรับค่าได้ | `src/labs.jsx`, `src/source-labs.jsx`, `src/math.mjs` |
@@ -48,6 +50,8 @@ chapters:
 ไม่ต้องใส่ `.md` ต่อท้ายค่า `file` ชื่อไฟล์ต้องไม่ซ้ำกัน รายการใหม่จะปรากฏในสารบัญและระบบค้นหาหลังสร้างเว็บใหม่
 
 ตัวสร้างนี้รองรับหน้าแรก `root`, รายการ `chapters` แบบหนึ่งระดับ และ `title` ของแต่ละหน้า ยังไม่รองรับโครงสร้างหลาย `parts` หรือการฝัง Notebook เป็นหน้าเว็บอัตโนมัติ เพิ่ม Notebook ในโฟลเดอร์ `notebooks/` แล้วลิงก์จาก Markdown ได้
+
+หากบทมี Notebook ของตัวเอง ให้เพิ่ม `notebook: notebooks/ชื่อบท.ipynb` ใน YAML frontmatter ปุ่มดาวน์โหลด Notebook ใน sidebar ของหน้านั้นจะชี้ไฟล์นี้ หน้าที่ไม่ได้กำหนดยังคงใช้ค่า `notebook` จาก `_config.yml`
 
 ## เพิ่มหรือแก้คำในอภิธานศัพท์
 
@@ -106,3 +110,5 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 ## Notebook
 
 เปิด `notebooks/random-assets.ipynb` ด้วย Jupyter หรือ VS Code แล้วแก้โค้ดได้โดยตรง หากต้องการสร้าง Notebook ใหม่จากเนื้อหาเว็บ ใช้ Python ที่มี NumPy รัน `make_notebook.py` คำสั่งนี้จะเขียนทับ Notebook ที่สร้างไว้ จึงควรเก็บสำเนาการทดลองของคุณในชื่อใหม่ก่อน
+
+สำหรับ Binomial Model ใช้ `python3 scripts/make_binomial_notebook.py` เพื่อสร้าง `notebooks/binomial-model.ipynb` จาก `binomial-model.md` และรันเซลล์ตัวอย่างด้วย Python standard library หลังแก้เนื้อหาบทนี้ให้รันคำสั่งอีกครั้งเพื่อให้ข้อความ สมการ ภาพ และผลคำนวณตรงกัน คำสั่งเขียนทับเฉพาะ Notebook ชื่อนี้
