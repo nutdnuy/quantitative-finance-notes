@@ -1,0 +1,267 @@
+{
+  "topic": "Applied Stochastic Calculus",
+  "date": "2026-09-12",
+  "sources": [
+    {
+      "filename": "JA251.4 Notes.pdf",
+      "title": "CQF Module 1 Lecture 4 — Introduction to Stochastic Calculus",
+      "pages": 43,
+      "author": "No individual author credited in inspected material",
+      "program": "Certificate in Quantitative Finance (CQF)",
+      "branding": "CQF / Fitch Group visible on supplied cover; not redistributed",
+      "sha256": "f69e37dad20d1c2fc337a19c5d99f231849784ac45381a50c6dbc6e26cd33e44",
+      "page_numbering": "PDF pages including cover; JA251.5 printed slide number is PDF page minus 1",
+      "coverage_pdf_pages": {
+        "coin_and_conditional_expectation": [
+          5,
+          7
+        ],
+        "quadratic_variation_and_scaling": [
+          8,
+          14
+        ],
+        "Taylor_and_Ito": [
+          15,
+          28
+        ],
+        "SDE_and_models": [
+          29,
+          35
+        ],
+        "mean_square_limit": [
+          36,
+          38
+        ],
+        "Normal_generators": [
+          39,
+          42
+        ]
+      },
+      "status": "Consulted locally only; PDF and rendered slides not redistributed; metadata timestamps not used as publication date"
+    },
+    {
+      "filename": "JA251.5 Notes.pdf",
+      "title": "CQF Module 1 Lecture 5 — Stochastic Differential Equations – Maths and Computation",
+      "pages": 44,
+      "author": "No individual author credited in inspected material",
+      "program": "Certificate in Quantitative Finance (CQF)",
+      "branding": "CQF / Fitch Group visible on supplied cover; not redistributed",
+      "sha256": "dcafef8d9baa2ee098a71911d99cd585e6e53e1e89adf8b40d7044b542eaaff0",
+      "page_numbering": "PDF pages including cover; JA251.5 printed slide number is PDF page minus 1",
+      "coverage_pdf_pages": {
+        "general_SDE_and_Ito": [
+          5,
+          11
+        ],
+        "log_and_exact_GBM": [
+          12,
+          14
+        ],
+        "OU_integrating_factor": [
+          15,
+          16
+        ],
+        "transition_density_and_forward": [
+          17,
+          23
+        ],
+        "stationary_density": [
+          24,
+          26
+        ],
+        "backward_equation": [
+          27,
+          27
+        ],
+        "Euler_GBM": [
+          28,
+          34
+        ],
+        "Euler_OU": [
+          35,
+          36
+        ],
+        "correlated_increments": [
+          37,
+          42
+        ],
+        "weighted_Normal_sums": [
+          43,
+          43
+        ]
+      },
+      "status": "Consulted locally only; PDF and rendered slides not redistributed; metadata timestamps not used as publication date"
+    }
+  ],
+  "narrative": [
+    "Brownian scaling and quadratic variation",
+    "Left-endpoint Ito integral and the missing second-order term",
+    "Full time-dependent Ito formula",
+    "GBM log transform and exact solution",
+    "OU integrating factor, conditional moments and stationary distribution",
+    "General forward/backward Kolmogorov equations",
+    "Euler approximation on shared Brownian increments",
+    "Normal generation and correlated Gaussian innovations"
+  ],
+  "notation": {
+    "Brownian_driver": "W maps source X; W0=0",
+    "state": "Y for general state, S for GBM price, r for OU rate",
+    "density": "k(y,t;z,T) consistent with prior chapter",
+    "OU": "kappa and theta map source gamma and r-bar",
+    "Normal_convention": "N(mean, variance)"
+  },
+  "assumptions": [
+    "Ito interpretation; nonanticipating integrands and square integrability when invoking zero expectation",
+    "C1 in time and C2 in state for the displayed Ito formula",
+    "Gaussian increments are independent across disjoint time intervals",
+    "GBM has positive initial price and constant mu/sigma; density formula requires sigma>0 and elapsed time>0",
+    "OU kappa>0 and constant theta,kappa,sigma_r; stationary density requires sigma_r>0",
+    "General density equations require appropriate regularity, density existence and boundary conditions",
+    "Correlated pair is formed from independent standard Gaussian base shocks; rho in [-1,1]",
+    "All data illustrative, no market calibration, physical/risk-neutral equivalence, or implied option valuation"
+  ],
+  "clarifications": [
+    "Finite Gaussian squared increment is dt*Z^2, not identically dt; coin construction differs",
+    "Exact Gaussian QV MSE is 2*T^2/N",
+    "Left sum on finite grid equals .5*(W_T^2-Q_N), with limit .5*(W_T^2-T)",
+    "Ito correction sign follows curvature",
+    "OU finite-time moments are derived additions to source integrating-factor solution",
+    "State-dependent forward coefficients remain inside derivatives",
+    "Euler may be nonpositive; do not clamp; even sigma=0 Euler differs from exponential exact growth when mu!=0",
+    "Sum of twelve uniforms minus six is bounded Normal approximation",
+    "Normal marginal laws alone do not guarantee jointly Gaussian variables; weighted variance includes covariance",
+    "Do not restore removed spreadsheet exercise"
+  ],
+  "source_worked_example": {
+    "model": "GBM Euler",
+    "S0": 100,
+    "mu": 0.1,
+    "sigma": 0.2,
+    "dt": 0.01,
+    "shocks": [
+      0.12,
+      -0.25
+    ],
+    "values": [
+      100,
+      100.34,
+      99.93864
+    ],
+    "source_display_second_value": 99.94
+  },
+  "examples": {
+    "GBM_moments": {
+      "S0": 100,
+      "mu": 0.1,
+      "sigma": 0.2,
+      "T": 1,
+      "mean": 110.517091807565,
+      "median": 108.328706767496
+    },
+    "OU_moments": {
+      "r0": 0.05,
+      "theta": 0.03,
+      "kappa": 1.5,
+      "sigma_r": 0.01,
+      "T": 1,
+      "mean": 0.034462603202968595,
+      "sd": 0.005627944952443819,
+      "stationary_sd": 0.005773502691896258
+    },
+    "negative_Euler": {
+      "S0": 100,
+      "mu": 0.1,
+      "sigma": 1,
+      "dt": 1,
+      "Z": -2,
+      "euler_multiplier": -0.9,
+      "exact_multiplier": "exp(-2.4)"
+    },
+    "correlated_pair": {
+      "rho": -0.6,
+      "Z1": 1,
+      "Z2": -0.5,
+      "phi1": 1,
+      "phi2": -1
+    }
+  },
+  "labs": {
+    "quadratic_variation": {
+      "mount": "qv-ito-lab",
+      "seed": 73,
+      "T": 1,
+      "default_steps": 256,
+      "steps": [
+        16,
+        64,
+        256,
+        1024,
+        4096
+      ],
+      "finest_steps": 4096,
+      "coupling": "Aggregate same fine increments for every resolution",
+      "theory_rms": "T*sqrt(2/N)"
+    },
+    "gbm_euler": {
+      "mount": "gbm-euler-lab",
+      "seed": 73,
+      "S0": 100,
+      "mu": 0.1,
+      "sigma": 0.2,
+      "T_years": 1,
+      "default_steps": 64,
+      "steps": [
+        4,
+        16,
+        64,
+        256,
+        1024
+      ],
+      "finest_steps": 4096,
+      "coupling": "Exact and Euler use same nested Brownian increments; no nonpositive clamp",
+      "negative_UI_case": {
+        "seed": 81,
+        "steps": 4,
+        "mu": -0.1,
+        "sigma": 1
+      }
+    },
+    "correlation": {
+      "mount": "correlated-noise-lab",
+      "seed": 31415,
+      "count": 2048,
+      "default_rho": 0.6,
+      "sampling": "Same independent base pairs reused when rho changes",
+      "display": "All pairs included; sample variance denominator n-1; sample correlation calculated from centered shocks"
+    }
+  },
+  "random_generation": {
+    "javascript": "Existing seeded normalGenerator in src/math.mjs, Box-Muller transform of seeded uniforms; no new third-party sampler",
+    "python": "Python standard-library random.Random.gauss; seeds explicit in each Notebook cell",
+    "cross_language": "Experiments are independently reproducible; same numeric seed does not imply identical streams across languages"
+  },
+  "visual": {
+    "route": "no-image-generator",
+    "image_generator_used": false,
+    "design": "Existing QuantCorner Thai light book with optional dark theme",
+    "charts": "Native React SVG Chart/Range/LabTitle reused; exact numerical coordinates, local fonts; no new illustrations, icons, or copied source charts",
+    "interactions": [
+      "Refine a shared Brownian grid with visible QV and integral identities",
+      "Change GBM parameters and grid to compare numerical methods",
+      "Change rho with fixed base shocks to inspect correlation"
+    ],
+    "motion": "Existing project reduced-motion handling; no new animation or decorative effect"
+  },
+  "verification": {
+    "numerical": "npm test",
+    "browser": "node qa/stochastic-calculus-browser.cjs",
+    "regression": "npm run check:site",
+    "notebook": "python3 scripts/make_stochastic_calculus_notebook.py; nbformat schema and fresh-cell replay",
+    "export": "npm run build:pages"
+  },
+  "supplementary_references": [
+    "https://personal.math.ubc.ca/~holmescerfon/teaching/asa22/handout-Lecture7_2022.pdf",
+    "https://personal.math.ubc.ca/~holmescerfon/teaching/asa22/handout-Lecture8_2022.pdf",
+    "https://personal.math.ubc.ca/~holmescerfon/teaching/asa22/handout-Lecture10_2022.pdf"
+  ]
+}

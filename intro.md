@@ -40,6 +40,13 @@ description: Quant Corner Learning 101
 <a class="text-link" href="transition-density-functions.html">เปิดบท Transition Density Functions →</a>
 </div>
 
+<div class="reading-entry">
+<p class="eyebrow">ต่อจาก Transition Density Functions</p>
+<h3><a href="applied-stochastic-calculus.html">Applied Stochastic Calculus <span aria-hidden="true">↗</span></a></h3>
+<p>Quadratic variation · Itô’s lemma · GBM และ mean reversion · จำลอง SDE และช็อกที่สัมพันธ์กัน</p>
+<a class="text-link" href="applied-stochastic-calculus.html">เปิดบท Applied Stochastic Calculus →</a>
+</div>
+
 ## อ่านไป ลองไป
 
 - **ดูความหมายก่อนแทนสูตร** — เริ่มจากตัวอย่างเล็ก ๆ แล้วค่อยเพิ่มรายละเอียด

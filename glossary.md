@@ -5,7 +5,7 @@ description: ศัพท์ที่ใช้ในบทเรียน Quant 
 
 # อภิธานศัพท์
 
-หน้านี้รวมศัพท์ที่เราใช้ในบทเรียน **พฤติกรรมแบบสุ่มของสินทรัพย์**, **Binomial Model** และ **Transition Density Functions** เอาไว้เปิดเทียบระหว่างอ่าน แต่ละคำมีลิงก์กลับไปดูตัวอย่างและการทดลองที่เกี่ยวข้อง
+หน้านี้รวมศัพท์ที่เราใช้ในบทเรียน **พฤติกรรมแบบสุ่มของสินทรัพย์**, **Binomial Model**, **Transition Density Functions** และ **Applied Stochastic Calculus** เอาไว้เปิดเทียบระหว่างอ่าน แต่ละคำมีลิงก์กลับไปดูตัวอย่างและการทดลองที่เกี่ยวข้อง
 
 <div class="glossary-search" hidden>
 <label for="glossary-query">ค้นหาคำศัพท์</label>
@@ -469,6 +469,8 @@ Option ที่กำหนดให้ใช้สิทธิได้เฉ�
 
 [ดูในบทเรียน](random-assets.html#wiener)
 
+[ต่อด้วย Itô’s lemma](applied-stochastic-calculus.html#ito-lemma)
+
 </section>
 <section class="glossary-term" id="stochastic-differential-equation">
 
@@ -478,6 +480,8 @@ Option ที่กำหนดให้ใช้สิทธิได้เฉ�
 
 [ดูในบทเรียน](random-assets.html#model)
 
+[แปลงฟังก์ชันของ SDE](applied-stochastic-calculus.html#ito-lemma)
+
 </section>
 <section class="glossary-term" id="geometric-brownian-motion">
 
@@ -486,6 +490,8 @@ Option ที่กำหนดให้ใช้สิทธิได้เฉ�
 แบบจำลองราคาที่เรียกสั้น ๆ ว่า **GBM** และเขียนเป็น dS = μS dt + σS dX เมื่อ μ และ σ คงที่และราคาเริ่มต้นเป็นบวก สูตรคำตอบของแบบจำลองคงราคาเป็นบวก โดยราคามีการแจกแจงแบบ Lognormal และ log return มีการแจกแจงแบบ Normal
 
 [ดูในบทเรียน](random-assets.html#model)
+
+[ดูที่มาของคำตอบ GBM](applied-stochastic-calculus.html#gbm)
 
 </section>
 
@@ -592,6 +598,112 @@ Option ที่กำหนดให้ใช้สิทธิได้เฉ�
 การแจกแจงเชิงคณิตศาสตร์ที่ใช้แทนมวลหนึ่งหน่วย ณ จุดเดียว นิยามผ่านผลของการอินทิเกรต ไม่ใช่ฟังก์ชันที่มีความสูงจำกัด ณ จุดนั้น ใช้ระบุว่าเริ่มจากค่า y แน่นอนก่อนความน่าจะเป็นจะแพร่ออก และห้ามแทนเวลาเป็นศูนย์ในสูตร Gaussian ที่มีไว้สำหรับเวลาบวก
 
 [ดูในบทเรียน](transition-density-functions.html#dirac)
+
+</section>
+
+</section>
+
+<section class="glossary-group" id="group-calculus">
+
+## แคลคูลัสและการจำลองกระบวนการสุ่ม
+
+<section class="glossary-term" id="quadratic-variation">
+
+### Quadratic variation — ความแปรผันกำลังสอง
+
+ลิมิตของผลรวมกำลังสองของก้าว เมื่อแบ่งช่วงเวลาละเอียดขึ้น สำหรับ standard Brownian motion บน [0,T] ค่านี้เท่ากับ T แต่ผลรวมบนตารางที่ยังมีจำนวนก้าวจำกัดยังสุ่มได้ ไม่ใช่ความแปรปรวนของระดับค่าบนเส้นทางหนึ่ง
+
+[ดูในบทเรียน](applied-stochastic-calculus.html#quadratic-variation)
+
+</section>
+
+<section class="glossary-term" id="mean-square-convergence">
+
+### Mean-square convergence — การลู่เข้าแบบค่าเฉลี่ยกำลังสอง
+
+Xₙ ลู่เข้า X แบบ mean square เมื่อ E[(Xₙ−X)²] เข้าใกล้ศูนย์ เป็นข้อความเกี่ยวกับค่าคาดหมายของความคลาดเคลื่อนยกกำลังสอง ไม่ได้บอกว่า error ของทุกตัวอย่างต้องลดลงทุกครั้ง
+
+[ดูในบทเรียน](applied-stochastic-calculus.html#quadratic-variation)
+
+</section>
+
+<section class="glossary-term" id="ito-integral">
+
+### Itô integral — ปริพันธ์อิโต
+
+ปริพันธ์เชิงสุ่มที่สร้างจากน้ำหนักซึ่งไม่มองอนาคต โดยผลรวมแบบง่ายใช้ค่า integrand ที่ต้นช่วงคูณกับ Brownian increment ถัดไป เช่น ∫₀ᵀ Wₜ dWₜ = (W_T²−T)/2 เมื่อ W₀ = 0
+
+[ดูในบทเรียน](applied-stochastic-calculus.html#ito-integral)
+
+</section>
+
+<section class="glossary-term" id="itos-lemma">
+
+### Itô’s lemma — บทตั้งของอิโต
+
+กฎแปลงฟังก์ชันที่เรียบของกระบวนการ Itô ถ้า dY = a dt + b dW จะมี dF = (Fₜ+aFᵧ+½b²Fᵧᵧ)dt+bFᵧdW พจน์อนุพันธ์อันดับสองเกิดจาก quadratic variation และต้องแยก (dY)² ออกจาก d(Y²)
+
+[ดูในบทเรียน](applied-stochastic-calculus.html#ito-lemma)
+
+</section>
+
+<section class="glossary-term" id="ornstein-uhlenbeck">
+
+### Ornstein–Uhlenbeck / Vasicek — กระบวนการออร์นสไตน์–อูเลนเบค
+
+แบบจำลอง dr = κ(θ−r)dt+σᵣdW ที่มี κ &gt; 0 ดึง drift กลับเข้าหาระดับ θ เมื่อใช้จำลองอัตราดอกเบี้ยระยะสั้นเรียก Vasicek model คำตอบเป็น Gaussian และมีค่าติดลบได้
+
+[ดูในบทเรียน](applied-stochastic-calculus.html#ou)
+
+</section>
+
+<section class="glossary-term" id="mean-reversion">
+
+### Mean reversion — การกลับเข้าหาค่ากลาง
+
+สมบัติที่ drift ดึงสถานะกลับเข้าหาระดับระยะยาว เช่น κ(θ−r) ใน OU แต่ละก้าวยังอาจเดินออกห่างเพราะช็อก จึงไม่ใช่การรับประกันว่าเส้นทางหรือราคาจะกลับมาถึงค่ากลางในเวลาที่ระบุ
+
+[ดูในบทเรียน](applied-stochastic-calculus.html#ou)
+
+</section>
+
+<section class="glossary-term" id="stationary-distribution">
+
+### Stationary distribution — การแจกแจงคงตัว
+
+การแจกแจงที่คงเดิมเมื่อให้กระบวนการวิวัฒน์ตามเวลา หากเริ่มจากการแจกแจงนั้น สำหรับ OU ที่ κ,σᵣ &gt; 0 คือ Normal(θ,σᵣ²/(2κ)) การเริ่มจากค่าคงที่ต้องแยกจากการเริ่มด้วย stationary distribution
+
+[ดูในบทเรียน](applied-stochastic-calculus.html#ou)
+
+</section>
+
+<section class="glossary-term" id="euler-maruyama">
+
+### Euler–Maruyama — วิธีออยเลอร์–มารุยามะ
+
+วิธีประมาณ SDE ด้วย Yᵢ₊₁ = Yᵢ+a(Yᵢ,tᵢ)Δt+b(Yᵢ,tᵢ)√Δt Zᵢ โดย Zᵢ เป็น Standard Normal อิสระ ใช้สัมประสิทธิ์ที่ต้นช่วงและยังมี discretization error รวมถึงอาจไม่รักษาความเป็นบวกของแบบจำลองเดิม
+
+[ดูในบทเรียน](applied-stochastic-calculus.html#simulation)
+
+</section>
+
+<section class="glossary-term" id="discretization-error">
+
+### Discretization error — ความคลาดเคลื่อนจากการแบ่งช่วง
+
+ความแตกต่างที่เกิดจากแทนสมการต่อเนื่องด้วยก้าวเวลาหรือตารางที่ยังมีขนาดจำกัด ต่างจาก sampling error ที่เกิดจากจำนวนตัวอย่าง และ model error ที่เกิดจากสมมติฐานของแบบจำลอง
+
+[ดูในบทเรียน](applied-stochastic-calculus.html#simulation)
+
+</section>
+
+<section class="glossary-term" id="correlated-increments">
+
+### Correlated increments — ก้าวสุ่มที่มีสหสัมพันธ์
+
+ก้าวของกระบวนการต่างตัวในช่วงเวลาเดียวกันซึ่งมี covariance ที่กำหนด เช่น Cov(ΔW₁,ΔW₂) = ρΔt สร้างได้จาก Normal อิสระด้วย φ₁=Z₁ และ φ₂=ρZ₁+√(1−ρ²)Z₂ ค่า ρ ของช็อกไม่ใช่ correlation ของระดับราคาตามเวลาโดยอัตโนมัติ
+
+[ดูในบทเรียน](applied-stochastic-calculus.html#correlation)
 
 </section>
 

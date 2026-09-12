@@ -12,5 +12,7 @@ chapters:
     title: Binomial Model
   - file: transition-density-functions
     title: Transition Density Functions
+  - file: applied-stochastic-calculus
+    title: Applied Stochastic Calculus
   - file: glossary
     title: อภิธานศัพท์

@@ -1,5 +1,13 @@
 # Sources and notices
 
+## Applied Stochastic Calculus chapter — 2026-09-12
+
+The user supplied `JA251.4 Notes.pdf` (43 pages), titled *CQF Module 1 Lecture 4 — Introduction to Stochastic Calculus*, and `JA251.5 Notes.pdf` (44 pages), titled *CQF Module 1 Lecture 5 — Stochastic Differential Equations – Maths and Computation*. The supplied documents identify CQF and show Fitch Group branding; no individual author is credited in the inspected material. PDF creation or modification metadata is not treated as a publication date. Both PDFs were consulted locally; neither the PDFs, their slide images, nor their logos are redistributed.
+
+The new Thai chapter synthesizes the two lectures into a continuous explanation, with newly computed native charts and reproducible examples. The source's two-step Euler example is retained with its inputs identified and its unrounded second value 99.93864. Quadratic-variation shorthand, regularity and nonanticipation assumptions, OU conditional moments, Euler positivity failures, and Gaussian covariance conditions are clarified. Private inputs and review renders remain outside the repository. Source page ranges, seeds, assumptions and verification commands are recorded in `data/stochastic-calculus-provenance.json`.
+
+Supplementary mathematical references are Miranda Holmes-Cerfon's *Applied Stochastic Analysis* (Spring 2022), [Lecture 7: Stochastic Integration](https://personal.math.ubc.ca/~holmescerfon/teaching/asa22/handout-Lecture7_2022.pdf), [Lecture 8: Stochastic Differential Equations](https://personal.math.ubc.ca/~holmescerfon/teaching/asa22/handout-Lecture8_2022.pdf), and [Lecture 10: Forward and Backward Equations](https://personal.math.ubc.ca/~holmescerfon/teaching/asa22/handout-Lecture10_2022.pdf). The existing local React components, fonts and governed book design are reused. All new visuals use the `no-image-generator` route; no new third-party icon, artwork, or copied chart is introduced.
+
 ## Transition Density Functions chapter — 2026-09-12
 
 The user-supplied `JU241.3 Notes.pdf` is a 49-page lecture titled *Transition Density Functions*. No author or institution is identified on the inspected title page; attribution from the preceding Binomial lecture is not inherited. The source was consulted locally, and neither its PDF nor slide images are redistributed. The Thai prose is newly written around the source's symmetric trinomial walk, forward/backward equations, similarity reduction and Gaussian kernel. Discrete probability mass is distinguished from continuous density; Markov conditioning and the distributional Dirac initial condition are added clarifications.
