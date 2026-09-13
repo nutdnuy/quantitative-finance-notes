@@ -4,8 +4,9 @@
 title: Quantitative Finance Notes
 author: Nuth
 language: th
-logo: assets/images/welcome-paths.png
-logo_alt: เส้นทางสุ่มสีม่วง เทา และ teal แผ่ออกจากจุดเริ่มต้นเดียวบนพื้นขาว
+logo: assets/images/quantcorner-horizontal-transparent-offwhite-1024.png
+logo_secondary: assets/images/quantsera-horizontal-transparent-offwhite-1024.png
+logo_alt: QuantCorner / Quantsera บนพื้นหลังสีดำ
 
 # ไฟล์สำหรับดาวน์โหลดจากแถบด้านข้าง
 notebook: notebooks/random-assets.ipynb

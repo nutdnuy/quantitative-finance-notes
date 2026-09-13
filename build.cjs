@@ -12,6 +12,7 @@ function safeFile(file){if(!/^[a-z0-9][a-z0-9-]*$/.test(file))throw Error(`Use a
 async function build(){
  const {marked}=await import('marked');
  const config=yaml.parse(fs.readFileSync(path.join(root,'_config.yml'),'utf8'));
+ const cover=className=>`<div class="brand-cover ${className}" role="img" aria-label="${escape(config.logo_alt)}"><img src="${escape(config.logo)}" alt="" width="1024" height="228"><img src="${escape(config.logo_secondary)}" alt="" width="1024" height="228"></div>`;
  const toc=yaml.parse(fs.readFileSync(path.join(root,'_toc.yml'),'utf8'));
  const sourcePages=[{file:toc.root},...(toc.chapters||[])];
  const seen=new Set();
@@ -45,11 +46,11 @@ async function build(){
   const html=`<!doctype html><html lang="${escape(config.language||'th')}" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escape(page.description)}"><title>${escape(page.title)} · ${escape(config.title)}</title><link rel="stylesheet" href="assets/katex/katex.min.css"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="book.css"><link rel="icon" href="data:,"></head><body class="book ${page.home?'welcome-page':'lesson-page'}">
 <a class="skip-link" href="#content">ข้ามไปเนื้อหา</a>
 <header class="book-mobile-header"><a href="index.html">${escape(config.title)}</a><button id="menu-button" aria-expanded="false" aria-controls="book-sidebar">สารบัญ</button></header>
-<div class="book-layout"><aside id="book-sidebar" class="book-sidebar"><a href="index.html" class="cover-link" aria-label="กลับหน้า Welcome"><img class="book-cover" src="${escape(config.logo)}" alt="${escape(config.logo_alt)}" width="1536" height="1024"></a><a class="book-name" href="index.html">${escape(config.title)}</a>
+<div class="book-layout"><aside id="book-sidebar" class="book-sidebar"><a href="index.html" class="cover-link" aria-label="กลับหน้า Welcome">${cover('book-cover')}</a><a class="book-name" href="index.html">${escape(config.title)}</a>
 <button class="search-trigger" id="search-button">${icon}<span>Search</span><kbd>⌘ K</kbd></button>
 <nav class="book-nav" aria-label="สารบัญ">${nav}</nav>${localNav}
 <div class="book-sidebar-footer"><a href="${escape(page.notebook)}" download>ดาวน์โหลด Notebook</a><a href="${page.file}.md" download>ไฟล์ Markdown หน้านี้</a>${github}<button id="theme-button">พื้นหลังมืด</button></div></aside>
-<main class="book-main ${page.home?'welcome-main':'chapter'}" id="content"><div class="page-topline"><span>${escape(config.title)}</span><button id="print-button">พิมพ์หน้านี้</button></div>${page.home?`<img class="mobile-cover" src="${escape(config.logo)}" alt="${escape(config.logo_alt)}" width="1536" height="1024">`:''}${page.body}<footer class="book-footer">${escape(config.title)}<span>โดย ${escape(config.author)}</span></footer></main></div>
+<main class="book-main ${page.home?'welcome-main':'chapter'}" id="content"><div class="page-topline"><span>${escape(config.title)}</span><button id="print-button">พิมพ์หน้านี้</button></div>${page.home?cover('mobile-cover'):''}${page.body}<footer class="book-footer">${escape(config.title)}<span>โดย ${escape(config.author)}</span></footer></main></div>
 <dialog id="search-dialog" aria-labelledby="search-title"><div class="search-dialog-heading"><h2 id="search-title">ค้นหาในสมุดบันทึก</h2><button id="close-search" aria-label="ปิดการค้นหา">ปิด</button></div><label for="search-input" class="sr-only">คำค้นหา</label><input id="search-input" type="search" placeholder="ลองค้นหา volatility หรือ ความผันผวน" autocomplete="off"><p id="search-status" role="status"></p><div id="search-results"></div></dialog>
 <script src="search-index.js" defer></script><script src="site.js" defer></script>${page.home?'':'<script src="app.js" defer></script>'}</body></html>`;
   fs.writeFileSync(path.join(root,page.href),html);

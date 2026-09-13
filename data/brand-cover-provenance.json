@@ -1,0 +1,31 @@
+{
+  "date": "2026-09-13",
+  "route": "no-image-generator",
+  "design_system": "quantseras-design-system.md",
+  "background": "#000000",
+  "layout": "QuantCorner above Quantsera; authentic logo files remain separate, unmodified layers.",
+  "assets": [
+    {
+      "brand": "quantcorner",
+      "asset": "assets/images/quantcorner-horizontal-transparent-offwhite-1024.png",
+      "canonical_asset": "quantcorner-brand/png/quantcorner-horizontal-transparent-offwhite-1024.png",
+      "sha256": "fe4b53e4977136fb512d39263d69b08cf50b2b2a2f0cd7714821ec58e40d8c84",
+      "dimensions": [
+        1024,
+        228
+      ],
+      "adaptation": "Unmodified approved PNG, proportionally placed in a native HTML black cover."
+    },
+    {
+      "brand": "quantsera",
+      "asset": "assets/images/quantsera-horizontal-transparent-offwhite-1024.png",
+      "canonical_asset": "quantsera-brand/png/quantsera-horizontal-transparent-offwhite-1024.png",
+      "sha256": "3de306fe9e5aeedd0bc875e0b4117e33b296c2cb30c23f35032b30a7ca9ee0c8",
+      "dimensions": [
+        1024,
+        228
+      ],
+      "adaptation": "Unmodified approved PNG, proportionally placed in a native HTML black cover."
+    }
+  ]
+}

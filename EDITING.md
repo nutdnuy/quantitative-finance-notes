@@ -16,7 +16,7 @@
 | ความหมายและตัวอย่างคำศัพท์ | `glossary.md` |
 | ชื่อเว็บ ชื่อผู้เขียน รูปด้านบน ลิงก์ GitHub | `_config.yml` |
 | รายการและลำดับหัวข้อในสารบัญ | `_toc.yml` |
-| รูปด้านบน | `assets/images/welcome-paths.png` หรือเปลี่ยนค่า `logo` ใน `_config.yml` |
+| รูปด้านบน | ไฟล์โลโก้ที่กำหนดใน `logo` และ `logo_secondary` ของ `_config.yml` |
 | Notebook สำหรับทดลอง Python | `notebooks/random-assets.ipynb` |
 | Notebook และห้องทดลอง Binomial | `notebooks/binomial-model.ipynb`, `src/binomial.jsx`, `src/binomial.mjs` |
 | Notebook และห้องทดลอง Transition Density | `notebooks/transition-density-functions.ipynb`, `src/transition-density.jsx`, `src/transition-density.mjs` |

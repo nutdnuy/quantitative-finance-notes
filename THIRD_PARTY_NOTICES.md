@@ -1,5 +1,9 @@
 # Sources and notices
 
+## QuantCorner / Quantsera book cover — 2026-09-13
+
+The cover uses the owner's approved `quantcorner-horizontal-transparent-offwhite-1024.png` and `quantsera-horizontal-transparent-offwhite-1024.png`, copied unchanged from the canonical brand packages. Native HTML/CSS places the separate logos on a black background under `quantseras-design-system.md` and the `no-image-generator` route. Source hashes and roles are recorded in `data/brand-cover-provenance.json`. The Quantsera immutable-logo preflight passed for the canonical package and the copied asset. The earlier stochastic-path artwork remains an unused asset.
+
 ## Applied Stochastic Calculus chapter — 2026-09-12
 
 The user supplied `JA251.4 Notes.pdf` (43 pages), titled *CQF Module 1 Lecture 4 — Introduction to Stochastic Calculus*, and `JA251.5 Notes.pdf` (44 pages), titled *CQF Module 1 Lecture 5 — Stochastic Differential Equations – Maths and Computation*. The supplied documents identify CQF and show Fitch Group branding; no individual author is credited in the inspected material. PDF creation or modification metadata is not treated as a publication date. Both PDFs were consulted locally; neither the PDFs, their slide images, nor their logos are redistributed.
