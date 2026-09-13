@@ -56,6 +56,11 @@
       "Light/dark, no clipping or overflow, source aspect ratio, accessibility and offline navigation",
       "Approved brand asset hashes remain unchanged"
     ],
-    "preflight_note": "Role-based row classes avoid a verifier false positive: it combined the page search SVG with an unrelated logo-named PNG class. Logos are still loaded exclusively through approved external PNG assets."
+    "preflight_note": "Role-based row classes avoid a verifier false positive: it combined the page search SVG with an unrelated logo-named PNG class. Logos are still loaded exclusively through approved external PNG assets.",
+    "cached_markup_regression": {
+      "reproduction": "HTML without brand-row classes plus the newer stylesheet rendered both logos at their intrinsic 1024 px width, matching the reported clipping.",
+      "fix": "Apply proportional sizing by the order of the two existing image elements, with a bounded base image width. Works with both earlier and current markup.",
+      "validation": "Browser regression covers pre-alignment HTML with current CSS on desktop and mobile, measuring the visible alpha bounds."
+    }
   }
 }
