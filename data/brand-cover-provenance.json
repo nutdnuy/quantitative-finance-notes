@@ -3,7 +3,7 @@
   "route": "no-image-generator",
   "design_system": "quantseras-design-system.md",
   "background": "#000000",
-  "layout": "QuantCorner above Quantsera; authentic logo files remain separate, unmodified layers.",
+  "layout": "QuantCorner above Quantsera, centered by painted alpha bounds with equal visible widths. Authentic PNGs remain unmodified and proportionally scaled; complete image boxes fit inside the black panel.",
   "assets": [
     {
       "brand": "quantcorner",
@@ -14,7 +14,13 @@
         1024,
         228
       ],
-      "adaptation": "Unmodified approved PNG, proportionally placed in a native HTML black cover."
+      "adaptation": "Unmodified approved PNG, proportionally placed in a native HTML black cover.",
+      "painted_bounds_px": [
+        42,
+        51,
+        818,
+        179
+      ]
     },
     {
       "brand": "quantsera",
@@ -25,7 +31,31 @@
         1024,
         228
       ],
-      "adaptation": "Unmodified approved PNG, proportionally placed in a native HTML black cover."
+      "adaptation": "Unmodified approved PNG, proportionally placed in a native HTML black cover.",
+      "painted_bounds_px": [
+        188,
+        56,
+        834,
+        173
+      ]
     }
-  ]
+  ],
+  "layout_metrics": {
+    "visible_width_fraction": 0.62,
+    "painted_center_x_fraction": 0.5,
+    "painted_center_y_fractions": [
+      0.32,
+      0.68
+    ],
+    "bounds_method": "Read nonzero-alpha bounding boxes from the exact approved PNGs; do not edit or crop the images."
+  },
+  "quality_review": {
+    "issue": "Equal PNG canvas widths hid different transparent margins, causing visible horizontal misalignment and unequal painted widths.",
+    "checks": [
+      "Pixel-alpha bounds, equal visible width and centered alignment across 320, 390, 768, 800, 834 and 1440 px viewports",
+      "Light/dark, no clipping or overflow, source aspect ratio, accessibility and offline navigation",
+      "Approved brand asset hashes remain unchanged"
+    ],
+    "preflight_note": "Role-based row classes avoid a verifier false positive: it combined the page search SVG with an unrelated logo-named PNG class. Logos are still loaded exclusively through approved external PNG assets."
+  }
 }

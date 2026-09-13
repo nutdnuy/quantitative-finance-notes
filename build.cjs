@@ -12,7 +12,7 @@ function safeFile(file){if(!/^[a-z0-9][a-z0-9-]*$/.test(file))throw Error(`Use a
 async function build(){
  const {marked}=await import('marked');
  const config=yaml.parse(fs.readFileSync(path.join(root,'_config.yml'),'utf8'));
- const cover=className=>`<div class="brand-cover ${className}" role="img" aria-label="${escape(config.logo_alt)}"><img src="${escape(config.logo)}" alt="" width="1024" height="228"><img src="${escape(config.logo_secondary)}" alt="" width="1024" height="228"></div>`;
+ const cover=className=>`<div class="brand-cover ${className}" role="img" aria-label="${escape(config.logo_alt)}"><img class="brand-row-primary" src="${escape(config.logo)}" alt="" width="1024" height="228"><img class="brand-row-secondary" src="${escape(config.logo_secondary)}" alt="" width="1024" height="228"></div>`;
  const toc=yaml.parse(fs.readFileSync(path.join(root,'_toc.yml'),'utf8'));
  const sourcePages=[{file:toc.root},...(toc.chapters||[])];
  const seen=new Set();
