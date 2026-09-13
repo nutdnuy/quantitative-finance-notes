@@ -24,7 +24,7 @@ visual_route: no-image-generator
 
 <section id="one-step">
 
-## 1. ทวนหนึ่งวัน ก่อนต่อเป็นหลายวัน
+## 1. ทบทวน Delta
 
 ให้หุ้นวันนี้ราคา 100 พรุ่งนี้ขึ้นเป็น 101 หรือลงเป็น 99 และมี [European Call](glossary.html#european-option) ราคาใช้สิทธิ K = 100 ใช้สิทธิได้เฉพาะพรุ่งนี้ ดอกเบี้ยเป็นศูนย์
 
