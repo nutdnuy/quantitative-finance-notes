@@ -426,7 +426,6 @@ $$
 
 ## อ้างอิงและขอบเขตการเรียบเรียง
 
-- *Transition Density Functions*, เอกสารที่ผู้ใช้ให้ชื่อ **JU241.3 Notes.pdf**, 49 หน้า ไม่ปรากฏชื่อผู้แต่งหรือสถาบันบนหน้าชื่อเรื่องที่ตรวจ: หน้า 4–7 การเดินสุ่มสามทาง; หน้า 8–11 นิยาม transition density และข้อแยกไม่ต่อเนื่อง/ต่อเนื่อง; หน้า 12–20 Forward Kolmogorov; หน้า 21–29 Backward Kolmogorov; หน้า 30 ข้อจำกัดของตัวแปรที่ติดลบได้; หน้า 31–43 similarity solution; หน้า 44–47 คำตอบ Gaussian; หน้า 48 ตัวอย่าง y = 1, c = 1; หน้า 49 สรุป
 - เรียบเรียงภาษาไทยใหม่ ใช้ **k(y,t;z,T)** แทน p(y,t;y′,t′), h แทน δy และ τ = T − t แยกมวลความน่าจะเป็นบนตารางจากความหนาแน่นต่อเนื่องอย่างชัดเจน ตัวอย่างตารางสอง step พื้นที่ช่วง 0 ถึง 2 แบบฝึกหัด ภาพ และห้องทดลองเป็นส่วนที่คำนวณขึ้นสำหรับบทนี้
 - ข้อสมมติ Markov การอธิบาย Dirac delta ผ่านการอินทิเกรต และข้อระวังค่าบนขอบช่วง เป็นคำอธิบายเพิ่มเติม หัวข้อ Dirac delta ปรากฏในสารบัญหน้าแรกของเอกสาร แต่เนื้อหาหลักไม่ได้ขยายรายละเอียดนี้ ไม่ได้เผยแพร่ PDF หรือภาพสไลด์ต้นฉบับ
 - Miranda Holmes-Cerfon, [*Applied Stochastic Analysis, Lecture 6: Brownian motion*](https://personal.math.ubc.ca/~holmescerfon/teaching/asa22/handout-Lecture6_2022.pdf), Spring 2022: ตรวจความสัมพันธ์ระหว่าง Brownian motion, transition density และสมการ Forward/Backward

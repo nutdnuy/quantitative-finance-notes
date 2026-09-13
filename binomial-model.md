@@ -365,7 +365,6 @@ $$
 
 ## อ้างอิงและขอบเขตการเรียบเรียง
 
-- *Binomial Model*, เอกสารประกอบการสอนที่มีข้อความ Certificate in Quantitative Finance, ไฟล์ที่ผู้ใช้ให้ชื่อ **JU241.2 Notes (1).pdf**, 89 หน้า ไม่ระบุชื่อผู้สอนในหน้าชื่อเรื่องที่ตรวจ: หน้า 4–20 ตัวอย่างหนึ่งวันและ hedging; หน้า 31–34 ตัวอย่าง 103/98; หน้า 36–49 ดอกเบี้ยและ risk neutrality; หน้า 50–60 สูตรทั่วไป; หน้า 62–72 การเชื่อม μ, σ และ time step; หน้า 74–83 ต้นไม้และการคิดย้อนกลับ; หน้า 84–88 สะพานไปสู่ Black–Scholes
 - เรียบเรียงคำอธิบายภาษาไทยใหม่ โดยใช้ **d แทน v** และ **q แทน p′** ของเอกสาร เพื่อให้ต่อเนื่องกับบทก่อน ตัวอย่างสอง step 100 → 110/90 → 121/99/81, ภาพ, ห้องทดลอง, แบบฝึกหัด และโค้ดเป็นส่วนเพิ่มเติมที่คำนวณขึ้นสำหรับบทนี้ ไม่ใช่การถอดต้นไม้ตัวเลขหน้า 78–83 และไม่ได้เผยแพร่ไฟล์ PDF หรือภาพสไลด์ต้นฉบับ
 - Clare Wallace, Durham University, [*The one-period binomial model*](https://maths.dur.ac.uk/users/clare.wallace/MF/Chapter2.html), §2.2–2.3: ใช้ตรวจเงื่อนไข d < R < u และพอร์ตหุ้นร่วมกับบัญชีเงินสด
 - MIT OpenCourseWare, [*15.401 Recitation 5: Options*](https://ocw.mit.edu/courses/15-401-finance-theory-i-fall-2008/d0734e7fec7b333f1255a6dc3dff389c_MIT15_401F08_rec05.pdf): อ่านเพิ่มเติมเรื่อง binomial tree, payoff replication และ q
