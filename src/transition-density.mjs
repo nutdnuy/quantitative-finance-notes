@@ -74,7 +74,7 @@ export function intervalProbability({ y = 1, c = 1, tau = 1, a = 0, b = 2 } = {}
 export function trinomialDistribution({ alpha = .2, steps = 2, stepSize = 1, initial = 0 } = {}) {
   if (!Number.isFinite(alpha) || alpha < 0 || alpha > .5) throw new RangeError('α ต้องอยู่ระหว่าง 0 และ 0.5');
   if (!Number.isInteger(steps) || steps < 0 || steps > 500) throw new RangeError('N ต้องเป็นจำนวนเต็มตั้งแต่ 0 ถึง 500');
-  if (!Number.isFinite(stepSize) || stepSize <= 0) throw new RangeError('ขนาดก้าว h ต้องเป็นจำนวนบวกที่มีค่าจำกัด');
+  if (!Number.isFinite(stepSize) || stepSize <= 0) throw new RangeError('ขนาด step h ต้องเป็นจำนวนบวกที่มีค่าจำกัด');
   if (!Number.isFinite(initial) || !Number.isFinite(initial + steps * stepSize) || !Number.isFinite(initial - steps * stepSize)) throw new RangeError('ตำแหน่งในแบบจำลองต้องมีค่าจำกัด');
   let masses = [1];
   for (let n = 0; n < steps; n++) {

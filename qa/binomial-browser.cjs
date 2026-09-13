@@ -71,8 +71,8 @@ const terms = [
     assert.equal(await number('price'), 5.25); assert.ok(await number('delta') < 0);
     await lab.getByRole('slider', { name: 'ราคาใช้สิทธิ K', exact: true }).fill('110');
     assert.ok(await number('price') > 5.25);
-    await lab.getByRole('slider', { name: 'หุ้นขึ้นต่อก้าว (u − 1)', exact: true }).fill('15');
-    await lab.getByRole('slider', { name: 'หุ้นลงต่อก้าว (1 − d)', exact: true }).fill('15');
+    await lab.getByRole('slider', { name: 'หุ้นขึ้นต่อ step (u − 1)', exact: true }).fill('15');
+    await lab.getByRole('slider', { name: 'หุ้นลงต่อ step (1 − d)', exact: true }).fill('15');
     assert.ok(Number.isFinite(await number('price')));
     await lab.getByRole('button', { name: 'คืนค่าเริ่มต้น', exact: true }).click();
     const r = lab.getByRole('slider', { name: 'อัตราดอกเบี้ย r ต่อปี', exact: true });

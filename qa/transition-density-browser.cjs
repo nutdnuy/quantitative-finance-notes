@@ -106,12 +106,12 @@ const close = (actual, expected, tolerance = 1e-4) => assert.ok(Math.abs(actual 
   async function trinomialInteractions() {
     const lab = page.locator('#trinomial-density-lab'), reset = lab.getByRole('button', { name: 'คืนค่าเริ่มต้นของ Trinomial', exact: true });
     await reset.click(); close(await number('trinomial', 'mass'), 100); close(await number('trinomial', 'variance'), 2); close(await number('trinomial', 'mean'), 0); close(await number('trinomial', 'point-mass'), 44);
-    const five = lab.getByRole('button', { name: '5 ก้าว', exact: true }); await five.focus(); await page.keyboard.press('Space'); assert.equal(await five.getAttribute('aria-pressed'), 'true');
-    await page.keyboard.press('Tab'); await page.keyboard.press('Enter'); assert.equal(await lab.getByRole('button', { name: '10 ก้าว', exact: true }).getAttribute('aria-pressed'), 'true');
-    const alpha = lab.getByRole('slider', { name: 'โอกาสลงหนึ่งก้าว α และโอกาสขึ้นหนึ่งก้าว α', exact: true });
+    const five = lab.getByRole('button', { name: '5 step', exact: true }); await five.focus(); await page.keyboard.press('Space'); assert.equal(await five.getAttribute('aria-pressed'), 'true');
+    await page.keyboard.press('Tab'); await page.keyboard.press('Enter'); assert.equal(await lab.getByRole('button', { name: '10 step', exact: true }).getAttribute('aria-pressed'), 'true');
+    const alpha = lab.getByRole('slider', { name: 'โอกาสลงหนึ่ง step α และโอกาสขึ้นหนึ่ง step α', exact: true });
     await alpha.focus(); await alpha.press('Home'); await alpha.press('ArrowRight'); assert.equal(await alpha.inputValue(), '0.15');
     for (const n of [2, 20, 100]) {
-      await lab.getByRole('button', { name: `${n} ก้าว`, exact: true }).click();
+      await lab.getByRole('button', { name: `${n} step`, exact: true }).click();
       for (const value of ['0.1', '0.4']) {
         await alpha.fill(value); close(await number('trinomial', 'mass'), 100); close(await number('trinomial', 'variance'), 2); close(await number('trinomial', 'mean'), 0);
         assert.equal(await lab.locator('polygon.band').evaluate(shape => shape.getAttribute('points').trim().split(/\s+/).length), 2 + 2 * (2 * n + 1));

@@ -198,10 +198,10 @@ series = [dict(x=np.linspace(0,1,1025),y=fine,label="1024 steps",color="#b0b0b0"
 for steps, color in [(4,"#00796b"),(64,"#6200ee")]:
     coarse = fine[::1024//steps]
     assert coarse[-1]==fine[-1]
-    print(f"{steps:4} ก้าว: dt={1/steps:.6f}, SD ต่อก้าว={1/np.sqrt(steps):.6f}, ความแปรปรวนรวมทฤษฎี={steps*(1/steps):.0f}")
+    print(f"{steps:4} step: dt={1/steps:.6f}, SD ต่อ step={1/np.sqrt(steps):.6f}, ความแปรปรวนรวมทฤษฎี={steps*(1/steps):.0f}")
     series.append(dict(x=np.linspace(0,1,steps+1),y=coarse,label=f"{steps} steps",color=color))
 display(chart(series,"3.9 One Wiener path, several observation grids","Years","X(t)"))
-# ก้าวหยาบได้จากการรวม increments บนเส้นละเอียดเดียวกัน จุดร่วมจึงไม่เปลี่ยน
+# step หยาบได้จากการรวม increments บนเส้นละเอียดเดียวกัน จุดร่วมจึงไม่เปลี่ยน
 '''
 mc_code = '''# Monte Carlo GBM: adjust mu, sigma and count, then rerun
 mu, sigma, count, seed = .10, .25, 1000, 73

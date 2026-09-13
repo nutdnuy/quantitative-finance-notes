@@ -36,7 +36,7 @@ export function nestedBrownian({ seed = 73, steps = 256, finestSteps = 4096, T =
   if (!Number.isInteger(finestSteps) || finestSteps < 1 || finestSteps > 65536) throw new RangeError('finestSteps ต้องเป็นจำนวนเต็มตั้งแต่ 1 ถึง 65536');
   if (!Number.isInteger(steps) || steps < 1 || steps > finestSteps || finestSteps % steps !== 0) throw new RangeError('N ต้องเป็นจำนวนเต็มบวกที่หาร finestSteps ลงตัว');
   const random = normalGenerator(seed), scale = Math.sqrt(T / finestSteps), stride = finestSteps / steps;
-  if (!Number.isFinite(scale) || scale <= 0) throw new RangeError('ขนาดก้าวเวลาเล็กเกินกว่าที่คำนวณได้');
+  if (!Number.isFinite(scale) || scale <= 0) throw new RangeError('ขนาด time step เล็กเกินกว่าที่คำนวณได้');
   const finestIncrements = Array.from({ length: finestSteps }, () => random() * scale), increments = Array(steps).fill(0);
   for (let i = 0; i < finestSteps; i++) increments[Math.floor(i / stride)] += finestIncrements[i];
   return { ...brownianDiagnostics({ increments, T }), seed, finestSteps, finestIncrements };

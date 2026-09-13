@@ -109,11 +109,11 @@ const close = (actual, expected, tolerance = 1e-4) => assert.ok(Number.isFinite(
     close(await number('qv', 'value'), .924346, 1e-6); close(await number('qv', 'terminal'), -1.101549, 1e-6);
     const baseline = await lab.locator('.results, .calculation-strip').allTextContents();
     const terminal = await number('qv', 'terminal');
-    const first = lab.getByRole('button', { name: '16 ก้าว', exact: true });
+    const first = lab.getByRole('button', { name: '16 step', exact: true });
     await first.focus(); await first.press('Space'); assert.equal(await first.getAttribute('aria-pressed'), 'true');
-    await page.keyboard.press('Tab'); await page.keyboard.press('Enter'); assert.equal(await lab.getByRole('button', { name: '64 ก้าว', exact: true }).getAttribute('aria-pressed'), 'true');
+    await page.keyboard.press('Tab'); await page.keyboard.press('Enter'); assert.equal(await lab.getByRole('button', { name: '64 step', exact: true }).getAttribute('aria-pressed'), 'true');
     for (const n of [16, 64, 256, 1024, 4096]) {
-      await lab.getByRole('button', { name: `${n.toLocaleString('en-US')} ก้าว`, exact: true }).click();
+      await lab.getByRole('button', { name: `${n.toLocaleString('en-US')} step`, exact: true }).click();
       const q = await number('qv', 'value'), w = await number('qv', 'terminal');
       close(w, terminal, 1e-6); close(await number('qv', 'rms'), Math.sqrt(2 / n), 1e-6);
       close(await number('qv', 'ito-left'), .5 * (w * w - q), 2e-6);
@@ -137,7 +137,7 @@ const close = (actual, expected, tolerance = 1e-4) => assert.ok(Number.isFinite(
     await reset.click(); close(await number('gbm-euler', 'exact'), 86.9089); close(await number('gbm-euler', 'euler'), 86.7745);
     const baseline = await lab.locator('.results').innerText(), terminal = await number('gbm-euler', 'terminal');
     for (const n of [4, 16, 64, 256, 1024]) {
-      await lab.getByRole('button', { name: `${n.toLocaleString('en-US')} ก้าว`, exact: true }).click();
+      await lab.getByRole('button', { name: `${n.toLocaleString('en-US')} step`, exact: true }).click();
       close(await number('gbm-euler', 'terminal'), terminal, 1e-6);
       const exact = await number('gbm-euler', 'exact'), euler = await number('gbm-euler', 'euler');
       close(exact, 100 * Math.exp(.1 - .5 * .2 ** 2 + .2 * terminal), .0001);
@@ -150,7 +150,7 @@ const close = (actual, expected, tolerance = 1e-4) => assert.ok(Number.isFinite(
     await sigma.focus(); await sigma.press('Home'); assert.equal(await sigma.inputValue(), '0');
     await mu.fill('10');
     for (const n of [4, 64]) {
-      await lab.getByRole('button', { name: `${n} ก้าว`, exact: true }).click();
+      await lab.getByRole('button', { name: `${n} step`, exact: true }).click();
       close(await number('gbm-euler', 'exact'), 100 * Math.exp(.1), .00006);
       close(await number('gbm-euler', 'euler'), 100 * (1 + .1 / n) ** n, .00006);
       assert.ok(await number('gbm-euler', 'error') > 0, 'Zero volatility does not remove Euler drift discretization error');
@@ -158,9 +158,9 @@ const close = (actual, expected, tolerance = 1e-4) => assert.ok(Number.isFinite(
     const deterministicPrices = [await number('gbm-euler', 'exact'), await number('gbm-euler', 'euler')];
     await reseed.click(); assert.deepEqual([await number('gbm-euler', 'exact'), await number('gbm-euler', 'euler')], deterministicPrices);
     await mu.fill('0'); close(await number('gbm-euler', 'exact'), 100); close(await number('gbm-euler', 'euler'), 100); close(await number('gbm-euler', 'error'), 0);
-    await reset.click(); await lab.getByRole('button', { name: '4 ก้าว', exact: true }).click(); await mu.fill('-10'); await sigma.fill('100');
+    await reset.click(); await lab.getByRole('button', { name: '4 step', exact: true }).click(); await mu.fill('-10'); await sigma.fill('100');
     for (let i = 0; i < 8; i++) await reseed.click();
-    await lab.getByRole('alert').waitFor(); assert.match(await lab.getByRole('alert').innerText(), /ก้าว 4/);
+    await lab.getByRole('alert').waitFor(); assert.match(await lab.getByRole('alert').innerText(), /step 4/);
     assert.match(await lab.locator('.seed').innerText(), /81/); assert.ok(await number('gbm-euler', 'euler') < 0); assert.ok(await number('gbm-euler', 'exact') > 0);
     await chartGeometry();
     await reset.click(); assert.equal(await lab.getByRole('alert').count(), 0); assert.equal(await lab.locator('.results').innerText(), baseline);
@@ -211,7 +211,7 @@ const close = (actual, expected, tolerance = 1e-4) => assert.ok(Number.isFinite(
     ['stationary-distribution', 'Stationary distribution', 'การแจกแจงคงตัว', 'ou'],
     ['euler-maruyama', 'Euler–Maruyama', 'ออยเลอร์', 'simulation'],
     ['discretization-error', 'Discretization error', 'ความคลาดเคลื่อนจากการแบ่งช่วง', 'simulation'],
-    ['correlated-increments', 'Correlated increments', 'ก้าวสุ่มที่มีสหสัมพันธ์', 'correlation']
+    ['correlated-increments', 'Correlated increments', 'step สุ่มที่มีสหสัมพันธ์', 'correlation']
   ];
   try {
     await loadChapter();

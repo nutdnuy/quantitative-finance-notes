@@ -55,15 +55,15 @@ export function TrinomialLab() {
   const peak = Math.max(...distribution.map(point => point.mass / h), transitionDensity({ y: 0, z: 0, c: 1, tau: 1 }));
   const middle = distribution[steps];
   return <div className="lab trinomial-lab">
-    <LabTitle number="เพิ่มเติม" title="เพิ่มจำนวนก้าว โดยให้เวลารวมและความแปรปรวนเท่าเดิม">เริ่มที่ y = 0 · เวลารวม τ = 1 · c = 1 · แต่ละก้าวเป็นอิสระและใช้โอกาสชุดเดียวกัน</LabTitle>
-    <div className="segmented" role="group" aria-label="จำนวนก้าวของ Trinomial">
-      {[2, 5, 10, 20, 50, 100].map(value => <button key={value} aria-pressed={steps === value} onClick={() => setSteps(value)}>{value} ก้าว</button>)}
+    <LabTitle number="เพิ่มเติม" title="เพิ่มจำนวน step โดยให้เวลารวมและความแปรปรวนเท่าเดิม">เริ่มที่ y = 0 · เวลารวม τ = 1 · c = 1 · แต่ละ step เป็นอิสระและใช้โอกาสชุดเดียวกัน</LabTitle>
+    <div className="segmented" role="group" aria-label="จำนวน step ของ Trinomial">
+      {[2, 5, 10, 20, 50, 100].map(value => <button key={value} aria-pressed={steps === value} onClick={() => setSteps(value)}>{value} step</button>)}
     </div>
-    <Range label="โอกาสลงหนึ่งก้าว α และโอกาสขึ้นหนึ่งก้าว α" value={alpha} onChange={setAlpha} min={.1} max={.4} step={.05} />
+    <Range label="โอกาสลงหนึ่ง step α และโอกาสขึ้นหนึ่ง step α" value={alpha} onChange={setAlpha} min={.1} max={.4} step={.05} />
     <p className="lab-note">ลง −h ด้วยโอกาส {format(alpha * 100, 0)}% · อยู่ที่เดิมด้วยโอกาส {format((1 - 2 * alpha) * 100, 0)}% · ขึ้น +h ด้วยโอกาส {format(alpha * 100, 0)}%<br />
       Δt = 1/N = {format(dt, 4)} หน่วยเวลา · h = c√(Δt/α) = {format(h, 4)} หน่วย y<br />
       ปรับ h พร้อม N และ α เพื่อให้ความแปรปรวนรวม 2Nαh² = 2c²τ = 2 เท่าเดิม ไม่ได้คง h แล้วปล่อยให้เวลารวมเพิ่ม</p>
-    <Chart title="ความน่าจะเป็น Trinomial ที่แปลงเป็นความสูงเทียบความหนาแน่น Gaussian" description={`Trinomial ${steps} ก้าว alpha ${alpha} ขนาดก้าว ${h} ผลรวมความน่าจะเป็น ${total} ความแปรปรวน 2 แสดงทุก ${distribution.length} จุดของแบบจำลองไม่ตัดหาง เส้นเปรียบเทียบคือ Gaussian ค่าเฉลี่ย 0 ความแปรปรวน 2`} xDomain={[-extent, extent]} yDomain={[0, peak * 1.15]} xLabel="ตำแหน่งปลายทาง z (หน่วย y)" yLabel="ความหนาแน่น (1 / หน่วย y)" xFormat={axisNumber} yFormat={axisNumber} lines={[{ values: gaussian }]} band={{ low: [[histogram[0][0], 0], [histogram.at(-1)[0], 0]], high: histogram }} />
+    <Chart title="ความน่าจะเป็น Trinomial ที่แปลงเป็นความสูงเทียบความหนาแน่น Gaussian" description={`Trinomial ${steps} step alpha ${alpha} ขนาด step ${h} ผลรวมความน่าจะเป็น ${total} ความแปรปรวน 2 แสดงทุก ${distribution.length} จุดของแบบจำลองไม่ตัดหาง เส้นเปรียบเทียบคือ Gaussian ค่าเฉลี่ย 0 ความแปรปรวน 2`} xDomain={[-extent, extent]} yDomain={[0, peak * 1.15]} xLabel="ตำแหน่งปลายทาง z (หน่วย y)" yLabel="ความหนาแน่น (1 / หน่วย y)" xFormat={axisNumber} yFormat={axisNumber} lines={[{ values: gaussian }]} band={{ low: [[histogram[0][0], 0], [histogram.at(-1)[0], 0]], high: histogram }} />
     <div className="legend"><span className="band-key">ความสูงของแท่ง = โอกาสที่จุด / h</span><span className="mean-key">Gaussian ค่าเฉลี่ย 0 ความแปรปรวน 2</span></div>
     <p className="lab-note">แสดงครบทุกจุดตั้งแต่ −Nh ถึง +Nh รวม {distribution.length} จุด จึงไม่ได้ตัดความน่าจะเป็นของ Trinomial ทิ้ง เมื่อ N เพิ่ม ขอบเขตตำแหน่งที่เป็นไปได้กว้างขึ้น แม้ความแปรปรวนเท่าเดิม ส่วน Gaussian มีหางต่อออกไปนอกกราฟ</p>
     <div className="results" aria-live="polite">
@@ -72,7 +72,7 @@ export function TrinomialLab() {
       <div><span>ความแปรปรวนรวม</span><strong data-trinomial="variance">{format(distribution.reduce((sum, point) => sum + point.mass * (point.x - mean) ** 2, 0), 4)} <small>(หน่วย y)²</small></strong><p>SD = {format(sd, 4)} หน่วย y ทั้ง Trinomial และ Gaussian</p></div>
       <div><span>โอกาสอยู่ตรงจุดกลาง z = 0</span><strong data-trinomial="point-mass">{format(middle.mass * 100, 4)}<small>%</small></strong><p>ความสูงแท่งกลาง = {format(middle.mass / h, 4)} ต่อหน่วย y ซึ่งเป็นคนละค่ากัน</p></div>
     </div>
-    <p className="lab-note">Trinomial แบบจำนวนก้าวจำกัดมีโอกาสเป็นบวกที่แต่ละจุด แต่ Gaussian ต่อเนื่องมีโอกาสที่จุดเดียวเท่ากับ 0 จึงต้องหารโอกาสด้วยความกว้าง h ก่อนเทียบรูปร่าง และควรเทียบความน่าจะเป็นของช่วงเมื่อทดสอบความใกล้เคียง</p>
+    <p className="lab-note">Trinomial แบบจำนวน step จำกัดมีโอกาสเป็นบวกที่แต่ละจุด แต่ Gaussian ต่อเนื่องมีโอกาสที่จุดเดียวเท่ากับ 0 จึงต้องหารโอกาสด้วยความกว้าง h ก่อนเทียบรูปร่าง และควรเทียบความน่าจะเป็นของช่วงเมื่อทดสอบความใกล้เคียง</p>
     <div className="lab-actions"><button onClick={() => { setSteps(2); setAlpha(.2); }}>คืนค่าเริ่มต้นของ Trinomial</button></div>
   </div>;
 }
