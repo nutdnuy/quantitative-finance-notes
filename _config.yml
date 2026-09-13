@@ -2,7 +2,7 @@
 # โครงสร้างไฟล์อิงแนวทาง Jupyter Book; เว็บนี้ใช้ตัวสร้างใน build.cjs
 
 title: Quantitative Finance Notes
-author: Nuth
+author: QuantCorner
 language: th
 logo: assets/images/quantcorner-horizontal-transparent-offwhite-1024.png
 logo_secondary: assets/images/quantsera-horizontal-transparent-offwhite-1024.png
