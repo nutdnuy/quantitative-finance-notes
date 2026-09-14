@@ -13,7 +13,7 @@ description: ผลตอบแทน ความผันผวน และ�
 >
 > <span lang="fr">“Les influences qui déterminent les mouvements de la Bourse sont innombrables…”</span>
 >
-> — **Louis Bachelier** · [*Théorie de la spéculation (1900), น. 21*](https://www.numdam.org/item/ASENS_1900_3_17__21_0.pdf#page=2) · คำแปลไทยโดย QuantCorner
+> — **Louis Bachelier** · [*Théorie de la spéculation (1900), น. 21*](https://www.numdam.org/item/ASENS_1900_3_17__21_0.pdf#page=2)
 
 </div>
 

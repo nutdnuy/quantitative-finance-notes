@@ -15,7 +15,7 @@ visual_route: no-image-generator
 >
 > <span lang="en">**“It ([Black-Scholes Model](black-scholes-model.html)) was like having machine guns against bows and arrows.”**</span>
 >
-> — **Edward O. Thorp** · [*The Tim Ferriss Show #596 (2022)*](https://tim.blog/2022/05/28/ed-thorp-transcript/) · คำแปลไทยและข้อความในวงเล็บตามที่ผู้เรียบเรียงเพิ่มเติม
+> — **Edward O. Thorp** · [*The Tim Ferriss Show #596 (2022)*](https://tim.blog/2022/05/28/ed-thorp-transcript/)
 
 </div>
 

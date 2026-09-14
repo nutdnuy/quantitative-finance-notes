@@ -15,7 +15,7 @@ visual_route: no-image-generator
 >
 > <span lang="en">“What I cannot create, I do not understand.”</span>
 >
-> — **Richard Feynman** · [*ข้อความบนกระดานของ Feynman · Caltech*](https://magazine.caltech.edu/post/biology-through-the-eyes-of-a-physicist) · คำแปลไทยโดย QuantCorner
+> — **Richard Feynman** · [*ข้อความบนกระดานของ Feynman · Caltech*](https://magazine.caltech.edu/post/biology-through-the-eyes-of-a-physicist)
 
 </div>
 

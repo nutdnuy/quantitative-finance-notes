@@ -15,7 +15,7 @@ visual_route: no-image-generator
 >
 > <span lang="en">“Thus logic and intuition have each their necessary rôle. Each is indispensable.”</span>
 >
-> — **Henri Poincaré** · [*The Value of Science, บท I §V*](https://www.gutenberg.org/cache/epub/39713/pg39713-images.html) · คำแปลไทยโดย QuantCorner
+> — **Henri Poincaré** · [*The Value of Science, บท I §V*](https://www.gutenberg.org/cache/epub/39713/pg39713-images.html)
 
 </div>
 

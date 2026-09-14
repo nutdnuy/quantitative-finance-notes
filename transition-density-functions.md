@@ -15,7 +15,7 @@ visual_route: no-image-generator
 >
 > <span lang="en">“the theory of probabilities is … only common sense reduced to calculus”</span>
 >
-> — **Pierre-Simon Laplace** · [*A Philosophical Essay on Probabilities, น. 196*](https://www.gutenberg.org/cache/epub/58881/pg58881-images.html) · คำแปลไทยโดย QuantCorner
+> — **Pierre-Simon Laplace** · [*A Philosophical Essay on Probabilities, น. 196*](https://www.gutenberg.org/cache/epub/58881/pg58881-images.html)
 
 </div>
 
