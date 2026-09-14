@@ -9,6 +9,16 @@ visual_route: no-image-generator
 
 <p class="lead">เมื่อรู้จุดเริ่มต้น เราจะอธิบายโอกาสของอนาคตทั้งช่วงได้อย่างไร</p>
 
+<div class="chapter-quote">
+
+> “ทฤษฎีความน่าจะเป็นก็คือสามัญสำนึกที่แปลงให้อยู่ในรูปของการคำนวณ”
+>
+> <span lang="en">“the theory of probabilities is … only common sense reduced to calculus”</span>
+>
+> — **Pierre-Simon Laplace** · [*A Philosophical Essay on Probabilities, น. 196*](https://www.gutenberg.org/cache/epub/58881/pg58881-images.html) · คำแปลไทยโดย QuantCorner
+
+</div>
+
 ในบท [Binomial Model](binomial-model.html) เราสร้างต้นไม้ราคาหุ้น แล้วคำนวณมูลค่า Option ย้อนกลับจากวันหมดอายุ คราวนี้จะพักเรื่องราคา Option ไว้ก่อน แล้วดูเครื่องมือที่อยู่เบื้องหลังการมองอนาคตเป็นการแจกแจง
 
 เส้นทางสุ่มหนึ่งเส้นบอกว่า **ในการเกิดขึ้นครั้งนั้น ตัวแปรเดินไปทางไหน** แต่ถ้าถามว่า “อีกหนึ่งหน่วยเวลาจะมีโอกาสอยู่ระหว่าง 0 กับ 2 เท่าไร” เราต้องมองผลลัพธ์ทุกทางพร้อมกัน เครื่องมือที่ตอบคำถามนี้คือ **[transition density](glossary.html#transition-density)** หรือความหนาแน่นของความน่าจะเป็นในการเปลี่ยนสถานะ

@@ -7,6 +7,16 @@ description: ผลตอบแทน ความผันผวน และ�
 
 <p class="lead">The Random Behavior of Assets</p>
 
+<div class="chapter-quote">
+
+> “ปัจจัยที่กำหนดการเคลื่อนไหวของตลาดหุ้นมีมากมายนับไม่ถ้วน”
+>
+> <span lang="fr">“Les influences qui déterminent les mouvements de la Bourse sont innombrables…”</span>
+>
+> — **Louis Bachelier** · [*Théorie de la spéculation (1900), น. 21*](https://www.numdam.org/item/ASENS_1900_3_17__21_0.pdf#page=2) · คำแปลไทยโดย QuantCorner
+
+</div>
+
 > “มีคนเพียง สองประเภทที่ บอกว่าเขาสามารถทำนาย ทิศทางราคาได้ ........... คือคนเสียสติ และ คนโกหก”
 
 ผมอยากเริ่มต้นที่คำถาม อะไรบ้างที่ส่งผลต่อราคาหุ้น 

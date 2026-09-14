@@ -1,5 +1,11 @@
 # Sources and notices
 
+## Chapter epigraphs — 2026-09-14
+
+Each of the five lessons now has a short sourced quotation, a separately identified Thai translation written for QuantCorner, and a direct source link. The quotations are from Louis Bachelier's *Théorie de la spéculation* (1900), Richard Feynman's blackboard as documented by Caltech, Pierre-Simon Laplace's *A Philosophical Essay on Probabilities* (Truscott/Emory translation, 1902), Henri Poincaré's *The Value of Science* in *The Foundations of Science* (Halsted translation), and George E. P. Box's *Robustness in the Strategy of Scientific Model Building* (1979, DTIC archive). Explicit ellipses mark the Bachelier and Laplace excerpts. Box's source heading retains its uppercase wording.
+
+Only short quotations and new Thai translations are included; no source image, full document or new graphic asset is redistributed. The notebook versions reproduce the same epigraphs. Source locations, contextual relevance, and verification notes are recorded in `data/chapter-quotes-provenance.json`. The Feynman and Poincaré quotations express general approaches to understanding mathematics; their placement does not imply that either speaker made those remarks about these finance models. The owner's existing separate Thai opening remark in the first lesson is preserved without adding an unverified author.
+
 ## QuantCorner / Quantsera book cover — 2026-09-13
 
 The cover uses the owner's approved `quantcorner-horizontal-transparent-offwhite-1024.png` and `quantsera-horizontal-transparent-offwhite-1024.png`, copied unchanged from the canonical brand packages. Native HTML/CSS places the separate logos on a black background under `quantseras-design-system.md` and the `no-image-generator` route. Source hashes and roles are recorded in `data/brand-cover-provenance.json`. The Quantsera immutable-logo preflight passed for the canonical package and the copied asset. The earlier stochastic-path artwork remains an unused asset.

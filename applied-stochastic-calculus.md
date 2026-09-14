@@ -9,6 +9,16 @@ visual_route: no-image-generator
 
 <p class="lead">เมื่อสิ่งที่เราสนใจเป็นฟังก์ชันของตัวแปรสุ่ม เราจะหาการเปลี่ยนแปลงของมันอย่างไร</p>
 
+<div class="chapter-quote">
+
+> “ตรรกะและสัญชาตญาณต่างมีบทบาทที่จำเป็น ทั้งสองสิ่งขาดไปไม่ได้”
+>
+> <span lang="en">“Thus logic and intuition have each their necessary rôle. Each is indispensable.”</span>
+>
+> — **Henri Poincaré** · [*The Value of Science, บท I §V*](https://www.gutenberg.org/cache/epub/39713/pg39713-images.html) · คำแปลไทยโดย QuantCorner
+
+</div>
+
 บท [Transition Density Functions](transition-density-functions.html) ตอบว่า “จากจุดเริ่มต้นหนึ่ง อนาคตกระจายไปอย่างไร” แต่ในการเงิน เรามักไม่ได้สนใจตัวแปรนั้นเพียงตัวเดียว เราอาจสนใจ log ของราคา ราคายกกำลังสอง หรือมูลค่าสัญญาที่ขึ้นกับราคาและเวลา
 
 ถ้า S เปลี่ยนแบบสุ่ม แล้ว F(S,t) จะเปลี่ยนตามกฎใด? คำตอบคือ **[Itô’s lemma](glossary.html#itos-lemma)** ซึ่งเป็นกฎลูกโซ่สำหรับกระบวนการแบบ Itô และเป็นเครื่องมือหลักของบทนี้

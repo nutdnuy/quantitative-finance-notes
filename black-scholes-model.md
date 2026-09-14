@@ -9,6 +9,16 @@ visual_route: no-image-generator
 
 <p class="lead">ถ้าราคาหุ้นยังสุ่มอยู่ เราจะหาราคา Option โดยไม่ต้องทายว่าหุ้นจะขึ้นหรือลงได้อย่างไร</p>
 
+<div class="chapter-quote">
+
+> “แบบจำลองทุกแบบล้วนผิด แต่บางแบบก็มีประโยชน์”
+>
+> <span lang="en">“ALL MODELS ARE WRONG BUT SOME ARE USEFUL”</span>
+>
+> — **George E. P. Box** · [*Robustness in the Strategy of Scientific Model Building (1979)*](https://archive.org/details/DTIC_ADA070213) · คำแปลไทยโดย QuantCorner
+
+</div>
+
 ใน [Binomial Model](binomial-model.html) เราหาจำนวนหุ้นและเงินสดที่ให้ผลลัพธ์เท่ากับ Option ได้ทุกแขนง เมื่อพอร์ตสองชุดให้สิ่งเดียวกันในอนาคต หลัก no-arbitrage ก็บังคับให้ต้นทุนวันนี้เท่ากัน
 
 เมื่อย่อ time step จนเข้าสู่เวลาต่อเนื่อง หุ้นไม่ได้มีเพียงสองราคาปลายทาง แต่แนวคิด **เลียนแบบ payoff ด้วยหุ้นและเงินสด** ยังอยู่ บท [Applied Stochastic Calculus](applied-stochastic-calculus.html) เตรียม Itô’s lemma ไว้แล้ว บทนี้จะใช้มันเปลี่ยนแนวคิดเรื่อง hedge ให้กลายเป็นสมการราคา

@@ -1,4 +1,13 @@
 /* Book shell. Article and experimental figure styles remain in style.css. */
+/* Sourced chapter epigraphs: native text, neutral surface, no accent rail. */
+.book-main .chapter-quote{max-width:760px;margin:28px 0 36px;padding:24px 28px;background:var(--surface);border-radius:6px;break-inside:avoid}
+.chapter-quote blockquote{margin:0;padding:0;border:0}
+.chapter-quote blockquote>p{margin:0 0 14px;overflow-wrap:anywhere}
+.chapter-quote blockquote>p:first-child{font-size:20px;line-height:1.7;color:var(--text)}
+.chapter-quote blockquote>p:nth-child(2){font-size:16px;line-height:1.7;color:var(--muted)}
+.chapter-quote blockquote>p:last-child{font-size:13px;line-height:1.8;color:var(--muted);margin-bottom:0}
+.chapter-quote blockquote>p:last-child em{font-style:normal}
+@media(max-width:800px){.book-main .chapter-quote{padding:20px;margin:24px 0 28px}.chapter-quote blockquote>p:first-child{font-size:18px}}
 /* Glossary: native text and controls, reusing the book's Material 2 tokens. */
 .book-main a.glossary-link{text-decoration-style:dotted;text-underline-offset:.22em}
 .book-main a.glossary-link:hover{text-decoration-style:solid}

@@ -9,6 +9,16 @@ visual_route: no-image-generator
 
 <p class="lead">ถ้าอนาคตมีแค่สองทาง เราจะหาราคา Option วันนี้ได้อย่างไร</p>
 
+<div class="chapter-quote">
+
+> “สิ่งใดที่ฉันสร้างขึ้นมาไม่ได้ ฉันก็ยังไม่เข้าใจสิ่งนั้น”
+>
+> <span lang="en">“What I cannot create, I do not understand.”</span>
+>
+> — **Richard Feynman** · [*ข้อความบนกระดานของ Feynman · Caltech*](https://magazine.caltech.edu/post/biology-through-the-eyes-of-a-physicist) · คำแปลไทยโดย QuantCorner
+
+</div>
+
 ใน[บทก่อน](random-assets.html#hedging) เราเริ่มเห็นว่า แม้จะไม่รู้ว่าหุ้นจะขึ้นหรือลง ก็ยังสร้างพอร์ตที่ให้ผลลัพธ์แน่นอนได้ ด้วยการเลือกจำนวนหุ้นให้เหมาะกับ Option ที่ถืออยู่
 
 บทนี้จะเปลี่ยนตัวอย่างนั้นให้เป็นวิธีคำนวณที่ใช้ซ้ำได้ เริ่มจากหนึ่งช่วงเวลา แล้วต่อเป็นหลายช่วงจนถึงวันหมดอายุ วิธีนี้เรียกว่า **[Binomial Model](glossary.html#binomial-model)** หรือแบบจำลองทวินาม คำว่า binomial ในที่นี้หมายถึง ณ แต่ละจุด ราคาหุ้นมีทางไปต่อสองทาง

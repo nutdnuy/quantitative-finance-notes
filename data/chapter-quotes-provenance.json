@@ -1,0 +1,55 @@
+{
+  "verified_on": "2026-09-14",
+  "scope": "One sourced epigraph for each of the five content lessons. Welcome and the shared glossary are navigation/reference pages.",
+  "visual_route": "no-image-generator",
+  "presentation": "Native Markdown blockquote with Thai translation, source-language excerpt, author and direct source link; existing fonts and theme tokens; no assets or motion.",
+  "translation_credit": "Thai translations newly written for QuantCorner; source-language quotations clearly separated.",
+  "preservation": "The separate pre-existing Thai opening remark in random-assets.md is preserved without inventing attribution.",
+  "quotes": [
+    {
+      "file": "random-assets.md",
+      "author": "Louis Bachelier",
+      "language": "fr",
+      "label": "Théorie de la spéculation (1900), น. 21",
+      "url": "https://www.numdam.org/item/ASENS_1900_3_17__21_0.pdf#page=2",
+      "note": "Opening clause of the introduction, with an ellipsis marking the omitted continuation. Original French was inspected in the scanned paper.",
+      "relation": "Many influences on asset prices; uncertainty motivates probabilistic models."
+    },
+    {
+      "file": "binomial-model.md",
+      "author": "Richard Feynman",
+      "language": "en",
+      "label": "ข้อความบนกระดานของ Feynman · Caltech",
+      "url": "https://magazine.caltech.edu/post/biology-through-the-eyes-of-a-physicist",
+      "note": "Caltech reports the exact words on the blackboard left in his office in 1988. Used as an analogy about learning by construction, not a statement he made about the binomial model.",
+      "relation": "Build the tree and replicating portfolio to understand option pricing."
+    },
+    {
+      "file": "transition-density-functions.md",
+      "author": "Pierre-Simon Laplace",
+      "language": "en",
+      "label": "A Philosophical Essay on Probabilities, น. 196",
+      "url": "https://www.gutenberg.org/cache/epub/58881/pg58881-images.html",
+      "note": "English translation by F. W. Truscott and F. L. Emory, 1902. A clause excerpt; the ellipsis explicitly omits “at bottom”. The surrounding passage was checked in chapter XVIII. Thai translation is newly written by QuantCorner.",
+      "relation": "Translate intuitive questions about future outcomes into probability densities and integrals."
+    },
+    {
+      "file": "applied-stochastic-calculus.md",
+      "author": "Henri Poincaré",
+      "language": "en",
+      "label": "The Value of Science, บท I §V",
+      "url": "https://www.gutenberg.org/cache/epub/39713/pg39713-images.html",
+      "note": "Exact two sentences in the English translation in The Foundations of Science, translated by George Bruce Halsted. The word rôle and sentence boundaries are retained. This is a general mathematical reflection, not a quotation about Itô calculus specifically.",
+      "relation": "Connect path intuition and rigorous limiting arguments when learning stochastic calculus."
+    },
+    {
+      "file": "black-scholes-model.md",
+      "author": "George E. P. Box",
+      "language": "en",
+      "label": "Robustness in the Strategy of Scientific Model Building (1979)",
+      "url": "https://archive.org/details/DTIC_ADA070213",
+      "note": "Exact uppercase section heading in the original report, verified using the public DTIC archive full text. Also independently corroborated by the University of Wisconsin–Madison Department of Statistics. Not a claim that assumptions can be ignored.",
+      "relation": "Use Black–Scholes with an understanding of its assumptions, usefulness and limits."
+    }
+  ]
+}
