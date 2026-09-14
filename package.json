@@ -5,7 +5,7 @@
   "scripts": {
     "build": "node build.cjs",
     "build:pages": "npm run build && node scripts/export-pages.cjs",
-    "test": "node qa/math-checks.mjs && node qa/binomial-checks.mjs && node qa/transition-density-checks.mjs && node qa/stochastic-calculus-checks.mjs",
+    "test": "node qa/math-checks.mjs && node qa/binomial-checks.mjs && node qa/transition-density-checks.mjs && node qa/stochastic-calculus-checks.mjs && node qa/black-scholes-checks.mjs",
     "dev": "node serve.cjs",
     "check:site": "node qa/welcome-checks.cjs"
   },

@@ -324,6 +324,122 @@ Option ที่กำหนดให้ใช้สิทธิได้เฉ�
 
 </section>
 
+<section class="glossary-group" id="group-black-scholes">
+
+## Black–Scholes และความไวของราคา
+
+<section class="glossary-term" id="black-scholes-pde">
+
+### Black–Scholes PDE — สมการราคาของแบล็ก–โชลส์
+
+สมการ Vₜ + ½σ²S²V_SS + rSV_S − rV = 0 สำหรับอนุพันธ์บนหุ้นไม่มีปันผลภายใต้สมมติฐาน Black–Scholes มาจากพอร์ตหุ้นและเงินสดที่เป็น self-financing และเลียนแบบสัญญาได้ ต้องมีเงื่อนไข payoff และขอบเขตเพื่อระบุคำตอบ
+
+[ดูการสร้างสมการ](black-scholes-model.html#hedge-pde)
+
+</section>
+
+<section class="glossary-term" id="risk-neutral-measure">
+
+### Risk-neutral measure — มาตรวัดความน่าจะเป็นสำหรับตั้งราคา
+
+เขียนเป็น ℚ ภายใต้มาตรวัดนี้ราคาสินทรัพย์รวมผลตอบแทนที่ discount อย่างเหมาะสมเป็น martingale ในแบบจำลองมาตรฐาน หุ้นไม่มีปันผลมี drift r และราคา European เป็น e⁻ʳτEᑫ[payoff | ข้อมูลปัจจุบัน] ไม่ใช่การอ้างว่าผลตอบแทนคาดหมายจริงต้องเท่ากับ r
+
+[ดูค่าเฉลี่ยสำหรับตั้งราคา](black-scholes-model.html#risk-neutral)
+
+</section>
+
+<section class="glossary-term" id="put-call-parity">
+
+### Put–call parity — ความสัมพันธ์ระหว่างราคา Call กับ Put
+
+European Call และ Put ที่มี strike และวันหมดอายุเดียวกัน บนหุ้นไม่มีปันผล ให้ C − P = S − Ke⁻ʳτ เมื่อ r ทบต้นต่อเนื่อง เพราะทั้งสองด้านเลียนแบบ payoff S_T − K เดียวกัน ความสัมพันธ์นี้ช่วยตรวจความสอดคล้องของราคา
+
+[ดูเหตุผลจาก payoff](black-scholes-model.html#formula)
+
+</section>
+
+<section class="glossary-term" id="digital-option">
+
+### Digital / Cash-or-nothing option — ออปชันที่จ่ายเงินตามเงื่อนไข
+
+Cash-or-nothing Call จ่ายเงินคงที่ A เมื่อราคาปลายทางเกิน K และจ่ายศูนย์กรณีอื่น สำหรับหุ้นไม่มีปันผลภายใต้ Black–Scholes มีราคา Ae⁻ʳτΦ(d₂) โดย Φ(d₂) เป็นโอกาสของเหตุการณ์นั้นภายใต้ ℚ ต้องกำหนดกรณีราคาเท่ากับ K ตามสัญญา
+
+[ดูการแยก payoff](black-scholes-model.html#formula)
+
+</section>
+
+<section class="glossary-term" id="gamma">
+
+### Gamma — ความไวของ Delta ต่อราคาหุ้น
+
+Γ = ∂²V/∂S² บอกว่า Delta เปลี่ยนเร็วเพียงใดเมื่อราคาหุ้นเปลี่ยน โดยตรึงเวลาและพารามิเตอร์อื่น หุ้นมี Gamma ศูนย์ จึงใช้หุ้นอย่างเดียวหักล้าง Gamma ของ Option ไม่ได้ การเป็น Delta-neutral ยังไม่ใช่ Gamma-neutral
+
+[ดูสูตรและการ hedge](black-scholes-model.html#greeks)
+
+</section>
+
+<section class="glossary-term" id="theta">
+
+### Theta — ความไวของราคาต่อเวลาปัจจุบัน
+
+Θ = ∂V/∂t โดยตรึงวันหมดอายุ T จึงเท่ากับ −∂V/∂τ เมื่อ τ = T − t ถ้าเวลาในสูตรเป็นปี ค่า Theta เป็นต่อปี การรายงานต่อวันต้องระบุ day count และไม่ใช่ผลกำไรหรือขาดทุนที่รับประกันเมื่อเวลาผ่านไปหนึ่งวัน
+
+[ดูสูตรและหน่วย](black-scholes-model.html#greeks)
+
+</section>
+
+<section class="glossary-term" id="vega">
+
+### Vega — ความไวของราคาต่อ volatility
+
+ν = ∂V/∂σ เป็นความไวต่อพารามิเตอร์ volatility โดยตรึงค่าอื่น สูตรที่ใช้ σ เป็นทศนิยมให้อนุพันธ์ต่อการเปลี่ยน σ เท่ากับ 1.00 ถ้ารายงานต่อ 1 percentage point เช่น 20% → 21% ต้องหารค่าจากสูตรด้วย 100
+
+[ดูสูตรและหน่วย](black-scholes-model.html#greeks)
+
+</section>
+
+<section class="glossary-term" id="rho">
+
+### Rho — ความไวของราคาต่อดอกเบี้ย
+
+ρᵣ = ∂V/∂r โดยตรึงค่าอื่น สำหรับ European vanilla บนหุ้นไม่มีปันผล Call มี Rho บวกและ Put มี Rho ลบ ก่อนหมดอายุเมื่อ σ > 0 ค่าอนุพันธ์ต่อ r ที่เป็นทศนิยมต้องหาร 100 เพื่อรายงานต่อดอกเบี้ย 1 percentage point
+
+[ดูสูตรและหน่วย](black-scholes-model.html#greeks)
+
+</section>
+
+<section class="glossary-term" id="american-option">
+
+### American option — ออปชันที่ใช้สิทธิได้ก่อนหมดอายุ
+
+สัญญาที่ใช้สิทธิได้ตลอดช่วงเวลาที่กำหนดจนถึงวันหมดอายุ จึงมีมูลค่าอย่างน้อยเท่ากับ European ที่มีเงื่อนไขอื่นเหมือนกัน ต้องเปรียบเทียบ payoff จากการใช้สิทธิทันทีกับมูลค่าของการถือต่อ ส่วน Bermudan ใช้สิทธิได้เฉพาะวันที่กำหนด
+
+[ดูการตัดสินใจใช้สิทธิ](black-scholes-model.html#early-exercise)
+
+</section>
+
+<section class="glossary-term" id="exercise-boundary">
+
+### Exercise boundary — ขอบเขตการใช้สิทธิ
+
+เส้นแบ่งสถานะที่เหมาะจะใช้สิทธิทันทีออกจากสถานะที่ควรถือต่อในโจทย์ American option เป็นส่วนหนึ่งของคำตอบที่ต้องหา สำหรับ vanilla diffusion ที่มีขอบเขตเรียบ มูลค่าและความชันของ Option จะต่อกับ payoff ตามเงื่อนไข value matching และ smooth pasting
+
+[ดู American Put](black-scholes-model.html#early-exercise)
+
+</section>
+
+<section class="glossary-term" id="implied-volatility">
+
+### Implied volatility — ความผันผวนโดยนัยจากราคา Option
+
+ค่า σ ที่ทำให้ราคาในแบบจำลองตรงกับราคา Option ที่สังเกต เมื่อกำหนด S,K,r,τ และสมมติฐานอื่นแล้ว เป็นการแก้สูตรย้อนกลับ ไม่ใช่ความผันผวนอนาคตที่รับประกัน หากได้ค่าต่างกันตาม strike หรือ maturity จะใช้ σ คงที่ค่าเดียวอธิบายราคาทั้งชุดไม่ได้
+
+[ดูขอบเขตของแบบจำลอง](black-scholes-model.html#model-limits)
+
+</section>
+
+</section>
+
 <section class="glossary-group" id="group-returns">
 
 ## ผลตอบแทนและการวัดความผันผวน

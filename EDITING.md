@@ -13,6 +13,7 @@
 | เนื้อหา Binomial Model | `binomial-model.md` |
 | เนื้อหา Transition Density Functions | `transition-density-functions.md` |
 | เนื้อหา Applied Stochastic Calculus | `applied-stochastic-calculus.md` |
+| เนื้อหา Black-Scholes Model | `black-scholes-model.md` |
 | ความหมายและตัวอย่างคำศัพท์ | `glossary.md` |
 | ชื่อเว็บ ชื่อผู้เขียน รูปด้านบน ลิงก์ GitHub | `_config.yml` |
 | รายการและลำดับหัวข้อในสารบัญ | `_toc.yml` |
@@ -21,6 +22,7 @@
 | Notebook และห้องทดลอง Binomial | `notebooks/binomial-model.ipynb`, `src/binomial.jsx`, `src/binomial.mjs` |
 | Notebook และห้องทดลอง Transition Density | `notebooks/transition-density-functions.ipynb`, `src/transition-density.jsx`, `src/transition-density.mjs` |
 | Notebook และห้องทดลอง Stochastic Calculus | `notebooks/applied-stochastic-calculus.ipynb`, `src/stochastic-calculus.jsx`, `src/stochastic-calculus.mjs` |
+| Notebook และห้องทดลอง Black–Scholes | `notebooks/black-scholes-model.ipynb`, `src/black-scholes.jsx`, `src/black-scholes.mjs` |
 | สีและหน้าตาของหน้า Welcome/สารบัญ | `book.css` |
 | หน้าตาบทเรียนและกราฟ | `style.css` |
 | พฤติกรรมกราฟแบบปรับค่าได้ | `src/labs.jsx`, `src/source-labs.jsx`, `src/math.mjs` |
@@ -122,3 +124,9 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 สำหรับ Transition Density Functions ใช้ `python3 scripts/make_transition_density_notebook.py` เพื่อสร้าง `notebooks/transition-density-functions.ipynb` จาก Markdown ของบทนี้และรันโค้ดด้วย Python standard library คำสั่งเขียนทับเฉพาะ Notebook ชื่อนี้ ให้รันอีกครั้งหลังแก้บทหรือภาพประกอบ และเก็บการทดลองส่วนตัวไว้ในชื่อไฟล์อื่น
 
 สำหรับ Applied Stochastic Calculus ใช้ `python3 scripts/make_stochastic_calculus_notebook.py` เพื่อสร้าง `notebooks/applied-stochastic-calculus.ipynb` จาก Markdown ของบทนี้และรันตัวอย่าง คำสั่งเขียนทับเฉพาะ Notebook ชื่อนี้ ให้รันอีกครั้งหลังแก้บทเรียนหรือสมการ ตัวสุ่ม Python และ JavaScript ระบุ seed และวิธีของตนเอง จึงไม่จำเป็นต้องให้เส้นทางเหมือนกันข้ามภาษา
+
+## สร้าง Notebook ของ Black-Scholes Model
+
+เมื่อแก้ `black-scholes-model.md` ให้รัน `python3 scripts/make_black_scholes_notebook.py` เพื่อสร้าง Notebook จากเนื้อหาปัจจุบันและรันเซลล์ด้วย Python standard library ตรวจราคา, Greeks, parity, risk-neutral Monte Carlo และ Delta hedge แบบ self-financing โค้ดใน Notebook ใช้ seed ของตนเองที่ระบุไว้ จึงไม่จำเป็นต้องได้เส้นทางเดียวกับห้องทดลอง JavaScript
+
+ตรวจด้วย `npm run build:pages`, `npm test` และ `node qa/black-scholes-browser.cjs` ขณะเปิด preview ที่พอร์ต 8763 ห้องทดลองใช้หุ้นไม่มีปันผล European Call/Put และดอกเบี้ยทบต้นต่อเนื่อง หากเปลี่ยนขอบเขตนี้ต้องแก้ข้อความ สมการ และ Notebook ให้ตรงกันด้วย

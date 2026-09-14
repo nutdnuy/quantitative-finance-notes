@@ -14,5 +14,7 @@ chapters:
     title: Transition Density Functions
   - file: applied-stochastic-calculus
     title: Applied Stochastic Calculus
+  - file: black-scholes-model
+    title: Black-Scholes Model
   - file: glossary
     title: อภิธานศัพท์

@@ -1,0 +1,196 @@
+{
+  "recorded_at": "2026-09-14",
+  "chapter": "black-scholes-model.md",
+  "source": {
+    "provided_filename": "Black-Scholes Model.pdf",
+    "title_visible": "The Black–Scholes Model",
+    "visible_course_footer": "Certificate in Quantitative Finance",
+    "pages": 108,
+    "sha256": "b52733f22d7e440b765e28c99e66cde0290a0536000b42ce7737ad516e56a694",
+    "individual_author": "Not verified from visible lecture content; PDF metadata is not treated as authorship.",
+    "publication_date": "Not verified; PDF creation/modification metadata is not treated as publication date.",
+    "access": "User-supplied private PDF, read locally. No PDF, page images or source logos redistributed.",
+    "method": "Scanned pages rendered locally, rotated for inspection, OCR with key derivations and formula sheets visually verified."
+  },
+  "source_topic_map": [
+    {
+      "pages": [
+        1,
+        17
+      ],
+      "topics": [
+        "model assumptions",
+        "Delta hedge",
+        "no-arbitrage PDE",
+        "terminal payoff"
+      ]
+    },
+    {
+      "pages": [
+        18,
+        21
+      ],
+      "topics": [
+        "continuous dividend yield",
+        "FX foreign rate",
+        "simplified proportional storage cost"
+      ]
+    },
+    {
+      "pages": [
+        22,
+        43
+      ],
+      "topics": [
+        "discount/log/time transformations",
+        "heat equation",
+        "Gaussian kernel",
+        "payoff integral"
+      ]
+    },
+    {
+      "pages": [
+        44,
+        61
+      ],
+      "topics": [
+        "European Call/Put",
+        "dividend formulas",
+        "cash-or-nothing binaries"
+      ]
+    },
+    {
+      "pages": [
+        62,
+        83
+      ],
+      "topics": [
+        "Delta",
+        "dynamic hedging",
+        "Gamma",
+        "Theta",
+        "Vega",
+        "Rho",
+        "dividend sensitivity"
+      ]
+    },
+    {
+      "pages": [
+        84,
+        99
+      ],
+      "topics": [
+        "American early exercise",
+        "free boundary",
+        "value matching",
+        "smooth pasting",
+        "Bermudan"
+      ]
+    },
+    {
+      "pages": [
+        100,
+        108
+      ],
+      "topics": [
+        "physical expectation",
+        "backward Kolmogorov",
+        "risk-neutral valuation",
+        "Monte Carlo connection"
+      ]
+    }
+  ],
+  "editorial_notes": [
+    "New Thai explanation of the mathematical ideas; not a verbatim translation or redistribution of the slides.",
+    "Long private-course filename/page-range bullets omitted from reader-facing chapter per owner preference; traceability retained here.",
+    "Source E mapped to K, Brownian X to W, dividend yield kept D to avoid collision with binomial pricing q; storage cost uses kappa.",
+    "Stock/cash self-financing derivation avoids discarding terms from differentiating a varying Delta.",
+    "Physical drift mu is not set equal to r; pricing measure Q is explicitly distinguished from physical P.",
+    "Theta is derivative with respect to calendar time t; Vega and Rho displays per 1 percentage point divide unit-parameter derivatives by100.",
+    "American no-dividend Call equality is qualified by r>=0 and standard assumptions; smooth pasting qualified by regular diffusion boundary.",
+    "All worked numerical results and native charts are newly computed hypothetical examples; no empirical market prices.",
+    "No original figure, logo, source screenshot, or unverified metadata attribution is reproduced."
+  ],
+  "web_labs": {
+    "price": {
+      "mount": "black-scholes-price-lab",
+      "S": 100,
+      "K": 100,
+      "r": 0.05,
+      "sigma": 0.2,
+      "tau_years": 1,
+      "kind": "call",
+      "dividends": 0,
+      "interest": "continuous compounding",
+      "units": "USD per one underlying share",
+      "default_call": 10.450583572185558,
+      "default_put": 5.573526022257,
+      "delta_call": 0.636830651175619,
+      "initial_cash_call": -53.23248154537634
+    },
+    "hedge": {
+      "mount": "black-scholes-hedge-lab",
+      "S0": 100,
+      "K": 100,
+      "r": 0.05,
+      "mu": 0.08,
+      "sigma": 0.2,
+      "T_years": 1,
+      "seed": 73,
+      "default_steps": 64,
+      "available_steps": [
+        16,
+        64,
+        256
+      ],
+      "finest_steps": 256,
+      "stock": "exact GBM under hypothetical physical measure, common Brownian path",
+      "funding": "Cash accrues exp(r*dt); rebalancing funded by same bank account; no external cash and no expiry rebalance.",
+      "transaction_costs": 0,
+      "default_terminal_stock": 87.2349428305035,
+      "default_residual": 0.5332731269559355,
+      "caveat": "More steps need not reduce absolute hedge error on every individual path. Sampling error, discrete hedge error and model error are distinct."
+    }
+  },
+  "notebook": {
+    "file": "notebooks/black-scholes-model.ipynb",
+    "generator": "scripts/make_black_scholes_notebook.py",
+    "dependencies": "Python standard library",
+    "normal_cdf": "math.erf, independent from JavaScript erfc implementation",
+    "monte_carlo_seed": 2026091401,
+    "monte_carlo_paths": 40000,
+    "hedge_seed": 2026091402,
+    "hedge_steps": [
+      16,
+      64,
+      256
+    ],
+    "seed_note": "Separate explicitly labeled reproducible examples; Python and JavaScript paths not claimed identical."
+  },
+  "visuals": {
+    "route": "no-image-generator",
+    "implementation": "Existing native React/SVG Chart components and SVG Notebook output calculated from model; no new decorative art or brand modifications."
+  },
+  "verification_commands": [
+    "npm run build:pages",
+    "npm test",
+    "python3 scripts/make_black_scholes_notebook.py",
+    "node qa/black-scholes-browser.cjs",
+    "npm run check:site",
+    "git diff --check"
+  ],
+  "supplementary_primary_references": [
+    {
+      "title": "The Black-Scholes Model",
+      "author": "Martin Haugh",
+      "year": 2016,
+      "url": "https://www.columbia.edu/~mh2078/FoundationsFE/BlackScholes.pdf"
+    },
+    {
+      "title": "Black–Scholes Formula & Risk-neutral Valuation",
+      "institution": "MIT OpenCourseWare",
+      "course": "18.S096 Fall 2013",
+      "url": "https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/d19208c017ada04f9261cfb41ab8d702_MIT18_S096F13_lecnote19.pdf"
+    }
+  ]
+}

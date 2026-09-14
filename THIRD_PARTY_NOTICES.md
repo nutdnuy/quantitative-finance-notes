@@ -4,6 +4,16 @@
 
 The cover uses the owner's approved `quantcorner-horizontal-transparent-offwhite-1024.png` and `quantsera-horizontal-transparent-offwhite-1024.png`, copied unchanged from the canonical brand packages. Native HTML/CSS places the separate logos on a black background under `quantseras-design-system.md` and the `no-image-generator` route. Source hashes and roles are recorded in `data/brand-cover-provenance.json`. The Quantsera immutable-logo preflight passed for the canonical package and the copied asset. The earlier stochastic-path artwork remains an unused asset.
 
+## Black-Scholes Model chapter — 2026-09-14
+
+The owner supplied *The Black–Scholes Model*, a 108-page scanned lecture with the footer Certificate in Quantitative Finance, in `Black-Scholes Model.pdf`. No individual author or publication date has been verified from the visible lecture. PDF metadata is not treated as an authorship or publication claim. The PDF was consulted locally; neither the source file, slide images nor source logos are redistributed.
+
+The chapter explains the lecture's mathematical ideas in newly written Thai prose. It connects the existing Binomial, transition-density and Itô chapters with self-financing replication, the PDE, European vanilla and digital valuation, Greeks and early exercise. The private-course page map is kept in `data/black-scholes-provenance.json`, not as a reader-facing bibliography bullet. Worked prices, native charts, numerical tests and Python examples are independently computed hypothetical examples. Self-financing funding, the distinction between physical and pricing measures, Greek units, and the conditions for early exercise are made explicit.
+
+Supplementary primary reading: Martin Haugh, [The Black-Scholes Model](https://www.columbia.edu/~mh2078/FoundationsFE/BlackScholes.pdf), Columbia University (2016), and MIT OpenCourseWare, [Black–Scholes Formula & Risk-neutral Valuation](https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/d19208c017ada04f9261cfb41ab8d702_MIT18_S096F13_lecnote19.pdf), 18.S096 (Fall 2013). No source prose or figure is reproduced verbatim. The JavaScript normal CDF reuses the existing independently implemented NIST-identity-based erfc routine; the Notebook uses Python's standard-library `math.erf`.
+
+All new visuals follow the `no-image-generator` route using the existing book's React/SVG components and a reproducible native SVG Notebook plot. No new third-party artwork, icon, font or modified brand asset is introduced.
+
 ## Applied Stochastic Calculus chapter — 2026-09-12
 
 The user supplied `JA251.4 Notes.pdf` (43 pages), titled *CQF Module 1 Lecture 4 — Introduction to Stochastic Calculus*, and `JA251.5 Notes.pdf` (44 pages), titled *CQF Module 1 Lecture 5 — Stochastic Differential Equations – Maths and Computation*. The supplied documents identify CQF and show Fitch Group branding; no individual author is credited in the inspected material. PDF creation or modification metadata is not treated as a publication date. Both PDFs were consulted locally; neither the PDFs, their slide images, nor their logos are redistributed.

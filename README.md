@@ -16,6 +16,7 @@ random-assets.md               บทเรียนเรื่องควา�
 binomial-model.md              บทเรียน Binomial Model และการคิดราคา Option ย้อนกลับ
 transition-density-functions.md  ความหนาแน่นการเปลี่ยนสถานะและสมการ Kolmogorov
 applied-stochastic-calculus.md  Itô’s lemma การแปลงแบบจำลองและการจำลอง SDE
+black-scholes-model.md         Delta hedge, สูตรราคาและ Greeks ของ Black–Scholes
 glossary.md                    อภิธานศัพท์ร่วมของซีรีส์
 AGENTS.md                      แนวทางทำงานสำหรับ AI ในโปรเจกต์นี้
 _config.yml                    ชื่อเว็บ ผู้เขียน รูป และลิงก์ repository
@@ -25,6 +26,7 @@ notebooks/random-assets.ipynb  Python Notebook
 notebooks/binomial-model.ipynb  Python Notebook ของบท Binomial Model
 notebooks/transition-density-functions.ipynb  Python Notebook ของบท Transition Density Functions
 notebooks/applied-stochastic-calculus.ipynb  Python Notebook ของบท Applied Stochastic Calculus
+notebooks/black-scholes-model.ipynb  Python Notebook ของบท Black-Scholes Model
 assets/images/                 รูปและคำสั่งที่ใช้สร้างภาพ
 book.css                       หน้าตา Welcome และสารบัญ
 style.css                      หน้าตาบทเรียนและกราฟ
@@ -61,6 +63,10 @@ npm run build
 ไฟล์ HTML ไม่อยู่ใน Git; รัน build ก่อนเปิดไฟล์ในเครื่อง หรือใช้ `npm run build:pages` เพื่อสร้างโฟลเดอร์ `_site/` สำหรับโฮสต์เว็บโดยเฉพาะ ระบบจะตรวจลิงก์ รูป และฟอนต์ภายในก่อนเผยแพร่
 
 ## เนื้อหาและแหล่งที่มา
+
+บท **Black-Scholes Model** ต่อจาก Applied Stochastic Calculus เชื่อม Delta hedge และ self-financing กับ PDE, heat equation, risk-neutral valuation, สูตร Call/Put, Greeks และ American early exercise ใช้เอกสาร *The Black–Scholes Model* ที่ผู้ใช้ให้เป็นเส้นเรื่อง และเพิ่มตัวอย่างสมมติที่ตรวจคำนวณใหม่ ห้องทดลองแยกเป็นราคาและ Delta กับการปรับ hedge บนเส้นทาง GBM ร่วมกัน รายละเอียดอยู่ใน `data/black-scholes-provenance.json` ไม่เผยแพร่ PDF ต้นฉบับ
+
+สร้างและรัน Notebook ด้วย `python3 scripts/make_black_scholes_notebook.py` ใช้ Python standard library; ตรวจตัวเลขด้วย `npm test` และหน้าเว็บด้วย `node qa/black-scholes-browser.cjs` ขณะเปิด preview ที่พอร์ต 8763
 
 บท **Applied Stochastic Calculus** ใช้เส้นเรื่องจากเอกสาร CQF Module 1 Lecture 4 และ Lecture 5 ที่ผู้ใช้ให้ใน `JA251.4 Notes.pdf` และ `JA251.5 Notes.pdf` เชื่อม quadratic variation, Itô’s lemma, GBM/OU, สมการ Kolmogorov และการจำลอง SDE มีห้องทดลอง 3 ส่วน: quadratic variation กับ Itô integral, Euler เทียบ exact GBM บน Brownian path เดียวกัน และ correlated Gaussian increments รายละเอียดสมมติฐานและแหล่งที่มาอยู่ท้ายบทและ `data/stochastic-calculus-provenance.json`
 

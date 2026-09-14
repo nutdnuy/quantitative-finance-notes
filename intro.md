@@ -47,6 +47,13 @@ description: Quant Corner Learning 101
 <a class="text-link" href="applied-stochastic-calculus.html">เปิดบท Applied Stochastic Calculus →</a>
 </div>
 
+<div class="reading-entry">
+<p class="eyebrow">ต่อจาก Applied Stochastic Calculus</p>
+<h3><a href="black-scholes-model.html">Black-Scholes Model <span aria-hidden="true">↗</span></a></h3>
+<p>Delta hedge · สมการและสูตรราคา Call/Put · Greeks · Risk-neutral valuation · American options</p>
+<a class="text-link" href="black-scholes-model.html">เปิดบท Black-Scholes Model →</a>
+</div>
+
 ## อ่านไป ลองไป
 
 - **ดูความหมายก่อนแทนสูตร** — เริ่มจากตัวอย่างเล็ก ๆ แล้วค่อยเพิ่มรายละเอียด
