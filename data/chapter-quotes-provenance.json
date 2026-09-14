@@ -3,7 +3,7 @@
   "scope": "One sourced epigraph for each of the five content lessons. Welcome and the shared glossary are navigation/reference pages.",
   "visual_route": "no-image-generator",
   "presentation": "Native Markdown blockquote with Thai translation, source-language excerpt, author and direct source link; existing fonts and theme tokens; no assets or motion.",
-  "translation_credit": "Thai translations newly written for QuantCorner; source-language quotations clearly separated.",
+  "translation_credit": "Thai translations for QuantCorner; the Thorp translation and parenthetical clarification were supplied by the owner. Source-language quotations are separately identified.",
   "preservation": "The separate pre-existing Thai opening remark in random-assets.md is preserved without inventing attribution.",
   "quotes": [
     {
@@ -44,12 +44,12 @@
     },
     {
       "file": "black-scholes-model.md",
-      "author": "George E. P. Box",
+      "author": "Edward O. Thorp",
       "language": "en",
-      "label": "Robustness in the Strategy of Scientific Model Building (1979)",
-      "url": "https://archive.org/details/DTIC_ADA070213",
-      "note": "Exact uppercase section heading in the original report, verified using the public DTIC archive full text. Also independently corroborated by the University of Wisconsin–Madison Department of Statistics. Not a claim that assumptions can be ignored.",
-      "relation": "Use Black–Scholes with an understanding of its assumptions, usefulness and limits."
+      "label": "The Tim Ferriss Show #596 (2022)",
+      "url": "https://tim.blog/2022/05/28/ed-thorp-transcript/",
+      "note": "Verified exact sentence in the original interview transcript published May 28, 2022. The linked parenthetical Black-Scholes Model is an owner-requested editorial insertion, not part of Thorp’s original sentence. The Thai translation was supplied by the owner.",
+      "relation": "Thorp describes his option-pricing advantage when CBOE opened in 1973, in a discussion of his earlier model and the publication of Black and Scholes’s work."
     }
   ]
 }

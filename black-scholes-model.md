@@ -11,11 +11,11 @@ visual_route: no-image-generator
 
 <div class="chapter-quote">
 
-> “แบบจำลองทุกแบบล้วนผิด แต่บางแบบก็มีประโยชน์”
+> **“มัน ([Black-Scholes Model](black-scholes-model.html)) เหมือนมีปืนกล สู้กับธนูและลูกศร”**
 >
-> <span lang="en">“ALL MODELS ARE WRONG BUT SOME ARE USEFUL”</span>
+> <span lang="en">**“It ([Black-Scholes Model](black-scholes-model.html)) was like having machine guns against bows and arrows.”**</span>
 >
-> — **George E. P. Box** · [*Robustness in the Strategy of Scientific Model Building (1979)*](https://archive.org/details/DTIC_ADA070213) · คำแปลไทยโดย QuantCorner
+> — **Edward O. Thorp** · [*The Tim Ferriss Show #596 (2022)*](https://tim.blog/2022/05/28/ed-thorp-transcript/) · คำแปลไทยและข้อความในวงเล็บตามที่ผู้เรียบเรียงเพิ่มเติม
 
 </div>
 
