@@ -1,6 +1,6 @@
 {
   "verified_on": "2026-09-14",
-  "scope": "One sourced epigraph for each of the five content lessons. Welcome and the shared glossary are navigation/reference pages.",
+  "scope": "One sourced epigraph for each of the eight content lessons. Welcome and the shared glossary are navigation/reference pages.",
   "visual_route": "no-image-generator",
   "presentation": "Native Markdown blockquote with Thai translation, source-language excerpt, author and direct source link; existing fonts and theme tokens; no assets or motion.",
   "translation_credit": "Thai translations for QuantCorner; the Thorp translation and parenthetical clarification were supplied by the owner. Source-language quotations are separately identified.",
@@ -13,7 +13,8 @@
       "label": "Théorie de la spéculation (1900), น. 21",
       "url": "https://www.numdam.org/item/ASENS_1900_3_17__21_0.pdf#page=2",
       "note": "Opening clause of the introduction, with an ellipsis marking the omitted continuation. Original French was inspected in the scanned paper.",
-      "relation": "Many influences on asset prices; uncertainty motivates probabilistic models."
+      "relation": "Many influences on asset prices; uncertainty motivates probabilistic models.",
+      "verified_on": "2026-09-14"
     },
     {
       "file": "binomial-model.md",
@@ -22,7 +23,8 @@
       "label": "ข้อความบนกระดานของ Feynman · Caltech",
       "url": "https://magazine.caltech.edu/post/biology-through-the-eyes-of-a-physicist",
       "note": "Caltech reports the exact words on the blackboard left in his office in 1988. Used as an analogy about learning by construction, not a statement he made about the binomial model.",
-      "relation": "Build the tree and replicating portfolio to understand option pricing."
+      "relation": "Build the tree and replicating portfolio to understand option pricing.",
+      "verified_on": "2026-09-14"
     },
     {
       "file": "transition-density-functions.md",
@@ -31,7 +33,8 @@
       "label": "A Philosophical Essay on Probabilities, น. 196",
       "url": "https://www.gutenberg.org/cache/epub/58881/pg58881-images.html",
       "note": "English translation by F. W. Truscott and F. L. Emory, 1902. A clause excerpt; the ellipsis explicitly omits “at bottom”. The surrounding passage was checked in chapter XVIII. Thai translation is newly written by QuantCorner.",
-      "relation": "Translate intuitive questions about future outcomes into probability densities and integrals."
+      "relation": "Translate intuitive questions about future outcomes into probability densities and integrals.",
+      "verified_on": "2026-09-14"
     },
     {
       "file": "applied-stochastic-calculus.md",
@@ -40,7 +43,8 @@
       "label": "The Value of Science, บท I §V",
       "url": "https://www.gutenberg.org/cache/epub/39713/pg39713-images.html",
       "note": "Exact two sentences in the English translation in The Foundations of Science, translated by George Bruce Halsted. The word rôle and sentence boundaries are retained. This is a general mathematical reflection, not a quotation about Itô calculus specifically.",
-      "relation": "Connect path intuition and rigorous limiting arguments when learning stochastic calculus."
+      "relation": "Connect path intuition and rigorous limiting arguments when learning stochastic calculus.",
+      "verified_on": "2026-09-14"
     },
     {
       "file": "black-scholes-model.md",
@@ -49,7 +53,41 @@
       "label": "The Tim Ferriss Show #596 (2022)",
       "url": "https://tim.blog/2022/05/28/ed-thorp-transcript/",
       "note": "Verified exact sentence in the original interview transcript published May 28, 2022. The linked parenthetical Black-Scholes Model is an owner-requested editorial insertion, not part of Thorp’s original sentence. The Thai translation was supplied by the owner.",
-      "relation": "Thorp describes his option-pricing advantage when CBOE opened in 1973, in a discussion of his earlier model and the publication of Black and Scholes’s work."
+      "relation": "Thorp describes his option-pricing advantage when CBOE opened in 1973, in a discussion of his earlier model and the publication of Black and Scholes’s work.",
+      "verified_on": "2026-09-14"
+    },
+    {
+      "file": "portfolio-theory.md",
+      "author": "Harry Markowitz",
+      "language": "en",
+      "label": "Portfolio Selection: Efficient Diversification of Investments (1959), น. 3",
+      "url": "https://cowles.yale.edu/sites/default/files/2022-09/m16-all.pdf#page=15",
+      "verified_on": "2026-09-18",
+      "note": "Exact sentence visually checked on printed page 3 (PDF page 15) of the monograph scan hosted by the Cowles Foundation at Yale. Thai translation written for QuantCorner.",
+      "relation": "A portfolio must be evaluated as an integrated whole, including relationships among its securities."
+    },
+    {
+      "file": "portfolio-optimization.md",
+      "author": "John W. Tukey",
+      "language": "en",
+      "label": "The Future of Data Analysis (1962), น. 13–14",
+      "url": "https://doi.org/10.1214/aoms/1177704711",
+      "verified_on": "2026-09-18",
+      "verification_url": "https://studylib.net/doc/28309883/elfuturoanalisisdatos-tukey-1962",
+      "note": "Excerpt checked against the digitized original article, section 11, Facing uncertainty, across printed pages 13–14. Publisher PDF was unavailable to the retrieval tool; its DOI is the reader-facing citation. Trailing ellipsis omits the final relative clause. Thai translation written for QuantCorner. General advice about data analysis, not a remark specifically about portfolio optimization.",
+      "relation": "A precise solver cannot compensate for an incorrectly formulated objective or question."
+    },
+    {
+      "file": "black-litterman.md",
+      "author": "Fischer Black and Robert Litterman",
+      "language": "en",
+      "label": "Global Portfolio Optimization (1992), น. 34",
+      "url": "https://people.duke.edu/~charvey/Teaching/BA453_2005/blacklitterman.pdf#page=7",
+      "verified_on": "2026-09-18",
+      "publisher_url": "https://rpc.cfainstitute.org/research/financial-analysts-journal/1992/faj-v48-n5-28",
+      "note": "Exact first numbered principle visually checked in the original article scan on printed page 34 (PDF page 7), Combining Investor Views with Market Equilibrium. Line-break hyphenation is joined. Thai translation written for QuantCorner.",
+      "relation": "The model combines information from investor views and market equilibrium, with uncertainty in both."
     }
-  ]
+  ],
+  "updated_on": "2026-09-18"
 }

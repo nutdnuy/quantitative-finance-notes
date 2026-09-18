@@ -10,6 +10,16 @@ inline_math: true
 
 <p class="lead">เราจะผสมพอร์ตตลาดกับมุมมองของเรา โดยบอกความไม่แน่นอนไว้ด้วยได้อย่างไร?</p>
 
+<div class="chapter-quote">
+
+> “เราเชื่อว่าข้อมูลเกี่ยวกับผลตอบแทนส่วนเกินในอนาคตมีสองแหล่งที่แตกต่างกัน คือมุมมองของผู้ลงทุนและดุลยภาพตลาด”
+>
+> <span lang="en">“We believe there are two distinct sources of information about future excess returns—investor views and market equilibrium.”</span>
+>
+> — **Fischer Black และ Robert Litterman** · [*Global Portfolio Optimization (1992), น. 34*](https://people.duke.edu/~charvey/Teaching/BA453_2005/blacklitterman.pdf#page=7)
+
+</div>
+
 บท [Portfolio Optimization](portfolio-optimization.html) อธิบายว่า objective และ constraints กำหนดน้ำหนักพอร์ตอย่างไร บทนี้มุ่งที่ expected returns ซึ่งเป็น input สำคัญของ optimizer: เริ่มจากพอร์ตตลาด แล้วค่อยปรับด้วย views ที่มีความไม่แน่นอน
 
 ตัวอย่างทั้งหมดเป็นสินทรัพย์สมมติสี่ตัว ใช้ผลตอบแทน simple return ระยะหนึ่งปี ไม่มีข้อมูลตลาดจริง ค่าเฉลี่ยที่ใช้ในสูตร Black–Litterman เป็น **excess return เหนืออัตราปลอดความเสี่ยง** ไม่ใช่ total return

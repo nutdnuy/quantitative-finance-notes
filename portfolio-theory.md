@@ -9,6 +9,16 @@ visual_route: no-image-generator
 
 <p class="lead">พอร์ตการลงทุนที่ดีเป็นอย่างไร?</p>
 
+<div class="chapter-quote">
+
+> “พอร์ตที่ดีเป็นมากกว่ารายชื่อหุ้นและพันธบัตรดี ๆ ที่เรียงกันยาวเหยียด”
+>
+> <span lang="en">“A good portfolio is more than a long list of good stocks and bonds.”</span>
+>
+> — **Harry Markowitz** · [*Portfolio Selection: Efficient Diversification of Investments (1959), น. 3*](https://cowles.yale.edu/sites/default/files/2022-09/m16-all.pdf#page=15)
+
+</div>
+
 
 หลังจากที่เราหมกหมุ่นกับ ออปชั่น เรามาดูงานของ Quant ที่ไปแก้ปัญหา อีก ประเภท ในการเงินกันดีกว่า และอาจมีมูลค่าไม่ต่างกันดูซำ้ เพื่อตอบคำถามเดี่ยวว่าพอร์ตการลงทุนที่ดีคืออะไร
 

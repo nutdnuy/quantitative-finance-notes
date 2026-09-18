@@ -10,6 +10,16 @@ inline_math: true
 
 <p class="lead">เราจะบอกคอมพิวเตอร์อย่างไรว่า “พอร์ตที่ดีที่สุด” หมายถึงอะไร?</p>
 
+<div class="chapter-quote">
+
+> “คำตอบโดยประมาณของคำถามที่ถูกต้อง แม้คำถามนั้นมักคลุมเครือ ก็ยังดีกว่าคำตอบที่แม่นยำของคำถามที่ผิด …”
+>
+> <span lang="en">“Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question …”</span>
+>
+> — **John W. Tukey** · [*The Future of Data Analysis (1962), น. 13–14*](https://doi.org/10.1214/aoms/1177704711)
+
+</div>
+
 บท [Portfolio Theory](portfolio-theory.html) วางเกณฑ์ไว้แล้วว่าเราสนใจผลตอบแทนคาดหวัง ความเสี่ยง และการเคลื่อนไหวร่วมกันของสินทรัพย์ บทนี้นำเกณฑ์เหล่านั้นมาเขียนเป็นโจทย์ที่คำนวณน้ำหนักพอร์ตได้จริง
 
 Optimizer ไม่ได้รู้เองว่าควรลดความเสี่ยง เพิ่มผลตอบแทน ห้ามขายชอร์ต หรือเกาะ benchmark แค่ไหน เราต้องกำหนด objective function, decision variables, ข้อมูลที่ป้อน และ constraints ให้ครบ คำตอบที่ได้จึงผูกกับโจทย์นั้นทุกบรรทัด
