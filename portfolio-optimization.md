@@ -480,14 +480,6 @@ $$
 
 </section>
 
-<section id="black-litterman">
-
-## อ่านต่อ: Black–Litterman
-
-เรื่องการหา implied prior จากพอร์ตตลาด การผสม views และห้องทดลอง ย้ายไปอยู่ใน [บท Black–Litterman](black-litterman.html#black-litterman) แล้ว บทใหม่นี้ใช้ covariance และสินทรัพย์สมมติชุดเดียวกัน
-
-</section>
-
 <section id="inequality-constraints">
 
 ## KKT บอกว่า constraint ใดกำลังบังคับคำตอบ
@@ -611,12 +603,6 @@ subject to \(\mathbf 1^\top\Delta\mathbf w=0\) และข้อจำกัด
 
 </section>
 
-<section id="experiments">
-
-ห้องทดลองผสม views ย้ายไปอยู่ใน [บท Black–Litterman](black-litterman.html#experiments)
-
-</section>
-
 <section id="implementation-limits">
 
 ## ตรวจ optimizer ก่อนเชื่อน้ำหนัก
@@ -668,6 +654,16 @@ subject to \(\mathbf 1^\top\Delta\mathbf w=0\) และข้อจำกัด
 ## ทำต่อใน Python
 
 [ดาวน์โหลด Notebook ของบท Portfolio Optimization](notebooks/portfolio-optimization.ipynb) เพื่อสร้าง covariance, แก้ target-return portfolio, ตรวจ GMV และ tangency, ทำ GLS whitening และเปรียบเทียบ unconstrained กับ long-only solution ตัวอย่างทั้งหมดใช้ Python standard library และรันซ้ำได้
+
+</section>
+
+<section id="black-litterman">
+
+## อ่านต่อ: Black–Litterman
+
+เมื่อกำหนด objective และ constraints ได้แล้ว ขั้นต่อไปคือเลือก expected returns ที่จะส่งเข้า optimizer [บท Black–Litterman](black-litterman.html#black-litterman) ใช้สินทรัพย์สมมติและ covariance ชุดเดียวกัน เพื่อหา prior จากพอร์ตตลาดและผสมมุมมองของผู้ลงทุนพร้อมความไม่แน่นอน
+
+<p id="experiments">ลองปรับความไม่แน่นอนของ views และ risk aversion ได้ใน <a href="black-litterman.html#experiments">ห้องทดลอง Black–Litterman</a></p>
 
 </section>
 
