@@ -19,27 +19,12 @@ visual_route: no-image-generator
 
 </div>
 
+ในบทนี้เราจะเข้าใจ Stochastic Calculus อย่าพึงถอดใจเมื่อเจอสิ่งที่ยาก Stochastic  แปลว่าสุ่ม Calculus คือการศึกษาการเปลี่ยนแปลง เรเพียงแต่จะศึกษาการเปลี่ยนแปลงของระบบที่สุ่ม
+
 บท [Transition Density Functions](transition-density-functions.html) ตอบว่า “จากจุดเริ่มต้นหนึ่ง อนาคตกระจายไปอย่างไร” แต่ในการเงิน เรามักไม่ได้สนใจตัวแปรนั้นเพียงตัวเดียว เราอาจสนใจ log ของราคา ราคายกกำลังสอง หรือมูลค่าสัญญาที่ขึ้นกับราคาและเวลา
 
 ถ้า S เปลี่ยนแบบสุ่ม แล้ว F(S,t) จะเปลี่ยนตามกฎใด? คำตอบคือ **[Itô’s lemma](glossary.html#itos-lemma)** ซึ่งเป็นกฎลูกโซ่สำหรับกระบวนการแบบ Itô และเป็นเครื่องมือหลักของบทนี้
 
-<section id="story">
-
-## เส้นเรื่อง: จากความขรุขระของเส้นทาง สู่การคำนวณ
-
-บทนี้รวมสองเอกสารเป็นเรื่องเดียว โดยใช้ <em>Introduction to Stochastic Calculus</em> วางเหตุผลของกฎใหม่ แล้วต่อด้วย <em>Stochastic Differential Equations – Maths and Computation</em> เพื่อใช้งานกฎนั้น
-
-| ช่วงของเรื่อง | คำถามที่ต้องตอบ | สิ่งที่จะใช้ต่อ |
-|---|---|---|
-| 1. มอง step เล็ก ๆ | ทำไม step Brownian ย่อไม่เร็วเท่า time step | Quadratic variation |
-| 2. เปลี่ยนกฎลูกโซ่ | ทำไม d(W²) ไม่ได้มีแค่ 2W dW | Itô integral และ Itô’s lemma |
-| 3. แปลงแบบจำลอง | ทำไม log ของ GBM มี drift ลดลง และ mean reversion ทำงานอย่างไร | คำตอบ exact ของ GBM และ OU |
-| 4. กลับมามองการแจกแจง | drift และขนาดช็อกไปอยู่ตรงไหนในสมการความหนาแน่น | Forward / Backward Kolmogorov |
-| 5. ลงมือจำลอง | แบ่งเวลา สร้างช็อก และทำให้ช็อกสัมพันธ์กันอย่างไร | Euler–Maruyama และ correlated increments |
-
-ใช้ **W** แทน standard Brownian motion ที่ต้นฉบับเรียกว่า X เพื่อให้ตรงกับบทก่อน สมมติ W₀ = 0 และใช้การตีความแบบ **Itô** ตลอดบท ตัวเลขทั้งหมดเป็นตัวอย่างสมมติหรือผลจำลองตามแบบจำลอง ไม่ใช่ข้อมูลตลาด
-
-</section>
 
 <section id="brownian">
 

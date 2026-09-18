@@ -7,7 +7,7 @@ visual_route: no-image-generator
 
 # Black-Scholes Model
 
-<p class="lead">ถ้าราคาหุ้นยังสุ่มอยู่ เราจะหาราคา Option โดยไม่ต้องทายว่าหุ้นจะขึ้นหรือลงได้อย่างไร</p>
+<p class="lead">สมการมูลค่าแสนล้านนน ดอลล่า </p>
 
 <div class="chapter-quote">
 
@@ -19,7 +19,7 @@ visual_route: no-image-generator
 
 </div>
 
-ใน [Binomial Model](binomial-model.html) เราหาจำนวนหุ้นและเงินสดที่ให้ผลลัพธ์เท่ากับ Option ได้ทุกแขนง เมื่อพอร์ตสองชุดให้สิ่งเดียวกันในอนาคต หลัก no-arbitrage ก็บังคับให้ต้นทุนวันนี้เท่ากัน
+ในบทนี้เราจะมารู้จักสมการที่ว่ากันว่าเปลี่ยนโลก Quant Finance ไปเลย  ใน [Binomial Model](binomial-model.html) เราหาจำนวนหุ้นและเงินสดที่ให้ผลลัพธ์เท่ากับ Option ได้ทุกแขนง เมื่อพอร์ตสองชุดให้สิ่งเดียวกันในอนาคต หลัก no-arbitrage ก็บังคับให้ต้นทุนวันนี้เท่ากัน
 
 เมื่อย่อ time step จนเข้าสู่เวลาต่อเนื่อง หุ้นไม่ได้มีเพียงสองราคาปลายทาง แต่แนวคิด **เลียนแบบ payoff ด้วยหุ้นและเงินสด** ยังอยู่ บท [Applied Stochastic Calculus](applied-stochastic-calculus.html) เตรียม Itô’s lemma ไว้แล้ว บทนี้จะใช้มันเปลี่ยนแนวคิดเรื่อง hedge ให้กลายเป็นสมการราคา
 
@@ -538,7 +538,6 @@ Put อาจคุ้มที่จะรับ K ก่อนเมื่อ�
 <section id="sources">
 
 ## อ่านประกอบ
-
 - Martin Haugh, [The Black-Scholes Model](https://www.columbia.edu/~mh2078/FoundationsFE/BlackScholes.pdf) — เอกสารมหาวิทยาลัยสำหรับอ่านเรื่องพอร์ต self-financing, PDE และ risk-neutral valuation เพิ่มเติม
 - MIT OpenCourseWare, [Black–Scholes Formula & Risk-neutral Valuation](https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/d19208c017ada04f9261cfb41ab8d702_MIT18_S096F13_lecnote19.pdf) — มุมมองสูตรราคาผ่านการแจกแจงและค่าเฉลี่ย
 
