@@ -5,7 +5,7 @@ description: ศัพท์ที่ใช้ในบทเรียน Quant 
 
 # อภิธานศัพท์
 
-หน้านี้รวมศัพท์ที่เราใช้ในบทเรียน **พฤติกรรมแบบสุ่มของสินทรัพย์**, **Binomial Model**, **Transition Density Functions**, **Applied Stochastic Calculus**, **Black–Scholes Model** และ **Portfolio Theory** เอาไว้เปิดเทียบระหว่างอ่าน แต่ละคำมีลิงก์กลับไปดูตัวอย่างและการทดลองที่เกี่ยวข้อง
+หน้านี้รวมศัพท์ที่เราใช้ในบทเรียน **พฤติกรรมแบบสุ่มของสินทรัพย์**, **Binomial Model**, **Transition Density Functions**, **Applied Stochastic Calculus**, **Black–Scholes Model**, **Portfolio Theory** และ **Portfolio Optimization & Black–Litterman** เอาไว้เปิดเทียบระหว่างอ่าน แต่ละคำมีลิงก์กลับไปดูตัวอย่างและการทดลองที่เกี่ยวข้อง
 
 <div class="glossary-search" hidden>
 <label for="glossary-query">ค้นหาคำศัพท์</label>
@@ -825,6 +825,132 @@ step ของกระบวนการต่างตัวในช่วง
 
 </section>
 
+<section class="glossary-group" id="group-optimization">
+
+## Optimization และการประมาณค่า
+
+<section class="glossary-term" id="objective-function">
+
+### Objective function — ฟังก์ชันเป้าหมาย
+
+ฟังก์ชันที่โจทย์ต้องการทำให้ต่ำสุดหรือสูงสุด เช่น ลด variance ของพอร์ต หรือเพิ่มผลตอบแทนคาดหวังหลังหักค่าปรับความเสี่ยง คำตอบขึ้นกับ objective, inputs และ constraints ที่กำหนดไว้ จึงไม่ได้มีความหมายว่า “ดีที่สุด” ในทุกเกณฑ์พร้อมกัน
+
+[ดูในบทเรียน](portfolio-optimization.html#optimization-problem)
+
+</section>
+
+<section class="glossary-term" id="decision-variable">
+
+### Decision variable — ตัวแปรตัดสินใจ
+
+ค่าที่ optimizer เลือกเพื่อแก้โจทย์ เช่น น้ำหนักสินทรัพย์แต่ละตัว จำนวนสัญญา หรือขนาด active position ข้อมูลคาดการณ์อย่าง expected return เป็น input ของโจทย์ ไม่ใช่ decision variable เว้นแต่แบบจำลองระบุให้ประมาณพร้อมกัน
+
+[ดูในบทเรียน](portfolio-optimization.html#optimization-problem)
+
+</section>
+
+<section class="glossary-term" id="optimization-constraint">
+
+### Constraint — ข้อจำกัดของโจทย์
+
+เงื่อนไขที่คำตอบต้องรักษา เช่น น้ำหนักรวมเท่ากับหนึ่ง น้ำหนักไม่ติดลบ ผลตอบแทนคาดหวังเท่ากับ target หรือ tracking error ไม่เกินเพดาน Equality constraint ต้องเท่ากัน ส่วน inequality constraint อนุญาตให้เหลือช่องว่างได้
+
+[ดูในบทเรียน](portfolio-optimization.html#optimization-problem)
+
+</section>
+
+<section class="glossary-term" id="gradient">
+
+### Gradient — เวกเตอร์ความชัน
+
+เวกเตอร์ของอนุพันธ์อันดับหนึ่งของฟังก์ชันต่อ decision variables ทุกตัว ชี้ทิศที่ฟังก์ชันเพิ่มเร็วที่สุดในบริเวณนั้น สำหรับ optimum ภายในของฟังก์ชันเรียบที่ไม่มี constraint gradient ต้องเป็นศูนย์ แต่เงื่อนไขนี้อย่างเดียวยังแยก minimum, maximum และ saddle point ไม่ได้
+
+[ดูในบทเรียน](portfolio-optimization.html#gradient-hessian)
+
+</section>
+
+<section class="glossary-term" id="hessian">
+
+### Hessian — เมทริกซ์อนุพันธ์อันดับสอง
+
+เมทริกซ์ที่ช่อง \((i,j)\) เป็นอนุพันธ์อันดับสองต่อ decision variables คู่ที่ \(i,j\) ใช้ตรวจความโค้งรอบ stationary point Hessian positive definite บอกว่าโค้งขึ้นทุกทิศทาง ส่วน negative definite บอกว่าโค้งลงทุกทิศทาง
+
+[ดูในบทเรียน](portfolio-optimization.html#gradient-hessian)
+
+</section>
+
+<section class="glossary-term" id="ordinary-least-squares">
+
+### Ordinary Least Squares (OLS) — กำลังสองน้อยที่สุดแบบสามัญ
+
+วิธีประมาณสัมประสิทธิ์ regression โดยลดผลรวม residual ยกกำลังสอง เมื่อเขียน \(Y=X\beta+\varepsilon\) และ \(X\) มี rank ครบ คำตอบคือ \((X^\top X)^{-1}X^\top Y\) ในการคำนวณจริงนิยมแก้ระบบหรือใช้ QR/SVD แทนการสร้าง inverse ตรง ๆ
+
+[ดูในบทเรียน](portfolio-optimization.html#regression-optimization)
+
+</section>
+
+<section class="glossary-term" id="generalized-least-squares">
+
+### Generalized Least Squares (GLS) — กำลังสองน้อยที่สุดแบบทั่วไป
+
+วิธี regression ที่ถ่วง residual ด้วย inverse covariance \(\Omega^{-1}\) เมื่อ residual มี variance ไม่เท่ากันหรือสัมพันธ์กัน หาก \(\Omega\) ต้องประมาณจากข้อมูล ผลลัพธ์เรียกว่า Feasible GLS และยังขึ้นกับแบบจำลอง covariance ที่เลือก
+
+[ดูในบทเรียน](portfolio-optimization.html#regression-optimization)
+
+</section>
+
+<section class="glossary-term" id="lagrange-multiplier">
+
+### Lagrange multiplier — ตัวคูณลากร็องฌ์
+
+ตัวแปรที่เพิ่มเข้า Lagrangian เพื่อรวม equality constraint เข้ากับ objective ที่ optimum ค่า multiplier เชื่อมกับการเปลี่ยนแปลงเฉพาะขอบของ objective เมื่อขยับค่าด้านขวาของ constraint เล็กน้อย ถ้าใช้ \(\mathcal L=f+\lambda(g-b)\) จะได้ \(\partial v^*/\partial b=-\lambda\) เครื่องหมายจึงขึ้นกับรูปที่ใช้ตั้ง Lagrangian
+
+[ดูในบทเรียน](portfolio-optimization.html#lagrange-method)
+
+</section>
+
+<section class="glossary-term" id="reverse-optimization">
+
+### Reverse optimization — การแก้ย้อนจากน้ำหนักไปหา input
+
+การเริ่มจากน้ำหนักพอร์ตที่สังเกตได้และสมมติว่าเป็นคำตอบของ optimizer แล้วแก้ย้อนหา parameter ที่สอดคล้องกัน ใน Black–Litterman ใช้ \(\Pi=\lambda\Sigma w_{mkt}\) เพื่อหา implied equilibrium excess returns จาก market weights
+
+[ดูในบทเรียน](portfolio-optimization.html#black-litterman)
+
+</section>
+
+<section class="glossary-term" id="black-litterman">
+
+### Black–Litterman model — แบบจำลองแบล็ก–ลิตเทอร์แมน
+
+กรอบจัดพอร์ตที่ใช้ reverse optimization สร้าง prior ของ expected excess returns จาก market weights แล้วผสม absolute หรือ relative views พร้อม covariance ของความไม่แน่นอน ผลลัพธ์ขึ้นกับ market portfolio, risk aversion, covariance, \(\tau\), views และ \(\Omega\)
+
+[ดูในบทเรียน](portfolio-optimization.html#black-litterman)
+
+</section>
+
+<section class="glossary-term" id="kkt-conditions">
+
+### Karush–Kuhn–Tucker conditions — เงื่อนไข KKT
+
+เงื่อนไข stationarity, primal feasibility, dual feasibility และ complementary slackness สำหรับโจทย์ที่มี inequality constraints ใน convex problem ที่มีเงื่อนไข regularity เหมาะสม KKT ใช้ยืนยัน global optimum และชี้ว่า constraint ใดกำลัง binding ได้
+
+[ดูในบทเรียน](portfolio-optimization.html#inequality-constraints)
+
+</section>
+
+<section class="glossary-term" id="active-weight">
+
+### Active weight — น้ำหนักส่วนต่างจาก benchmark
+
+ผลต่าง \(\Delta w=w_P-w_B\) ระหว่างน้ำหนักพอร์ตกับ benchmark ถ้าทั้งสองพอร์ตลงทุนครบ 100% active weights ต้องรวมเป็นศูนย์ ค่าบวกคือ overweight และค่าลบคือ underweight ส่วน final portfolio จะเป็น short ก็ต่อเมื่อ \(w_P<0\)
+
+[ดูในบทเรียน](portfolio-optimization.html#benchmark-active)
+
+</section>
+
+</section>
+
 <section class="glossary-group" id="group-portfolio">
 
 ## พอร์ตการลงทุนและความเสี่ยงร่วมกัน
@@ -967,4 +1093,4 @@ step ของกระบวนการต่างตัวในช่วง
 
 ---
 
-ความหมายและตัวอย่างในหน้านี้ใช้ประกอบบทเรียน [พฤติกรรมแบบสุ่มของสินทรัพย์](random-assets.html) สามารถย้อนดู [แหล่งอ้างอิงของบทเรียน](random-assets.html#sources) ได้ที่ท้ายบท
+ความหมายและตัวอย่างแต่ละคำมีลิงก์กลับไปยังบทที่เกี่ยวข้อง แหล่งอ้างอิงของคำและตัวอย่างอยู่ท้ายบทเหล่านั้น

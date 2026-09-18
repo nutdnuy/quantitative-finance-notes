@@ -1,6 +1,6 @@
 ---
 title: Welcome
-description: เรียนการเงินเชิงปริมาณภาษาไทย จากความสุ่มของสินทรัพย์ถึง Black–Scholes ผ่านตัวอย่าง สมการ กราฟที่ปรับค่าได้ และ Python Notebook
+description: เรียนการเงินเชิงปริมาณภาษาไทย จากความสุ่มและ Option ไปจนถึง Portfolio Optimization ผ่านตัวอย่าง สมการ กราฟที่ปรับค่าได้ และ Python Notebook
 ---
 
 # Welcome
@@ -8,7 +8,7 @@ description: เรียนการเงินเชิงปริมาณ�
 <div class="welcome-hero">
 <p class="welcome-kicker">QuantCorner 101 Notes </p>
 <div class="welcome-lead">เริ่มเรียน Quant<br>ความสุ่มและราคา Option</div>
-<p class="welcome-summary">ทำความเข้าใจการเงินผ่านคณิตศาสตร์และการทดลอง ตั้งแต่ความสุ่มของราคาสินทรัพย์ ไปจนถึงการคิดราคา Option ด้วยแบบจำลอง Black–Scholes</p>
+<p class="welcome-summary">ทำความเข้าใจการเงินผ่านคณิตศาสตร์และการทดลอง ตั้งแต่ความสุ่มของราคาสินทรัพย์ การคิดราคา Option ไปจนถึงการจัดพอร์ตด้วย Optimization</p>
 <div class="welcome-actions"><a class="button primary" href="random-assets.html">เริ่มจากบทแรก <span aria-hidden="true">→</span></a><a class="welcome-text-link" href="#lessons">ดูบทเรียนทั้งหมด <span aria-hidden="true">↓</span></a></div>
 <p class="welcome-format">ตัวอย่างและสมการ   Python Notebook</p>
 </div>
@@ -79,6 +79,14 @@ description: เรียนการเงินเชิงปริมาณ�
 <p>สัดส่วนลงทุนและ correlation เปลี่ยนความเสี่ยงของพอร์ตอย่างไร?</p>
 <p class="welcome-topics">Diversification · Efficient frontier · Sharpe ratio · CAPM</p>
 <a class="welcome-text-link" href="portfolio-theory.html">เปิดบท Portfolio Theory →</a></div>
+</article>
+<article class="welcome-lesson">
+<span class="welcome-lesson-number" aria-hidden="true">07</span>
+<div><p class="welcome-lesson-label">เปลี่ยนเกณฑ์ให้เป็นน้ำหนักพอร์ต</p>
+<h3><a href="portfolio-optimization.html">Portfolio Optimization & Black–Litterman</a></h3>
+<p>เราจะเขียน objective, constraints และ views อย่างไรให้ optimizer คำนวณพอร์ตได้?</p>
+<p class="welcome-topics">Lagrange · OLS/GLS · Black–Litterman · KKT · Active weights</p>
+<a class="welcome-text-link" href="portfolio-optimization.html">เปิดบท Portfolio Optimization →</a></div>
 </article>
 </div>
 

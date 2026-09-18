@@ -13,7 +13,9 @@
 | เนื้อหา Binomial Model | `binomial-model.md` |
 | เนื้อหา Transition Density Functions | `transition-density-functions.md` |
 | เนื้อหา Applied Stochastic Calculus | `applied-stochastic-calculus.md` |
-| เนื้อหา Black-Scholes Model | `black-scholes-model.md` |
+| เนื้อหา Black–Scholes Model | `black-scholes-model.md` |
+| เนื้อหา Portfolio Theory | `portfolio-theory.md` |
+| เนื้อหา Portfolio Optimization & Black–Litterman | `portfolio-optimization.md` |
 | ความหมายและตัวอย่างคำศัพท์ | `glossary.md` |
 | ชื่อเว็บ ชื่อผู้เขียน รูปด้านบน ลิงก์ GitHub | `_config.yml` |
 | รายการและลำดับหัวข้อในสารบัญ | `_toc.yml` |
@@ -23,6 +25,7 @@
 | Notebook และห้องทดลอง Transition Density | `notebooks/transition-density-functions.ipynb`, `src/transition-density.jsx`, `src/transition-density.mjs` |
 | Notebook และห้องทดลอง Stochastic Calculus | `notebooks/applied-stochastic-calculus.ipynb`, `src/stochastic-calculus.jsx`, `src/stochastic-calculus.mjs` |
 | Notebook และห้องทดลอง Black–Scholes | `notebooks/black-scholes-model.ipynb`, `src/black-scholes.jsx`, `src/black-scholes.mjs` |
+| Notebook และห้องทดลอง Portfolio Optimization | `notebooks/portfolio-optimization.ipynb`, `src/portfolio-optimization.jsx`, `src/portfolio-optimization.mjs` |
 | สีและหน้าตาของหน้า Welcome/สารบัญ | `book.css` |
 | หน้าตาบทเรียนและกราฟ | `style.css` |
 | พฤติกรรมกราฟแบบปรับค่าได้ | `src/labs.jsx`, `src/source-labs.jsx`, `src/math.mjs` |
@@ -138,3 +141,9 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 หลังแก้บทนี้ รัน `python3 scripts/make_portfolio_notebook.py` เพื่อสร้างและรัน `notebooks/portfolio-theory.ipynb` จากเนื้อหาล่าสุด คำสั่งเขียนทับเฉพาะ Notebook ชื่อนี้ จากนั้นตรวจด้วย `npm run build:pages`, `npm test` และ `node qa/portfolio-browser.cjs` ขณะเปิด preview ที่พอร์ต 8763
 
 เปิด `portfolio-theory.html` ในโฟลเดอร์หลักหรือผ่าน preview เพื่อดูงานในเครื่อง การ build ไม่ได้อัปโหลดเว็บ ต้อง commit และ push แยกต่างหากเมื่อพร้อมเผยแพร่
+
+## แก้บท Portfolio Optimization & Black–Litterman
+
+เนื้อหาอยู่ใน `portfolio-optimization.md` สูตรคำนวณและห้องทดลองอยู่ใน `src/portfolio-optimization.mjs` กับ `src/portfolio-optimization.jsx` ภาพเชิงคำนวณ 13 ภาพสร้างจาก `scripts/make_portfolio_optimization_figures.py` และเก็บ SVG ไว้ใน `assets/images/` ส่วน Black–Litterman roadmap เป็นภาพที่ 14 และมี source ที่แก้ไขต่อได้ใน `assets/diagrams/optimization-black-litterman-roadmap.excalidraw`
+
+หลังแก้บทหรือสมการ รัน `python3 scripts/make_portfolio_optimization_figures.py` และ `python3 scripts/make_portfolio_optimization_notebook.py` เพื่อให้ภาพกับ Notebook ตรงกับหน้าเว็บ จากนั้นตรวจด้วย `npm run build:pages`, `npm test`, `node qa/portfolio-optimization-browser.cjs` และ `node qa/portfolio-optimization-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 ตัวเลขสี่สินทรัพย์และ views เป็นข้อมูลสมมติ ห้ามนำ PDF ต้นฉบับหรือภาพหน้าสไลด์เข้า repository

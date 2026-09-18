@@ -1,0 +1,48 @@
+{
+  "title": "Black–Litterman in five stages",
+  "direction": "LR",
+  "nodes": [
+    {
+      "id": "market",
+      "label": "Market weights"
+    },
+    {
+      "id": "reverse",
+      "label": "Reverse optimization"
+    },
+    {
+      "id": "beliefs",
+      "label": "Prior Π, τΣ + Views P, Q, Ω"
+    },
+    {
+      "id": "posterior",
+      "label": "Posterior μ̂"
+    },
+    {
+      "id": "allocation",
+      "label": "Allocation"
+    }
+  ],
+  "edges": [
+    {
+      "from": "market",
+      "to": "reverse",
+      "label": "equilibrium"
+    },
+    {
+      "from": "reverse",
+      "to": "beliefs",
+      "label": "implied returns"
+    },
+    {
+      "from": "beliefs",
+      "to": "posterior",
+      "label": "combine"
+    },
+    {
+      "from": "posterior",
+      "to": "allocation",
+      "label": "optimize"
+    }
+  ]
+}

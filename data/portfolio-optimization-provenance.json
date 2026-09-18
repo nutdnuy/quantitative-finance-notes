@@ -1,0 +1,357 @@
+{
+  "recorded_at": "2026-09-18",
+  "chapter": "portfolio-optimization.md",
+  "delivery": "Prepared for the Portfolio Optimization & Black–Litterman chapter. Publication and deployment are handled by the parent task.",
+  "source": {
+    "provided_filename": "JA252.2 Notes1.pdf",
+    "source_location": "User-provided local PDF; not included in the repository.",
+    "title": "Fundamentals of Optimization and Application to Portfolio Selection",
+    "author_metadata": "CQF",
+    "creator_metadata": "LaTeX with Beamer class",
+    "producer_metadata": "pdfTeX-1.40.20",
+    "creation_date_metadata": "2025-02-13T17:00:29+07:00",
+    "physical_pages": 145,
+    "internal_slide_numbering": "Slides 1-143 align with physical pages 1-143. The two bibliography pages at physical pages 144-145 also display 143/143 in the footer.",
+    "page_size": "A4 landscape, 841.89 x 595.276 points",
+    "sha256": "eebd6f73231ea0c249afb91aaf551dd45d9e54f3a2898fac88d5e8bf66106c20",
+    "access": "User-provided PDF read locally as source material. The PDF, extracted text, rendered pages, portraits and decorative source images are not copied into this repository.",
+    "method": "Metadata checked with pdfinfo; all pages extracted with pdftotext -layout; embedded raster objects inventoried with pdfimages -list; formula, numerical-example and suspected-error pages rendered and visually inspected with pdftoppm. Numerical examples were independently recomputed before use."
+  },
+  "source_page_map": [
+    {
+      "pages": [1, 3],
+      "topics": ["title", "lecture roadmap"]
+    },
+    {
+      "pages": [4, 8],
+      "topics": ["optimization problem formulation", "objective function", "decision variables", "constraints", "min-max and affine transformations"]
+    },
+    {
+      "pages": [9, 10],
+      "topics": ["unconstrained optimization", "gradient", "Hessian", "first- and second-order conditions"]
+    },
+    {
+      "pages": [11, 22],
+      "topics": ["mean-variance notation", "covariance decomposition", "risk-free asset", "unconstrained mean-variance allocation"]
+    },
+    {
+      "pages": [23, 47],
+      "topics": ["CAPM regression motivation", "ordinary least squares", "residuals", "multifactor regression"]
+    },
+    {
+      "pages": [48, 54],
+      "topics": ["generalized least squares", "Mahalanobis objective", "Cholesky whitening"]
+    },
+    {
+      "pages": [55, 60],
+      "topics": ["equality constraints", "Lagrangian", "first-order system"]
+    },
+    {
+      "pages": [61, 76],
+      "topics": ["minimum variance for a target return", "four-asset numerical example", "A-B-C scalars"]
+    },
+    {
+      "pages": [77, 84],
+      "topics": ["minimum-variance frontier", "global minimum-variance portfolio", "four-asset GMV example"]
+    },
+    {
+      "pages": [85, 100],
+      "topics": ["risk-free funding", "target return with a risk-free asset", "tangency portfolio", "four-asset numerical example"]
+    },
+    {
+      "pages": [101, 107],
+      "topics": ["Black-Litterman motivation", "Bayesian roadmap", "Bayes formula background"]
+    },
+    {
+      "pages": [108, 118],
+      "topics": ["reverse optimization", "market-implied prior", "market risk aversion", "tau", "prior numerical example"]
+    },
+    {
+      "pages": [119, 123],
+      "topics": ["absolute and relative views", "P-Q-Omega representation", "view uncertainty"]
+    },
+    {
+      "pages": [124, 131],
+      "topics": ["Black-Litterman posterior", "posterior expected excess returns", "risk-aversion allocation examples"]
+    },
+    {
+      "pages": [132, 135],
+      "topics": ["inequality constraints", "Kuhn-Tucker and Fritz John form", "130-30 heading without a worked example"]
+    },
+    {
+      "pages": [136, 137],
+      "topics": ["benchmark-relative optimization", "active weights", "active mean-variance objective"]
+    },
+    {
+      "pages": [138, 139],
+      "topics": ["lecture recap"]
+    },
+    {
+      "pages": [140, 143],
+      "topics": ["conditional probability", "multiplication rule", "independence", "total probability"]
+    },
+    {
+      "pages": [144, 145],
+      "topics": ["bibliography"]
+    }
+  ],
+  "corrected_source_issues": [
+    {
+      "pages": [3, 55, 101],
+      "source_issue": "Equality-constrained optimization and Black-Litterman are both labelled Part III.",
+      "chapter_treatment": "Use semantic section titles and a fresh chapter order instead of copying the source part numbers."
+    },
+    {
+      "pages": [49],
+      "source_issue": "The slide says GLS does not assume regressors are uncorrelated with residuals, then imposes E[epsilon|X]=0, and prints Var[epsilon_i|X]=0 while naming Omega as the variance.",
+      "chapter_treatment": "State E[epsilon|X]=0 and Var[epsilon|X]=Omega; do not claim that GLS removes the exogeneity condition."
+    },
+    {
+      "pages": [50],
+      "source_issue": "The printed GLS Mahalanobis objective uses Omega rather than Omega inverse, while the estimator below uses Omega inverse.",
+      "chapter_treatment": "Use (Y-X beta)' Omega^-1 (Y-X beta)."
+    },
+    {
+      "pages": [52, 53],
+      "source_issue": "The whitening covariance expression omits the transpose on the right inverse Cholesky factor, refers to the untransformed residual, and equates the transformed OLS objective to a quadratic form containing Omega rather than Omega inverse.",
+      "chapter_treatment": "Use Omega=C C', epsilon*=C^-1 epsilon, Var[epsilon*|X]=C^-1 Omega C^-T=I, and run OLS on X*=C^-1 X and Y*=C^-1 Y."
+    },
+    {
+      "pages": [60],
+      "source_issue": "The slide suggests checking the Hessian of the objective is generally enough after solving an equality-constrained problem.",
+      "chapter_treatment": "Limit the conclusion to the convex quadratic portfolio examples with affine constraints; avoid presenting it as a general constrained second-order test."
+    },
+    {
+      "pages": [67, 69],
+      "source_issue": "The derivation inverts the covariance matrix and states AC-B^2>0 without stating the required nonsingularity and linear-independence assumptions.",
+      "chapter_treatment": "Require a positive-definite covariance matrix and independent budget and target-return constraints; solve linear systems in code instead of forming an explicit inverse."
+    },
+    {
+      "pages": [74, 75],
+      "source_issue": "Gamma is reported as -0.0105013 on page 74, but the substitution line on page 75 changes it to +0.0105013. The displayed final weights correspond to the negative value.",
+      "chapter_treatment": "Retain gamma=-0.0105013 and explicitly use Sigma^-1(lambda mu + gamma 1)."
+    },
+    {
+      "pages": [106],
+      "source_issue": "The product P(I|E)P(E) is labelled the likelihood.",
+      "chapter_treatment": "Treat P(I|E) as the likelihood and the product with the prior as the unnormalized posterior or joint density."
+    },
+    {
+      "pages": [110, 111, 125, 127],
+      "source_issue": "Equation references and numbers are duplicated or refer to slide numbers rather than stable equation numbers.",
+      "chapter_treatment": "Use unnumbered semantic equations and local prose references."
+    },
+    {
+      "pages": [108, 110, 112],
+      "source_issue": "The market-cap prior is described as neutral and uninformed and the reverse optimization is tied loosely to CAPM.",
+      "chapter_treatment": "Describe it as an equilibrium prior implied by a selected market proxy, covariance estimate and risk-aversion parameter; disclose those assumptions."
+    },
+    {
+      "pages": [117, 118],
+      "source_issue": "Tau=1/T is presented as a convenient heuristic even though tau and Omega are convention-dependent.",
+      "chapter_treatment": "Use tau=1/120 only as the reproducible teaching convention and state that no unique calibration follows from the PDF."
+    },
+    {
+      "pages": [120, 121],
+      "source_issue": "Omega is called confidence although larger diagonal entries mean more uncertainty, and the conditional distribution is written as though P(I|E) itself were a random variable distributed N(Q,Omega).",
+      "chapter_treatment": "Call Omega view-error covariance and write Q=P mu+epsilon_v with epsilon_v~N(0,Omega), equivalently Q|mu~N(P mu,Omega)."
+    },
+    {
+      "pages": [128],
+      "source_issue": "The slide says three allocations and three risk-aversion levels but lists four.",
+      "chapter_treatment": "Describe four sensitivity cases only when all four are shown."
+    },
+    {
+      "pages": [128, 129],
+      "source_issue": "Lambda=1 is called the Kelly portfolio and the lowest risk aversion anyone should use, without the assumptions needed for that identification or normative threshold.",
+      "chapter_treatment": "Treat lambda only as a mean-variance sensitivity parameter and remove the universal Kelly and minimum-safe-lambda claims."
+    },
+    {
+      "pages": [130],
+      "source_issue": "The rounded risky weights shown sum to 76.63%, inconsistent with the stated 23.27% risk-free weight; independent recomputation under the chapter inputs gives 23.4140% because the chapter consistently uses lambda_mkt=2.24.",
+      "chapter_treatment": "Compute every displayed weight from the deterministic chapter implementation and reconcile risky plus risk-free weights to one."
+    },
+    {
+      "pages": [133, 134],
+      "source_issue": "The displayed conditions include a lambda_0 multiplier on the objective, which is a Fritz John form, while the slide calls them Kuhn-Tucker conditions; the sufficiency discussion is narrower than the general convex case.",
+      "chapter_treatment": "Present standard KKT stationarity, primal feasibility, dual feasibility and complementary slackness, with convexity and a stated constraint qualification."
+    },
+    {
+      "pages": [135],
+      "source_issue": "The 130-30 slide repeats the generic inequality problem and contains no 130-30 formulation or numerical example.",
+      "chapter_treatment": "Define 130% long, 30% short, 100% net and 160% gross directly; do not attribute a worked 130-30 example to the source."
+    },
+    {
+      "pages": [137],
+      "source_issue": "The zero-net active-weight constraint is printed as Delta w'1=1, and the benchmark return term omits the transpose on w_B.",
+      "chapter_treatment": "Use 1' Delta w=0 and R_B=w_B'R when both benchmark and portfolio weights sum to one."
+    }
+  ],
+  "examples": {
+    "data_kind": "Hypothetical teaching example; the source names assets only X1-X4 and provides no instrument identifiers, dates or raw observations.",
+    "period_and_units": "Expected returns and volatilities are decimals for one common holding period. Covariances are return-squared. Percentages are display formatting.",
+    "shorting": "Closed-form risky-only target, frontier and GMV examples permit negative weights unless long-only is stated explicitly.",
+    "frictions": "No taxes, fees, turnover, margin, borrow spread, short-borrow cost or integer holdings.",
+    "expected_returns": [0.05, 0.07, 0.15, 0.27],
+    "volatilities": [0.07, 0.12, 0.3, 0.6],
+    "correlation": [
+      [1, 0.8, 0.5, 0.4],
+      [0.8, 1, 0.7, 0.5],
+      [0.5, 0.7, 1, 0.8],
+      [0.4, 0.5, 0.8, 1]
+    ],
+    "covariance": [
+      [0.0049, 0.00672, 0.0105, 0.0168],
+      [0.00672, 0.0144, 0.0252, 0.036],
+      [0.0105, 0.0252, 0.09, 0.144],
+      [0.0168, 0.036, 0.144, 0.36]
+    ],
+    "target_return_risky_only": {
+      "target": 0.1,
+      "A": 239.34404679746285,
+      "B": 9.618456078083405,
+      "C": 0.5502809819580006,
+      "return_multiplier": 0.36527936942728567,
+      "budget_multiplier": -0.010501299717695724,
+      "weights": [0.5284121083377582, 0.17288807520660476, 0.15976434270310244, 0.13893547375253518],
+      "variance": 0.02602663722503291,
+      "volatility": 0.1613277323495031
+    },
+    "global_minimum_variance": {
+      "weights": [1.2748867225044624, -0.26311272827131676, 0.016339420568447043, -0.028113414801592743],
+      "expected_return": 0.040186736235067966,
+      "variance": 0.004178085953590554,
+      "volatility": 0.06463811533136277
+    },
+    "risk_free_target": {
+      "risk_free_return": 0.025,
+      "target": 0.1,
+      "risky_weights": [0.8873524831610342, 0.08126325071765012, 0.1548434304583574, 0.12164862380157235],
+      "risky_weight_sum": 1.245107788138614,
+      "risk_free_weight": -0.2451077881386141,
+      "volatility": 0.16028414561637885
+    },
+    "tangency": {
+      "risk_free_return": 0.025,
+      "weights": [0.7126712173952348, 0.06526603679761364, 0.12436146647981546, 0.09770127932733609],
+      "expected_return": 0.08523574883594776,
+      "variance": 0.016571706535229463,
+      "volatility": 0.12873114050310222,
+      "sharpe": 0.46791901788904083
+    },
+    "black_litterman": {
+      "market_weights": [0.05, 0.4, 0.45, 0.1],
+      "market_sharpe_assumption": 0.5,
+      "market_volatility": 0.22352304131789186,
+      "market_risk_aversion_used": 2.24,
+      "tau": 0.008333333333333333,
+      "P": [
+        [-1, 0, 1, 0],
+        [0, 1, 0, 0]
+      ],
+      "Q": [0.1, 0.03],
+      "omega_rule": "diag(P (tau Sigma) P')",
+      "omega": [
+        [0.0006158333333333334, 0],
+        [0, 0.00012]
+      ],
+      "prior_excess_returns": [0.02091712, 0.04712064, 0.1467312, 0.2599296],
+      "posterior_excess_returns": [0.016781811019405336, 0.03755243557399479, 0.12484270485942535, 0.22717373844727903],
+      "posterior_risky_weights_at_lambda_2_24": [0.09869571476911322, 0.16585951221494336, 0.4013042852308861, 0.1],
+      "posterior_risk_free_weight_at_lambda_2_24": 0.23414048778505725
+    },
+    "long_only_target_20_percent": {
+      "target": 0.2,
+      "binding_constraint": "w1 = 0",
+      "unconstrained_w1": -0.7195963887413726,
+      "weights": [0, 0.02631578947368496, 0.5394736842105264, 0.4342105263157895],
+      "variance": 0.16307763157894745,
+      "volatility": 0.40382871564432793
+    },
+    "exposure_definitions": {
+      "portfolio_130_30_long": 1.3,
+      "portfolio_130_30_short_absolute": 0.3,
+      "portfolio_130_30_net": 1,
+      "portfolio_130_30_gross": 1.6,
+      "active_weight_sum_when_fully_invested": 0
+    }
+  },
+  "editorial_notes": [
+    "The chapter is a new Thai explanation and reconstruction, not a verbatim slide translation. no-ai-slop is applied to remove generic setup, unsupported importance claims and repeated recap.",
+    "The existing Portfolio Theory chapter already covers mean-variance geometry, GMV, tangency and CAPM. This chapter emphasizes the optimization machinery, source corrections, implementability constraints and Black-Litterman update.",
+    "The source's statement that the covariance came from 120 monthly returns is retained only as the teaching convention behind tau=1/120. Without asset identities, dates and raw observations, the example is not presented as empirical market evidence.",
+    "All model weights are reconciled with budget, target-return and risk-free residual identities. Negative risk-free weight is borrowing, not a free gain.",
+    "Posterior mean uncertainty and the covariance of asset returns are distinct. The displayed allocation convention uses Sigma as return covariance and states that alternative Black-Litterman conventions exist.",
+    "Source portraits, the compass illustration and PDF screenshots are not reused."
+  ],
+  "visuals": {
+    "design_system": "QuantCorner / QuantSeras; preserve the current light book layout, purple and teal accents, readable Thai typography, accessible dark theme and offline operation.",
+    "route": "no-image-generator",
+    "reason": "Every illustration communicates a mathematical relationship, calculated example or model flow and is generated as an editable or deterministic diagram rather than decorative artwork.",
+    "image_generator_used": false,
+    "generator": "scripts/make_portfolio_optimization_figures.py generates 13 calculated SVGs; the editable Excalidraw source renders the Black-Litterman roadmap SVG.",
+    "svg_files": [
+      "assets/images/optimization-types.svg",
+      "assets/images/optimization-curvature.svg",
+      "assets/images/optimization-covariance.svg",
+      "assets/images/optimization-ols.svg",
+      "assets/images/optimization-gls.svg",
+      "assets/images/optimization-lagrange.svg",
+      "assets/images/optimization-target-allocation.svg",
+      "assets/images/optimization-frontier.svg",
+      "assets/images/optimization-target-weights.svg",
+      "assets/images/optimization-black-litterman-roadmap.svg",
+      "assets/images/optimization-black-litterman-beliefs.svg",
+      "assets/images/optimization-black-litterman-weights.svg",
+      "assets/images/optimization-kkt.svg",
+      "assets/images/optimization-active.svg"
+    ],
+    "editable_diagram": {
+      "rendered_file": "assets/images/optimization-black-litterman-roadmap.svg",
+      "source_file": "assets/diagrams/optimization-black-litterman-roadmap.excalidraw",
+      "spec": {
+        "layout": "Left-to-right five-stage flow",
+        "stages": [
+          "market weights and covariance",
+          "reverse optimization prior",
+          "P-Q-Omega views",
+          "posterior expected excess returns",
+          "portfolio allocation"
+        ],
+        "requirements": [
+          "Each arrow names the object passed to the next stage.",
+          "Market inputs, investor views and allocation outputs remain visually distinct.",
+          "The SVG and Excalidraw source express the same five stages.",
+          "Text remains legible at 320 CSS pixels and in both site themes.",
+          "No PDF artwork or source portrait is embedded."
+        ]
+      }
+    },
+    "labels": "SVGs include explicit titles, descriptions, axes, units and source-aligned numerical values. Chapter alt text and figure captions explain the takeaway without relying on color alone.",
+    "editable": "Thirteen deterministic calculated SVGs plus one Excalidraw roadmap SVG and its editable source."
+  },
+  "notebook": {
+    "file": "notebooks/portfolio-optimization.ipynb",
+    "generator": "scripts/make_portfolio_optimization_notebook.py",
+    "dependencies": "Python standard library",
+    "scope": [
+      "covariance construction",
+      "target-return minimum variance",
+      "GMV and tangency checks",
+      "GLS whitening",
+      "Black-Litterman prior, views, posterior and weights",
+      "unconstrained versus long-only target-return allocation"
+    ],
+    "execution": "All non-empty code cells are executed by the generator and must finish without an error output."
+  },
+  "verification_commands": [
+    "python3 scripts/make_portfolio_optimization_figures.py",
+    "python3 scripts/make_portfolio_optimization_notebook.py",
+    "node qa/portfolio-optimization-checks.mjs",
+    "npm run build:pages",
+    "npm test",
+    "node qa/portfolio-optimization-browser.cjs",
+    "node qa/portfolio-optimization-page-checks.cjs",
+    "git diff --check"
+  ]
+}
