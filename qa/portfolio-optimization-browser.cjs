@@ -46,15 +46,18 @@ const close = (actual, expected, tolerance = 1e-4) => assert.ok(Number.isFinite(
     assert.equal(await lab.locator('circle[data-series]').count(), 8);
     for (let i = 0; i < 4; i++) {
       const cx = Number(await lab.locator('circle[data-series="posterior"]').nth(i).getAttribute('cx'));
-      close((cx - 92) / 576 * 30, await number(`posterior-return-${i}`), .00051);
+      const width = await svg.evaluate(e=>e.viewBox.baseVal.width);
+      const lo = Number(await svg.getAttribute('data-min')), hi = Number(await svg.getAttribute('data-max'));
+      close(100*(lo+(cx-42)/(width-58)*(hi-lo)), await number(`posterior-return-${i}`), .00051);
     }
     assert.equal(await lab.evaluate(element => /NaN|Infinity|null|undefined/.test(element.innerText)), false);
   }
 
   async function interactions() {
     const reset = lab.getByRole('button', { name: 'คืนค่าเริ่มต้นของ Black–Litterman', exact: true });
-    const risk = lab.getByRole('slider', { name: 'Risk aversion λ', exact: true });
-    const uncertainty = lab.getByRole('slider', { name: 'ตัวคูณความไม่แน่นอนของ view', exact: true });
+    const risk = lab.getByRole('slider', { name: 'Risk aversion ของผู้ลงทุน λ', exact: true });
+    const uncertaintyTwo = lab.getByRole('slider', { name: 'ตัวคูณ Ω ข้อ 2', exact: true });
+    const uncertainty = lab.getByRole('slider', { name: 'ตัวคูณ Ω ข้อ 1', exact: true });
     await reset.click();
     close(await number('prior-return-0'), 2.092, .001); close(await number('posterior-return-0'), 1.678, .001);
     close(await number('posterior-return-3'), 22.717, .001);
@@ -75,11 +78,11 @@ const close = (actual, expected, tolerance = 1e-4) => assert.ok(Number.isFinite(
     await reset.click();
     const baselineViewOne = Math.abs(await number('posterior-view-1') - 10);
     const baselineViewTwo = Math.abs(await number('posterior-view-2') - 3);
-    await uncertainty.focus(); await uncertainty.press('Home'); assert.equal(await uncertainty.inputValue(), '0.25');
+    await uncertainty.focus(); await uncertainty.press('Home'); await uncertaintyTwo.focus(); await uncertaintyTwo.press('Home'); assert.equal(await uncertainty.inputValue(), '0.25');
     assert.ok(Math.abs(await number('posterior-view-1') - 10) < baselineViewOne);
     assert.ok(Math.abs(await number('posterior-view-2') - 3) < baselineViewTwo);
     await uncertainty.press('ArrowRight'); close(Number(await uncertainty.inputValue()), .5);
-    await uncertainty.press('End'); assert.equal(await uncertainty.inputValue(), '4');
+    await uncertainty.press('End'); await uncertaintyTwo.focus(); await uncertaintyTwo.press('End'); assert.equal(await uncertainty.inputValue(), '4');
     assert.ok(Math.abs(await number('posterior-view-1') - 10) > baselineViewOne);
     assert.ok(Math.abs(await number('posterior-view-2') - 3) > baselineViewTwo);
     await geometry();

@@ -177,6 +177,18 @@ export function blackLitterman({
   const checked = symmetricPositiveDefinite(covariance, 'covariance'), n = checked.values.length;
   const market = vector(marketWeights, 'marketWeights', n);
   if (Math.abs(market.reduce((sum, value) => sum + value, 0) - 1) > 1e-10) throw new RangeError('marketWeights must sum to one');
+  if (Array.isArray(P) && P.length === 0) {
+    if (!Array.isArray(Q) || Q.length !== 0 || (omega !== undefined && (!Array.isArray(omega) || omega.length !== 0))) throw new RangeError('No views requires empty Q and omega');
+    const priorExcessReturns = multiplyVector(checked.values, market).map(value => marketRiskAversion * value);
+    const priorRiskyWeights = solveWithCholesky(checked.lower, priorExcessReturns).map(value => value / riskAversion);
+    const priorRiskFreeWeight = 1 - priorRiskyWeights.reduce((sum, value) => sum + value, 0);
+    return {
+      covariance: checked.values, baseOmega: [], omega: [], priorExcessReturns,
+      posteriorExcessReturns: [...priorExcessReturns], priorViews: [], viewReturns: [], viewInnovation: [],
+      marketWeights: market, priorRiskyWeights, posteriorRiskyWeights: [...priorRiskyWeights],
+      priorRiskFreeWeight, posteriorRiskFreeWeight: priorRiskFreeWeight, riskAversion, uncertaintyMultiplier,
+    };
+  }
   const views = matrix(P, 'P'), viewReturns = vector(Q, 'Q', views.length);
   if (views[0].length !== n) throw new RangeError('P and covariance dimensions differ');
   if (views.some(row => row.every(value => value === 0))) throw new RangeError('view rows must contain at least one nonzero loading');
@@ -227,4 +239,57 @@ export function defaultOptimizationInputs() {
     P: defaults.views.P.map(row => [...row]),
     Q: [...defaults.views.Q],
   };
+}
+
+// Enumerate faces of the simplex for the four-asset teaching problem.
+// Each interior face solution is an equality-constrained quadratic optimum.
+export function longOnlyTargetPortfolio({ mu, covariance, target }) {
+  finite(target, 'target');
+  const inputs = covarianceInputs(mu, covariance), n = inputs.mu.length;
+  if (n > 12) throw new RangeError('Face enumeration is limited to 12 assets');
+  const tolerance = 1e-10;
+  if (target < Math.min(...mu) - tolerance || target > Math.max(...mu) + tolerance) return { status: 'infeasible', weights: null };
+  let best = null;
+  for (let mask = 1; mask < 2 ** n; mask++) {
+    const ids = mu.map((_, i) => i).filter(i => mask & (1 << i));
+    const subMu = ids.map(i => mu[i]), subCov = ids.map(i => ids.map(j => covariance[i][j]));
+    let candidate;
+    if (ids.length === 1) {
+      if (Math.abs(subMu[0] - target) > tolerance) continue;
+      candidate = { weights: [1] };
+    } else if (Math.max(...subMu) - Math.min(...subMu) < 1e-12) {
+      if (Math.abs(subMu[0] - target) > tolerance) continue;
+      candidate = globalMinimumVariance({ mu: subMu, covariance: subCov });
+    } else {
+      if (target < Math.min(...subMu) - tolerance || target > Math.max(...subMu) + tolerance) continue;
+      candidate = minimumVarianceForTarget({ mu: subMu, covariance: subCov, target });
+    }
+    if (candidate.weights.some(w => w < -tolerance)) continue;
+    const weights = Array(n).fill(0);
+    ids.forEach((id, i) => { weights[id] = Math.abs(candidate.weights[i]) < 1e-12 ? 0 : candidate.weights[i]; });
+    const result = portfolioMoments(weights, mu, covariance);
+    if (!best || result.variance < best.variance - 1e-14) best = { ...result, multipliers: candidate.multipliers };
+  }
+  if (!best) throw new Error('No feasible face found within numerical tolerance');
+  return { ...best, status: 'optimal', active: best.weights.flatMap((w, i) => Math.abs(w) < 1e-9 ? [i] : []) };
+}
+
+export function quadraticConstraint({ mode = 'inequality', bound = 1 } = {}) {
+  finite(bound, 'bound');
+  if (!['none', 'equality', 'inequality'].includes(mode)) throw new RangeError('Unknown constraint mode');
+  const multiplier = mode === 'none' ? 0 : mode === 'inequality' ? Math.max(0, 4 * (2 - bound) / 3) : 4 * (2 - bound) / 3;
+  const x = 1 - multiplier / 2, y = 1 - multiplier / 4;
+  return { x, y, objective: (x - 1) ** 2 + 2 * (y - 1) ** 2, multiplier,
+    slack: mode === 'none' ? null : bound - x - y,
+    binding: mode !== 'none' && Math.abs(bound - x - y) < 1e-10 };
+}
+
+export function estimationBurden({ assets = 100, years = 25, volatility = .2 } = {}) {
+  if (!Number.isSafeInteger(assets) || assets < 1 || assets > 1e6) throw new RangeError('assets must be a positive integer at most one million');
+  if (!Number.isSafeInteger(years) || years < 1) throw new RangeError('years must be a positive integer');
+  finite(volatility, 'volatility');
+  if (volatility <= 0) throw new RangeError('volatility must be positive');
+  const covariances = assets * (assets - 1) / 2;
+  return { means: assets, variances: assets, covariances, total: 2 * assets + covariances,
+    standardError: volatility / Math.sqrt(years) };
 }

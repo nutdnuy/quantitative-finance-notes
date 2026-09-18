@@ -30,7 +30,7 @@ notebooks/binomial-model.ipynb  Python Notebook ของบท Binomial Model
 notebooks/transition-density-functions.ipynb  Python Notebook ของบท Transition Density Functions
 notebooks/applied-stochastic-calculus.ipynb  Python Notebook ของบท Applied Stochastic Calculus
 notebooks/black-scholes-model.ipynb  Python Notebook ของบท Black-Scholes Model
-notebooks/portfolio-optimization.ipynb  Python Notebook ของบท Portfolio Optimization
+notebooks/portfolio-optimization.ipynb  Python Notebook ของบท Optimization Problem
 notebooks/black-litterman.ipynb  Python Notebook ของบท Black–Litterman
 assets/images/                 รูปและคำสั่งที่ใช้สร้างภาพ
 book.css                       หน้าตา Welcome และสารบัญ
@@ -69,7 +69,7 @@ npm run build
 
 ## เนื้อหาและแหล่งที่มา
 
-บท **Portfolio Optimization และ Black–Litterman** ต่อจาก Portfolio Theory ใช้เอกสาร *Fundamentals of Optimization and Application to Portfolio Selection* ที่ผู้ใช้ให้มาเป็นเส้นเรื่อง ตั้งแต่ objective, gradient/Hessian, OLS/GLS และ Lagrange ไปจนถึง Black–Litterman, KKT และ active portfolio สูตรและตัวเลขที่พิมพ์คลาดในเอกสารต้นทางได้รับการคำนวณใหม่ ตัวอย่างสี่สินทรัพย์เป็นข้อมูลสมมติ ไม่มีชื่อสินทรัพย์หรือช่วงตลาดจริง รายละเอียดอยู่ใน `data/portfolio-optimization-provenance.json`
+บท **Optimization Problem และ Black–Litterman** ต่อจาก Portfolio Theory ใช้เอกสาร *Fundamentals of Optimization and Application to Portfolio Selection* ที่ผู้ใช้ให้มาเป็นเส้นเรื่อง ตั้งแต่ objective, gradient/Hessian, OLS/GLS และ Lagrange ไปจนถึง Black–Litterman, KKT และ active portfolio สูตรและตัวเลขที่พิมพ์คลาดในเอกสารต้นทางได้รับการคำนวณใหม่ ตัวอย่างสี่สินทรัพย์เป็นข้อมูลสมมติ ไม่มีชื่อสินทรัพย์หรือช่วงตลาดจริง รายละเอียดอยู่ใน `data/portfolio-optimization-provenance.json`
 
 สร้างภาพ SVG เชิงคำนวณ 13 ภาพด้วย `python3 scripts/make_portfolio_optimization_figures.py` และสร้าง Black–Litterman roadmap อีก 1 ภาพจากไฟล์ Excalidraw ที่แก้ไขต่อได้ สร้างและรัน Notebook ด้วย `python3 scripts/make_portfolio_optimization_notebook.py` ตรวจตัวเลขด้วย `npm test` และตรวจหน้าเว็บด้วย `node qa/portfolio-optimization-browser.cjs` กับ `node qa/portfolio-optimization-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763
 

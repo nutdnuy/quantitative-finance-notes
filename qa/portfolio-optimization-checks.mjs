@@ -123,3 +123,46 @@ console.log(JSON.stringify({
     posteriorRiskFreeWeight: bl.posteriorRiskFreeWeight,
   },
 }, null, 2));
+
+// New learning interactions: verify identities and edge cases independently.
+const { longOnlyTargetPortfolio, quadraticConstraint, estimationBurden } = await import('../src/portfolio-optimization.mjs');
+for (let t = .05; t <= .270001; t += .0025) {
+  const lo = longOnlyTargetPortfolio({...inputs,target:t});
+  assert.equal(lo.status,'optimal');
+  close(lo.weights.reduce((a,b)=>a+b,0),1,1e-9);
+  close(dot(lo.weights,inputs.mu),t,1e-9);
+  assert.ok(lo.weights.every(w=>w>=-1e-10));
+  const free = minimumVarianceForTarget({...inputs,target:t});
+  assert.ok(lo.variance >= free.variance-1e-10);
+  // A feasible convex mix of extreme assets provides an independent upper bound.
+  const mix = (t-.05)/(.27-.05);
+  assert.ok(lo.variance <= portfolioMoments([1-mix,0,0,mix],inputs.mu,inputs.covariance).variance+1e-10);
+}
+closeVector(longOnlyTargetPortfolio({...inputs,target:.20}).weights,[0,1/38,41/76,33/76]);
+closeVector(longOnlyTargetPortfolio({...inputs,target:.05}).weights,[1,0,0,0]);
+closeVector(longOnlyTargetPortfolio({...inputs,target:.27}).weights,[0,0,0,1]);
+for(const t of [0,.049,.271,.35])assert.equal(longOnlyTargetPortfolio({...inputs,target:t}).status,'infeasible');
+for(const mode of ['none','equality','inequality'])for(let bound=-2;bound<=4;bound+=.25){
+  const r=quadraticConstraint({mode,bound});
+  close(2*(r.x-1)+r.multiplier,0);
+  close(4*(r.y-1)+r.multiplier,0);
+  if(mode==='inequality'){assert.ok(r.multiplier>=0&&r.slack>=-1e-12);close(r.multiplier*r.slack,0);}
+  if(mode==='equality')close(r.x+r.y,bound);
+}
+assert.equal(estimationBurden().total,5150);
+assert.equal(estimationBurden({assets:1}).total,2);
+close(estimationBurden({years:400}).standardError,.01);
+const noview=blackLitterman({...inputs,P:[],Q:[]});
+closeVector(noview.posteriorExcessReturns,noview.priorExcessReturns);
+closeVector(noview.posteriorRiskyWeights,inputs.marketWeights);
+const single=blackLitterman({...inputs,P:[inputs.P[0]],Q:[-.10]});
+assert.ok(single.posteriorExcessReturns.every(Number.isFinite));
+const scale=blackLitterman({...inputs,P:[],Q:[],riskAversion:4.48});
+closeVector(scale.posteriorRiskyWeights,inputs.marketWeights.map(w=>w/2));
+close(scale.posteriorRiskFreeWeight,.5);
+for(const enabled of [[true,true],[true,false],[false,true],[false,false]])for(const q of [-.2,.3])for(const u of [.25,4]){
+ const selected=[0,1].filter(i=>enabled[i]), base=blackLitterman(inputs).baseOmega;
+ const r=blackLitterman({...inputs,P:selected.map(i=>inputs.P[i]),Q:selected.map(()=>q),omega:selected.map((i,r)=>selected.map((j,c)=>r===c?base[i][i]*u:0))});
+ assert.ok([...r.posteriorExcessReturns,...r.posteriorRiskyWeights].every(Number.isFinite));
+}
+console.log('Learning math passed: long-only endpoints/infeasibility, constraints, estimation SE, optional and negative BL views.');

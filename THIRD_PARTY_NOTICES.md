@@ -94,3 +94,9 @@ The search icon is Tabler Icons `search`, native 24px outline and 2px stroke, fr
 
 ## One-step Call tree
 The editable Excalidraw scene and matching native SVG in `assets/diagrams/` are newly drawn. The user-provided tree image informed the branching layout only; no source image or logo is reused. The lesson now uses physical up/down probabilities 0.6/0.4 and derives risk-neutral weights 0.5/0.5 with zero interest. The replication argument is checked against Clare Wallace, Durham University, The one-period binomial model, https://maths.dur.ac.uk/users/clare.wallace/MF/Chapter2.html.
+
+## Portraits added to the optimization lessons
+
+- `assets/images/lagrange-portrait.jpg`: Joseph-Louis Lagrange; creator unknown. [Wikimedia Commons source and public-domain statement](https://commons.wikimedia.org/wiki/File:Lagrange_portrait.jpg), retrieved 2026-09-18. Original pixels retained.
+- `assets/images/fischer-black.jpg`: Fischer Black, credited to Dalmatine; released into the public domain by the contributor. [Source and dedication](https://commons.wikimedia.org/wiki/File:Fischer_Black.JPG), retrieved 2026-09-18. Original pixels retained. The upload date is not the photograph date.
+- Robert Litterman's interview is linked, not reproduced as a portrait: the Minneapolis Fed photograph credits Jake Armour and an open reuse license was not established.

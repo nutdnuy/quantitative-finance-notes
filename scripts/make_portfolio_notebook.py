@@ -87,10 +87,24 @@ assert 0 < normal_shortfall < .5
 print("The same mean and SD do not determine this probability for an arbitrary distribution.")''',
 }
 
+snippets['model-limits'] = """def parameter_count(n):
+    return 2*n+n*(n-1)//2
+
+for n in [10,100,500]:
+    print(f"N={n}: means={n}, variances={n}, pair covariances={n*(n-1)//2}, total={parameter_count(n)}")
+assert parameter_count(100) == 5150
+sigma = .20
+for years in [25,100,400]:
+    se = sigma/math.sqrt(years)
+    print(f"{years} independent years: SE={100*se:.3f} percentage points")
+assert math.isclose(sigma/math.sqrt(400), .01)
+print("Assumes iid annual returns with fixed mean and variance. SE is not a 95% confidence interval.")
+"""
+
 
 def markdown(text):
     text = re.sub(r'<noscript>.*?</noscript>', '', text, flags=re.S)
-    text = re.sub(r'<div id="portfolio-lab"[^>]*></div>', '', text)
+    text = re.sub(r'<div id="(?:portfolio|estimation-learning)-lab"[^>]*></div>', '', text)
     text = re.sub(r'<a[^>]+href="([^"]+)"[^>]*>(.*?)</a>', r'[\2](\1)', text, flags=re.S)
     text = text.replace('](notebooks/portfolio-theory.ipynb)', '](portfolio-theory.ipynb)')
     text = re.sub(r'<summary>(.*?)</summary>', r'**\1**', text, flags=re.S)
@@ -98,7 +112,7 @@ def markdown(text):
     text = re.sub(r'</?(?:p|div|section|details|figure|figcaption)\b[^>]*>', '\n', text)
     text = re.sub(r'(?<=\]\()([\w-]+\.html(?:#[^)]*)?)(?=\))', r'../\1', text)
     cell = {'cell_type': 'markdown', 'metadata': {}, 'source': re.sub(r'\n{3,}', '\n\n', text).strip()}
-    for asset in set(re.findall(r'assets/images/[\w-]+\.(?:svg|jpg)', cell['source'])):
+    for asset in sorted(set(re.findall(r'assets/images/[\w-]+\.(?:svg|jpg)', cell['source']))):
         name = Path(asset).name
         mime = 'image/svg+xml' if asset.endswith('.svg') else 'image/jpeg'
         payload = (ROOT/asset).read_text() if asset.endswith('.svg') else base64.b64encode((ROOT/asset).read_bytes()).decode('ascii')

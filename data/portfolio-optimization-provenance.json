@@ -2,7 +2,7 @@
   "recorded_at": "2026-09-18",
   "chapter": "portfolio-optimization.md",
   "related_chapter": "black-litterman.md",
-  "delivery": "Portfolio Optimization and Black–Litterman are now separate lessons with independent executed Notebooks.",
+  "delivery": "Optimization Problem and Black–Litterman are now separate lessons with independent executed Notebooks.",
   "source": {
     "provided_filename": "JA252.2 Notes1.pdf",
     "source_location": "User-provided local PDF; not included in the repository.",
@@ -357,5 +357,23 @@
     "node qa/portfolio-optimization-browser.cjs",
     "node qa/portfolio-optimization-page-checks.cjs",
     "git diff --check"
-  ]
+  ],
+  "learning_revision": {
+    "display_title": "Optimization Problem",
+    "url_preserved": true,
+    "editorial": "New introduction; covariance inputs moved after regression and Lagrange; equations and quote retained; production details removed from reader prose.",
+    "labs": [
+      "2D quadratic constraints with KKT diagnostics",
+      "Four-asset target frontier with long-only active-set enumeration and explicit infeasibility"
+    ],
+    "portraits": [
+      {
+        "path": "assets/images/lagrange-portrait.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Lagrange_portrait.jpg",
+        "rights": "Public domain; unknown creator; original file retained",
+        "sha256": "5e37505cc5140246bd020079f17f59604b42e1789b9fc7998c66b7289f88c6db"
+      }
+    ],
+    "date": "2026-09-18"
+  }
 }

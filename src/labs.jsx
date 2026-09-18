@@ -14,6 +14,7 @@ import { ComparisonLab, ReturnsLab, DistributionLab, WienerLab } from './source-
 import BinomialLab from './binomial.jsx';
 import { BlackScholesPriceLab, BlackScholesHedgeLab } from './black-scholes.jsx';
 import { PortfolioLab } from './portfolio.jsx';
+import { ConstraintLab, TargetPortfolioLab, EstimationLab } from './optimization-learning.jsx';
 import { PortfolioOptimizationLab } from './portfolio-optimization.jsx';
 import { DensityLab, TrinomialLab } from './transition-density.jsx';
 import { QuadraticVariationLab, GbmEulerLab, CorrelationLab } from './stochastic-calculus.jsx';
@@ -83,7 +84,7 @@ function ExerciseLab() {
     <div><h4>2% บอกขนาดการแกว่ง</h4><p>มันไม่ใช่ผลตอบแทนที่จะได้ และไม่ใช่ขาดทุนสูงสุด ถ้าช็อกข้ามวันพึ่งพากัน ต้องรวม covariance ด้วย คำตอบ 2% ผูกอยู่กับสมมติฐานของโจทย์นี้</p></div>
   </Stepper></div>;
 }
-for (const [id, Component] of [['black-litterman-lab', PortfolioOptimizationLab], ['portfolio-lab', PortfolioLab], ['black-scholes-price-lab', BlackScholesPriceLab], ['black-scholes-hedge-lab', BlackScholesHedgeLab], ['qv-ito-lab', QuadraticVariationLab], ['gbm-euler-lab', GbmEulerLab], ['correlated-noise-lab', CorrelationLab], ['transition-density-lab', DensityLab], ['trinomial-density-lab', TrinomialLab], ['binomial-lab', BinomialLab], ['hedging-lab', HedgingLab], ['monte-carlo-lab', MonteCarloLab], ['jensen-lab', JensenLab], ['comparison-lab',ComparisonLab], ['returns-lab',ReturnsLab], ['distribution-lab',DistributionLab], ['scaling-lab', ScalingLab], ['rolling-lab', RollingLab], ['wiener-lab',WienerLab], ['gbm-lab', GbmLab], ['exercise-lab', ExerciseLab]]) {
+for (const [id, Component] of [['constraint-learning-lab', ConstraintLab], ['target-portfolio-lab', TargetPortfolioLab], ['estimation-learning-lab', EstimationLab], ['black-litterman-lab', PortfolioOptimizationLab], ['portfolio-lab', PortfolioLab], ['black-scholes-price-lab', BlackScholesPriceLab], ['black-scholes-hedge-lab', BlackScholesHedgeLab], ['qv-ito-lab', QuadraticVariationLab], ['gbm-euler-lab', GbmEulerLab], ['correlated-noise-lab', CorrelationLab], ['transition-density-lab', DensityLab], ['trinomial-density-lab', TrinomialLab], ['binomial-lab', BinomialLab], ['hedging-lab', HedgingLab], ['monte-carlo-lab', MonteCarloLab], ['jensen-lab', JensenLab], ['comparison-lab',ComparisonLab], ['returns-lab',ReturnsLab], ['distribution-lab',DistributionLab], ['scaling-lab', ScalingLab], ['rolling-lab', RollingLab], ['wiener-lab',WienerLab], ['gbm-lab', GbmLab], ['exercise-lab', ExerciseLab]]) {
   const target = document.getElementById(id);
   if (target) createRoot(target).render(<MotionConfig reducedMotion="user"><Component /></MotionConfig>);
 }

@@ -40,5 +40,27 @@
   "notes": [
     "The prior is reverse-optimized from market weights, not copied from the expected returns used in the previous chapter.",
     "Return covariance Sigma is held fixed for allocation; posterior uncertainty of the mean is a distinct object."
-  ]
+  ],
+  "learning_revision": {
+    "editorial": "New concrete introduction; fixed market lambda distinguished from investor lambda.",
+    "controls": [
+      "independently enabled views",
+      "two Q values",
+      "two positive diagonal Omega multipliers",
+      "investor risk aversion",
+      "no-view and negative-view presets"
+    ],
+    "return_axis": "adaptive to negative and positive values",
+    "weights": "prior and posterior including residual risk-free allocation",
+    "portraits": [
+      {
+        "path": "assets/images/fischer-black.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Fischer_Black.JPG",
+        "rights": "Public-domain dedication by Dalmatine; original retained; photograph date unknown",
+        "sha256": "e06d7fd8a49854f624c803b34c688c35db49d1da34d6a67545941f659fe66d7d"
+      }
+    ],
+    "litterman_portrait": "Linked interview only; no open reuse license established for Jake Armour photograph.",
+    "date": "2026-09-18"
+  }
 }

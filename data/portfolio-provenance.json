@@ -174,5 +174,45 @@
     "sha256": "50a79292200d749a45543b5e375e7043c798ad14d3a52574da4d6ced59087579",
     "rights": "No open reuse license stated on source page; copyright remains with respective rights holder. Source credited; no open license or permission from the rights holder is asserted.",
     "modifications": "None; displayed at reduced size with source credit."
+  },
+  "learning_revision": {
+    "source_slides": [
+      111,
+      112,
+      113,
+      114
+    ],
+    "excluded_reference": "Unrelated desktop wallpaper screenshot",
+    "survey": {
+      "respondents": 36,
+      "mean_variance_users": 30,
+      "rounded_percent": 83,
+      "study_year": 2006,
+      "article_year": 2007,
+      "article": "https://doi.org/10.1080/14697680701195941",
+      "primary_numeric_crosscheck": "https://catalogimages.wiley.com/images/db/pdf/9780470262474.excerpt.pdf#page=23",
+      "scope": "Historical surveyed firms, not current industry adoption"
+    },
+    "topics": [
+      "practical usage",
+      "dimensionality and factor selection",
+      "mean estimation and nonstationarity",
+      "single-period remedies",
+      "multiperiod stochastic programming, control and filtering"
+    ],
+    "lab": "2N+N(N-1)/2 parameters; SE=sigma/sqrt(T) for iid annual returns",
+    "corrections": [
+      "Covariance stability not guaranteed",
+      "400 years at 20% volatility gives 1pp SE, not a 95% interval of +/-1pp",
+      "More scenarios alone do not ensure tail protection",
+      "Stochastic control need not have an analytic solution"
+    ],
+    "additional_sources": [
+      "https://web.stanford.edu/~boyd/papers/markowitz.html",
+      "https://ledoit.net/honey.pdf",
+      "https://stanford.edu/~boyd/papers/cvx_portfolio.html",
+      "https://link.springer.com/article/10.1007/s10479-024-06281-1"
+    ],
+    "date": "2026-09-18"
   }
 }

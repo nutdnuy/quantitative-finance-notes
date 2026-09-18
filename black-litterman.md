@@ -8,7 +8,7 @@ inline_math: true
 
 <h1 id="black-litterman-title">Black–Litterman</h1>
 
-<p class="lead">เราจะผสมพอร์ตตลาดกับมุมมองของเรา โดยบอกความไม่แน่นอนไว้ด้วยได้อย่างไร?</p>
+<p class="lead">ถ้าเราคิดต่างจากตลาด ควรปรับพอร์ตไปไกลแค่ไหน?</p>
 
 <div class="chapter-quote">
 
@@ -20,9 +20,21 @@ inline_math: true
 
 </div>
 
-บท [Portfolio Optimization](portfolio-optimization.html) อธิบายว่า objective และ constraints กำหนดน้ำหนักพอร์ตอย่างไร บทนี้มุ่งที่ expected returns ซึ่งเป็น input สำคัญของ optimizer: เริ่มจากพอร์ตตลาด แล้วค่อยปรับด้วย views ที่มีความไม่แน่นอน
+สมมติเราคาดว่าสินทรัพย์ X3 จะให้ผลตอบแทนมากกว่า X1 อยู่ 10 จุดเปอร์เซ็นต์ แต่ยังไม่มั่นใจว่าประมาณได้แม่นแค่ไหน ถ้าใส่ตัวเลขนี้ลงใน optimizer โดยตรง น้ำหนักพอร์ตอาจเปลี่ยนไปมาก เราต้องการวิธีระบุทั้งมุมมองและความไม่แน่นอนของมุมมองนั้น
 
-ตัวอย่างทั้งหมดเป็นสินทรัพย์สมมติสี่ตัว ใช้ผลตอบแทน simple return ระยะหนึ่งปี ไม่มีข้อมูลตลาดจริง ค่าเฉลี่ยที่ใช้ในสูตร Black–Litterman เป็น **excess return เหนืออัตราปลอดความเสี่ยง** ไม่ใช่ total return
+Black–Litterman เริ่มจากผลตอบแทนคาดหมายที่สอดคล้องกับพอร์ตตลาด แล้วปรับด้วย views ของผู้ลงทุน มุมมองที่มีความไม่แน่นอนสูงจะดึงค่าประมาณออกจากจุดตั้งต้นได้น้อยกว่า เมื่อได้ผลตอบแทนชุดใหม่ จึงนำไปคำนวณน้ำหนักด้วยโจทย์จัดพอร์ตจากบท [Optimization Problem](portfolio-optimization.html)
+
+เราจะใช้สินทรัพย์สมมติสี่ตัวจากบทก่อน โดยเขียนค่าเฉลี่ยเป็น **ผลตอบแทนส่วนเกินเหนืออัตราปลอดความเสี่ยง** ทุกครั้งที่อ่าน Q หรือ posterior จึงต้องแยกออกจากผลตอบแทนรวม ตัวอย่างเป็น simple return ระยะหนึ่งปี
+
+<figure class="portfolio-portrait">
+
+![ภาพถ่าย Fischer Black](assets/images/fischer-black.jpg)
+
+<figcaption><strong>Fischer Black และงานร่วมกับ Robert Litterman</strong>
+บทความ <em>Global Portfolio Optimization</em> ปี 1992 ใช้ข้อมูลจากดุลยภาพตลาดร่วมกับมุมมองผู้ลงทุน เป็นที่มาของแบบจำลองที่เราจะคำนวณในบทนี้ อ่านเรื่องการร่วมงานจาก <a href="https://www.minneapolisfed.org/article/2019/interview-with-robert-litterman">บทสัมภาษณ์ Robert Litterman</a> ได้เพิ่มเติม
+<small>บุคคลในภาพ: Fischer Black · ภาพโดย Dalmatine เผยแพร่เป็นสาธารณสมบัติผ่าน <a href="https://commons.wikimedia.org/wiki/File:Fischer_Black.JPG">Wikimedia Commons</a> · ไม่ทราบวันที่ถ่าย</small></figcaption>
+
+</figure>
 
 <section id="covariance-inputs">
 
@@ -106,7 +118,7 @@ $$
 \sim N(\boldsymbol\Pi,\tau\Sigma).
 $$
 
-ตัวอย่างกำหนด \(\tau=1/120\) เป็น teaching convention เท่านั้น เลข 120 จำลองกรณีมีผลตอบแทนรายเดือนสิบปี แต่ไม่ได้อ้างว่า \(\Sigma\) ชุดนี้ประมาณจากข้อมูลดังกล่าว วิธีตั้ง \(\tau\) ไม่มีคำตอบเดียวและต้องสอดคล้องกับนิยามของ \(\Omega\) ที่ใช้กับ views
+ตัวอย่างกำหนด \(\tau=1/120\) เพื่อประกอบตัวอย่าง เลข 120 เทียบกับจำนวนเดือนในสิบปี แต่ \(\Sigma\) ชุดนี้ประมาณจากข้อมูลดังกล่าว วิธีตั้ง \(\tau\) ไม่มีคำตอบเดียวและต้องสอดคล้องกับนิยามของ \(\Omega\) ที่ใช้กับ views
 
 ### 2. เขียน views เป็น \(P,Q,\Omega\)
 
@@ -218,9 +230,9 @@ $$
 
 </div>
 
-<p class="figure-caption">Risk aversion เปลี่ยนขนาดรวมของ risky allocation ส่วน \(P,Q,\Omega\) และ covariance เปลี่ยนทิศทางสัมพัทธ์ของน้ำหนัก ใน convention นี้ \(\Omega\) scale พร้อม \(\tau\) ทำให้ \(\tau\) หักล้างจาก posterior mean; ถ้ากำหนด \(\Omega\) แยกต่างหาก \(\tau\) จะมีผล</p>
+<p class="figure-caption">Risk aversion เปลี่ยนขนาดรวมของ risky allocation ส่วน \(P,Q,\Omega\) และ covariance เปลี่ยนทิศทางสัมพัทธ์ของน้ำหนัก เมื่อกำหนดแบบนี้ \(\Omega\) เปลี่ยนตาม \(\tau\) ทำให้ \(\tau\) หักล้างจาก posterior mean; ถ้ากำหนด \(\Omega\) แยกต่างหาก \(\tau\) จะมีผล</p>
 
-Posterior covariance ของค่าเฉลี่ยและ covariance ของผลตอบแทนเป็นคนละวัตถุ สูตรจัดพอร์ตข้างบนใช้ \(\Sigma\) เป็น covariance ของผลตอบแทน การนำ posterior uncertainty ไปบวกหรือใช้แทน \(\Sigma\) เป็นอีก convention ที่ต้องประกาศให้ชัด
+Posterior covariance ของค่าเฉลี่ยและ covariance ของผลตอบแทนเป็นคนละวัตถุ สูตรจัดพอร์ตข้างบนใช้ \(\Sigma\) เป็น covariance ของผลตอบแทน การนำ posterior uncertainty ไปบวกหรือใช้แทน \(\Sigma\) เป็นการเลือกแบบจำลองอีกแบบหนึ่ง ซึ่งจะให้โจทย์จัดพอร์ตต่างออกไป
 
 </section>
 
@@ -228,7 +240,7 @@ Posterior covariance ของค่าเฉลี่ยและ covariance �
 
 ## ทดลองผสม views กับพอร์ตตลาด
 
-ห้องทดลองใช้ \(\Sigma\), market weights, \(\tau=1/120\), \(P\) และ \(Q\) ชุดเดียวกับตัวอย่าง ปรับ risk aversion และตัวคูณความไม่แน่นอนของ views เพื่อดู posterior expected excess returns กับน้ำหนักพอร์ตพร้อมกัน
+ห้องทดลองใช้ \(\Sigma\), market weights, \(\tau=1/120\), \(P\) และ \(Q\) ชุดเดียวกับตัวอย่าง เปิดหรือปิดแต่ละ view เปลี่ยนค่า Q และความไม่แน่นอนแยกกัน แล้วเปรียบเทียบผลตอบแทนส่วนเกินกับน้ำหนักพอร์ต ปุ่มปิด views ทั้งหมดใช้ตรวจจุดตั้งต้น ก่อนลองปรับ risk aversion ของผู้ลงทุน
 
 <div id="black-litterman-lab" class="interactive-mount"></div>
 
@@ -279,10 +291,10 @@ Posterior covariance ของค่าเฉลี่ยและ covariance �
 
 ## เอกสารประกอบ
 
-- *Fundamentals of Optimization and Application to Portfolio Selection*, CQF, เอกสาร PDF ที่ผู้ใช้ให้มา, 145 หน้า เนื้อหา Black–Litterman แยกมาจากบท Portfolio Optimization เดิม ซึ่งครอบคลุมหน้า 4–137 โดยคำนวณสูตรและตัวเลขใหม่ จุดพิมพ์คลาดใน GLS, Lagrange, Black–Litterman และ active weights ได้รับการแก้ก่อนใช้
+- *Fundamentals of Optimization and Application to Portfolio Selection*, CQF, หัวข้อ Black–Litterman
 - Fischer Black and Robert Litterman, “Global Portfolio Optimization,” *Financial Analysts Journal*, 48(5), 28–43, 1992
 - Jay Walters, *The Black–Litterman Model in Detail*, working paper, 2011 ใช้เป็นที่มาของตัวอย่าง views ตามรายการอ้างอิงในเอกสารประกอบ
 
-ภาพกราฟและไดอะแกรมในบทสร้างใหม่จากสมการและข้อมูลสมมติด้วย `scripts/make_portfolio_optimization_figures.py` และแผนผังจาก Excalidraw ผ่าน `scripts/render_optimization_roadmap.py` ตาม visual route `no-image-generator` ไม่มีภาพจาก PDF หรือข้อมูลตลาดถูกคัดลอกเข้ามา รายละเอียดที่มา สมมติฐาน และค่าตรวจอยู่ใน [`data/black-litterman-provenance.json`](data/black-litterman-provenance.json)
+[ข้อมูลสมมติและวิธีตรวจตัวเลข](data/black-litterman-provenance.json)
 
 </section>

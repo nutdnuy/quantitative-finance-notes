@@ -6,7 +6,7 @@ const {pathToFileURL}=require('node:url');
 const root=path.resolve(__dirname,'..');
 const pageURL=name=>pathToFileURL(path.join(root,name)).href;
 const report={status:'running',checks:[],states:[],errors:[],externalRequests:[]};
-const chapters=[['portfolio-optimization','Portfolio Optimization',11],['black-litterman','Black–Litterman',3]];
+const chapters=[['portfolio-optimization','Optimization Problem',11],['black-litterman','Black–Litterman',3]];
 const terms=[['objective-function','optimization-problem'],['gradient','gradient-hessian'],['hessian','gradient-hessian'],['ordinary-least-squares','regression-optimization'],['generalized-least-squares','regression-optimization'],['lagrange-multiplier','lagrange-method'],['reverse-optimization','black-litterman'],['black-litterman','black-litterman'],['kkt-conditions','inequality-constraints'],['active-weight','benchmark-active']];
 (async()=>{
  const browser=await chromium.launch();const page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
@@ -28,7 +28,7 @@ const terms=[['objective-function','optimization-problem'],['gradient','gradient
    const notebook=JSON.parse(fs.readFileSync(path.join(root,`notebooks/${slug}.ipynb`),'utf8'));
    assert.equal(notebook.metadata.source.path,`${slug}.md`);
    assert.ok(notebook.cells.filter(c=>c.cell_type==='code').every(c=>c.execution_count>0&&!c.outputs.some(o=>o.output_type==='error')));
-   const attachments=notebook.cells.flatMap(c=>Object.keys(c.attachments||{}));assert.equal(attachments.length,count);
+   const attachments=notebook.cells.flatMap(c=>Object.keys(c.attachments||{}));assert.equal(attachments.filter(name=>name.endsWith('.svg')).length,count);assert.equal(attachments.filter(name=>name.endsWith('.jpg')).length,1);
    assert.equal(notebook.cells.some(c=>c.cell_type==='code'&&c.source.includes('LAMBDA_MARKET')),slug==='black-litterman');
    if(slug==='black-litterman'){
     await page.locator('#black-litterman-lab .lab').waitFor();

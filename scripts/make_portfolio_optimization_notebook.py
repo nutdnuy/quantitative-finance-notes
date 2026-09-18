@@ -225,11 +225,66 @@ print("Active weights:", [f"{100*w:+.2f}%" for w in active])
 print(f"Net active weight={100*sum(active):.2f}%, tracking error={100*tracking_error:.4f}%")''',
 }
 
+snippets['constraint-experiment'] = """def constrained_point(c, mode="inequality"):
+    nu = 4*(2-c)/3
+    if mode == "inequality":
+        nu = max(0, nu)
+    elif mode == "none":
+        nu = 0
+    x, y = 1-nu/2, 1-nu/4
+    return x, y, nu, (x-1)**2+2*(y-1)**2
+
+for c in [1, 2, 3]:
+    for mode in ["none", "equality", "inequality"]:
+        x, y, nu, objective = constrained_point(c, mode)
+        print(f"{mode:10s} c={c}: point=({x:.4f},{y:.4f}), multiplier={nu:.4f}, f={objective:.4f}")
+        close(2*(x-1)+nu, 0)
+        close(4*(y-1)+nu, 0)
+        if mode == "inequality":
+            assert x+y <= c+1e-10 and nu >= 0
+            close(nu*(x+y-c), 0)
+"""
+
+snippets['target-experiment'] = """for target in [.10, .20, .30]:
+    unconstrained, _, _ = minimum_variance_target(target)
+    print(f"Target {target:.0%}: short allowed SD={math.sqrt(variance(unconstrained,SIGMA)):.4%}")
+    if not min(MU) <= target <= max(MU):
+        print("Long-only: infeasible (target outside convex hull of means)")
+    else:
+        v, weights = long_only_target(target)
+        print(f"Long-only weights={weights}, SD={math.sqrt(v):.4%}")
+"""
+
+snippets['experiments'] = """def update_views(q_values, enabled=(True, True), scales=(1, 1), investor_lambda=2.24):
+    indices = [i for i in range(2) if enabled[i]]
+    if not indices:
+        updated = prior[:]
+    else:
+        rows = [P[i] for i in indices]
+        projected = matmul(matmul(rows, tau_sigma), transpose(rows))
+        system = [[projected[i][j] + (scales[indices[i]]*projected[i][i] if i == j else 0)
+                   for j in range(len(indices))] for i in range(len(indices))]
+        delta = solve(system, [q_values[i]-dot(P[i],prior) for i in indices])
+        correction = matvec(matmul(tau_sigma,transpose(rows)),delta)
+        updated = [p+d for p,d in zip(prior,correction)]
+    weights = [x/investor_lambda for x in solve(SIGMA,updated)]
+    return updated, weights, 1-sum(weights)
+
+no_views, market_again, cash = update_views(Q, enabled=(False,False))
+for actual, expected in zip(market_again, MARKET):
+    close(actual, expected)
+close(cash, 0)
+for enabled, scales, q in [((True,False),(.25,1),Q), ((True,True),(1,4),Q), ((True,True),(1,1),[-.10,-.05])]:
+    updated, weights, cash = update_views(q, enabled, scales)
+    print(f"views={enabled}, Omega multipliers={scales}, Q={q}")
+    print("Posterior:", updated, "Weights:", weights, "Risk-free:", cash)
+"""
+
 
 def markdown(text):
     text = re.sub(r'<h1[^>]*>(.*?)</h1>', r'# \1', text)
     text = re.sub(r'<noscript>.*?</noscript>', '', text, flags=re.S)
-    text = re.sub(r'<div id="(?:portfolio-optimization|black-litterman)-lab"[^>]*></div>', '', text)
+    text = re.sub(r'<div id="(?:portfolio-optimization|black-litterman|constraint-learning|target-portfolio)-lab"[^>]*></div>', '', text)
     text = re.sub(r'<a[^>]+href="([^"]+)"[^>]*>(.*?)</a>', r'[\2](\1)', text, flags=re.S)
     text = re.sub(r'\]\(notebooks/([\w-]+\.ipynb)\)', r'](\1)', text)
     text = re.sub(r'\]\(((?:assets/diagrams|data)/[^)]+)\)', r'](../\1)', text)
@@ -242,10 +297,11 @@ def markdown(text):
         'metadata': {},
         'source': re.sub(r'\n{3,}', '\n\n', text).strip(),
     }
-    for asset in set(re.findall(r'assets/images/[\w-]+\.svg', cell['source'])):
+    for asset in sorted(set(re.findall(r'assets/images/[\w-]+\.(?:svg|jpg)', cell['source']))):
         name = Path(asset).name
-        payload = (ROOT / asset).read_text()
-        cell.setdefault('attachments', {})[name] = {'image/svg+xml': payload}
+        mime = 'image/svg+xml' if asset.endswith('.svg') else 'image/jpeg'
+        payload = (ROOT / asset).read_text() if asset.endswith('.svg') else base64.b64encode((ROOT / asset).read_bytes()).decode('ascii')
+        cell.setdefault('attachments', {})[name] = {mime: payload}
         cell['source'] = cell['source'].replace(f']({asset})', f'](attachment:{name})')
     cells.append(cell)
 
@@ -271,13 +327,13 @@ def build_notebook(slug, title):
     output_path = ROOT / f'notebooks/{slug}.ipynb'
     source = source_path.read_text()
     body = re.sub(r"\A---\n.*?\n---\n", "", source, flags=re.S)
-    markdown(f'# Notebook: {title}\n\nใช้ Python 3 standard library และกด Run All ตามลำดับได้ ตัวเลขเป็นข้อมูลสมมติ ภาพ SVG ฝังอยู่ในไฟล์แล้ว')
+    markdown(f'# Notebook: {title}\n\nใช้ Python 3 standard library และกด Run All ตามลำดับได้ ตัวเลขเป็นข้อมูลสมมติ ภาพประกอบฝังอยู่ในไฟล์แล้ว')
     markdown(body.split('<section id="', 1)[0])
     code(snippets['setup'])
     for match in re.finditer(r'<section id="([^"]+)"[^>]*>(.*?)</section>', body, flags=re.S):
         section_id, content = match.groups()
         markdown(content)
-        if section_id in snippets and not (slug == 'portfolio-optimization' and section_id == 'black-litterman'):
+        if section_id in snippets and not (slug == 'portfolio-optimization' and section_id in ('black-litterman', 'experiments')):
             code(snippets[section_id])
     for index, cell in enumerate(cells):
         cell['id'] = f'{slug}-{index:02d}'
@@ -295,5 +351,5 @@ def build_notebook(slug, title):
 
 
 if __name__ == '__main__':
-    build_notebook('portfolio-optimization', 'Portfolio Optimization')
+    build_notebook('portfolio-optimization', 'Optimization Problem')
     build_notebook('black-litterman', 'Black–Litterman')

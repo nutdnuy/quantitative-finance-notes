@@ -1,14 +1,14 @@
 ---
-title: Portfolio Optimization
+title: Optimization Problem
 description: เขียนโจทย์จัดพอร์ตให้ optimizer แก้ ตั้งแต่ objective, OLS/GLS และ Lagrange ไปจนถึง KKT และ active portfolio
 notebook: notebooks/portfolio-optimization.ipynb
 visual_route: no-image-generator
 inline_math: true
 ---
 
-# Portfolio Optimization
+<h1 id="optimization-title">Optimization Problem</h1>
 
-<p class="lead">เราจะบอกคอมพิวเตอร์อย่างไรว่า “พอร์ตที่ดีที่สุด” หมายถึงอะไร?</p>
+<p class="lead">จะเลือกคำตอบที่ดีที่สุดอย่างไร เมื่อมีข้อบังคับว่าคำตอบนั้นต้องทำอะไรได้บ้าง?</p>
 
 <div class="chapter-quote">
 
@@ -20,11 +20,11 @@ inline_math: true
 
 </div>
 
-บท [Portfolio Theory](portfolio-theory.html) วางเกณฑ์ไว้แล้วว่าเราสนใจผลตอบแทนคาดหวัง ความเสี่ยง และการเคลื่อนไหวร่วมกันของสินทรัพย์ บทนี้นำเกณฑ์เหล่านั้นมาเขียนเป็นโจทย์ที่คำนวณน้ำหนักพอร์ตได้จริง
+การหาเส้น regression กับการจัดพอร์ตดูเป็นคนละงาน แต่เขียนเป็นโจทย์ optimization ได้ทั้งคู่ งานแรกเลือกความชันและจุดตัดแกนให้ผลรวมความคลาดเคลื่อนยกกำลังสองต่ำที่สุด งานที่สองอาจเลือกน้ำหนักสินทรัพย์ให้ variance ต่ำที่สุด โดยต้องได้ผลตอบแทนคาดหวัง 10% และใช้งบลงทุนครบ 100%
 
-Optimizer ไม่ได้รู้เองว่าควรลดความเสี่ยง เพิ่มผลตอบแทน ห้ามขายชอร์ต หรือเกาะ benchmark แค่ไหน เราต้องกำหนด objective function, decision variables, ข้อมูลที่ป้อน และ constraints ให้ครบ คำตอบที่ได้จึงผูกกับโจทย์นั้นทุกบรรทัด
+ก่อนคำนวณ เราจึงต้องระบุว่าจะเลือกค่าอะไร วัดคำตอบด้วยเกณฑ์ไหน และมีข้อจำกัดใดบ้าง สามส่วนนี้คือ decision variables, objective function และ constraints การเพิ่มข้อห้ามขายชอร์ตเพียงข้อเดียวอาจทำให้น้ำหนักพอร์ตเปลี่ยน หรือทำให้เป้าหมายผลตอบแทนบางระดับไม่มีคำตอบ
 
-เราจะใช้ตัวอย่างสินทรัพย์สมมติสี่ตัวต่อเนื่องทั้งบท จากโจทย์ไม่มีข้อจำกัดไปจนถึง long-only และ benchmark-relative portfolio ตัวเลขไม่มีชื่อสินทรัพย์ ช่วงวันที่ หรือข้อมูลตลาดจริง จึงใช้เพื่อเรียนรู้กลไกเท่านั้น
+บทนี้เริ่มจากภาพของโจทย์สองตัวแปร แล้วใช้ regression ฝึกอ่าน gradient และ Hessian ก่อนนำ Lagrange และ KKT ไปแก้ตัวอย่างสินทรัพย์สมมติสี่ตัว ผู้อ่านที่ต้องการทบทวนความหมายของ expected return และ covariance สามารถย้อนดูบท [Portfolio Theory](portfolio-theory.html) ได้
 
 <section id="optimization-problem">
 
@@ -124,62 +124,7 @@ Hessian ของ objective คือ \(-\lambda\Sigma\) ถ้า \(\Sigma\) po
 
 </section>
 
-<section id="covariance-inputs">
 
-## สร้าง covariance matrix จาก volatility และ correlation
-
-ตัวอย่างหลักใช้สินทรัพย์สมมติ \(X_1,\ldots,X_4\) และผลตอบแทน simple return ระยะหนึ่งปี
-
-<div class="table-wrap portfolio-table" tabindex="0" role="group" aria-label="ผลตอบแทนคาดหวังและส่วนเบี่ยงเบนมาตรฐานของสินทรัพย์สมมติสี่ตัว">
-
-| สินทรัพย์ | \(X_1\) | \(X_2\) | \(X_3\) | \(X_4\) |
-|---|---:|---:|---:|---:|
-| ผลตอบแทนคาดหวัง \(\mu_i\) | 5% | 7% | 15% | 27% |
-| ส่วนเบี่ยงเบนมาตรฐาน \(\sigma_i\) | 7% | 12% | 30% | 60% |
-
-</div>
-
-Correlation matrix คือ
-
-$$
-R=
-\begin{pmatrix}
-1&0.8&0.5&0.4\\
-0.8&1&0.7&0.5\\
-0.5&0.7&1&0.8\\
-0.4&0.5&0.8&1
-\end{pmatrix}.
-$$
-
-สร้างเมทริกซ์แนวทแยง \(S=\operatorname{diag}(0.07,0.12,0.30,0.60)\) แล้วคำนวณ
-
-$$
-\boxed{\Sigma=SRS.}
-$$
-
-เพราะ \(S\) เป็นเมทริกซ์แนวทแยง เราจึงมี \(S^\top=S\) ค่าแนวทแยงของ \(\Sigma\) คือ variance และค่านอกแนวทแยงคือ covariance
-
-$$
-\Sigma=
-\begin{pmatrix}
-0.0049&0.00672&0.0105&0.0168\\
-0.00672&0.0144&0.0252&0.0360\\
-0.0105&0.0252&0.0900&0.1440\\
-0.0168&0.0360&0.1440&0.3600
-\end{pmatrix}.
-$$
-
-<div class="portfolio-figure" tabindex="0" role="group" aria-label="ภาพ heatmap แสดงการแปลง correlation และ volatility เป็น covariance matrix เลื่อนแนวนอนเพื่อดูภาพเต็ม">
-
-![Correlation matrix รวมกับ volatility ผ่านสูตร SRS แล้วได้ covariance matrix ของสินทรัพย์สมมติสี่ตัว](assets/images/optimization-covariance.svg)
-
-</div>
-
-<p class="figure-caption">สีเข้มช่วยเปรียบเทียบขนาดภายในแต่ละเมทริกซ์ ส่วนตัวเลขเป็นค่าที่ใช้คำนวณจริง Correlation ไม่มีหน่วย ขณะที่ covariance ใช้หน่วยผลตอบแทนยกกำลังสอง</p>
-
-Covariance matrix ต้องเป็น positive semidefinite เพราะ \(\mathbf w^\top\Sigma\mathbf w\) คือ variance และห้ามติดลบ หากเมทริกซ์เกือบ singular การกลับเมทริกซ์โดยตรงจะขยายความคลาดเคลื่อน ควรแก้ระบบสมการและตรวจ condition number แทน
-
-</section>
 
 <section id="regression-optimization">
 
@@ -271,6 +216,16 @@ $$
 
 ## Lagrange ใส่ equality constraints เข้าไปในสมการ
 
+<figure class="portfolio-portrait">
+
+![ภาพเหมือน Joseph-Louis Lagrange](assets/images/lagrange-portrait.jpg)
+
+<figcaption><strong>Joseph-Louis Lagrange</strong>
+วิธีตัวคูณลากร็องจ์นำข้อจำกัดแบบเท่ากันมาเขียนร่วมกับ objective ทำให้เราหาคำตอบจากเงื่อนไขอนุพันธ์ได้ ภาพเส้นสัมผัสด้านล่างแสดงว่าทำไม gradient สองชุดจึงเกี่ยวข้องกัน
+<small>ภาพสาธารณสมบัติ · <a href="https://commons.wikimedia.org/wiki/File:Lagrange_portrait.jpg">Wikimedia Commons</a> · ไม่ทราบผู้สร้างภาพ</small></figcaption>
+
+</figure>
+
 สมมติโจทย์มีข้อจำกัด \(g_j(\mathbf x)=b_j\) เราสร้าง [Lagrangian](glossary.html#lagrange-multiplier)
 
 $$
@@ -297,6 +252,75 @@ $$
 </div>
 
 <p class="figure-caption">จุดที่ต่ำกว่านี้อยู่นอกเส้น constraint ส่วนจุดอื่นบนเส้นเดียวกันตัด contour ระดับสูงกว่า จุดสัมผัสจึงแก้ทั้ง stationarity และ constraint พร้อมกัน</p>
+
+</section>
+
+<section id="constraint-experiment">
+
+## ลองเลื่อนเส้นข้อจำกัด
+
+ใช้ f(x,y) = (x − 1)² + 2(y − 1)² ซึ่งมีจุดต่ำสุดที่ (1,1) เลือกระหว่างไม่มีข้อจำกัด, x + y = c และ x + y ≤ c แล้วเลื่อนค่า c เพื่อดูว่าจุดต่ำสุดที่เลือกได้ย้ายไปอย่างไร เส้นวงรีแต่ละเส้นแสดงระดับของ objective เดียวกัน
+
+<div id="constraint-learning-lab" class="interactive-mount"></div>
+
+ที่ c = 1 คำตอบบนขอบคือ (1/3, 2/3) ทั้งกรณี equality และ inequality แต่เมื่อ c = 3 ข้อจำกัด inequality เปิดทางให้เลือก (1,1) ได้แล้ว ส่วน equality ยังบังคับให้คำตอบอยู่บนเส้น x + y = 3 เราจะกลับมาอ่านเงื่อนไขนี้เป็น complementary slackness ในหัวข้อ KKT
+
+</section>
+
+<section id="covariance-inputs">
+
+## สร้าง covariance matrix จาก volatility และ correlation
+
+ตัวอย่างหลักใช้สินทรัพย์สมมติ \(X_1,\ldots,X_4\) และผลตอบแทน simple return ระยะหนึ่งปี
+
+<div class="table-wrap portfolio-table" tabindex="0" role="group" aria-label="ผลตอบแทนคาดหวังและส่วนเบี่ยงเบนมาตรฐานของสินทรัพย์สมมติสี่ตัว">
+
+| สินทรัพย์ | \(X_1\) | \(X_2\) | \(X_3\) | \(X_4\) |
+|---|---:|---:|---:|---:|
+| ผลตอบแทนคาดหวัง \(\mu_i\) | 5% | 7% | 15% | 27% |
+| ส่วนเบี่ยงเบนมาตรฐาน \(\sigma_i\) | 7% | 12% | 30% | 60% |
+
+</div>
+
+Correlation matrix คือ
+
+$$
+R=
+\begin{pmatrix}
+1&0.8&0.5&0.4\\
+0.8&1&0.7&0.5\\
+0.5&0.7&1&0.8\\
+0.4&0.5&0.8&1
+\end{pmatrix}.
+$$
+
+สร้างเมทริกซ์แนวทแยง \(S=\operatorname{diag}(0.07,0.12,0.30,0.60)\) แล้วคำนวณ
+
+$$
+\boxed{\Sigma=SRS.}
+$$
+
+เพราะ \(S\) เป็นเมทริกซ์แนวทแยง เราจึงมี \(S^\top=S\) ค่าแนวทแยงของ \(\Sigma\) คือ variance และค่านอกแนวทแยงคือ covariance
+
+$$
+\Sigma=
+\begin{pmatrix}
+0.0049&0.00672&0.0105&0.0168\\
+0.00672&0.0144&0.0252&0.0360\\
+0.0105&0.0252&0.0900&0.1440\\
+0.0168&0.0360&0.1440&0.3600
+\end{pmatrix}.
+$$
+
+<div class="portfolio-figure" tabindex="0" role="group" aria-label="ภาพ heatmap แสดงการแปลง correlation และ volatility เป็น covariance matrix เลื่อนแนวนอนเพื่อดูภาพเต็ม">
+
+![Correlation matrix รวมกับ volatility ผ่านสูตร SRS แล้วได้ covariance matrix ของสินทรัพย์สมมติสี่ตัว](assets/images/optimization-covariance.svg)
+
+</div>
+
+<p class="figure-caption">สีเข้มช่วยเปรียบเทียบขนาดภายในแต่ละเมทริกซ์ ส่วนตัวเลขเป็นค่าที่ใช้คำนวณจริง Correlation ไม่มีหน่วย ขณะที่ covariance ใช้หน่วยผลตอบแทนยกกำลังสอง</p>
+
+Covariance matrix ต้องเป็น positive semidefinite เพราะ \(\mathbf w^\top\Sigma\mathbf w\) คือ variance และห้ามติดลบ หากเมทริกซ์เกือบ singular การกลับเมทริกซ์โดยตรงจะขยายความคลาดเคลื่อน ควรแก้ระบบสมการและตรวจ condition number แทน
 
 </section>
 
@@ -613,6 +637,18 @@ subject to \(\mathbf 1^\top\Delta\mathbf w=0\) และข้อจำกัด
 
 </section>
 
+<section id="target-experiment">
+
+## Target เดียวกัน เมื่อห้ามขายชอร์ต
+
+ใช้ค่าเฉลี่ยและ covariance ของสินทรัพย์สี่ตัวข้างต้น เปรียบเทียบพอร์ต variance ต่ำสุดที่ target เดียวกัน แล้วสังเกตว่าสินทรัพย์ใดมีน้ำหนักลดลงถึงศูนย์
+
+<div id="target-portfolio-lab" class="interactive-mount"></div>
+
+ค่าเฉลี่ยของสินทรัพย์อยู่ระหว่าง 5% กับ 27% พอร์ตที่น้ำหนักไม่ติดลบและรวมเป็นหนึ่งจึงให้ผลตอบแทนคาดหวังนอกช่วงนี้ไม่ได้ หากเปิดขายชอร์ต ข้อจำกัดนี้หายไป แต่ขนาดสถานะและความเสี่ยงอาจเพิ่มขึ้นมาก
+
+</section>
+
 <section id="implementation-limits">
 
 ## ตรวจ optimizer ก่อนเชื่อน้ำหนัก
@@ -621,18 +657,17 @@ subject to \(\mathbf 1^\top\Delta\mathbf w=0\) และข้อจำกัด
 
 | จุดที่ต้องตรวจ | วิธีตรวจ |
 |---|---|
-| หน่วยของ \(\mu,\Sigma,r,Q\) | ใช้ช่วงเวลาและรูปแบบทศนิยมเดียวกันทุกตัว |
+| หน่วยของ \(\mu,\Sigma,r\) | ใช้ช่วงเวลาและรูปแบบทศนิยมเดียวกันทุกตัว |
 | Constraint residuals | คำนวณ \(\mathbf1^\top\mathbf w-1\), \(\boldsymbol\mu^\top\mathbf w-m\) และ inequality violations หลัง solve |
 | Covariance เกือบ singular | ตรวจ eigenvalues/condition number ใช้ linear solve, regularization หรือ factor model ที่มีเหตุผลรองรับ |
-| น้ำหนักไวต่อ expected returns | ขยับ \(\mu\), views และ \(\Omega\) ทีละน้อย แล้วเทียบ turnover, gross exposure และ objective |
+| น้ำหนักไวต่อ expected returns | ขยับ \(\mu\) และ \(\Sigma\) ทีละน้อย แล้วเทียบ turnover, gross exposure และ objective |
 | Solver status | แยก optimal, infeasible, unbounded และ numerical failure ไม่ใช้คำตอบล่าสุดเงียบ ๆ |
 | In-sample fit | ทดสอบนอกช่วงที่ใช้ประมาณค่าและคิดต้นทุนซื้อขาย |
-| Posterior uncertainty | แยก uncertainty ของค่าประมาณ expected return ออกจาก covariance ของผลตอบแทน |
 | Benchmark | ตรวจว่า active weights รวมเป็นศูนย์และใช้ benchmark ตัวเดียวกับรายงานผล |
 
 </div>
 
-พอร์ตที่แก้สมการได้ทุกบรรทัดยังแพ้จริงได้ เพราะ \(\mu\), \(\Sigma\), views และข้อจำกัดเป็นแบบจำลองของอนาคต การเพิ่ม precision ทางตัวเลขช่วยให้แก้โจทย์ที่ตั้งไว้ได้แม่นขึ้น แต่ไม่ได้ทำให้ inputs ถูกต้องขึ้นเอง
+การตรวจ residual ยืนยันว่าโปรแกรมแก้โจทย์ตามที่ตั้งไว้ได้ ส่วนผลตอบแทนหลังลงทุนยังขึ้นกับความคลาดเคลื่อนของ \(\mu\), \(\Sigma\) และต้นทุนที่แบบจำลองอาจไม่ได้รวมไว้ จึงต้องทดสอบพอร์ตกับข้อมูลที่ไม่ได้ใช้ประมาณค่าและสถานการณ์ที่ต่างจากช่วงฝึกด้วย
 
 </section>
 
@@ -663,7 +698,7 @@ subject to \(\mathbf 1^\top\Delta\mathbf w=0\) และข้อจำกัด
 
 ## ทำต่อใน Python
 
-[ดาวน์โหลด Notebook ของบท Portfolio Optimization](notebooks/portfolio-optimization.ipynb) เพื่อสร้าง covariance, แก้ target-return portfolio, ตรวจ GMV และ tangency, ทำ GLS whitening และเปรียบเทียบ unconstrained กับ long-only solution ตัวอย่างทั้งหมดใช้ Python standard library และรันซ้ำได้
+[ดาวน์โหลด Notebook ของบท Optimization Problem](notebooks/portfolio-optimization.ipynb) เพื่อสร้าง covariance, แก้ target-return portfolio, ตรวจ GMV และ tangency, ทำ GLS whitening และเปรียบเทียบ unconstrained กับ long-only solution ตัวอย่างทั้งหมดใช้ Python standard library และรันซ้ำได้
 
 </section>
 
@@ -681,8 +716,8 @@ subject to \(\mathbf 1^\top\Delta\mathbf w=0\) และข้อจำกัด
 
 ## เอกสารประกอบ
 
-- *Fundamentals of Optimization and Application to Portfolio Selection*, CQF, เอกสาร PDF ที่ผู้ใช้ให้มา, 145 หน้า เนื้อหาหลักของบทนี้เรียบเรียงจากหน้า 4–137 โดยคำนวณสูตรและตัวเลขใหม่ จุดพิมพ์คลาดใน GLS, Lagrange และ active weights ได้รับการแก้ก่อนใช้
+- *Fundamentals of Optimization and Application to Portfolio Selection*, CQF, เนื้อหาเรื่อง objective, regression, Lagrange, KKT และ active portfolio
 
-ภาพกราฟและไดอะแกรมในบทสร้างใหม่จากสมการและข้อมูลสมมติด้วย `scripts/make_portfolio_optimization_figures.py` ตาม visual route `no-image-generator` ไม่มีภาพจาก PDF หรือข้อมูลตลาดถูกคัดลอกเข้ามา รายละเอียดที่มา สมมติฐาน และค่าตรวจอยู่ใน [`data/portfolio-optimization-provenance.json`](data/portfolio-optimization-provenance.json)
+[ข้อมูลสมมติและวิธีตรวจตัวเลข](data/portfolio-optimization-provenance.json)
 
 </section>

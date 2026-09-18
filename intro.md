@@ -1,6 +1,6 @@
 ---
 title: Welcome
-description: เรียนการเงินเชิงปริมาณภาษาไทย จากความสุ่มและ Option ไปจนถึง Portfolio Optimization ผ่านตัวอย่าง สมการ กราฟที่ปรับค่าได้ และ Python Notebook
+description: เรียนการเงินเชิงปริมาณภาษาไทย จากความสุ่มและ Option ไปจนถึง Optimization Problem ผ่านตัวอย่าง สมการ กราฟที่ปรับค่าได้ และ Python Notebook
 ---
 
 # Welcome
@@ -83,10 +83,10 @@ description: เรียนการเงินเชิงปริมาณ�
 <article class="welcome-lesson">
 <span class="welcome-lesson-number" aria-hidden="true">07</span>
 <div><p class="welcome-lesson-label">เปลี่ยนเกณฑ์ให้เป็นน้ำหนักพอร์ต</p>
-<h3><a href="portfolio-optimization.html">Portfolio Optimization</a></h3>
+<h3><a href="portfolio-optimization.html">Optimization Problem</a></h3>
 <p>เราจะเขียน objective และ constraints อย่างไรให้ optimizer คำนวณพอร์ตได้?</p>
 <p class="welcome-topics">Lagrange · OLS/GLS · KKT · Active weights</p>
-<a class="welcome-text-link" href="portfolio-optimization.html">เปิดบท Portfolio Optimization →</a></div>
+<a class="welcome-text-link" href="portfolio-optimization.html">เปิดบท Optimization Problem →</a></div>
 </article>
 <article class="welcome-lesson">
 <span class="welcome-lesson-number" aria-hidden="true">08</span>

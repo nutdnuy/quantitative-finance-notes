@@ -5,7 +5,7 @@ description: ศัพท์ที่ใช้ในบทเรียน Quant 
 
 # อภิธานศัพท์
 
-หน้านี้รวมศัพท์ที่เราใช้ในบทเรียน **พฤติกรรมแบบสุ่มของสินทรัพย์**, **Binomial Model**, **Transition Density Functions**, **Applied Stochastic Calculus**, **Black–Scholes Model**, **Portfolio Theory** และ **Portfolio Optimization** และ **Black–Litterman** เอาไว้เปิดเทียบระหว่างอ่าน แต่ละคำมีลิงก์กลับไปดูตัวอย่างและการทดลองที่เกี่ยวข้อง
+หน้านี้รวมศัพท์ที่เราใช้ในบทเรียน **พฤติกรรมแบบสุ่มของสินทรัพย์**, **Binomial Model**, **Transition Density Functions**, **Applied Stochastic Calculus**, **Black–Scholes Model**, **Portfolio Theory** และ **Optimization Problem** และ **Black–Litterman** เอาไว้เปิดเทียบระหว่างอ่าน แต่ละคำมีลิงก์กลับไปดูตัวอย่างและการทดลองที่เกี่ยวข้อง
 
 <div class="glossary-search" hidden>
 <label for="glossary-query">ค้นหาคำศัพท์</label>
