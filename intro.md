@@ -7,7 +7,7 @@ description: เรียนการเงินเชิงปริมาณ�
 
 <div class="welcome-hero">
 <p class="welcome-kicker">QuantCorner 101 Notes · ภาษาไทย</p>
-<div class="welcome-lead">เริ่มเรียน Quant<br>จากความสงสัย สู่ความเข้าใจ</div>
+<div class="welcome-lead">เริ่มเรียน Quant<br>ความสุ่มและราคา Option</div>
 <p class="welcome-summary">ทำความเข้าใจการเงินผ่านคณิตศาสตร์และการทดลอง ตั้งแต่ความสุ่มของราคาสินทรัพย์ ไปจนถึงการคิดราคา Option ด้วยแบบจำลอง Black–Scholes</p>
 <div class="welcome-actions"><a class="button primary" href="random-assets.html">เริ่มจากบทแรก <span aria-hidden="true">→</span></a><a class="welcome-text-link" href="#lessons">ดูบทเรียนทั้งหมด <span aria-hidden="true">↓</span></a></div>
 <p class="welcome-format">ตัวอย่างและสมการ · กราฟที่ปรับค่าได้ · Python Notebook</p>
