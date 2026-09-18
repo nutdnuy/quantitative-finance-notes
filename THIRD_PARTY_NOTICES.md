@@ -1,5 +1,9 @@
 # Sources and notices
 
+## Harry Markowitz portrait — 2026-09-18
+
+`assets/images/harry-markowitz.jpg` is the unmodified portrait from [Rady School of Management, UC San Diego](https://rady.ucsd.edu/faculty-research/faculty/emeriti-faculty/harry-markowitz.html), retrieved for the Portfolio Theory chapter. The source page does not state an open reuse license; copyright remains with the respective rights holder, and redistribution permission is not asserted. Source URL and file hash are recorded in `data/portfolio-provenance.json`. The HTML caption and Notebook credit the source.
+
 ## Chapter epigraphs — 2026-09-14
 
 Each of the five lessons now has a short sourced quotation, a separately identified Thai translation written for QuantCorner, and a direct source link. The quotations are from Louis Bachelier's *Théorie de la spéculation* (1900), Richard Feynman's blackboard as documented by Caltech, Pierre-Simon Laplace's *A Philosophical Essay on Probabilities* (Truscott/Emory translation, 1902), Henri Poincaré's *The Value of Science* in *The Foundations of Science* (Halsted translation), and Edward O. Thorp's interview on *The Tim Ferriss Show #596* (May 28, 2022). Explicit ellipses mark the Bachelier and Laplace excerpts. The Thorp quotation includes the owner's linked parenthetical clarification, which is identified as an editorial addition; its Thai translation was also supplied by the owner.

@@ -17,6 +17,7 @@ binomial-model.md              บทเรียน Binomial Model และก
 transition-density-functions.md  ความหนาแน่นการเปลี่ยนสถานะและสมการ Kolmogorov
 applied-stochastic-calculus.md  Itô’s lemma การแปลงแบบจำลองและการจำลอง SDE
 black-scholes-model.md         Delta hedge, สูตรราคาและ Greeks ของ Black–Scholes
+portfolio-theory.md            การจัดพอร์ต Mean–Variance, Sharpe ratio, CAPM และ factor models
 glossary.md                    อภิธานศัพท์ร่วมของซีรีส์
 AGENTS.md                      แนวทางทำงานสำหรับ AI ในโปรเจกต์นี้
 _config.yml                    ชื่อเว็บ ผู้เขียน รูป และลิงก์ repository
@@ -63,6 +64,10 @@ npm run build
 ไฟล์ HTML ไม่อยู่ใน Git; รัน build ก่อนเปิดไฟล์ในเครื่อง หรือใช้ `npm run build:pages` เพื่อสร้างโฟลเดอร์ `_site/` สำหรับโฮสต์เว็บโดยเฉพาะ ระบบจะตรวจลิงก์ รูป และฟอนต์ภายในก่อนเผยแพร่
 
 ## เนื้อหาและแหล่งที่มา
+
+บท **Portfolio Theory** ต่อจาก Black–Scholes ใช้เอกสาร *An Introduction to Portfolio Theory* ที่ผู้ใช้ให้มา อธิบายผลตอบแทนและความเสี่ยงร่วมกันของพอร์ต พร้อมภาพ SVG ที่คำนวณใหม่ 4 ภาพและห้องทดลองพอร์ตสองสินทรัพย์ ตัวเลขทั้งหมดเป็นสมมติฐาน รายละเอียดแหล่งที่มาและข้อจำกัดอยู่ใน `data/portfolio-provenance.json` โดยไม่มีไฟล์ PDF ต้นฉบับใน repository
+
+สร้างภาพด้วย `python3 scripts/make_portfolio_figures.py` และสร้างพร้อมรัน Notebook ด้วย `python3 scripts/make_portfolio_notebook.py` ใช้ Python standard library ตรวจห้องทดลองด้วย `node qa/portfolio-browser.cjs` ขณะเปิด preview ที่พอร์ต 8763 ไฟล์ HTML คือ `portfolio-theory.html` หลัง build
 
 บท **Black-Scholes Model** ต่อจาก Applied Stochastic Calculus เชื่อม Delta hedge และ self-financing กับ PDE, heat equation, risk-neutral valuation, สูตร Call/Put, Greeks และ American early exercise ใช้เอกสาร *The Black–Scholes Model* ที่ผู้ใช้ให้เป็นเส้นเรื่อง และเพิ่มตัวอย่างสมมติที่ตรวจคำนวณใหม่ ห้องทดลองแยกเป็นราคาและ Delta กับการปรับ hedge บนเส้นทาง GBM ร่วมกัน รายละเอียดอยู่ใน `data/black-scholes-provenance.json` ไม่เผยแพร่ PDF ต้นฉบับ
 

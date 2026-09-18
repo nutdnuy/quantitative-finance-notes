@@ -1,0 +1,178 @@
+{
+  "recorded_at": "2026-09-18",
+  "chapter": "portfolio-theory.md",
+  "delivery": "Publication to GitHub main authorized by Nuth on 2026-09-18.",
+  "source": {
+    "provided_filename": "JA252.1 Notes-1 (1).pdf",
+    "title_visible": "An Introduction to Portfolio Theory",
+    "course": "Certificate in Quantitative Finance",
+    "pages": 117,
+    "sha256": "8d6cc4ea46cc71cf9c2c5abfc719015562d32676d2b21da10ef78df0fe46c056",
+    "author": "Not verified; PDF metadata not used as authorship.",
+    "publication_date": "Not verified; filename and metadata not used as publication evidence.",
+    "access": "User-provided PDF read locally. No source PDF, extracted text, page images or source logos copied into this project.",
+    "method": "Text extracted across all 117 pages; key formulas reconstructed algebraically and selected source diagrams visually inspected."
+  },
+  "source_topic_map": [
+    {
+      "pages": [
+        7,
+        19
+      ],
+      "topics": [
+        "one-period model",
+        "weights",
+        "mean-variance assumptions"
+      ]
+    },
+    {
+      "pages": [
+        20,
+        37
+      ],
+      "topics": [
+        "two assets",
+        "covariance",
+        "GMV",
+        "efficient frontier",
+        "correlation limits"
+      ]
+    },
+    {
+      "pages": [
+        38,
+        55
+      ],
+      "topics": [
+        "risk-free allocation",
+        "tangency",
+        "Sharpe",
+        "zero variance and arbitrage"
+      ]
+    },
+    {
+      "pages": [
+        56,
+        72
+      ],
+      "topics": [
+        "N assets",
+        "matrix optimization",
+        "diversification limits"
+      ]
+    },
+    {
+      "pages": [
+        73,
+        88
+      ],
+      "topics": [
+        "market equilibrium",
+        "single factor",
+        "CAPM"
+      ]
+    },
+    {
+      "pages": [
+        89,
+        103
+      ],
+      "topics": [
+        "multifactor",
+        "APT",
+        "empirical factors",
+        "safety-first"
+      ]
+    },
+    {
+      "pages": [
+        104,
+        117
+      ],
+      "topics": [
+        "risk-adjusted performance",
+        "estimation",
+        "practical limitations"
+      ]
+    }
+  ],
+  "editorial_notes": [
+    "New Thai explanation and synthetic examples, not a verbatim slide translation. no-ai-slop applied after drafting.",
+    "Preserve physical expected return versus risk-neutral valuation distinction.",
+    "Risk-free covariance is zero but correlation is undefined.",
+    "Absolute weights and volatility signs retained where shorting allowed. Lab is explicitly long-only.",
+    "Use CAL for a selected risky universe; CML requires market equilibrium assumptions.",
+    "Regression factor model, CAPM equilibrium and APT no-arbitrage pricing restrictions are distinguished.",
+    "Alpha is not standalone evidence of skill. Benchmark IR differs from appraisal ratio.",
+    "Equicorrelation matrix must be positive semidefinite; a fixed negative rho cannot be taken to an arbitrary N."
+  ],
+  "examples": {
+    "data_kind": "Hypothetical; no market observations",
+    "period": "One year",
+    "returns": "Simple total returns; decimals internally; percentages in display",
+    "mu_a": 0.12,
+    "mu_b": 0.06,
+    "sigma_a": 0.2,
+    "sigma_b": 0.1,
+    "rho": 0.2,
+    "risk_free_return": 0.02,
+    "weight_a": 0.5,
+    "default_mean": 0.09,
+    "default_variance": 0.0145,
+    "gmv_weight_a": "1/7",
+    "tangency_weight_a": "7/17",
+    "sigma_zero_case": {
+      "rho": -1,
+      "weight_a": "1/3",
+      "mean": 0.08,
+      "interpretation": "Inconsistent with rf2% under unrestricted risk-free borrowing and frictionless no-arbitrage."
+    },
+    "capm": {
+      "market_expected_return": 0.08,
+      "risk_free_return": 0.02,
+      "beta": 1.2,
+      "asset_expected_return": 0.092
+    }
+  },
+  "visuals": {
+    "design_system": "QuantCorner / QuantSeras; preserve light book theme",
+    "route": "no-image-generator",
+    "reason": "All requested illustrations are educational charts showing calculated data, governed by Route 3. No decorative artwork.",
+    "image_generator_used": false,
+    "generator": "scripts/make_portfolio_figures.py",
+    "files": [
+      "assets/images/portfolio-correlation.svg",
+      "assets/images/portfolio-frontier.svg",
+      "assets/images/portfolio-diversification.svg",
+      "assets/images/portfolio-sml.svg"
+    ],
+    "labels": "Native SVG text, explicit axes and periods. Thai explanations and alt text in chapter.",
+    "editable": "SVG plus deterministic Python generator"
+  },
+  "notebook": {
+    "file": "notebooks/portfolio-theory.ipynb",
+    "generator": "scripts/make_portfolio_notebook.py",
+    "dependencies": "Python standard library",
+    "figures": "Embedded SVG attachments",
+    "execution": "All code cells executed in a shared Python namespace with assertions."
+  },
+  "verification_commands": [
+    "python3 scripts/make_portfolio_figures.py",
+    "python3 scripts/make_portfolio_notebook.py",
+    "npm run build:pages",
+    "npm test",
+    "node qa/portfolio-browser.cjs",
+    "node qa/portfolio-page-checks.cjs",
+    "git diff --check"
+  ],
+  "portrait": {
+    "file": "assets/images/harry-markowitz.jpg",
+    "subject": "Harry Markowitz",
+    "source_page": "https://rady.ucsd.edu/faculty-research/faculty/emeriti-faculty/harry-markowitz.html",
+    "source_image": "https://rady.ucsd.edu/_images/staff-faculty/500/Harry-Markowitz.jpg",
+    "retrieved": "2026-09-18",
+    "sha256": "50a79292200d749a45543b5e375e7043c798ad14d3a52574da4d6ced59087579",
+    "rights": "No open reuse license stated on source page; copyright remains with respective rights holder. Source credited; no open license or permission from the rights holder is asserted.",
+    "modifications": "None; displayed at reduced size with source credit."
+  }
+}

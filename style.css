@@ -15,3 +15,21 @@
 img[src*="technical-lightning-satire"]{display:block;width:100%;height:auto;border-radius:4px;margin:24px 0}
 
 .hedge-steps{display:flex;flex-wrap:wrap;gap:8px}.hedge-steps button[aria-current="step"]{color:var(--primary);border-color:var(--primary)}.hedge-lesson .option-tree img{min-width:660px}.hedge-explanation{min-height:5em}.hedge-experiment{margin-top:28px}
+/* Portfolio figures keep precise labels readable inside a scrollable mobile frame. */
+.portfolio-figure{max-width:100%;overflow-x:auto;margin:28px 0 12px;background:#fff;border:1px solid var(--border);border-radius:4px}
+.portfolio-figure img{display:block;width:100%;min-width:680px;height:auto}
+.portfolio-figure:focus-visible{outline:3px solid var(--primary);outline-offset:4px}
+.portfolio-figure+p{font-size:15px;color:var(--muted);line-height:1.7}
+.portfolio-table td{text-align:left}
+.portfolio-table td[align=right],.portfolio-table th[align=right]{text-align:right}
+.portfolio-table:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+
+/* Sourced portrait in the Portfolio Theory introduction. */
+.portfolio-portrait{display:flex;align-items:center;gap:24px;margin:28px 0 32px;padding:0 0 24px;border-bottom:1px solid var(--border)}
+.portfolio-portrait>p{flex:0 0 168px;margin:0}
+.portfolio-portrait img{display:block;width:168px;height:auto;border-radius:4px}
+.portfolio-portrait figcaption{min-width:0;text-align:left}
+.portfolio-portrait figcaption>strong{font-size:1.2rem;color:var(--text)}
+.portfolio-portrait figcaption p{margin:8px 0 0}
+.portfolio-portrait .portfolio-portrait-credit{font-size:.8rem;color:var(--muted)}
+@media(max-width:520px){.portfolio-portrait{align-items:flex-start;flex-direction:column;gap:16px}.portfolio-portrait>p{flex-basis:auto}.portfolio-portrait img{width:144px}}

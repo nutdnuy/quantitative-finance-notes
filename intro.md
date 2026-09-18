@@ -72,6 +72,14 @@ description: เรียนการเงินเชิงปริมาณ�
 <p class="welcome-topics">Delta hedge · สูตรราคา Call/Put · Greeks · Risk-neutral valuation</p>
 <a class="welcome-text-link" href="black-scholes-model.html">เปิดบท Black-Scholes Model →</a></div>
 </article>
+<article class="welcome-lesson">
+<span class="welcome-lesson-number" aria-hidden="true">06</span>
+<div><p class="welcome-lesson-label">จัดพอร์ตจากผลตอบแทนและความเสี่ยง</p>
+<h3><a href="portfolio-theory.html">Portfolio Theory</a></h3>
+<p>สัดส่วนลงทุนและ correlation เปลี่ยนความเสี่ยงของพอร์ตอย่างไร?</p>
+<p class="welcome-topics">Diversification · Efficient frontier · Sharpe ratio · CAPM</p>
+<a class="welcome-text-link" href="portfolio-theory.html">เปิดบท Portfolio Theory →</a></div>
+</article>
 </div>
 
 ## อ่านไป ลองไป

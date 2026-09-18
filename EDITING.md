@@ -130,3 +130,11 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 เมื่อแก้ `black-scholes-model.md` ให้รัน `python3 scripts/make_black_scholes_notebook.py` เพื่อสร้าง Notebook จากเนื้อหาปัจจุบันและรันเซลล์ด้วย Python standard library ตรวจราคา, Greeks, parity, risk-neutral Monte Carlo และ Delta hedge แบบ self-financing โค้ดใน Notebook ใช้ seed ของตนเองที่ระบุไว้ จึงไม่จำเป็นต้องได้เส้นทางเดียวกับห้องทดลอง JavaScript
 
 ตรวจด้วย `npm run build:pages`, `npm test` และ `node qa/black-scholes-browser.cjs` ขณะเปิด preview ที่พอร์ต 8763 ห้องทดลองใช้หุ้นไม่มีปันผล European Call/Put และดอกเบี้ยทบต้นต่อเนื่อง หากเปลี่ยนขอบเขตนี้ต้องแก้ข้อความ สมการ และ Notebook ให้ตรงกันด้วย
+
+## แก้บท Portfolio Theory
+
+เนื้อหาอยู่ใน `portfolio-theory.md` ห้องทดลองอยู่ใน `src/portfolio.jsx` และสูตรอยู่ใน `src/portfolio.mjs` รูปกราฟทั้งสี่สร้างจาก `scripts/make_portfolio_figures.py` และเก็บเป็น SVG ใน `assets/images/` แก้สมมติฐานผ่านสคริปต์แล้วสร้างรูปใหม่ เพื่อให้เส้นกราฟและป้ายตัวเลขตรงกัน
+
+หลังแก้บทนี้ รัน `python3 scripts/make_portfolio_notebook.py` เพื่อสร้างและรัน `notebooks/portfolio-theory.ipynb` จากเนื้อหาล่าสุด คำสั่งเขียนทับเฉพาะ Notebook ชื่อนี้ จากนั้นตรวจด้วย `npm run build:pages`, `npm test` และ `node qa/portfolio-browser.cjs` ขณะเปิด preview ที่พอร์ต 8763
+
+เปิด `portfolio-theory.html` ในโฟลเดอร์หลักหรือผ่าน preview เพื่อดูงานในเครื่อง การ build ไม่ได้อัปโหลดเว็บ ต้อง commit และ push แยกต่างหากเมื่อพร้อมเผยแพร่
