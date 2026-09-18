@@ -32,3 +32,46 @@
 @media(max-width:1100px){.book-layout{grid-template-columns:220px minmax(0,1fr);gap:44px;padding:0 28px}.book-sidebar{padding-top:24px}.book-main{padding-top:20px}.page-topline{margin-bottom:40px}.book-main .lab{padding:24px}}
 @media(max-width:800px){.book-layout{display:block;padding:0 24px}.book-mobile-header{display:flex;justify-content:space-between;gap:16px;align-items:center;position:sticky;top:0;z-index:12;background:var(--bg);padding:8px 20px;border-bottom:1px solid var(--grid)}.book-mobile-header>a{font-size:13px;line-height:1.45;font-weight:500;color:var(--text);text-decoration:none;max-width:190px}.book-mobile-header button{font-size:12px;padding:10px 12px;min-height:48px;background:transparent}.book-sidebar{display:none;position:relative;height:auto;padding:20px 0;overflow:visible;border-bottom:1px solid var(--grid)}.menu-open .book-sidebar{display:block}.menu-open .book-sidebar .cover-link,.menu-open .book-name{display:none}.book-sidebar-footer{margin-top:16px}.page-contents{display:none}.book-main{padding:24px 0 48px}.page-topline{display:none}.mobile-cover{display:block;max-width:390px;margin:0 auto 32px}.welcome-main h1{font-size:40px;margin-bottom:20px}.welcome-lead{font-size:25px;line-height:1.6;margin-bottom:28px}.book{font-size:16px;line-height:1.9}.welcome-main h2{font-size:23px;margin-top:40px}.welcome-main li{font-size:15px}.reading-entry{padding:22px}.reading-entry h3{font-size:20px;line-height:1.7}.reading-entry h3 span{display:none}.book-footer{font-size:11px;margin-top:40px;flex-wrap:wrap}.book-main h1{font-size:33px;line-height:1.55}.book-main h2{scroll-margin-top:88px}.book-main .lab{padding:18px 12px}.book-main>section{scroll-margin-top:72px}.book-main .lead{font-size:19px}.book-main .equation{font-size:15px}#search-dialog{padding:20px}.search-dialog-heading h2{font-size:17px}}
 @media print{.book-layout{display:block;padding:0}.book-sidebar,.book-mobile-header,.page-topline,.mobile-cover,#search-dialog{display:none!important}.book-main{max-width:none;padding:0}.book-footer{margin-top:30px}.book-main h1{font-size:30pt}}
+
+/* Welcome editorial refresh. Route: no-image-generator.
+   QuantCorner / Quantseras Design System; existing approved logos unchanged. */
+.welcome-main .welcome-hero{padding-bottom:32px;border-bottom:1px solid var(--grid)}
+.welcome-main .welcome-kicker{font-size:13px;color:var(--muted);margin:0 0 16px}
+.welcome-main .welcome-lead{font-size:clamp(28px,3vw,40px);font-weight:500;line-height:1.5;letter-spacing:0;margin:0 0 20px;text-wrap:balance}
+.welcome-main .welcome-summary{font-size:18px;line-height:1.85;max-width:640px;margin:0 0 24px;color:var(--muted)}
+.welcome-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px 24px}
+.welcome-actions .button{gap:16px;padding-inline:24px}
+.welcome-main .welcome-text-link{display:inline-flex;align-items:center;gap:8px;min-height:48px;font-size:14px;line-height:1.7;text-decoration:none;overflow-wrap:anywhere}
+.welcome-main .welcome-text-link:hover{text-decoration:underline;text-underline-offset:5px}
+.welcome-main .welcome-format{font-size:13px;color:var(--muted);margin:24px 0 0}
+.welcome-preparation{background:var(--surface);border-radius:6px;padding:24px 28px;margin:28px 0 40px}
+.welcome-main .welcome-preparation h3,.welcome-main .welcome-resources h3{font-size:19px;font-weight:500;margin:0 0 12px}
+.welcome-main .welcome-preparation p,.welcome-main .welcome-resources p{font-size:15px;line-height:1.85;margin:0 0 8px}
+.welcome-main .welcome-lessons{margin:28px 0 40px}
+.welcome-lesson{display:grid;grid-template-columns:48px minmax(0,1fr);gap:24px;border-top:1px solid var(--grid);padding:24px 0}
+.welcome-lesson:last-child{border-bottom:1px solid var(--grid)}
+.welcome-lesson-number{font-size:26px;font-weight:400;font-variant-numeric:tabular-nums;line-height:1.5;color:var(--muted)}
+.welcome-main .welcome-lesson-label{font-size:12px;color:var(--muted);margin:0 0 6px}
+.welcome-main .welcome-lesson h3{font-size:22px;line-height:1.55;margin:0 0 8px;font-weight:500;overflow-wrap:anywhere}
+.welcome-lesson h3 a{color:var(--text);text-decoration:none}
+.welcome-lesson h3 a:hover{color:var(--primary);text-decoration:underline}
+.welcome-main .welcome-lesson p{font-size:15px;line-height:1.8;margin:0 0 8px}
+.welcome-main .welcome-lesson .welcome-lesson-label{font-size:12px}
+.welcome-main .welcome-lesson .welcome-topics{font-size:13px;color:var(--muted);margin-bottom:4px}
+.welcome-resources{padding:28px;background:var(--surface);border-radius:6px;margin-top:32px}
+.welcome-resources .welcome-download{margin:12px 0 0;gap:8px 24px}
+.welcome-resources .welcome-download a{display:inline-flex;align-items:center;min-height:48px;font-size:14px}
+@media(max-width:800px){
+ .welcome-main .welcome-lead{font-size:clamp(25px,5vw,36px)}
+ .welcome-main .welcome-summary{font-size:16px}
+ .welcome-main .welcome-format{max-width:320px;line-height:1.9}
+ .welcome-preparation,.welcome-resources{padding:20px}
+ .welcome-lesson{grid-template-columns:32px minmax(0,1fr);gap:12px;padding:24px 0}
+ .welcome-lesson-number{font-size:22px}
+ .welcome-main .welcome-lesson h3{font-size:20px}
+ .welcome-main .welcome-lesson .welcome-text-link{font-size:13px}
+}
+@media print{
+ .welcome-main .welcome-hero{padding-bottom:20px}
+ .welcome-preparation,.welcome-lesson,.welcome-resources{break-inside:avoid}
+}
