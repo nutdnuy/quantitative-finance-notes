@@ -5,7 +5,7 @@ description: ศัพท์ที่ใช้ในบทเรียน Quant 
 
 # อภิธานศัพท์
 
-หน้านี้รวมศัพท์ที่เราใช้ในบทเรียน **พฤติกรรมแบบสุ่มของสินทรัพย์**, **Binomial Model**, **Transition Density Functions**, **Applied Stochastic Calculus**, **Black–Scholes Model**, **Portfolio Theory** และ **Portfolio Optimization & Black–Litterman** เอาไว้เปิดเทียบระหว่างอ่าน แต่ละคำมีลิงก์กลับไปดูตัวอย่างและการทดลองที่เกี่ยวข้อง
+หน้านี้รวมศัพท์ที่เราใช้ในบทเรียน **พฤติกรรมแบบสุ่มของสินทรัพย์**, **Binomial Model**, **Transition Density Functions**, **Applied Stochastic Calculus**, **Black–Scholes Model**, **Portfolio Theory** และ **Portfolio Optimization** และ **Black–Litterman** เอาไว้เปิดเทียบระหว่างอ่าน แต่ละคำมีลิงก์กลับไปดูตัวอย่างและการทดลองที่เกี่ยวข้อง
 
 <div class="glossary-search" hidden>
 <label for="glossary-query">ค้นหาคำศัพท์</label>
@@ -915,7 +915,7 @@ step ของกระบวนการต่างตัวในช่วง
 
 การเริ่มจากน้ำหนักพอร์ตที่สังเกตได้และสมมติว่าเป็นคำตอบของ optimizer แล้วแก้ย้อนหา parameter ที่สอดคล้องกัน ใน Black–Litterman ใช้ \(\Pi=\lambda\Sigma w_{mkt}\) เพื่อหา implied equilibrium excess returns จาก market weights
 
-[ดูในบทเรียน](portfolio-optimization.html#black-litterman)
+[ดูในบทเรียน](black-litterman.html#black-litterman)
 
 </section>
 
@@ -925,7 +925,7 @@ step ของกระบวนการต่างตัวในช่วง
 
 กรอบจัดพอร์ตที่ใช้ reverse optimization สร้าง prior ของ expected excess returns จาก market weights แล้วผสม absolute หรือ relative views พร้อม covariance ของความไม่แน่นอน ผลลัพธ์ขึ้นกับ market portfolio, risk aversion, covariance, \(\tau\), views และ \(\Omega\)
 
-[ดูในบทเรียน](portfolio-optimization.html#black-litterman)
+[ดูในบทเรียน](black-litterman.html#black-litterman)
 
 </section>
 

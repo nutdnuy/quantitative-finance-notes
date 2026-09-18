@@ -15,7 +15,8 @@
 | เนื้อหา Applied Stochastic Calculus | `applied-stochastic-calculus.md` |
 | เนื้อหา Black–Scholes Model | `black-scholes-model.md` |
 | เนื้อหา Portfolio Theory | `portfolio-theory.md` |
-| เนื้อหา Portfolio Optimization & Black–Litterman | `portfolio-optimization.md` |
+| เนื้อหา Portfolio Optimization | `portfolio-optimization.md` |
+| เนื้อหา Black–Litterman | `black-litterman.md` |
 | ความหมายและตัวอย่างคำศัพท์ | `glossary.md` |
 | ชื่อเว็บ ชื่อผู้เขียน รูปด้านบน ลิงก์ GitHub | `_config.yml` |
 | รายการและลำดับหัวข้อในสารบัญ | `_toc.yml` |
@@ -142,8 +143,16 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 
 เปิด `portfolio-theory.html` ในโฟลเดอร์หลักหรือผ่าน preview เพื่อดูงานในเครื่อง การ build ไม่ได้อัปโหลดเว็บ ต้อง commit และ push แยกต่างหากเมื่อพร้อมเผยแพร่
 
-## แก้บท Portfolio Optimization & Black–Litterman
+## แก้บท Portfolio Optimization และ Black–Litterman
 
-เนื้อหาอยู่ใน `portfolio-optimization.md` สูตรคำนวณและห้องทดลองอยู่ใน `src/portfolio-optimization.mjs` กับ `src/portfolio-optimization.jsx` ภาพเชิงคำนวณ 13 ภาพสร้างจาก `scripts/make_portfolio_optimization_figures.py` และเก็บ SVG ไว้ใน `assets/images/` ส่วน Black–Litterman roadmap เป็นภาพที่ 14 และมี source ที่แก้ไขต่อได้ใน `assets/diagrams/optimization-black-litterman-roadmap.excalidraw`
+เนื้อหาอยู่ใน `portfolio-optimization.md` และ `black-litterman.md` สูตรคำนวณและห้องทดลองอยู่ใน `src/portfolio-optimization.mjs` กับ `src/portfolio-optimization.jsx` ภาพเชิงคำนวณ 13 ภาพสร้างจาก `scripts/make_portfolio_optimization_figures.py` และเก็บ SVG ไว้ใน `assets/images/` ส่วน Black–Litterman roadmap เป็นภาพที่ 14 และมี source ที่แก้ไขต่อได้ใน `assets/diagrams/optimization-black-litterman-roadmap.excalidraw`
 
 หลังแก้บทหรือสมการ รัน `python3 scripts/make_portfolio_optimization_figures.py` และ `python3 scripts/make_portfolio_optimization_notebook.py` เพื่อให้ภาพกับ Notebook ตรงกับหน้าเว็บ จากนั้นตรวจด้วย `npm run build:pages`, `npm test`, `node qa/portfolio-optimization-browser.cjs` และ `node qa/portfolio-optimization-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 ตัวเลขสี่สินทรัพย์และ views เป็นข้อมูลสมมติ ห้ามนำ PDF ต้นฉบับหรือภาพหน้าสไลด์เข้า repository
+
+## หน้า Black–Litterman ที่แยกออกมา
+
+`portfolio-optimization.md` ครอบคลุมเครื่องมือ optimization ส่วน `black-litterman.md` ครอบคลุม prior, views, posterior และห้องทดลองที่ mount ด้วย `black-litterman-lab` สารบัญและ glossary เชื่อมสองหน้าแยกกัน
+
+ภาพทั้ง 14 ภาพออกแบบใหม่จาก inputs เดิม: รัน `python3 scripts/make_portfolio_optimization_figures.py` สำหรับ 13 ภาพเชิงคำนวณ และ `python3 scripts/render_optimization_roadmap.py` สำหรับ roadmap จาก Excalidraw จากนั้น `python3 scripts/make_portfolio_optimization_notebook.py` จะสร้างและรัน Notebook ทั้งสองเล่มแยก namespace กัน
+
+สองหน้านี้ตั้ง `inline_math: true` ใน frontmatter เพื่อเรนเดอร์สมการในบรรทัดที่เขียนด้วย `\( ... \)` ผ่าน KaTeX เช่นเดียวกับสมการ display `$$ ... $$`

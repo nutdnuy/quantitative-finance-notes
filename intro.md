@@ -83,10 +83,18 @@ description: เรียนการเงินเชิงปริมาณ�
 <article class="welcome-lesson">
 <span class="welcome-lesson-number" aria-hidden="true">07</span>
 <div><p class="welcome-lesson-label">เปลี่ยนเกณฑ์ให้เป็นน้ำหนักพอร์ต</p>
-<h3><a href="portfolio-optimization.html">Portfolio Optimization & Black–Litterman</a></h3>
-<p>เราจะเขียน objective, constraints และ views อย่างไรให้ optimizer คำนวณพอร์ตได้?</p>
-<p class="welcome-topics">Lagrange · OLS/GLS · Black–Litterman · KKT · Active weights</p>
+<h3><a href="portfolio-optimization.html">Portfolio Optimization</a></h3>
+<p>เราจะเขียน objective และ constraints อย่างไรให้ optimizer คำนวณพอร์ตได้?</p>
+<p class="welcome-topics">Lagrange · OLS/GLS · KKT · Active weights</p>
 <a class="welcome-text-link" href="portfolio-optimization.html">เปิดบท Portfolio Optimization →</a></div>
+</article>
+<article class="welcome-lesson">
+<span class="welcome-lesson-number" aria-hidden="true">08</span>
+<div><p class="welcome-lesson-label">ผสมพอร์ตตลาดกับมุมมองของเรา</p>
+<h3><a href="black-litterman.html">Black–Litterman</a></h3>
+<p>จะรวม prior กับ views ที่มีความไม่แน่นอน แล้วนำไปจัดพอร์ตอย่างไร?</p>
+<p class="welcome-topics">Reverse optimization · Prior · Views · Posterior</p>
+<a class="welcome-text-link" href="black-litterman.html">เปิดบท Black–Litterman →</a></div>
 </article>
 </div>
 

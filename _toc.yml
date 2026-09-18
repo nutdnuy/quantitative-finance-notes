@@ -19,6 +19,8 @@ chapters:
   - file: portfolio-theory
     title: Portfolio Theory
   - file: portfolio-optimization
-    title: Portfolio Optimization & Black–Litterman
+    title: Portfolio Optimization
+  - file: black-litterman
+    title: Black–Litterman
   - file: glossary
     title: อภิธานศัพท์

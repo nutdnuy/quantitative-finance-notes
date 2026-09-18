@@ -1,0 +1,44 @@
+{
+  "chapter": "black-litterman.md",
+  "source_provenance": "portfolio-optimization-provenance.json",
+  "data_status": "Hypothetical one-year simple returns; no empirical market observations",
+  "visuals": {
+    "design_system": "QuantCorner / QuantSeras; preserve the current light book layout, purple and teal accents, readable Thai typography, accessible dark theme and offline operation.",
+    "route": "no-image-generator",
+    "image_generator_used": false,
+    "generator": "scripts/make_portfolio_optimization_figures.py generates 13 SVGs; scripts/render_optimization_roadmap.py renders the editable Excalidraw roadmap.",
+    "svg_files": [
+      "assets/images/optimization-black-litterman-roadmap.svg",
+      "assets/images/optimization-black-litterman-beliefs.svg",
+      "assets/images/optimization-black-litterman-weights.svg"
+    ],
+    "editable_diagram": {
+      "rendered_file": "assets/images/optimization-black-litterman-roadmap.svg",
+      "source_file": "assets/diagrams/optimization-black-litterman-roadmap.excalidraw",
+      "spec": {
+        "layout": "Two input branches: market to prior, prior and views to posterior, posterior to allocation",
+        "stages": [
+          "market weights and covariance",
+          "reverse optimization prior",
+          "P-Q-Omega views",
+          "posterior expected excess returns",
+          "portfolio allocation"
+        ],
+        "requirements": [
+          "Each arrow names the object passed to the next stage.",
+          "Market inputs, investor views and allocation outputs remain visually distinct.",
+          "The SVG and Excalidraw source express the same five stages.",
+          "Text remains legible at 320 CSS pixels and in both site themes.",
+          "No PDF artwork or source portrait is embedded."
+        ]
+      }
+    },
+    "labels": "SVGs include explicit titles, descriptions, axes, units and source-aligned numerical values. Chapter alt text and figure captions explain the takeaway without relying on color alone.",
+    "revision": "2026-09-18: three static illustrations and the interactive prior/posterior chart rebuilt for the standalone lesson."
+  },
+  "notebook": "notebooks/black-litterman.ipynb",
+  "notes": [
+    "The prior is reverse-optimized from market weights, not copied from the expected returns used in the previous chapter.",
+    "Return covariance Sigma is held fixed for allocation; posterior uncertainty of the mean is a distinct object."
+  ]
+}

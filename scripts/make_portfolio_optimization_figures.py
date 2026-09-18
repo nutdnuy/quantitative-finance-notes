@@ -9,6 +9,7 @@ deterministic geometry and are labelled as illustrations.
 from __future__ import annotations
 
 from html import escape
+from base64 import b64encode
 from math import cos, pi, sin, sqrt
 from pathlib import Path
 
@@ -173,7 +174,7 @@ POSTERIOR = solve(
     POSTERIOR_PRECISION,
     [rhs_prior[i] + rhs_views[i] for i in range(4)],
 )
-BL_RISKY = [0.09869571, 0.16585951, 0.40130429, 0.10]
+BL_RISKY = [value / LAMBDA_MKT for value in solve(SIGMA, POSTERIOR)]
 BL_RF = 1 - sum(BL_RISKY)
 
 
@@ -212,8 +213,13 @@ class SVG:
             '<rect width="100%" height="100%" fill="#FFFFFF"/>',
             '<g font-family="Roboto, Noto Sans Thai, Arial, sans-serif">',
         ]
-        self.text(44, 48, title, size=28, weight=600)
-        self.text(44, 80, subtitle, size=16, fill=GRAY)
+        font_css = ''.join(
+            f"@font-face{{font-family:Roboto;src:url(data:font/woff2;base64,{b64encode((ROOT / f'assets/fonts/roboto-latin-{weight}-normal.woff2').read_bytes()).decode()}) format('woff2');font-weight:{weight}}}"
+            for weight in [400, 500]
+        )
+        self.items.append(f'<style>{font_css}</style>')
+        self.text(48, 48, title, size=28, weight=500)
+        self.text(48, 85, subtitle, size=17, fill=GRAY)
 
     def text(self, x, y, text, size=16, fill=INK, anchor="start", weight=400, rotate=None):
         attrs = ""
@@ -274,7 +280,8 @@ class SVG:
         )
 
     def save(self, filename):
-        self.text(44, self.height - 22, self.footer, size=14, fill=GRAY)
+        self.line(48, self.height - 51, self.width - 48, self.height - 51, GRID, 1)
+        self.text(48, self.height - 23, self.footer, size=14, fill=GRAY)
         self.items.append("</g></svg>\n")
         (OUT / filename).write_text("".join(self.items), encoding="utf-8")
 
@@ -304,509 +311,290 @@ def axes(svg, x0, y0, width, height, xmin, xmax, ymin, ymax, xticks, yticks, xla
     return x, y
 
 
+def new_figure(slug, title, subtitle, footer="Hypothetical one-year inputs · No market observations", height=700):
+    return SVG(slug, title, subtitle, subtitle, footer, width=1080, height=height)
+
+
+def rule(svg, x, y, title, color=PURPLE):
+    svg.line(x, y, x + 36, y, color, 3)
+    svg.text(x, y + 30, title, size=20, weight=500)
+
+
+def axis(svg, box, limits, xticks, yticks, xlabel, ylabel, percent=False):
+    x0, y0, w, h = box
+    xmin, xmax, ymin, ymax = limits
+    x, y = plot_map(x0, y0, w, h, xmin, xmax, ymin, ymax)
+    fmt = (lambda v: f"{v * 100:g}") if percent else (lambda v: f"{v:g}")
+    for v in xticks:
+        svg.line(x(v), y0, x(v), y0+h, GRID, 1)
+        svg.text(x(v), y0+h+27, fmt(v), size=15, anchor="middle", fill=GRAY)
+    for v in yticks:
+        svg.line(x0, y(v), x0+w, y(v), GRID, 1)
+        svg.text(x0-14, y(v)+5, fmt(v), size=15, anchor="end", fill=GRAY)
+    svg.line(x0,y0+h,x0+w,y0+h,GRAY,1.4)
+    svg.text(x0+w/2,y0+h+62,xlabel,size=17,anchor="middle")
+    svg.text(x0,y0-24,ylabel,size=17,fill=GRAY)
+    return x,y
+
+
 def figure_optimization_types():
-    svg = SVG(
-        "optimization-types",
-        "Four ways to frame an optimization problem",
-        "Three panels show minimization of elliptical objective contours over different feasible sets. Equality and binding inequality optima are exact tangencies. The fourth shows benchmark-relative weights as a reparameterization with zero-net active weights.",
-        "Constraints define feasible choices; a benchmark defines active weights.",
-        "Illustrative convex objective · Lower contours are better · No market observations",
-        height=760,
-    )
-    panels = [(50, 112), (570, 112), (50, 412), (570, 412)]
-    titles = ["1  Unconstrained", "2  Equality constraint", "3  Inequality constraint", "4  Benchmark-relative"]
-    for (px, py), title in zip(panels, titles):
-        svg.rect(px, py, 500, 276, fill=WHITE, stroke=GRID, rx=8)
-        svg.rect(px + 18, py + 18, 4, 22, fill=PURPLE, rx=2)
-        svg.text(px + 34, py + 35, title, size=18, weight=600)
-        svg.line(px + 18, py + 52, px + 482, py + 52, GRID, 1)
-
-    # All three panels share f(x,y) = (x/105)^2 + (y/38)^2.
-    # For n·z = d, z* = Q^-1 n d / (n·Q^-1 n).
-    rx, ry, slope = 105, 38, 0.22
-    offset = (slope ** 2 * rx ** 2 + ry ** 2) ** 0.5
-    dx, dy = slope * rx ** 2 / offset, ry ** 2 / offset
-    assert abs((dx / rx) ** 2 + (dy / ry) ** 2 - 1) < 1e-12
-    assert abs(slope * dx + dy - offset) < 1e-12
-
-    px, py = panels[0]
-    cx, cy = px + 250, py + 147
-    for scale in [1.2, 0.85, 0.5]:
-        svg.ellipse(cx, cy, rx * scale, ry * scale, stroke=PURPLE, stroke_width=1.8)
-    svg.circle(cx, cy, 6, fill=PURPLE, stroke=WHITE)
-    svg.text(cx + 16, cy + 6, "x*", size=16, fill=PURPLE, weight=600)
-    svg.text(px + 250, py + 239, "Search over all x", size=16, anchor="middle", fill=GRAY)
-
-    for index, direction in [(1, 1), (2, -1)]:
-        px, py = panels[index]
-        cx, cy = px + 235, py + 120
-        tx, ty = cx + direction * dx, cy + dy
-        x1, x2 = px + 72, px + 428
-        y1 = cy + offset - direction * slope * (x1 - cx)
-        y2 = cy + offset - direction * slope * (x2 - cx)
-        if index == 2:
-            svg.polygon([(x1, y1), (x2, y2), (x2, py + 218), (x1, py + 218)], fill=TEAL_LIGHT, stroke="none")
-        for scale in [1.35, 1, 0.6]:
-            svg.ellipse(cx, cy, rx * scale, ry * scale, stroke=PURPLE if scale == 1 else GRAY, stroke_width=1.8 if scale == 1 else 1.2)
-        svg.circle(cx, cy, 3, fill=GRAY, stroke=WHITE, stroke_width=1)
-        svg.line(x1, y1, x2, y2, TEAL, 3)
-        svg.circle(tx, ty, 6.5, fill=PURPLE, stroke=WHITE, stroke_width=2)
-        # Short leaders move labels away from both contours and boundaries.
-        label_x = tx + 28 if index == 1 else tx - 28
-        anchor = "start" if index == 1 else "end"
-        svg.polyline([(tx, ty + 10), (tx, py + 213), (label_x, py + 213)], stroke=GRAY, width=1.2)
-        svg.text(label_x, py + 218, "x*" if index == 1 else "binding x*", size=15, fill=PURPLE, anchor=anchor, weight=600)
-        caption = "g(x) = b  ·  Feasible choices lie on the line" if index == 1 else "g(x) ≤ b  ·  Shaded side is feasible"
-        svg.text(px + 250, py + 249, caption, size=15, anchor="middle", fill=TEAL, weight=500)
-
-    px, py = panels[3]
-    svg.items.append(f'<text x="{px + 250}" y="{py + 92}" text-anchor="middle" font-size="25" fill="{INK}" font-weight="500">w<tspan baseline-shift="sub" font-size="16">p</tspan><tspan> = w</tspan><tspan baseline-shift="sub" font-size="16">B</tspan><tspan> + Δw</tspan></text>')
-    svg.text(px + 250, py + 119, "portfolio = benchmark + active weights", size=14, anchor="middle", fill=GRAY)
-    svg.rect(px + 74, py + 141, 160, 40, fill=TEAL_LIGHT, stroke=TEAL, rx=5)
-    svg.text(px + 154, py + 167, "+ overweight", size=15, anchor="middle", fill=TEAL, weight=500)
-    svg.rect(px + 266, py + 141, 160, 40, fill="#FCE8EC", stroke=ERROR, rx=5)
-    svg.text(px + 346, py + 167, "− underweight", size=15, anchor="middle", fill=ERROR, weight=500)
-    svg.text(px + 250, py + 213, "Σᵢ Δwᵢ = 0", size=22, anchor="middle", weight=500)
-    svg.text(px + 250, py + 249, "Same total weight; active tilts net to zero", size=15, anchor="middle", fill=GRAY)
+    svg=new_figure("optimization-types", "The feasible set changes the answer", "A convex objective; three feasible sets. Benchmark weights provide a different coordinate system.", "Illustrative geometry · Purple dot = optimum · Teal = feasible choices", height=740)
+    rx,ry,m=100,48,.3
+    d=sqrt(m*m*rx*rx+ry*ry)
+    dx,dy=m*rx*rx/d,ry*ry/d
+    assert abs((dx/rx)**2+(dy/ry)**2-1)<1e-12
+    assert abs(dy+m*dx-d)<1e-12
+    for i,title in enumerate(["01  Unconstrained", "02  Equality", "03  Inequality"]):
+        left=48+i*344
+        rule(svg,left,143,title)
+        cx,cy=left+148,298
+        if i==2:
+            svg.polygon([(left+12,cy+d+m*(12-148)),(left+288,cy+d+m*(288-148)),(left+288,411),(left+12,411)],fill=TEAL_LIGHT,stroke="none")
+        for scale in [1.25,1,.55]:
+            svg.ellipse(cx,cy,rx*scale,ry*scale,stroke=PURPLE if scale==1 else GRID,stroke_width=2)
+        tx,ty=cx,cy
+        if i:
+            sign=1 if i==1 else -1
+            svg.line(left+12,cy+d-sign*m*(12-148),left+288,cy+d-sign*m*(288-148),TEAL,3)
+            tx,ty=cx+sign*dx,cy+dy
+        svg.circle(tx,ty,7,fill=PURPLE,stroke=WHITE)
+        svg.text(tx+15,ty-12,"x*",size=18,fill=PURPLE,weight=500)
+        svg.text(left,452,["Search all x","g(x) = b","g(x) ≤ b"][i],size=20,weight=500)
+        svg.text(left,480,["Minimum at the center","The line is the feasible set","The shaded side is feasible"][i],size=16,fill=GRAY)
+    svg.line(48,515,1032,515,GRID,1)
+    svg.text(48,556,"04  Benchmark-relative",size=22,weight=500)
+    svg.text(48,589,"Re-express the portfolio as active weights.",size=17,fill=GRAY)
+    svg.items.append(f'<text x="620" y="557" font-size="28" font-weight="500" fill="{INK}">w<tspan baseline-shift="sub" font-size="18">P</tspan><tspan> = w</tspan><tspan baseline-shift="sub" font-size="18">B</tspan><tspan> + Δw</tspan></text>')
+    svg.text(620,610,"Σᵢ Δwᵢ = 0",size=24,fill=TEAL,weight=500)
+    svg.text(48,650,"When portfolio and benchmark each sum to 100%, overweights and underweights net to zero.",size=18)
     svg.save("optimization-types.svg")
 
 
 def figure_curvature():
-    svg = SVG(
-        "optimization-curvature",
-        "A zero gradient finds candidates; curvature classifies them",
-        "A contour plot shows gradient arrows toward a stationary point. Two profile plots distinguish positive and negative second derivative, with a note that mixed Hessian signs imply a saddle.",
-        "First-order and second-order conditions answer different questions.",
-        "Conceptual functions with exact deterministic geometry | No market observations",
-    )
-    svg.arrow_defs()
-    svg.rect(50, 112, 610, 492, fill=WHITE, stroke=GRID, rx=8)
-    svg.text(72, 145, "Gradient field", size=19, weight=600)
-    cx, cy = 350, 355
-    for rx, ry in [(245, 178), (185, 132), (125, 88), (62, 43)]:
-        svg.ellipse(cx, cy, rx, ry, stroke=PURPLE, stroke_width=2)
-    starts = [(138, 216), (535, 214), (150, 496), (548, 505), (350, 162)]
-    for sx, sy in starts:
-        ex = sx + 0.56 * (cx - sx)
-        ey = sy + 0.56 * (cy - sy)
-        svg.line(sx, sy, ex, ey, PURPLE, 2.5, marker="arrow-purple")
-    svg.circle(cx, cy, 8, fill=PURPLE, stroke=WHITE)
-    svg.text(cx + 18, cy + 6, "∇f(x*) = 0", size=17, fill=PURPLE, weight=600)
-
-    svg.rect(690, 112, 380, 230, fill=WHITE, stroke=GRID, rx=8)
-    svg.text(712, 145, "Positive curvature", size=18, weight=600)
-    points = []
-    for i in range(101):
-        value = -1.0 + 2.0 * i / 100
-        points.append((728 + 300 * (value + 1) / 2, 294 - 125 * value * value))
-    svg.polyline(points, stroke=TEAL, width=4)
-    svg.circle(878, 294, 6, fill=TEAL, stroke=WHITE)
-    svg.text(878, 320, "H ≻ 0 → minimum", size=16, fill=TEAL, anchor="middle", weight=600)
-
-    svg.rect(690, 368, 380, 236, fill=WHITE, stroke=GRID, rx=8)
-    svg.text(712, 401, "Negative or mixed curvature", size=18, weight=600)
-    points = []
-    for i in range(101):
-        value = -1.0 + 2.0 * i / 100
-        points.append((728 + 300 * (value + 1) / 2, 442 + 100 * value * value))
-    svg.polyline(points, stroke=ORANGE, width=4, dash="10 6")
-    svg.circle(878, 442, 6, fill=ORANGE, stroke=WHITE)
-    svg.text(878, 568, "H ≺ 0 → maximum", size=16, fill=ORANGE, anchor="middle", weight=600)
-    svg.text(878, 590, "mixed eigenvalue signs → saddle", size=14, fill=GRAY, anchor="middle")
+    svg=new_figure("optimization-curvature", "A zero gradient can be a minimum or a saddle", "Compare two cross-sections through the same stationary point: x = y = 0.", "Exact functions · Left: f = x² + y² · Right: f = x² − y² · No market observations")
+    for i,title in enumerate(["Positive definite Hessian", "Indefinite Hessian"]):
+        left=80+i*510
+        rule(svg,left,130,title)
+        x,y=axis(svg,(left+30,235,350,260),(-1.2,1.2,-1.3,1.5),[-1,0,1],[-1,0,1],"Position along the slice","Objective value")
+        for sign,color,dash in [(1,PURPLE,None),(1 if i==0 else -1,TEAL,"8 5")]:
+            pts=[(x(t),y(sign*t*t)) for t in [-1.15+j*2.3/100 for j in range(101)]]
+            svg.polyline(pts,stroke=color,width=3,dash=dash)
+        svg.circle(x(0),y(0),6,fill=INK,stroke=WHITE)
+        svg.text(left+190,606,"Both slices curve up" if i==0 else "One up; one down",size=20,anchor="middle",weight=500)
+    svg.line(740,196,772,196,PURPLE,3);svg.text(781,202,"x slice",size=15,fill=PURPLE)
+    svg.line(890,196,922,196,TEAL,3,dash="8 5");svg.text(931,202,"y slice",size=15,fill=TEAL)
     svg.save("optimization-curvature.svg")
 
 
-def matrix_heatmap(svg, matrix, x0, y0, cell, title, vmax, digits, row_labels=True):
-    svg.text(x0, y0 - 26, title, size=19, weight=600)
-    for i, row in enumerate(matrix):
-        for j, value in enumerate(row):
-            strength = min(1.0, abs(value) / vmax if vmax else 0.0)
-            # Four discrete fills keep output deterministic and readable.
-            if strength > 0.72:
-                fill, text_fill = PURPLE, WHITE
-            elif strength > 0.38:
-                fill, text_fill = "#B99AEF", INK
-            elif strength > 0.10:
-                fill, text_fill = PURPLE_LIGHT, INK
-            else:
-                fill, text_fill = LIGHT_GRAY, GRAY
-            svg.rect(x0 + j * cell, y0 + i * cell, cell, cell, fill=fill, stroke=WHITE, stroke_width=2)
-            label = f"{value:.{digits}f}"
-            svg.text(x0 + (j + 0.5) * cell, y0 + (i + 0.57) * cell, label, size=13, fill=text_fill, anchor="middle", weight=500)
-    if row_labels:
-        for i in range(len(matrix)):
-            svg.text(x0 - 12, y0 + (i + 0.57) * cell, f"X{i + 1}", size=13, fill=GRAY, anchor="end")
-            svg.text(x0 + (i + 0.5) * cell, y0 - 8, f"X{i + 1}", size=13, fill=GRAY, anchor="middle")
-
-
 def figure_covariance():
-    svg = SVG(
-        "optimization-covariance",
-        "Covariance combines scale and co-movement: Σ = S R S",
-        "Three heatmaps show the diagonal volatility matrix S, the four-asset correlation matrix R and the resulting covariance matrix Sigma.",
-        "The same correlation can imply different covariance when volatilities differ.",
-        "Hypothetical annual inputs | σ = 7%, 12%, 30%, 60% | No market observations",
-    )
-    matrix_heatmap(svg, [[SD[i] if i == j else 0.0 for j in range(4)] for i in range(4)], 72, 190, 48, "S  volatility", 0.60, 2)
-    svg.text(292, 294, "×", size=36, fill=GRAY, anchor="middle", weight=500)
-    matrix_heatmap(svg, CORR, 330, 190, 48, "R  correlation", 1.0, 1)
-    svg.text(550, 294, "×", size=36, fill=GRAY, anchor="middle", weight=500)
-    matrix_heatmap(svg, [[SD[i] if i == j else 0.0 for j in range(4)] for i in range(4)], 588, 190, 48, "S  volatility", 0.60, 2)
-    svg.text(808, 294, "=", size=36, fill=GRAY, anchor="middle", weight=500)
-    matrix_heatmap(svg, SIGMA, 846, 190, 48, "Σ  covariance", 0.36, 4)
-    svg.rect(72, 435, 966, 94, fill=LIGHT_GRAY, stroke="none", rx=6)
-    svg.text(94, 468, "Example cell", size=15, fill=GRAY)
-    svg.text(94, 502, "Σ₂₃ = σ₂ ρ₂₃ σ₃ = 0.12 × 0.70 × 0.30 = 0.0252", size=21, weight=500)
-    svg.text(94, 528, "Correlation is unitless; covariance is expressed in squared-return units.", size=14, fill=GRAY)
+    svg=new_figure("optimization-covariance", "Volatility turns correlation into covariance", "Each cell follows Σᵢⱼ = σᵢ × ρᵢⱼ × σⱼ. Color scales are separate for the two matrices.")
+    for matrix,left,title,digits,maximum in [(CORR,95,"Correlation ρ · unitless",2,1),(SIGMA,607,"Covariance Σ · return²",5,.36)]:
+        rule(svg,left,137,title)
+        for i in range(4):
+            svg.text(left-24,267+i*65,f"X{i+1}",size=16,anchor="end",weight=500)
+            svg.text(left+39+i*85,217,f"X{i+1}",size=16,anchor="middle",weight=500)
+            for j in range(4):
+                value=matrix[i][j]; intensity=.06+.23*value/maximum
+                svg.rect(left+j*85,236+i*65,81,61,fill=PURPLE_LIGHT if value/maximum<.25 else "#D7C2F5",rx=4)
+                svg.items.append(f'<rect x="{left+j*85}" y="{236+i*65}" width="81" height="61" rx="4" fill="{PURPLE}" opacity="{intensity:.3f}"/>')
+                svg.text(left+40+j*85,273+i*65,f"{value:.{digits}f}".rstrip('0').rstrip('.') if digits==5 else f"{value:.2f}",size=16,anchor="middle")
+        svg.text(left,532,"Scale: 0 to 1" if maximum==1 else "Scale: 0 to 0.36",size=16,fill=GRAY)
+    svg.rect(48,568,984,62,fill=LIGHT_GRAY,rx=6)
+    svg.text(72,605,"Example  Σ₁₂ = 0.07 × 0.80 × 0.12 = 0.00672",size=22,weight=500)
     svg.save("optimization-covariance.svg")
 
 
 def figure_ols():
-    xs = [0.5, 1.2, 2.0, 2.8, 3.6, 4.2, 5.1, 5.8, 6.6, 7.4]
-    ys = [1.3, 2.5, 2.4, 4.1, 3.8, 5.8, 5.1, 6.7, 6.2, 8.2]
-    xbar = sum(xs) / len(xs)
-    ybar = sum(ys) / len(ys)
-    beta = sum((x - xbar) * (y - ybar) for x, y in zip(xs, ys)) / sum((x - xbar) ** 2 for x in xs)
-    alpha = ybar - beta * xbar
-    fitted = [alpha + beta * x for x in xs]
-    sse = sum((y - yhat) ** 2 for y, yhat in zip(ys, fitted))
-    svg = SVG(
-        "optimization-ols",
-        "OLS chooses the line with the smallest sum of squared residuals",
-        "A scatter plot shows ten synthetic observations, the fitted ordinary least squares line and dashed vertical residuals from each point to the line.",
-        "Each dashed segment contributes eᵢ² to the objective.",
-        "Illustrative synthetic observations | OLS calculated from the displayed points | No market data",
-    )
-    x, y = axes(svg, 105, 128, 850, 410, 0, 8, 0, 9, [0, 2, 4, 6, 8], [0, 2, 4, 6, 8], "x", "y", lambda v: f"{v:g}", lambda v: f"{v:g}")
-    svg.line(x(0), y(alpha), x(8), y(alpha + 8 * beta), PURPLE, 4)
-    for xv, yv, yhat in zip(xs, ys, fitted):
-        svg.line(x(xv), y(yv), x(xv), y(yhat), TEAL, 2, dash="5 4")
-        svg.circle(x(xv), y(yv), 6, fill=TEAL, stroke=WHITE)
-    svg.text(980, 185, "fit", size=14, fill=GRAY)
-    svg.text(980, 214, f"ŷ = {alpha:.2f} + {beta:.2f}x", size=18, fill=PURPLE, weight=600)
-    svg.text(980, 264, "objective", size=14, fill=GRAY)
-    svg.text(980, 293, f"Σeᵢ² = {sse:.2f}", size=18, fill=TEAL, weight=600)
-    svg.line(976, 338, 1024, 338, TEAL, 2, dash="5 4")
-    svg.text(980, 364, "residual eᵢ", size=14, fill=GRAY)
+    xs=[-2,-1,0,1,2];ys=[-2.7,-1.0,1.2,2.8,5.1]
+    mx,my=sum(xs)/len(xs),sum(ys)/len(ys)
+    beta=sum((x-mx)*(y-my) for x,y in zip(xs,ys))/sum((x-mx)**2 for x in xs);alpha=my-beta*mx
+    residuals=[yv-alpha-beta*xv for xv,yv in zip(xs,ys)]
+    svg=new_figure("optimization-ols", "OLS minimizes the sum of squared residuals", "A deterministic five-point example; each residual is measured vertically from the fitted line.", "Illustrative regression · Same five observations as the Notebook · No market observations")
+    x,y=axis(svg,(100,185,570,365),(-2.5,2.5,-4,6),[-2,-1,0,1,2],[-4,-2,0,2,4,6],"Input x","Observed y")
+    svg.line(x(-2.4),y(alpha-2.4*beta),x(2.4),y(alpha+2.4*beta),PURPLE,3)
+    for a,b,e in zip(xs,ys,residuals):
+        svg.line(x(a),y(b),x(a),y(b-e),TEAL,4)
+        svg.circle(x(a),y(b),6,fill=TEAL,stroke=WHITE)
+    rule(svg,740,180,"Fitted line")
+    svg.text(740,256,f"ŷ = {alpha:.2f} + {beta:.2f}x",size=24,fill=PURPLE,weight=500)
+    svg.text(740,330,"Residuals",size=18,weight=500)
+    for i,e in enumerate(residuals):
+        svg.text(750,368+i*33,f"e{i+1}",size=16,fill=GRAY)
+        svg.text(977,368+i*33,f"{e:+.2f}",size=18,anchor="end")
+    svg.text(740,581,f"Σ eᵢ² = {dot(residuals,residuals):.3f}",size=24,weight=500)
     svg.save("optimization-ols.svg")
 
 
 def figure_gls():
-    # Exact correlated residual construction e = Lz with Ω = LLᵀ.
-    l = [[2.0, 0.0], [0.8, 0.6]]
-    unit = [
-        (-1.3, -0.3), (-1.0, 0.5), (-0.7, -1.0), (-0.2, 0.4),
-        (0.2, -0.7), (0.5, 1.1), (0.8, 0.1), (1.1, 0.8),
-        (1.3, -0.5), (-0.4, 1.2), (0.7, -1.1), (0.0, 0.0),
-    ]
-    correlated = [(2 * a, 0.8 * a + 0.6 * b) for a, b in unit]
-    svg = SVG(
-        "optimization-gls",
-        "GLS rotates and rescales correlated errors before fitting",
-        "Side-by-side residual plots show elongated correlated errors and the same residuals after whitening, where equal-distance circles are appropriate.",
-        "The whitening transform turns Ω into the identity matrix.",
-        "Illustrative residual geometry | e = Lz with Ω = LLᵀ | No market observations",
-    )
-    svg.arrow_defs()
-    for x0, title in [(78, "Before: correlated scale"), (642, "After: whitened scale")]:
-        svg.rect(x0, 132, 400, 390, fill=WHITE, stroke=GRID, rx=8)
-        svg.text(x0 + 20, 164, title, size=19, weight=600)
-        svg.line(x0 + 44, 345, x0 + 356, 345, GRAY, 1.5)
-        svg.line(x0 + 200, 190, x0 + 200, 486, GRAY, 1.5)
-    # Exact covariance ellipse from L applied to the unit circle.
-    ellipse_points = []
-    for i in range(121):
-        angle = 2 * pi * i / 120
-        a, b = cos(angle), sin(angle)
-        e1, e2 = 2 * a, 0.8 * a + 0.6 * b
-        ellipse_points.append((278 + 64 * e1, 345 - 84 * e2))
-    svg.polyline(ellipse_points, stroke=PURPLE, width=3, dash="9 5")
-    for e1, e2 in correlated:
-        svg.circle(278 + 64 * e1, 345 - 84 * e2, 6, fill=PURPLE, stroke=WHITE)
-    svg.text(98, 500, "Ω = [[4.00, 1.60], [1.60, 1.00]]", size=15, fill=GRAY)
-    svg.line(500, 330, 614, 330, TEAL, 4, marker="arrow-ink")
-    svg.text(557, 310, "L⁻¹", size=20, fill=TEAL, anchor="middle", weight=600)
-    svg.circle(842, 345, 112, fill="none", stroke=TEAL, stroke_width=3)
-    for a, b in unit:
-        svg.circle(842 + 82 * a, 345 - 82 * b, 6, fill=TEAL, stroke=WHITE)
-    svg.text(662, 500, "Cov(L⁻¹e) = I", size=15, fill=GRAY)
+    svg=new_figure("optimization-gls", "Whitening measures residuals on a common scale", "The same unit-distance boundary is an ellipse before whitening and a circle afterward.", "Exact geometry · e = Lz · L = [[2, 0], [0.8, 0.6]] · Ω = LLᵀ")
+    for i,title in enumerate(["Original residuals e", "Whitened residuals z = L⁻¹e"]):
+        left=55+i*510
+        rule(svg,left,133,title)
+        x,y=axis(svg,(left+58,236,334,268),(-2.5,2.5,-2,2),[-2,0,2],[-2,0,2],"e₁" if i==0 else "z₁","e₂" if i==0 else "z₂")
+        pts=[]
+        for k in range(121):
+            a=cos(2*pi*k/120);b=sin(2*pi*k/120)
+            e1,e2=(2*a,.8*a+.6*b) if i==0 else (a,b)
+            pts.append((x(e1),y(e2)))
+        svg.polyline(pts,stroke=PURPLE if i==0 else TEAL,width=3)
+        for k in range(12):
+            a=.75*cos(2*pi*k/12);b=.75*sin(2*pi*k/12)
+            e1,e2=(2*a,.8*a+.6*b) if i==0 else (a,b)
+            svg.circle(x(e1),y(e2),4,fill=PURPLE if i==0 else TEAL,stroke=WHITE,stroke_width=1)
+        svg.text(left+224,610,"Ω = [[4, 1.6], [1.6, 1]]" if i==0 else "Cov(z) = I",size=20,anchor="middle",weight=500)
     svg.save("optimization-gls.svg")
 
 
 def figure_lagrange():
-    svg = SVG(
-        "optimization-lagrange",
-        "The constrained optimum is where a contour touches the constraint",
-        "Elliptical contours of f equals w1 squared plus two w2 squared touch the budget line w1 plus w2 equals one at w1 two thirds and w2 one third.",
-        "At the solution, the objective gradient is parallel to the constraint gradient.",
-        "Conceptual two-variable example | f(w₁,w₂)=w₁²+2w₂² | No market observations",
-    )
-    x, y = axes(svg, 110, 132, 820, 410, 0, 1.15, 0, 1.15, [0, .25, .5, .75, 1], [0, .25, .5, .75, 1], "w₁", "w₂", lambda v: f"{v:.2g}", lambda v: f"{v:.2g}")
-    for level in [0.45, 0.7, 1.0, 1.35]:
-        points = []
-        for i in range(121):
-            angle = 2 * pi * i / 120
-            w1 = sqrt(level) * cos(angle)
-            w2 = sqrt(level / 2) * sin(angle)
-            if 0 <= w1 <= 1.15 and 0 <= w2 <= 1.15:
-                points.append((x(w1), y(w2)))
-        if len(points) > 1:
-            svg.polyline(points, stroke=PURPLE, width=2)
-    svg.line(x(0), y(1), x(1), y(0), TEAL, 4)
-    w1, w2 = 2 / 3, 1 / 3
-    svg.circle(x(w1), y(w2), 8, fill=TEAL, stroke=WHITE)
-    svg.text(x(w1) + 18, y(w2) - 14, "w* = (2/3, 1/3)", size=17, fill=TEAL, weight=600)
-    svg.text(x(.13), y(.87), "w₁ + w₂ = 1", size=16, fill=TEAL, weight=600, rotate=-28)
-    svg.rect(954, 180, 126, 178, fill=LIGHT_GRAY, stroke="none", rx=6)
-    svg.text(972, 214, "FOC", size=14, fill=GRAY)
-    svg.text(972, 249, "∇f = λ∇g", size=18, weight=600)
-    svg.text(972, 294, "same", size=14, fill=GRAY)
-    svg.text(972, 321, "direction", size=14, fill=GRAY)
+    svg=new_figure("optimization-lagrange", "Lagrange finds the lowest feasible contour", "Minimize f(w₁,w₂) = w₁² + 2w₂² subject to w₁ + w₂ = 1.", "Exact two-variable geometry · Optimum (2/3, 1/3) · Minimum f = 2/3")
+    x,y=axis(svg,(100,194,510,360),(0,1.2,0,1.2),[0,.3,.6,.9,1.2],[0,.3,.6,.9,1.2],"w₁","w₂")
+    for level in [.22,2/3,1.0,1.4]:
+        pts=[]
+        for k in range(181):
+            t=pi*k/360;a=sqrt(level)*cos(t);b=sqrt(level/2)*sin(t)
+            if a<=1.2 and b<=1.2:pts.append((x(a),y(b)))
+        svg.polyline(pts,stroke=PURPLE if level==2/3 else GRID,width=3 if level==2/3 else 1.5)
+    svg.line(x(0),y(1),x(1),y(0),TEAL,3)
+    svg.circle(x(2/3),y(1/3),7,fill=PURPLE,stroke=WHITE)
+    svg.text(x(2/3)+15,y(1/3)-14,"w*",size=20,fill=PURPLE,weight=500)
+    rule(svg,708,200,"At the optimum")
+    for j,txt in enumerate(["w₁ = 2/3", "w₂ = 1/3", "∇f = (4/3, 4/3)", "∇g = (1, 1)"]):svg.text(708,282+j*53,txt,size=23)
+    svg.text(708,530,"The gradients are parallel.",size=19,fill=GRAY)
+    svg.text(708,562,"The budget still sums to 1.",size=19,fill=GRAY)
     svg.save("optimization-lagrange.svg")
 
 
 def figure_target_allocation():
-    weights = target_weights(0.10)
-    svg = SVG(
-        "optimization-target-allocation",
-        "A 10% target return determines one minimum-variance allocation",
-        "Horizontal bars show the four optimal weights for the unconstrained minimum-variance portfolio with expected return fixed at ten percent.",
-        "All four weights are positive for this target, although short selling is allowed by the model.",
-        "Hypothetical annual inputs | Target portfolio return = 10% | Weights calculated from Sigma inverse",
-    )
-    x0, bar0, barw = 92, 290, 660
-    svg.line(bar0, 146, bar0, 532, GRAY, 1.5)
-    for i, value in enumerate(weights):
-        cy = 194 + i * 86
-        svg.text(x0, cy + 6, f"X{i + 1}", size=21, weight=600)
-        svg.text(x0 + 55, cy + 6, f"μ {MU[i] * 100:.0f}%  ·  σ {SD[i] * 100:.0f}%", size=15, fill=GRAY)
-        svg.rect(bar0, cy - 19, barw, 38, fill=LIGHT_GRAY, stroke="none", rx=4)
-        svg.rect(bar0, cy - 19, barw * value / 0.60, 38, fill=PURPLE if i % 2 == 0 else TEAL, stroke="none", rx=4)
-        svg.text(bar0 + barw * value / 0.60 + 12, cy + 7, f"{value * 100:.2f}%", size=17, weight=600)
-    svg.rect(92, 556, 956, 58, fill=PURPLE_LIGHT, stroke="none", rx=6)
-    svg.text(112, 592, f"sum(w) = {sum(weights):.4f}     mu^T w = {dot(MU, weights) * 100:.2f}%     portfolio SD = {sqrt(variance(weights)) * 100:.2f}%", size=18, weight=500)
+    w=target_weights(.1)
+    svg=new_figure("optimization-target-allocation", "A 10% target fixes one minimum-variance portfolio", "The optimizer satisfies both equations: sum of weights = 1 and expected return = 10%.")
+    x0,scale=184,12
+    for tick in [0,10,20,30,40,50,60]:
+        svg.line(x0+scale*tick,185,x0+scale*tick,497,GRID,1)
+        svg.text(x0+scale*tick,526,f"{tick}%",size=15,anchor="middle",fill=GRAY)
+    for i,v in enumerate(w):
+        yy=217+76*i
+        svg.text(88,yy+8,f"X{i+1}",size=21,weight=500)
+        svg.rect(x0,yy-16,v*100*scale,32,fill=PURPLE,rx=3)
+        svg.text(x0+v*100*scale+14,yy+6,f"{v*100:.2f}%",size=20,weight=500)
+    for xx,label,value in [(80,"TOTAL WEIGHT","100.00%"),(423,"EXPECTED RETURN","10.00%"),(755,"VOLATILITY",f"{sqrt(variance(w))*100:.2f}%")]:
+        svg.text(xx,593,label,size=14,fill=GRAY);svg.text(xx,629,value,size=29,weight=500)
     svg.save("optimization-target-allocation.svg")
 
 
 def figure_frontier():
-    svg = SVG(
-        "optimization-frontier",
-        "Four assets: frontier, GMV, tangency and CAL",
-        "The four-asset minimum-variance frontier is shown with the global minimum variance portfolio, the ten percent target portfolio, the tangency portfolio and the capital allocation line from a two point five percent risk-free return.",
-        "GMV minimizes risk; tangency maximizes the Sharpe slope from the risk-free point.",
-        "Hypothetical annual inputs | Unconstrained weights | r_f = 2.5% | No market observations",
-    )
-    x, y = axes(svg, 105, 126, 820, 430, 0, .48, -.02, .32, [0, .1, .2, .3, .4], [0, .05, .10, .15, .20, .25, .30], "Portfolio standard deviation (%)", "Expected return (%)", lambda v: f"{v * 100:.0f}", lambda v: f"{v * 100:.0f}")
-    lower, upper = [], []
-    for i in range(181):
-        target = -.02 + .34 * i / 180
-        sigma, mean, _ = target_point(target)
-        if sigma <= .48 and -.02 <= mean <= .32:
-            point = (x(sigma), y(mean))
-            (upper if target >= GMV_RETURN else lower).append(point)
-    svg.polyline(lower, stroke=GRAY, width=2.5, dash="8 6")
-    svg.polyline(upper, stroke=PURPLE, width=4)
-    cal_end_sigma = .46
-    cal_end_return = RF + TANGENCY_SHARPE * cal_end_sigma
-    svg.line(x(0), y(RF), x(cal_end_sigma), y(cal_end_return), TEAL, 3, dash="10 5")
-    points = [
-        (GMV_SD, GMV_RETURN, "GMV", GRAY, -16, 35),
-        (target_point(.10)[0], .10, "Target 10%", ORANGE, 12, -16),
-        (TANGENCY_SD, TANGENCY_RETURN, "Tangency", TEAL, 12, 30),
-        (0, RF, "r_f 2.5%", TEAL, 12, -12),
-    ]
-    for sx, mean, label, color, dx, dy in points:
-        svg.circle(x(sx), y(mean), 7, fill=color, stroke=WHITE)
-        svg.text(x(sx) + dx, y(mean) + dy, label, size=15, fill=color, weight=600)
-    svg.text(952, 190, "solid", size=14, fill=GRAY)
-    svg.line(952, 211, 1002, 211, PURPLE, 4)
-    svg.text(952, 238, "efficient", size=14, fill=PURPLE)
-    svg.line(952, 284, 1002, 284, GRAY, 2.5, dash="8 6")
-    svg.text(952, 311, "inefficient", size=14, fill=GRAY)
-    svg.line(952, 357, 1002, 357, TEAL, 3, dash="10 5")
-    svg.text(952, 384, "CAL", size=14, fill=TEAL)
+    svg=new_figure("optimization-frontier", "The frontier contains a different optimum for each target", "Risky-only minimum variance and the capital allocation line (CAL) with a 2.5% risk-free rate.")
+    x,y=axis(svg,(104,187,560,363),(0,.55,0,.25),[0,.1,.2,.3,.4,.5],[0,.05,.1,.15,.2,.25],"Portfolio volatility (%)","Expected return (%)",True)
+    for lo,hi,color,dash in [(0,GMV_RETURN,GRAY,"7 5"),(GMV_RETURN,.25,PURPLE,None)]:
+        pts=[(x(target_point(t)[0]),y(t)) for t in [lo+(hi-lo)*k/150 for k in range(151)]]
+        svg.polyline(pts,stroke=color,width=3,dash=dash)
+    svg.line(x(0),y(RF),x(.4),y(RF+.4*TANGENCY_SHARPE),TEAL,2.5,dash="8 5")
+    points=[(GMV_SD,GMV_RETURN,"1",PURPLE),(TANGENCY_SD,TANGENCY_RETURN,"2",TEAL),(target_point(.1)[0],.1,"3",ORANGE)]
+    for sx,sy,label,color in points:
+        svg.circle(x(sx),y(sy),7,fill=color,stroke=WHITE)
+    rule(svg,735,165,"Three reference portfolios")
+    for i,(label,mean,sd,color) in enumerate([("GMV",GMV_RETURN,GMV_SD,PURPLE),("Tangency",TANGENCY_RETURN,TANGENCY_SD,TEAL),("Target 10%",.1,target_point(.1)[0],ORANGE)]):
+        yy=250+i*95
+        svg.circle(744,yy-5,5,fill=color,stroke=color)
+        svg.text(766,yy,label,size=21,weight=500)
+        svg.text(766,yy+31,f"μ {mean*100:.2f}% · σ {sd*100:.2f}%",size=17,fill=GRAY)
+    svg.line(738,566,776,566,TEAL,3,dash="8 5");svg.text(792,572,"CAL",size=17,fill=TEAL)
+    svg.line(738,605,776,605,GRAY,2,dash="7 5");svg.text(792,611,"Inefficient branch",size=17,fill=GRAY)
     svg.save("optimization-frontier.svg")
 
 
 def figure_target_weights():
-    svg = SVG(
-        "optimization-target-weights",
-        "Target return moves the solution and can create short positions",
-        "Four lines show each asset weight in the unconstrained minimum-variance portfolio as target return rises from three to twenty-five percent.",
-        "Weights always sum to one, but individual weights can fall below zero or exceed one.",
-        "Hypothetical annual inputs | Unconstrained weights | No transaction costs or short-sale limits",
-    )
-    colors = [PURPLE, TEAL, ORANGE, GRAY]
-    dashes = [None, "10 5", "3 5", "14 5 3 5"]
-    x, y = axes(svg, 105, 126, 820, 430, .03, .25, -1.5, 1.5, [.03, .05, .10, .15, .20, .25], [-1.5, -1, -.5, 0, .5, 1, 1.5], "Target expected return (%)", "Portfolio weight (%)", lambda v: f"{v * 100:.0f}", lambda v: f"{v * 100:.0f}")
-    svg.line(105, y(0), 925, y(0), INK, 1.8)
-    targets = [.03 + .22 * i / 160 for i in range(161)]
-    all_weights = [target_weights(target) for target in targets]
-    for asset in range(4):
-        pts = [(x(target), y(weights[asset])) for target, weights in zip(targets, all_weights)]
-        svg.polyline(pts, stroke=colors[asset], width=3, dash=dashes[asset])
-        label_target = .238
-        label_weights = target_weights(label_target)
-        svg.text(x(label_target) + 9, y(label_weights[asset]) + (asset - 1.5) * 5, f"X{asset + 1}", size=15, fill=colors[asset], weight=600)
-    svg.rect(952, 155, 120, 190, fill=LIGHT_GRAY, stroke="none", rx=6)
-    for i, (color, dash) in enumerate(zip(colors, dashes)):
-        cy = 188 + i * 39
-        svg.line(970, cy, 1012, cy, color, 3, dash=dash)
-        svg.text(1024, cy + 5, f"X{i + 1}", size=14, fill=color, weight=600)
-    svg.text(952, 389, "below 0%", size=14, fill=GRAY)
-    svg.text(952, 414, "= short", size=16, fill=ERROR, weight=600)
+    svg=new_figure("optimization-target-weights", "Higher targets reshape every asset weight", "Four small multiples share the same scales. The shaded region marks short positions.")
+    for i in range(4):
+        left=80+(i%2)*515; top=182+(i//2)*225
+        x,y=axis(svg,(left+35,top+27,355,118),(.03,.25,-1.5,1.5),[.05,.15,.25],[-1,0,1],"Target return (%)" if i>=2 else "",f"X{i+1} weight (%)",True)
+        svg.rect(left+35,y(0),355,y(-1.5)-y(0),fill="#FCE8EC")
+        svg.line(left+35,y(0),left+390,y(0),GRAY,1)
+        svg.polyline([(x(t),y(target_weights(t)[i])) for t in [.03+k*.22/100 for k in range(101)]],stroke=PURPLE,width=3)
+        v=target_weights(.25)[i]
+        svg.circle(x(.25),y(v),4,fill=PURPLE,stroke=WHITE)
+        svg.text(left+402,y(v)+5,f"{100*v:.0f}%",size=16,fill=PURPLE,weight=500)
     svg.save("optimization-target-weights.svg")
 
 
 def figure_black_litterman_beliefs():
-    svg = SVG(
-        "optimization-black-litterman-beliefs",
-        "Black–Litterman moves equilibrium beliefs toward stated views",
-        "Grouped bars compare the reverse-optimized prior excess returns and Black-Litterman posterior excess returns for four hypothetical assets.",
-        "The posterior reflects both the views and their uncertainty; it does not simply replace the prior.",
-        "Hypothetical annual excess returns | τ = 1/120 | Ω = diag(PτΣPᵀ) | No market observations",
-    )
-    x, y = axes(svg, 105, 132, 810, 410, 0, 5, 0, .30, [1, 2, 3, 4], [0, .05, .10, .15, .20, .25, .30], "Asset", "Expected excess return (%)", lambda v: f"X{int(v)}", lambda v: f"{v * 100:.0f}")
-    barw = 48
-    for i, (prior, posterior) in enumerate(zip(PRIOR, POSTERIOR), 1):
-        svg.rect(x(i) - barw - 4, y(prior), barw, y(0) - y(prior), fill=PURPLE, stroke="none", rx=3)
-        svg.rect(x(i) + 4, y(posterior), barw, y(0) - y(posterior), fill=TEAL, stroke="none", rx=3)
-        svg.text(x(i) - barw / 2 - 4, y(prior) - 9, f"{prior * 100:.2f}", size=13, fill=PURPLE, anchor="middle", weight=600)
-        svg.text(x(i) + barw / 2 + 4, y(posterior) - 9, f"{posterior * 100:.2f}", size=13, fill=TEAL, anchor="middle", weight=600)
-    svg.rect(946, 170, 20, 20, fill=PURPLE)
-    svg.text(978, 186, "Prior Π", size=15, fill=PURPLE, weight=600)
-    svg.rect(946, 216, 20, 20, fill=TEAL)
-    svg.text(978, 232, "Posterior μ̂", size=15, fill=TEAL, weight=600)
-    svg.text(946, 292, "Views", size=14, fill=GRAY)
-    svg.text(946, 321, "X3 − X1 = 10%", size=14, weight=500)
-    svg.text(946, 349, "X2 = 3%", size=14, weight=500)
+    svg=new_figure("optimization-black-litterman-beliefs", "Views update the prior across all four assets", "Lines connect each market-implied prior to its Black–Litterman posterior.", "Hypothetical annual excess returns · τ = 1/120 · Ω = diag(PτΣPᵀ)")
+    x=lambda v:168+v/.30*675
+    for tick in [0,.05,.1,.15,.2,.25,.3]:
+        svg.line(x(tick),195,x(tick),513,GRID,1)
+        svg.text(x(tick),550,f"{tick*100:g}%",size=15,fill=GRAY,anchor="middle")
+    svg.circle(182,143,6,fill=WHITE,stroke=PURPLE);svg.text(200,149,"Prior Π",size=18,fill=PURPLE)
+    svg.circle(355,143,6,fill=TEAL,stroke=TEAL);svg.text(373,149,"Posterior",size=18,fill=TEAL)
+    svg.text(1018,149,"Prior / posterior",size=16,fill=GRAY,anchor="end")
+    for i,(a,b) in enumerate(zip(PRIOR,POSTERIOR)):
+        yy=231+i*83
+        svg.text(80,yy+7,f"X{i+1}",size=22,weight=500)
+        svg.line(x(a),yy,x(b),yy,GRAY,3)
+        svg.circle(x(a),yy,7,fill=WHITE,stroke=PURPLE,stroke_width=2.5)
+        svg.circle(x(b),yy,6,fill=TEAL,stroke=TEAL)
+        svg.text(1018,yy+6,f"{a*100:.2f} / {b*100:.2f}%",size=18,anchor="end")
+    svg.text(80,605,"Views: X3 − X1 = 10 percentage points; X2 excess return = 3%.",size=19,weight=500)
     svg.save("optimization-black-litterman-beliefs.svg")
 
 
 def figure_black_litterman_weights():
-    labels = ["X1", "X2", "X3", "X4", "Risk-free"]
-    market = MARKET + [0.0]
-    posterior = BL_RISKY + [BL_RF]
-    svg = SVG(
-        "optimization-black-litterman-weights",
-        "Views change both risky allocations and the risk-free share",
-        "Paired horizontal bars compare market weights with Black-Litterman allocation weights at risk aversion lambda two point two four, including the residual risk-free allocation.",
-        "The posterior allocation is not the market portfolio because the two stated views alter expected excess returns.",
-        "Hypothetical allocation | λ = 2.24 | Risky weights use posterior μ̂ | No market observations",
-    )
-    x0, scale = 290, 13.5
-    svg.line(x0, 140, x0, 568, GRAY, 1.5)
-    for tick in [0, 10, 20, 30, 40, 50]:
-        svg.line(x0 + tick * scale, 140, x0 + tick * scale, 568, GRID, 1)
-        svg.text(x0 + tick * scale, 592, f"{tick}%", size=13, fill=GRAY, anchor="middle")
-    for i, label in enumerate(labels):
-        cy = 180 + i * 78
-        svg.text(90, cy + 8, label, size=18, weight=600)
-        svg.rect(x0, cy - 24, market[i] * 100 * scale, 20, fill=PURPLE, stroke="none", rx=3)
-        svg.rect(x0, cy + 5, posterior[i] * 100 * scale, 20, fill=TEAL, stroke="none", rx=3)
-        svg.text(x0 + market[i] * 100 * scale + 8, cy - 9, f"{market[i] * 100:.1f}%", size=13, fill=PURPLE, weight=600)
-        svg.text(x0 + posterior[i] * 100 * scale + 8, cy + 21, f"{posterior[i] * 100:.1f}%", size=13, fill=TEAL, weight=600)
-    svg.rect(930, 166, 18, 18, fill=PURPLE)
-    svg.text(960, 181, "Market", size=14, fill=PURPLE, weight=600)
-    svg.rect(930, 208, 18, 18, fill=TEAL)
-    svg.text(960, 223, "BL allocation", size=14, fill=TEAL, weight=600)
+    svg=new_figure("optimization-black-litterman-weights", "The posterior also changes the risk-free allocation", "Compare market weights with the allocation computed from posterior returns at λ = 2.24.")
+    market=MARKET+[0];post=[v/LAMBDA_MKT for v in solve(SIGMA,POSTERIOR)];post+=[1-sum(post)]
+    labels=["X1","X2","X3","X4","Risk-free"]
+    for xx,title in [(230,"Market"),(621,"Black–Litterman")]:rule(svg,xx,140,title,PURPLE if xx==230 else TEAL)
+    for i,label in enumerate(labels):
+        yy=232+i*69
+        svg.text(60,yy+6,label,size=21,weight=500)
+        for value,x0,color in [(market[i],230,PURPLE),(post[i],621,TEAL)]:
+            svg.rect(x0,yy-15,260,30,fill=LIGHT_GRAY,rx=3)
+            svg.rect(x0,yy-15,value/.5*260,30,fill=color,rx=3)
+            svg.text(x0+282,yy+6,f"{value*100:.2f}%",size=19,fill=color,weight=500)
+    svg.text(60,608,"Risky + risk-free weights = 100% in both portfolios. Each bar uses a 0–50% scale.",size=18,fill=GRAY)
     svg.save("optimization-black-litterman-weights.svg")
 
 
 def figure_kkt():
-    unconstrained = target_weights(0.20)
-    svg = SVG(
-        "optimization-kkt",
-        "A long-only constraint moves the 20% target portfolio to the boundary",
-        "Diverging bars compare unconstrained and long-only minimum-variance weights for a twenty percent target return. Asset X1 is negative without the constraint and exactly zero when the long-only constraint binds.",
-        "KKT identifies the active boundary: w₁ = 0 while the remaining weights satisfy the return and budget constraints.",
-        "Hypothetical annual inputs | Target portfolio return = 20% | Long-only active set X2-X4",
-    )
-    x, y = plot_map(185, 148, 720, 360, -0.85, 1.0, 0, 4)
-    zero = x(0)
-    for value in [-.75, -.5, -.25, 0, .25, .5, .75, 1.0]:
-        svg.line(x(value), 148, x(value), 508, GRID if value else INK, 1.5 if value else 2)
-        svg.text(x(value), 536, f"{value * 100:.0f}%", size=13, fill=GRAY, anchor="middle")
-    for i in range(4):
-        cy = 194 + i * 82
-        svg.text(92, cy + 6, f"X{i + 1}", size=19, weight=600)
-        u = unconstrained[i]
-        k = KKT_WEIGHTS[i]
-        svg.rect(min(zero, x(u)), cy - 20, abs(x(u) - zero), 17, fill=PURPLE, stroke="none", rx=3)
-        svg.rect(min(zero, x(k)), cy + 7, abs(x(k) - zero), 17, fill=TEAL, stroke="none", rx=3)
-        svg.text(x(u) + (8 if u >= 0 else -8), cy - 6, f"{u * 100:.1f}%", size=13, fill=PURPLE, anchor="start" if u >= 0 else "end", weight=600)
-        if abs(k) < 1e-12:
-            svg.circle(zero, cy + 15, 5, fill=TEAL, stroke=WHITE)
-            svg.text(zero + 10, cy + 21, "0%  binding", size=13, fill=TEAL, weight=600)
-        else:
-            svg.text(x(k) + 8, cy + 21, f"{k * 100:.1f}%", size=13, fill=TEAL, weight=600)
-    svg.rect(936, 166, 18, 18, fill=PURPLE)
-    svg.text(966, 181, "Unconstrained", size=14, fill=PURPLE, weight=600)
-    svg.rect(936, 208, 18, 18, fill=TEAL)
-    svg.text(966, 223, "Long-only", size=14, fill=TEAL, weight=600)
-    svg.rect(936, 286, 142, 112, fill=TEAL_LIGHT, stroke="none", rx=6)
-    svg.text(954, 317, "Active constraint", size=14, fill=GRAY)
-    svg.text(954, 351, "w₁ = 0", size=22, fill=TEAL, weight=600)
-    svg.text(954, 380, "multiplier ≥ 0", size=13, fill=GRAY)
+    svg=new_figure("optimization-kkt", "Long-only moves the 20% target to an active boundary", "Both portfolios satisfy the same return and budget constraints; one also requires every weight ≥ 0.")
+    x=lambda v:210+(v+.85)/1.85*620
+    for tick in [-.75,-.5,-.25,0,.25,.5,.75,1]:
+        svg.line(x(tick),194,x(tick),540,INK if tick==0 else GRID,1.5 if tick==0 else 1)
+        svg.text(x(tick),568,f"{tick*100:g}",size=15,anchor="middle",fill=GRAY)
+    svg.line(95,143,127,143,PURPLE,5);svg.text(140,149,"Shorting allowed",size=18,fill=PURPLE)
+    svg.line(370,143,402,143,TEAL,5);svg.text(415,149,"Long-only",size=18,fill=TEAL)
+    for i,(a,b) in enumerate(zip(target_weights(.2),KKT_WEIGHTS)):
+        yy=230+i*80
+        svg.text(65,yy+10,f"X{i+1}",size=21,weight=500)
+        for v,yv,color in [(a,yy-12,PURPLE),(b,yy+16,TEAL)]:
+            svg.line(x(0),yv,x(v),yv,color,10)
+            svg.circle(x(v),yv,5,fill=color,stroke=color)
+        svg.text(1015,yy+3,f"{a*100:.2f}%",size=18,fill=PURPLE,anchor="end")
+        svg.text(1015,yy+27,f"{b*100:.2f}%"+(" · binding" if i==0 else ""),size=18,fill=TEAL,anchor="end")
+    svg.text(520,608,"Portfolio weight (%)",size=18,anchor="middle")
     svg.save("optimization-kkt.svg")
 
 
 def figure_active():
-    svg = SVG(
-        "optimization-active",
-        "A 130–30 portfolio is a 100% benchmark plus a zero-net active overlay",
-        "A three-step bar decomposition shows a fully invested benchmark, an active long thirty percent and short thirty percent overlay, and the combined portfolio with one hundred thirty percent long and thirty percent short exposure.",
-        "The active weights sum to zero, so the combined portfolio keeps net exposure at one hundred percent.",
-        "Conceptual 130–30 exposure | Illustrative only | No market observations",
-    )
-    svg.arrow_defs()
-    stages = [(72, "Benchmark", "100% net"), (405, "Active overlay", "0% net"), (738, "Combined", "100% net")]
-    for x0, title, subtitle in stages:
-        svg.rect(x0, 132, 286, 410, fill=WHITE, stroke=GRID, rx=8)
-        svg.text(x0 + 20, 170, title, size=20, weight=600)
-        svg.text(x0 + 20, 197, subtitle, size=14, fill=GRAY)
-    # Benchmark.
-    svg.rect(132, 260, 166, 132, fill=PURPLE_LIGHT, stroke=PURPLE, stroke_width=2, rx=5)
-    svg.text(215, 322, "+100%", size=26, fill=PURPLE, anchor="middle", weight=600)
-    svg.text(215, 352, "benchmark", size=15, fill=PURPLE, anchor="middle")
-    # Active overlay.
-    svg.rect(465, 225, 166, 82, fill=TEAL_LIGHT, stroke=TEAL, stroke_width=2, rx=5)
-    svg.text(548, 274, "+30% long", size=20, fill=TEAL, anchor="middle", weight=600)
-    svg.rect(465, 352, 166, 82, fill="#FCE8EC", stroke=ERROR, stroke_width=2, rx=5)
-    svg.text(548, 401, "−30% short", size=20, fill=ERROR, anchor="middle", weight=600)
-    svg.text(548, 477, "sum(Delta w) = 0", size=18, anchor="middle", weight=600)
-    # Combined exposure.
-    svg.rect(798, 200, 166, 172, fill=TEAL_LIGHT, stroke=TEAL, stroke_width=2, rx=5)
-    svg.text(881, 279, "+130%", size=27, fill=TEAL, anchor="middle", weight=600)
-    svg.text(881, 310, "gross long", size=15, fill=TEAL, anchor="middle")
-    svg.rect(798, 395, 166, 68, fill="#FCE8EC", stroke=ERROR, stroke_width=2, rx=5)
-    svg.text(881, 437, "−30% short", size=20, fill=ERROR, anchor="middle", weight=600)
-    svg.line(360, 336, 393, 336, INK, 2.5, marker="arrow-ink")
-    svg.line(693, 336, 726, 336, INK, 2.5, marker="arrow-ink")
-    svg.text(548, 585, "w_p = w_B + Delta w     ·     gross exposure = 160%     ·     net exposure = 100%", size=18, anchor="middle", weight=500)
+    svg=new_figure("optimization-active", "130–30 has 100% net exposure and 160% gross exposure", "An illustrative benchmark plus a zero-net overlay, with the short leg outside the benchmark.", "Illustrative exposure decomposition · Bars share one percentage scale · No market observations")
+    x=lambda v:298+(v+.3)/1.6*650
+    for tick in [-.3,0,.3,.6,.9,1.3]:
+        svg.line(x(tick),194,x(tick),514,INK if tick==0 else GRID,1.5 if tick==0 else 1)
+        svg.text(x(tick),546,f"{tick*100:g}%",size=15,anchor="middle",fill=GRAY)
+    for yy,label,pos,neg in [(240,"Benchmark",1,0),(349,"Active overlay",.3,.3),(458,"Combined",1.3,.3)]:
+        svg.text(60,yy+7,label,size=22,weight=500)
+        svg.rect(x(0),yy-20,x(pos)-x(0),40,fill=PURPLE if yy==240 else TEAL,rx=2)
+        svg.text((x(pos)+x(0))/2,yy+7,f"+{pos*100:.0f}%",size=21,fill=WHITE,anchor="middle",weight=500)
+        if neg:
+            svg.rect(x(-neg),yy-20,x(0)-x(-neg),40,fill=ERROR,rx=2)
+            svg.text((x(-neg)+x(0))/2,yy+7,f"−{neg*100:.0f}%",size=21,fill=WHITE,anchor="middle",weight=500)
+    svg.text(60,610,"Net: 130 − 30 = 100%",size=24,weight=500)
+    svg.text(580,610,"Gross: 130 + 30 = 160%",size=24,weight=500)
     svg.save("optimization-active.svg")
 
 
 def main():
-    OUT.mkdir(parents=True, exist_ok=True)
-    figure_optimization_types()
-    figure_curvature()
-    figure_covariance()
-    figure_ols()
-    figure_gls()
-    figure_lagrange()
-    figure_target_allocation()
-    figure_frontier()
-    figure_target_weights()
-    figure_black_litterman_beliefs()
-    figure_black_litterman_weights()
-    figure_kkt()
-    figure_active()
-    print("Generated 13 deterministic portfolio-optimization SVG figures.")
-    print(f"GMV: return={GMV_RETURN:.8f}, sd={GMV_SD:.8f}, weights={GMV_WEIGHTS}")
-    print(f"Tangency: return={TANGENCY_RETURN:.8f}, sd={TANGENCY_SD:.8f}, weights={TANGENCY_WEIGHTS}")
-    print(f"Black-Litterman prior={PRIOR}")
-    print(f"Black-Litterman posterior={POSTERIOR}")
+    OUT.mkdir(parents=True,exist_ok=True)
+    for function in [figure_optimization_types,figure_curvature,figure_covariance,figure_ols,figure_gls,figure_lagrange,figure_target_allocation,figure_frontier,figure_target_weights,figure_black_litterman_beliefs,figure_black_litterman_weights,figure_kkt,figure_active]:
+        function()
+    print("Created 13 newly designed, deterministic figures for Portfolio Optimization and Black–Litterman.")
 
 
 if __name__ == "__main__":

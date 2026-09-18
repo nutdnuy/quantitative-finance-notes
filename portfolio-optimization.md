@@ -1,11 +1,12 @@
 ---
-title: Portfolio Optimization & Black–Litterman
-description: เขียนโจทย์จัดพอร์ตให้ optimizer แก้ ตั้งแต่ objective, OLS/GLS และ Lagrange ไปจนถึง Black–Litterman, KKT และ active portfolio
+title: Portfolio Optimization
+description: เขียนโจทย์จัดพอร์ตให้ optimizer แก้ ตั้งแต่ objective, OLS/GLS และ Lagrange ไปจนถึง KKT และ active portfolio
 notebook: notebooks/portfolio-optimization.ipynb
 visual_route: no-image-generator
+inline_math: true
 ---
 
-# Portfolio Optimization & Black–Litterman
+# Portfolio Optimization
 
 <p class="lead">เราจะบอกคอมพิวเตอร์อย่างไรว่า “พอร์ตที่ดีที่สุด” หมายถึงอะไร?</p>
 
@@ -13,7 +14,7 @@ visual_route: no-image-generator
 
 Optimizer ไม่ได้รู้เองว่าควรลดความเสี่ยง เพิ่มผลตอบแทน ห้ามขายชอร์ต หรือเกาะ benchmark แค่ไหน เราต้องกำหนด objective function, decision variables, ข้อมูลที่ป้อน และ constraints ให้ครบ คำตอบที่ได้จึงผูกกับโจทย์นั้นทุกบรรทัด
 
-เราจะใช้ตัวอย่างสินทรัพย์สมมติสี่ตัวต่อเนื่องทั้งบท แล้วดูว่า Black–Litterman ผสมพอร์ตตลาดกับมุมมองของผู้ลงทุนอย่างไร ตัวเลขไม่มีชื่อสินทรัพย์ ช่วงวันที่ หรือข้อมูลตลาดจริง จึงใช้เพื่อเรียนรู้กลไกเท่านั้น
+เราจะใช้ตัวอย่างสินทรัพย์สมมติสี่ตัวต่อเนื่องทั้งบท จากโจทย์ไม่มีข้อจำกัดไปจนถึง long-only และ benchmark-relative portfolio ตัวเลขไม่มีชื่อสินทรัพย์ ช่วงวันที่ หรือข้อมูลตลาดจริง จึงใช้เพื่อเรียนรู้กลไกเท่านั้น
 
 <section id="optimization-problem">
 
@@ -40,7 +41,7 @@ $$
 
 <div class="portfolio-figure" tabindex="0" role="group" aria-label="ภาพเปรียบเทียบคำตอบของโจทย์ optimization เมื่อไม่มีข้อจำกัด มีข้อจำกัดแบบเท่ากัน แบบอสมการ และแบบเทียบ benchmark เลื่อนแนวนอนเพื่อดูภาพเต็ม">
 
-![พื้นผิว objective เดียวกันให้จุดเหมาะสมต่างกันเมื่อ feasible set เปลี่ยนจาก unconstrained เป็น equality, inequality และ benchmark constraint](assets/images/optimization-types.svg)
+![เปรียบเทียบ feasible set ของ unconstrained, equality และ inequality พร้อมการเขียนน้ำหนักเทียบ benchmark](assets/images/optimization-types.svg)
 
 </div>
 
@@ -71,13 +72,13 @@ $$
 
 ถ้า Hessian เป็น positive definite ที่ stationary point ฟังก์ชันโค้งขึ้นทุกทิศทางและจุดนั้นเป็น strict local minimum ถ้าเป็น negative definite จะได้ strict local maximum ส่วน Hessian ที่มีทั้งทิศบวกและลบชี้ไปที่ saddle point
 
-<div class="portfolio-figure" tabindex="0" role="group" aria-label="แผนที่ contour แสดง minimum และ saddle point พร้อมทิศทางความโค้ง เลื่อนแนวนอนเพื่อดูภาพเต็ม">
+<div class="portfolio-figure" tabindex="0" role="group" aria-label="เส้นตัดตามสองแกนแสดงความโค้งของ minimum และ saddle point เลื่อนแนวนอนเพื่อดูภาพเต็ม">
 
-![แผนที่ contour ของฟังก์ชัน convex ที่มี minimum เทียบกับ saddle point ซึ่ง gradient เป็นศูนย์เหมือนกันแต่ Hessian ต่างกัน](assets/images/optimization-curvature.svg)
+![เส้นตัดของ f=x²+y² เทียบกับ f=x²−y² ทั้งคู่มี gradient เป็นศูนย์ที่จุดกำเนิด แต่ความโค้งตามแกนต่างกัน](assets/images/optimization-curvature.svg)
 
 </div>
 
-<p class="figure-caption">ลูกศร gradient หายไปที่จุดกึ่งกลางทั้งสองภาพ ฝั่งซ้ายโค้งขึ้นทุกทิศทาง ส่วนฝั่งขวามีทิศหนึ่งโค้งขึ้นและอีกทิศโค้งลง</p>
+<p class="figure-caption">ทั้งสองกรณีมี gradient เป็นศูนย์ที่จุดกึ่งกลาง แต่เส้นตัดผ่านจุดนั้นแสดงว่าฝั่ง minimum โค้งขึ้นทั้งสองทิศทาง ส่วน saddle โค้งขึ้นทิศหนึ่งและโค้งลงอีกทิศหนึ่ง</p>
 
 ### Mean–variance แบบไม่มี constraint บนน้ำหนักสินทรัพย์เสี่ยง
 
@@ -481,181 +482,9 @@ $$
 
 <section id="black-litterman">
 
-## Black–Litterman ตั้งต้นจากพอร์ตตลาด
+## อ่านต่อ: Black–Litterman
 
-น้ำหนัก mean–variance ไวต่อ \(\boldsymbol\mu\) มาก ผลตอบแทนคาดหวังที่ต่างกันไม่กี่จุดอาจเปลี่ยน long–short positions ขนาดใหญ่ [Black–Litterman](glossary.html#black-litterman) เริ่มจากน้ำหนักตลาดที่สังเกตได้ แล้วใช้ reverse optimization หา expected excess returns ที่สอดคล้องกับน้ำหนักนั้น ก่อนผสม views ที่ระบุพร้อมความไม่แน่นอน
-
-<div class="portfolio-figure" tabindex="0" role="group" aria-label="แผนผัง Black–Litterman ห้าขั้นจากน้ำหนักตลาดไปสู่พอร์ตใหม่ เลื่อนแนวนอนเพื่อดูภาพเต็ม">
-
-![Black–Litterman เริ่มจาก market weights ทำ reverse optimization เพื่อหา prior ผสม views เป็น posterior แล้วนำไปจัดพอร์ต](assets/images/optimization-black-litterman-roadmap.svg)
-
-</div>
-
-<p class="figure-caption">Roadmap แยกข้อมูลตลาด ความเห็น และการจัดสรรออกจากกัน จึงย้อนตรวจได้ว่าการเปลี่ยนน้ำหนักมาจาก input ส่วนใด <a href="assets/diagrams/optimization-black-litterman-roadmap.excalidraw" download>ดาวน์โหลดไฟล์ Excalidraw ที่แก้ไขต่อได้</a></p>
-
-### 1. Reverse optimization หา prior
-
-สมมติพอร์ตตลาดมีน้ำหนัก
-
-$$
-\mathbf w_{\mathrm{mkt}}=
-\begin{pmatrix}
-0.05&0.40&0.45&0.10
-\end{pmatrix}^{\!\top}.
-$$
-
-จากคำตอบ mean–variance \(\mathbf w^*=\lambda^{-1}\Sigma^{-1}\widetilde{\boldsymbol\mu}\) เราแก้ย้อนกลับเพื่อหา implied equilibrium excess returns
-
-$$
-\boxed{
-\boldsymbol\Pi=
-\lambda_{\mathrm{mkt}}\Sigma\mathbf w_{\mathrm{mkt}}.
-}
-$$
-
-ตัวอย่างกำหนด market Sharpe ratio เท่ากับ 0.5 พอร์ตตลาดมี volatility ประมาณ 22.3523% จึงใช้
-
-$$
-\lambda_{\mathrm{mkt}}
-=\frac{\operatorname{SR}_{\mathrm{mkt}}}
-{\sigma_{\mathrm{mkt}}}
-\approx2.24.
-$$
-
-ผลที่คำนวณด้วย \(\lambda_{\mathrm{mkt}}=2.24\) คือ
-
-$$
-\boldsymbol\Pi\approx
-\begin{pmatrix}
-0.020917\\
-0.047121\\
-0.146731\\
-0.259930
-\end{pmatrix}.
-$$
-
-เราเขียน prior ของ excess returns เป็น
-
-$$
-\widetilde{\boldsymbol\mu}
-\sim N(\boldsymbol\Pi,\tau\Sigma).
-$$
-
-ตัวอย่างกำหนด \(\tau=1/120\) เป็น teaching convention เท่านั้น เลข 120 จำลองกรณีมีผลตอบแทนรายเดือนสิบปี แต่ไม่ได้อ้างว่า \(\Sigma\) ชุดนี้ประมาณจากข้อมูลดังกล่าว วิธีตั้ง \(\tau\) ไม่มีคำตอบเดียวและต้องสอดคล้องกับนิยามของ \(\Omega\) ที่ใช้กับ views
-
-### 2. เขียน views เป็น \(P,Q,\Omega\)
-
-กำหนดสอง views
-
-1. \(X_3\) จะให้ excess return สูงกว่า \(X_1\) อยู่ 10 จุดเปอร์เซ็นต์
-2. \(X_2\) จะให้ excess return 3%
-
-จึงได้
-
-$$
-P=
-\begin{pmatrix}
--1&0&1&0\\
-0&1&0&0
-\end{pmatrix},
-\qquad
-Q=
-\begin{pmatrix}
-0.10\\0.03
-\end{pmatrix}.
-$$
-
-แถวแรกของ \(P\) รวมเป็นศูนย์เพราะเป็น relative view ส่วนแถวที่สองเลือก \(X_2\) ตัวเดียวและเป็น absolute view เขียนแบบจำลองของ views เป็น
-
-$$
-Q=P\widetilde{\boldsymbol\mu}+\boldsymbol\varepsilon_v,
-\qquad
-\boldsymbol\varepsilon_v\sim N(\mathbf 0,\Omega).
-$$
-
-ตัวอย่างใช้
-
-$$
-\Omega_{ii}=\left[P(\tau\Sigma)P^\top\right]_{ii},
-\qquad
-\Omega_{ij}=0\quad(i\ne j).
-$$
-
-ค่าแนวทแยงเล็กลงทำให้ view มีน้ำหนักมากขึ้น ค่าใหญ่ขึ้นทำให้ posterior อยู่ใกล้ prior มากขึ้น การเรียกค่าหนึ่งว่า “มั่นใจ 80%” ต้องมี mapping เพิ่มเติม เช่นวิธีของ Idzorek จึงไม่ควรติดป้ายเปอร์เซ็นต์ให้ \(\Omega\) โดยตรง
-
-### 3. ผสมเป็น posterior
-
-Posterior mean เขียนในรูปที่คำนวณได้เสถียรว่า
-
-$$
-\boxed{
-\widehat{\boldsymbol\mu}_{\mathrm{BL}}
-=\boldsymbol\Pi
-+\tau\Sigma P^\top
-\left(P\tau\Sigma P^\top+\Omega\right)^{-1}
-(Q-P\boldsymbol\Pi).
-}
-$$
-
-สูตรนี้เทียบเท่ากับ precision form
-
-$$
-\widehat{\boldsymbol\mu}_{\mathrm{BL}}
-=\left[(\tau\Sigma)^{-1}+P^\top\Omega^{-1}P\right]^{-1}
-\left[(\tau\Sigma)^{-1}\boldsymbol\Pi+P^\top\Omega^{-1}Q\right].
-$$
-
-สำหรับตัวอย่าง
-
-$$
-\widehat{\boldsymbol\mu}_{\mathrm{BL}}
-\approx
-\begin{pmatrix}
-0.016782\\
-0.037552\\
-0.124843\\
-0.227174
-\end{pmatrix}.
-$$
-
-<div class="portfolio-figure" tabindex="0" role="group" aria-label="กราฟเปรียบเทียบ implied prior กับ Black–Litterman posterior ของสินทรัพย์สี่ตัว เลื่อนแนวนอนเพื่อดูภาพเต็ม">
-
-![Implied equilibrium excess returns เทียบกับ posterior หลังใส่ relative view ของ X3 ต่อ X1 และ absolute view ของ X2](assets/images/optimization-black-litterman-beliefs.svg)
-
-</div>
-
-<p class="figure-caption">Posterior ขยับทั้งสี่สินทรัพย์เพราะ covariance เชื่อม views เข้ากับสินทรัพย์อื่น เส้นทางการขยับจึงไม่ได้จำกัดอยู่ที่ช่องของ \(P\) เท่านั้น</p>
-
-### 4. แปลง posterior เป็นน้ำหนัก
-
-เมื่อใช้ risk aversion \(\lambda\)
-
-$$
-\mathbf w_{\mathrm{BL}}
-=\frac1\lambda
-\Sigma^{-1}\widehat{\boldsymbol\mu}_{\mathrm{BL}}.
-$$
-
-ที่ \(\lambda=2.24\) น้ำหนักสินทรัพย์เสี่ยงและสินทรัพย์ปลอดความเสี่ยงเป็น
-
-<div class="table-wrap portfolio-table" tabindex="0" role="group" aria-label="เปรียบเทียบน้ำหนักตลาดกับน้ำหนัก Black–Litterman">
-
-| น้ำหนัก | \(X_1\) | \(X_2\) | \(X_3\) | \(X_4\) | สินทรัพย์ปลอดความเสี่ยง |
-|---|---:|---:|---:|---:|---:|
-| พอร์ตตลาด | 5.00% | 40.00% | 45.00% | 10.00% | 0.00% |
-| Black–Litterman | 9.87% | 16.59% | 40.13% | 10.00% | 23.41% |
-
-</div>
-
-<div class="portfolio-figure" tabindex="0" role="group" aria-label="กราฟเปรียบเทียบน้ำหนัก market portfolio กับ Black–Litterman allocation เลื่อนแนวนอนเพื่อดูภาพเต็ม">
-
-![Market weights เทียบกับ Black–Litterman weights ที่ lambda 2.24 โดยแสดงเงินส่วนที่เหลือในสินทรัพย์ปลอดความเสี่ยง](assets/images/optimization-black-litterman-weights.svg)
-
-</div>
-
-<p class="figure-caption">Risk aversion เปลี่ยนขนาดรวมของ risky allocation ส่วน \(P,Q,\Omega\) และ covariance เปลี่ยนทิศทางสัมพัทธ์ของน้ำหนัก ใน convention นี้ \(\Omega\) scale พร้อม \(\tau\) ทำให้ \(\tau\) หักล้างจาก posterior mean; ถ้ากำหนด \(\Omega\) แยกต่างหาก \(\tau\) จะมีผล</p>
-
-Posterior covariance ของค่าเฉลี่ยและ covariance ของผลตอบแทนเป็นคนละวัตถุ สูตรจัดพอร์ตข้างบนใช้ \(\Sigma\) เป็น covariance ของผลตอบแทน การนำ posterior uncertainty ไปบวกหรือใช้แทน \(\Sigma\) เป็นอีก convention ที่ต้องประกาศให้ชัด
+เรื่องการหา implied prior จากพอร์ตตลาด การผสม views และห้องทดลอง ย้ายไปอยู่ใน [บท Black–Litterman](black-litterman.html#black-litterman) แล้ว บทใหม่นี้ใช้ covariance และสินทรัพย์สมมติชุดเดียวกัน
 
 </section>
 
@@ -784,13 +613,7 @@ subject to \(\mathbf 1^\top\Delta\mathbf w=0\) และข้อจำกัด
 
 <section id="experiments">
 
-## ทดลองผสม views กับพอร์ตตลาด
-
-ห้องทดลองใช้ \(\Sigma\), market weights, \(\tau=1/120\), \(P\) และ \(Q\) ชุดเดียวกับตัวอย่าง ปรับ risk aversion และตัวคูณความไม่แน่นอนของ views เพื่อดู posterior expected excess returns กับน้ำหนักพอร์ตพร้อมกัน
-
-<div id="portfolio-optimization-lab" class="interactive-mount"></div>
-
-ตัวคูณ \(\Omega\) ต่ำทำให้ views มีน้ำหนักมากขึ้น ตัวคูณสูงดึง posterior กลับเข้าหา market-implied prior ส่วน \(\lambda\) เปลี่ยนขนาด risky allocation หลังคำนวณ posterior แล้ว ห้องทดลองไม่ใช้ข้อมูลตลาด ไม่รวมค่าธรรมเนียม ภาษี turnover หรือข้อจำกัด long-only
+ห้องทดลองผสม views ย้ายไปอยู่ใน [บท Black–Litterman](black-litterman.html#experiments)
 
 </section>
 
@@ -824,9 +647,8 @@ subject to \(\mathbf 1^\top\Delta\mathbf w=0\) และข้อจำกัด
 1. ตรวจว่าน้ำหนัก target 10% รวมเป็นหนึ่ง และใช้ \(\boldsymbol\mu^\top\mathbf w\) คำนวณผลตอบแทนกลับ
 2. ใช้ \(\gamma=-0.0105013\) ใน \(\Sigma^{-1}(\lambda\boldsymbol\mu+\gamma\mathbf1)\) แล้วสังเกตว่าการเปลี่ยนเครื่องหมาย \(\gamma\) ทำให้ constraints ผิดอย่างไร
 3. น้ำหนักสินทรัพย์เสี่ยงสำหรับ target 10% เมื่อมี \(r=2.5\%\) รวมเป็นเท่าไร และต้องถือสินทรัพย์ปลอดความเสี่ยงเท่าไร
-4. ทำไมแถว relative view ของ \(P\) จึงรวมเป็นศูนย์ ส่วน absolute view ของสินทรัพย์หนึ่งตัวรวมเป็นหนึ่ง
-5. ที่ target 20% long-only solution มี constraint ใด binding และ complementary slackness บอกอะไรเกี่ยวกับ multiplier ของ constraint นั้น
-6. ถ้า benchmark และพอร์ตลงทุนครบ 100% ทั้งคู่ จงพิสูจน์ว่า active weights รวมเป็นศูนย์
+4. ที่ target 20% long-only solution มี constraint ใด binding และ complementary slackness บอกอะไรเกี่ยวกับ multiplier ของ constraint นั้น
+5. ถ้า benchmark และพอร์ตลงทุนครบ 100% ทั้งคู่ จงพิสูจน์ว่า active weights รวมเป็นศูนย์
 
 <details>
 <summary>ดูแนวคำตอบ</summary>
@@ -834,9 +656,8 @@ subject to \(\mathbf 1^\top\Delta\mathbf w=0\) และข้อจำกัด
 1. น้ำหนักรวมประมาณ 1 และ expected return ประมาณ 0.10 ส่วน volatility ประมาณ 0.161328
 2. เมื่อเปลี่ยนเป็น \(\gamma=+0.0105013\) คำตอบจะไม่ใช่น้ำหนักชุดที่รายงานและไม่รักษา target/budget ตามระบบสมการเดิม
 3. Risky weights รวมประมาณ 1.245108 จึงมี risk-free weight ประมาณ −0.245108 หรือกู้ 24.5108%
-4. Relative view เปรียบเทียบขาหนึ่งกับอีกขาโดยไม่มี net exposure ส่วน absolute view เลือกระดับผลตอบแทนของตะกร้าที่มีน้ำหนักรวมหนึ่ง
-5. Constraint \(w_1\ge0\) binding ที่ \(w_1=0\) และ multiplier สามารถเป็นบวกได้ ส่วน constraint ที่ยัง slack ต้องมี multiplier ศูนย์
-6. \(\mathbf1^\top\Delta\mathbf w=\mathbf1^\top\mathbf w_P-\mathbf1^\top\mathbf w_B=1-1=0\)
+4. Constraint \(w_1\ge0\) binding ที่ \(w_1=0\) และ multiplier สามารถเป็นบวกได้ ส่วน constraint ที่ยัง slack ต้องมี multiplier ศูนย์
+5. \(\mathbf1^\top\Delta\mathbf w=\mathbf1^\top\mathbf w_P-\mathbf1^\top\mathbf w_B=1-1=0\)
 
 </details>
 
@@ -846,7 +667,7 @@ subject to \(\mathbf 1^\top\Delta\mathbf w=0\) และข้อจำกัด
 
 ## ทำต่อใน Python
 
-[ดาวน์โหลด Notebook ของบท Portfolio Optimization & Black–Litterman](notebooks/portfolio-optimization.ipynb) เพื่อสร้าง covariance, แก้ target-return portfolio, ตรวจ GMV และ tangency, ทำ GLS whitening, คำนวณ Black–Litterman posterior และเปรียบเทียบ unconstrained กับ long-only solution ตัวอย่างทั้งหมดใช้ Python standard library และรันซ้ำได้
+[ดาวน์โหลด Notebook ของบท Portfolio Optimization](notebooks/portfolio-optimization.ipynb) เพื่อสร้าง covariance, แก้ target-return portfolio, ตรวจ GMV และ tangency, ทำ GLS whitening และเปรียบเทียบ unconstrained กับ long-only solution ตัวอย่างทั้งหมดใช้ Python standard library และรันซ้ำได้
 
 </section>
 
@@ -854,9 +675,7 @@ subject to \(\mathbf 1^\top\Delta\mathbf w=0\) และข้อจำกัด
 
 ## เอกสารประกอบ
 
-- *Fundamentals of Optimization and Application to Portfolio Selection*, CQF, เอกสาร PDF ที่ผู้ใช้ให้มา, 145 หน้า เนื้อหาหลักของบทนี้เรียบเรียงจากหน้า 4–137 โดยคำนวณสูตรและตัวเลขใหม่ จุดพิมพ์คลาดใน GLS, Lagrange, Black–Litterman และ active weights ได้รับการแก้ก่อนใช้
-- Fischer Black and Robert Litterman, “Global Portfolio Optimization,” *Financial Analysts Journal*, 48(5), 28–43, 1992
-- Jay Walters, *The Black–Litterman Model in Detail*, working paper, 2011 ใช้เป็นที่มาของตัวอย่าง views ตามรายการอ้างอิงในเอกสารประกอบ
+- *Fundamentals of Optimization and Application to Portfolio Selection*, CQF, เอกสาร PDF ที่ผู้ใช้ให้มา, 145 หน้า เนื้อหาหลักของบทนี้เรียบเรียงจากหน้า 4–137 โดยคำนวณสูตรและตัวเลขใหม่ จุดพิมพ์คลาดใน GLS, Lagrange และ active weights ได้รับการแก้ก่อนใช้
 
 ภาพกราฟและไดอะแกรมในบทสร้างใหม่จากสมการและข้อมูลสมมติด้วย `scripts/make_portfolio_optimization_figures.py` ตาม visual route `no-image-generator` ไม่มีภาพจาก PDF หรือข้อมูลตลาดถูกคัดลอกเข้ามา รายละเอียดที่มา สมมติฐาน และค่าตรวจอยู่ใน [`data/portfolio-optimization-provenance.json`](data/portfolio-optimization-provenance.json)
 

@@ -18,7 +18,8 @@ transition-density-functions.md  ความหนาแน่นการเ�
 applied-stochastic-calculus.md  Itô’s lemma การแปลงแบบจำลองและการจำลอง SDE
 black-scholes-model.md         Delta hedge, สูตรราคาและ Greeks ของ Black–Scholes
 portfolio-theory.md            การจัดพอร์ต Mean–Variance, Sharpe ratio, CAPM และ factor models
-portfolio-optimization.md      Optimization, OLS/GLS, Black–Litterman, KKT และ active portfolio
+portfolio-optimization.md      Optimization, OLS/GLS, Lagrange, KKT และ active portfolio
+black-litterman.md             Prior, views, posterior และห้องทดลอง Black–Litterman
 glossary.md                    อภิธานศัพท์ร่วมของซีรีส์
 AGENTS.md                      แนวทางทำงานสำหรับ AI ในโปรเจกต์นี้
 _config.yml                    ชื่อเว็บ ผู้เขียน รูป และลิงก์ repository
@@ -30,6 +31,7 @@ notebooks/transition-density-functions.ipynb  Python Notebook ของบท Tr
 notebooks/applied-stochastic-calculus.ipynb  Python Notebook ของบท Applied Stochastic Calculus
 notebooks/black-scholes-model.ipynb  Python Notebook ของบท Black-Scholes Model
 notebooks/portfolio-optimization.ipynb  Python Notebook ของบท Portfolio Optimization
+notebooks/black-litterman.ipynb  Python Notebook ของบท Black–Litterman
 assets/images/                 รูปและคำสั่งที่ใช้สร้างภาพ
 book.css                       หน้าตา Welcome และสารบัญ
 style.css                      หน้าตาบทเรียนและกราฟ
@@ -67,7 +69,7 @@ npm run build
 
 ## เนื้อหาและแหล่งที่มา
 
-บท **Portfolio Optimization & Black–Litterman** ต่อจาก Portfolio Theory ใช้เอกสาร *Fundamentals of Optimization and Application to Portfolio Selection* ที่ผู้ใช้ให้มาเป็นเส้นเรื่อง ตั้งแต่ objective, gradient/Hessian, OLS/GLS และ Lagrange ไปจนถึง Black–Litterman, KKT และ active portfolio สูตรและตัวเลขที่พิมพ์คลาดในเอกสารต้นทางได้รับการคำนวณใหม่ ตัวอย่างสี่สินทรัพย์เป็นข้อมูลสมมติ ไม่มีชื่อสินทรัพย์หรือช่วงตลาดจริง รายละเอียดอยู่ใน `data/portfolio-optimization-provenance.json`
+บท **Portfolio Optimization และ Black–Litterman** ต่อจาก Portfolio Theory ใช้เอกสาร *Fundamentals of Optimization and Application to Portfolio Selection* ที่ผู้ใช้ให้มาเป็นเส้นเรื่อง ตั้งแต่ objective, gradient/Hessian, OLS/GLS และ Lagrange ไปจนถึง Black–Litterman, KKT และ active portfolio สูตรและตัวเลขที่พิมพ์คลาดในเอกสารต้นทางได้รับการคำนวณใหม่ ตัวอย่างสี่สินทรัพย์เป็นข้อมูลสมมติ ไม่มีชื่อสินทรัพย์หรือช่วงตลาดจริง รายละเอียดอยู่ใน `data/portfolio-optimization-provenance.json`
 
 สร้างภาพ SVG เชิงคำนวณ 13 ภาพด้วย `python3 scripts/make_portfolio_optimization_figures.py` และสร้าง Black–Litterman roadmap อีก 1 ภาพจากไฟล์ Excalidraw ที่แก้ไขต่อได้ สร้างและรัน Notebook ด้วย `python3 scripts/make_portfolio_optimization_notebook.py` ตรวจตัวเลขด้วย `npm test` และตรวจหน้าเว็บด้วย `node qa/portfolio-optimization-browser.cjs` กับ `node qa/portfolio-optimization-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763
 
@@ -100,3 +102,9 @@ npm run build
 Notebook ใช้ Python 3, NumPy และ Jupyter/IPython ถ้ารัน `make_notebook.py` จะสร้าง Notebook ใหม่จากเนื้อหาเว็บ รันเซลล์โค้ด และรายงานจำนวนเซลล์กับกราฟที่สร้างได้ คำสั่งนี้เขียนทับไฟล์ Notebook ที่สร้างไว้
 
 ดูที่มาและใบอนุญาตแยกตามส่วนใน [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) แหล่งอ้างอิงและผลงานของบุคคลที่สามยังอยู่ภายใต้สิทธิ์เดิมของเจ้าของ ไม่มีการให้ใบอนุญาตใหม่ครอบคลุมทั้ง repository
+
+## หน้า Black–Litterman ที่แยกออกมา
+
+`portfolio-optimization.md` ครอบคลุมเครื่องมือ optimization ส่วน `black-litterman.md` ครอบคลุม prior, views, posterior และห้องทดลองที่ mount ด้วย `black-litterman-lab` สารบัญและ glossary เชื่อมสองหน้าแยกกัน
+
+ภาพทั้ง 14 ภาพออกแบบใหม่จาก inputs เดิม: รัน `python3 scripts/make_portfolio_optimization_figures.py` สำหรับ 13 ภาพเชิงคำนวณ และ `python3 scripts/render_optimization_roadmap.py` สำหรับ roadmap จาก Excalidraw จากนั้น `python3 scripts/make_portfolio_optimization_notebook.py` จะสร้างและรัน Notebook ทั้งสองเล่มแยก namespace กัน

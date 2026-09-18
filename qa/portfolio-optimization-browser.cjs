@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const base = process.env.PORTFOLIO_OPTIMIZATION_PREVIEW_URL || 'http://127.0.0.1:8763';
-const chapter = 'portfolio-optimization.html';
+const chapter = 'black-litterman.html';
 const axePath = require.resolve('axe-core/axe.min.js');
 const report = { status: 'running', checks: [], states: [], failures: [], pageErrors: [], failedResponses: [], externalRequests: [] };
 const close = (actual, expected, tolerance = 1e-4) => assert.ok(Number.isFinite(actual) && Math.abs(actual - expected) <= tolerance, `${actual} != ${expected}`);
@@ -16,7 +16,7 @@ const close = (actual, expected, tolerance = 1e-4) => assert.ok(Number.isFinite(
   page.on('pageerror', error => report.pageErrors.push(error.message));
   page.on('response', response => { if (response.status() >= 400) report.failedResponses.push({ url: response.url(), status: response.status() }); });
   page.on('request', request => { if (!request.url().startsWith(base) && !/^(file:|data:|blob:)/.test(request.url())) report.externalRequests.push(request.url()); });
-  const lab = page.locator('#portfolio-optimization-lab .portfolio-optimization-lab');
+  const lab = page.locator('#black-litterman-lab .portfolio-optimization-lab');
   const output = key => lab.locator(`[data-opt="${key}"]`);
   const number = async key => parseFloat((await output(key).innerText()).replaceAll(',', '').replaceAll('−', '-').replace('%', ''));
 
@@ -36,15 +36,18 @@ const close = (actual, expected, tolerance = 1e-4) => assert.ok(Number.isFinite(
     const issues = await svg.evaluate(element => {
       const problems = [], bounds = element.viewBox.baseVal;
       if (!element.querySelector('title')?.textContent || !element.querySelector('desc')?.textContent) problems.push('missing accessible chart text');
-      for (const rectangle of element.querySelectorAll('rect')) {
-        const x = Number(rectangle.getAttribute('x')), y = Number(rectangle.getAttribute('y'));
-        const width = Number(rectangle.getAttribute('width')), height = Number(rectangle.getAttribute('height'));
-        if (![x, y, width, height].every(Number.isFinite) || x < 0 || y < 0 || width < 0 || height < 0 || x + width > bounds.width + .01 || y + height > bounds.height + .01) problems.push('invalid bar geometry');
+      for (const dot of element.querySelectorAll('circle[data-series]')) {
+        const x = Number(dot.getAttribute('cx')), y = Number(dot.getAttribute('cy')), r = Number(dot.getAttribute('r'));
+        if (![x,y,r].every(Number.isFinite) || x-r < 0 || y-r < 0 || x+r > bounds.width || y+r > bounds.height) problems.push('invalid return marker geometry');
       }
       return problems;
     });
     assert.deepEqual(issues, []);
-    assert.equal(await lab.locator('rect').count(), 8);
+    assert.equal(await lab.locator('circle[data-series]').count(), 8);
+    for (let i = 0; i < 4; i++) {
+      const cx = Number(await lab.locator('circle[data-series="posterior"]').nth(i).getAttribute('cx'));
+      close((cx - 92) / 576 * 30, await number(`posterior-return-${i}`), .00051);
+    }
     assert.equal(await lab.evaluate(element => /NaN|Infinity|null|undefined/.test(element.innerText)), false);
   }
 
@@ -92,7 +95,7 @@ const close = (actual, expected, tolerance = 1e-4) => assert.ok(Number.isFinite(
     await page.evaluate(value => document.documentElement.setAttribute('data-theme', value), theme);
     await page.evaluate(() => scrollTo(0, 0)); await page.evaluate(() => document.fonts.ready);
     await page.addScriptTag({ path: axePath });
-    const result = await page.evaluate(async () => axe.run(document.querySelector('#portfolio-optimization-lab'), { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } }));
+    const result = await page.evaluate(async () => axe.run(document.querySelector('#black-litterman-lab'), { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } }));
     const overflow = await page.evaluate(() => ({ width: innerWidth, scrollWidth: document.documentElement.scrollWidth }));
     const serious = result.violations.filter(item => ['serious', 'critical'].includes(item.impact));
     report.states.push({ width, theme, overflow, violations: result.violations.map(item => ({ id: item.id, impact: item.impact, targets: item.nodes.map(node => node.target) })) });

@@ -1,7 +1,8 @@
 {
   "recorded_at": "2026-09-18",
   "chapter": "portfolio-optimization.md",
-  "delivery": "Prepared for the Portfolio Optimization & Black–Litterman chapter. Publication and deployment are handled by the parent task.",
+  "related_chapter": "black-litterman.md",
+  "delivery": "Portfolio Optimization and Black–Litterman are now separate lessons with independent executed Notebooks.",
   "source": {
     "provided_filename": "JA252.2 Notes1.pdf",
     "source_location": "User-provided local PDF; not included in the repository.",
@@ -289,7 +290,8 @@
     "route": "no-image-generator",
     "reason": "Every illustration communicates a mathematical relationship, calculated example or model flow and is generated as an editable or deterministic diagram rather than decorative artwork.",
     "image_generator_used": false,
-    "generator": "scripts/make_portfolio_optimization_figures.py generates 13 calculated SVGs; the editable Excalidraw source renders the Black-Litterman roadmap SVG.",
+    "generator": "scripts/make_portfolio_optimization_figures.py generates 13 SVGs; scripts/render_optimization_roadmap.py renders the editable Excalidraw roadmap.",
+    "revision": "2026-09-18: all 14 figures redesigned from mathematical inputs. OLS matches the Notebook, the Lagrange contour is exactly tangent, and exposure bars use a common scale. The interactive Black–Litterman chart is also redesigned.",
     "svg_files": [
       "assets/images/optimization-types.svg",
       "assets/images/optimization-curvature.svg",
@@ -310,7 +312,7 @@
       "rendered_file": "assets/images/optimization-black-litterman-roadmap.svg",
       "source_file": "assets/diagrams/optimization-black-litterman-roadmap.excalidraw",
       "spec": {
-        "layout": "Left-to-right five-stage flow",
+        "layout": "Two input branches: market to prior; prior and views to posterior; posterior to allocation",
         "stages": [
           "market weights and covariance",
           "reverse optimization prior",
@@ -331,7 +333,7 @@
     "editable": "Thirteen deterministic calculated SVGs plus one Excalidraw roadmap SVG and its editable source."
   },
   "notebook": {
-    "file": "notebooks/portfolio-optimization.ipynb",
+    "files": ["notebooks/portfolio-optimization.ipynb", "notebooks/black-litterman.ipynb"],
     "generator": "scripts/make_portfolio_optimization_notebook.py",
     "dependencies": "Python standard library",
     "scope": [
@@ -346,7 +348,9 @@
   },
   "verification_commands": [
     "python3 scripts/make_portfolio_optimization_figures.py",
+    "python3 scripts/render_optimization_roadmap.py",
     "python3 scripts/make_portfolio_optimization_notebook.py",
+    "node qa/optimization-figure-review.cjs",
     "node qa/portfolio-optimization-checks.mjs",
     "npm run build:pages",
     "npm test",

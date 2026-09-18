@@ -22,7 +22,9 @@ async function build(){
   const fm=source.match(/^---\n([\s\S]*?)\n---\n/);if(fm){meta=yaml.parse(fm[1]);source=source.slice(fm[0].length);}
   const equations=[];
   source=source.replace(/\$\$([\s\S]+?)\$\$/g,(_,tex)=>{const n=equations.length;equations.push(katex.renderToString(tex.trim(),{displayMode:true,throwOnError:true,output:'htmlAndMathml',strict:'ignore'}));return `<div class="equation math-display" tabindex="0" role="group" aria-label="สมการ" data-math="${n}">EQUATION_${n}_END</div>`;});
-  let body=marked.parse(source).replace(/EQUATION_(\d+)_END/g,(_,i)=>equations[Number(i)]).replaceAll('<pre>','<pre tabindex="0" aria-label="ตัวอย่างโค้ด Python">');
+  const inlineEquations=[];
+  if(meta.inline_math===true)source=source.replace(/\\\(([\s\S]+?)\\\)/g,(_,tex)=>{const n=inlineEquations.length;inlineEquations.push(katex.renderToString(tex.trim(),{displayMode:false,throwOnError:true,output:'htmlAndMathml',strict:'ignore'}));return `INLINEEQUATION${n}END`;});
+  let body=marked.parse(source).replace(/INLINEEQUATION(\d+)END/g,(_,i)=>inlineEquations[Number(i)]).replace(/EQUATION_(\d+)_END/g,(_,i)=>equations[Number(i)]).replaceAll('<pre>','<pre tabindex="0" aria-label="ตัวอย่างโค้ด Python">');
   const headings=[],ids=new Map();
   body=body.replace(/<h([1-3])>([\s\S]*?)<\/h\1>/g,(_,level,text)=>{let base=slug(text)||'heading',n=(ids.get(base)||0)+1;ids.set(base,n);const id=n===1?base:`${base}-${n}`;if(level==='2')headings.push({id,title:plain(text)});return `<h${level} id="${id}">${text}</h${level}>`;});
   body=body.replace(/href="([a-z0-9-]+)\.md(#[^"]*)?"(?! download)/g,(_,file,hash='')=>`href="${file===toc.root?'index':file}.html${hash}"`);

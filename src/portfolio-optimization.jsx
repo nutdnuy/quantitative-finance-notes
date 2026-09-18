@@ -8,29 +8,28 @@ const clean = value => Math.abs(value) < 5e-13 ? 0 : value;
 
 function ReturnComparison({ prior, posterior }) {
   const titleId = useId(), descriptionId = useId();
-  const width = 700, height = 290, left = 54, right = 18, top = 28, bottom = 48;
-  const plotHeight = height - top - bottom, maximum = .30;
-  const y = value => top + (maximum - value) / maximum * plotHeight;
-  const groupWidth = (width - left - right) / ASSETS.length, barWidth = Math.min(30, groupWidth * .22);
+  const width = 700, height = 330, left = 92, right = 32;
+  const maximum = .30, x = value => left + value / maximum * (width - left - right);
   const description = ASSETS.map((asset, index) => `${asset}: prior ${percent(prior[index])}, posterior ${percent(posterior[index])}`).join('; ');
   return <div className="chart">
-    <svg width="100%" height="290" viewBox={`0 0 ${width} ${height}`} role="img" aria-labelledby={`${titleId} ${descriptionId}`}>
+    <svg width="100%" height={height} viewBox={`0 0 ${width} ${height}`} role="img" aria-labelledby={`${titleId} ${descriptionId}`}>
       <title id={titleId}>ผลตอบแทนส่วนเกินก่อนและหลังรวม view</title>
       <desc id={descriptionId}>{description}</desc>
-      <text x={left} y="15" className="axis-label">ผลตอบแทนส่วนเกินคาดหมาย (%)</text>
-      {[0, .075, .15, .225, .30].map(value => <g key={value}>
-        <line className="grid" x1={left} x2={width - right} y1={y(value)} y2={y(value)} />
-        <text x={left - 9} y={y(value) + 4} textAnchor="end">{format(100 * value, 1)}</text>
+      {[0, .05, .10, .15, .20, .25, .30].map(value => <g key={value}>
+        <line className="grid" x1={x(value)} x2={x(value)} y1="38" y2="270" />
+        <text x={x(value)} y="294" textAnchor="middle">{format(100 * value, 0)}</text>
       </g>)}
       {ASSETS.map((asset, index) => {
-        const center = left + groupWidth * (index + .5), priorHeight = plotHeight - (y(prior[index]) - top), posteriorHeight = plotHeight - (y(posterior[index]) - top);
+        const cy = 63 + index * 62;
         return <g key={asset}>
-          <rect x={center - barWidth - 2} y={y(prior[index])} width={barWidth} height={priorHeight} rx="2" style={{ fill: 'var(--muted)', opacity: .48 }} />
-          <rect x={center + 2} y={y(posterior[index])} width={barWidth} height={posteriorHeight} rx="2" style={{ fill: 'var(--primary)' }} />
-          <text x={center} y={height - 22} textAnchor="middle">{index + 1}</text>
+          <text x="60" y={cy + 5} textAnchor="end">X{index + 1}</text>
+          <line x1={x(prior[index])} x2={x(posterior[index])} y1={cy} y2={cy} style={{ stroke: 'var(--muted)', strokeWidth: 2 }} />
+          <circle data-series="prior" cx={x(prior[index])} cy={cy} r="6" style={{ fill: 'var(--surface)', stroke: 'var(--primary)', strokeWidth: 2 }} />
+          <circle data-series="posterior" cx={x(posterior[index])} cy={cy} r="5" style={{ fill: 'var(--comparison)' }} />
         </g>;
       })}
-      <text x={width - right} y={height - 6} textAnchor="end" className="axis-label">สินทรัพย์</text>
+      <text x={left} y="19" className="axis-label">วงโปร่ง: Prior · จุดทึบ: Posterior</text>
+      <text x={width / 2} y="324" textAnchor="middle" className="axis-label">ผลตอบแทนส่วนเกินคาดหมาย (%)</text>
     </svg>
   </div>;
 }
@@ -61,7 +60,7 @@ export function PortfolioOptimizationLab() {
       <p>สินทรัพย์ 3 ให้ผลตอบแทนส่วนเกินมากกว่าสินทรัพย์ 1 อยู่ 10 จุดเปอร์เซ็นต์ และสินทรัพย์ 2 ให้ผลตอบแทนส่วนเกิน 3%</p>
     </div>
     <ReturnComparison prior={result.priorExcessReturns} posterior={result.posteriorExcessReturns} />
-    <p className="lab-note">แท่งสีเทาแสดง prior จากสมดุลตลาด แท่งสีม่วงแสดง posterior หลังรวม view</p>
+    <p className="lab-note">วงโปร่งแสดง prior จากสมดุลตลาด จุดทึบแสดง posterior หลังรวม view เส้นเชื่อมช่วยให้อ่านทิศทางการปรับของแต่ละสินทรัพย์</p>
 
     <div className="table-wrap" tabIndex="0" role="group" aria-label="ตารางผลตอบแทนส่วนเกินก่อนและหลังรวม view">
       <table>

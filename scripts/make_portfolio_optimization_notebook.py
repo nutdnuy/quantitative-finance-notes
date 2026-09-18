@@ -1,4 +1,4 @@
-"""Build and execute the Portfolio Optimization & Black-Litterman notebook."""
+"""Build and execute the two independent optimization lesson notebooks."""
 import base64
 import contextlib
 import hashlib
@@ -11,10 +11,6 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE_PATH = ROOT / "portfolio-optimization.md"
-OUTPUT_PATH = ROOT / "notebooks/portfolio-optimization.ipynb"
-source = SOURCE_PATH.read_text()
-body = re.sub(r"\A---\n.*?\n---\n", "", source, flags=re.S)
 cells = []
 namespace = {}
 
@@ -104,7 +100,18 @@ omega_inv_X_columns = [solve(OMEGA, column) for column in transpose(X)]
 omega_inv_X = transpose(omega_inv_X_columns)
 beta_gls = solve(matmul(Xt, omega_inv_X), matvec(Xt, omega_inv_y))
 print(f"GLS slope={beta_gls[0]:.6f}, intercept={beta_gls[1]:.6f}")
-assert all(math.isfinite(value) for value in beta_ols + beta_gls)''',
+assert all(math.isfinite(value) for value in beta_ols + beta_gls)
+
+# The same exact whitening transform shown in the lesson figure.
+L = [[2.0, 0.0], [.8, .6]]
+I = [[1.0, 0.0], [0.0, 1.0]]
+L_inv = transpose([solve(L, col) for col in transpose(I)])
+model_covariance = matmul(L, transpose(L))
+whitened_covariance = matmul(matmul(L_inv, model_covariance), transpose(L_inv))
+for row, expected in zip(whitened_covariance, I):
+    for value, target in zip(row, expected):
+        close(value, target)
+print("Whitened model covariance:", whitened_covariance)''',
     "target-return-portfolio": '''inverse_one = solve(SIGMA, ONE)
 inverse_mu = solve(SIGMA, MU)
 A = dot(ONE, inverse_one)
@@ -220,10 +227,12 @@ print(f"Net active weight={100*sum(active):.2f}%, tracking error={100*tracking_e
 
 
 def markdown(text):
+    text = re.sub(r'<h1[^>]*>(.*?)</h1>', r'# \1', text)
     text = re.sub(r'<noscript>.*?</noscript>', '', text, flags=re.S)
-    text = re.sub(r'<div id="portfolio-optimization-lab"[^>]*></div>', '', text)
+    text = re.sub(r'<div id="(?:portfolio-optimization|black-litterman)-lab"[^>]*></div>', '', text)
     text = re.sub(r'<a[^>]+href="([^"]+)"[^>]*>(.*?)</a>', r'[\2](\1)', text, flags=re.S)
-    text = text.replace('](notebooks/portfolio-optimization.ipynb)', '](portfolio-optimization.ipynb)')
+    text = re.sub(r'\]\(notebooks/([\w-]+\.ipynb)\)', r'](\1)', text)
+    text = re.sub(r'\]\(((?:assets/diagrams|data)/[^)]+)\)', r'](../\1)', text)
     text = re.sub(r'<summary>(.*?)</summary>', r'**\1**', text, flags=re.S)
     text = text.replace('<strong>', '**').replace('</strong>', '**')
     text = re.sub(r'</?(?:p|div|section|details|figure|figcaption)\b[^>]*>', '\n', text)
@@ -255,43 +264,36 @@ def code(text):
     })
 
 
-markdown(
-    '# Notebook: Portfolio Optimization & Black–Litterman\n\n'
-    'ใช้ Python 3 standard library และกด Run All ตามลำดับได้ '
-    'ตัวเลขทุกชุดเป็นข้อมูลสมมติสำหรับเรียนรู้ ไม่ใช่ข้อมูลตลาดหรือคำแนะนำการลงทุน '
-    'ภาพ SVG ฝังอยู่ใน Notebook แล้ว'
-)
-markdown(body.split('<section id="', 1)[0])
-code(snippets['setup'])
-used = {'setup'}
-for match in re.finditer(r'<section id="([^"]+)"[^>]*>(.*?)</section>', body, flags=re.S):
-    section_id, content = match.groups()
-    markdown(content)
-    if section_id in snippets:
-        code(snippets[section_id])
-        used.add(section_id)
-for key in (name for name in snippets if name not in used):
-    markdown(f'## Python experiment: {key}')
-    code(snippets[key])
-for index, cell in enumerate(cells):
-    cell['id'] = f'portfolio-optimization-{index:02d}'
-
-notebook = {
-    'nbformat': 4,
-    'nbformat_minor': 5,
-    'cells': cells,
-    'metadata': {
-        'kernelspec': {'display_name': 'Python 3', 'language': 'python', 'name': 'python3'},
-        'language_info': {'name': 'python', 'version': sys.version.split()[0], 'file_extension': '.py'},
-        'source': {'path': SOURCE_PATH.name, 'sha256': hashlib.sha256(source.encode()).hexdigest()},
-        'execution': {
-            'method': 'Executed every code cell in one shared namespace; captured stdout',
-            'generator': 'scripts/make_portfolio_optimization_notebook.py',
+def build_notebook(slug, title):
+    global cells, namespace
+    cells, namespace = [], {}
+    source_path = ROOT / f'{slug}.md'
+    output_path = ROOT / f'notebooks/{slug}.ipynb'
+    source = source_path.read_text()
+    body = re.sub(r"\A---\n.*?\n---\n", "", source, flags=re.S)
+    markdown(f'# Notebook: {title}\n\nใช้ Python 3 standard library และกด Run All ตามลำดับได้ ตัวเลขเป็นข้อมูลสมมติ ภาพ SVG ฝังอยู่ในไฟล์แล้ว')
+    markdown(body.split('<section id="', 1)[0])
+    code(snippets['setup'])
+    for match in re.finditer(r'<section id="([^"]+)"[^>]*>(.*?)</section>', body, flags=re.S):
+        section_id, content = match.groups()
+        markdown(content)
+        if section_id in snippets and not (slug == 'portfolio-optimization' and section_id == 'black-litterman'):
+            code(snippets[section_id])
+    for index, cell in enumerate(cells):
+        cell['id'] = f'{slug}-{index:02d}'
+    notebook = {
+        'nbformat': 4, 'nbformat_minor': 5, 'cells': cells,
+        'metadata': {
+            'kernelspec': {'display_name': 'Python 3', 'language': 'python', 'name': 'python3'},
+            'language_info': {'name': 'python', 'version': sys.version.split()[0], 'file_extension': '.py'},
+            'source': {'path': source_path.name, 'sha256': hashlib.sha256(source.encode()).hexdigest()},
+            'execution': {'method': 'Executed every code cell in a fresh namespace for each notebook; captured stdout', 'generator': 'scripts/make_portfolio_optimization_notebook.py'},
         },
-    },
-}
-OUTPUT_PATH.write_text(json.dumps(notebook, ensure_ascii=False, indent=1) + '\n')
-print(
-    f'Wrote {OUTPUT_PATH.name}: {len(cells)} cells; '
-    f'{sum(cell["cell_type"] == "code" for cell in cells)} executed code cells.'
-)
+    }
+    output_path.write_text(json.dumps(notebook, ensure_ascii=False, indent=1) + '\n')
+    print(f'Wrote {output_path.name}: {len(cells)} cells; {sum(c["cell_type"] == "code" for c in cells)} executed code cells.')
+
+
+if __name__ == '__main__':
+    build_notebook('portfolio-optimization', 'Portfolio Optimization')
+    build_notebook('black-litterman', 'Black–Litterman')
