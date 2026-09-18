@@ -307,58 +307,67 @@ def axes(svg, x0, y0, width, height, xmin, xmax, ymin, ymax, xticks, yticks, xla
 def figure_optimization_types():
     svg = SVG(
         "optimization-types",
-        "Four optimization problems differ by the feasible set",
-        "Four panels compare unconstrained optimization, an equality constraint, an inequality constraint and benchmark-relative active weights.",
-        "The objective may stay the same while the admissible answer changes.",
-        "Conceptual geometry | No market observations",
+        "Four ways to frame an optimization problem",
+        "Three panels show minimization of elliptical objective contours over different feasible sets. Equality and binding inequality optima are exact tangencies. The fourth shows benchmark-relative weights as a reparameterization with zero-net active weights.",
+        "Constraints define feasible choices; a benchmark defines active weights.",
+        "Illustrative convex objective · Lower contours are better · No market observations",
+        height=760,
     )
-    svg.arrow_defs()
-    panels = [(50, 112), (570, 112), (50, 365), (570, 365)]
+    panels = [(50, 112), (570, 112), (50, 412), (570, 412)]
     titles = ["1  Unconstrained", "2  Equality constraint", "3  Inequality constraint", "4  Benchmark-relative"]
-    fills = [PURPLE_LIGHT, TEAL_LIGHT, LIGHT_GRAY, PURPLE_LIGHT]
-    for (px, py), title, fill in zip(panels, titles, fills):
-        svg.rect(px, py, 500, 220, fill=WHITE, stroke=GRID, rx=8)
-        svg.rect(px, py, 500, 46, fill=fill, stroke="none", rx=8)
-        svg.text(px + 18, py + 30, title, size=18, weight=600)
+    for (px, py), title in zip(panels, titles):
+        svg.rect(px, py, 500, 276, fill=WHITE, stroke=GRID, rx=8)
+        svg.rect(px + 18, py + 18, 4, 22, fill=PURPLE, rx=2)
+        svg.text(px + 34, py + 35, title, size=18, weight=600)
+        svg.line(px + 18, py + 52, px + 482, py + 52, GRID, 1)
 
-    # Unconstrained: concentric contours and unconstrained optimum.
+    # All three panels share f(x,y) = (x/105)^2 + (y/38)^2.
+    # For n·z = d, z* = Q^-1 n d / (n·Q^-1 n).
+    rx, ry, slope = 105, 38, 0.22
+    offset = (slope ** 2 * rx ** 2 + ry ** 2) ** 0.5
+    dx, dy = slope * rx ** 2 / offset, ry ** 2 / offset
+    assert abs((dx / rx) ** 2 + (dy / ry) ** 2 - 1) < 1e-12
+    assert abs(slope * dx + dy - offset) < 1e-12
+
     px, py = panels[0]
-    for rx, ry in [(115, 58), (80, 40), (44, 22)]:
-        svg.ellipse(px + 250, py + 140, rx, ry, stroke=PURPLE, stroke_width=2)
-    svg.circle(px + 250, py + 140, 7, fill=PURPLE, stroke=WHITE)
-    svg.text(px + 380, py + 102, "search all x", size=15, fill=GRAY)
-    svg.text(px + 268, py + 146, "x*", size=16, fill=PURPLE, weight=600)
+    cx, cy = px + 250, py + 147
+    for scale in [1.2, 0.85, 0.5]:
+        svg.ellipse(cx, cy, rx * scale, ry * scale, stroke=PURPLE, stroke_width=1.8)
+    svg.circle(cx, cy, 6, fill=PURPLE, stroke=WHITE)
+    svg.text(cx + 16, cy + 6, "x*", size=16, fill=PURPLE, weight=600)
+    svg.text(px + 250, py + 239, "Search over all x", size=16, anchor="middle", fill=GRAY)
 
-    # Equality: a line cuts the contours; optimum is tangent to it.
-    px, py = panels[1]
-    for rx, ry in [(115, 58), (80, 40), (44, 22)]:
-        svg.ellipse(px + 250, py + 140, rx, ry, stroke=GRAY, stroke_width=1.5)
-    svg.line(px + 88, py + 187, px + 412, py + 86, TEAL, 4)
-    svg.circle(px + 309, py + 118, 7, fill=TEAL, stroke=WHITE)
-    svg.text(px + 82, py + 202, "g(x) = b", size=15, fill=TEAL, weight=600)
-    svg.text(px + 323, py + 113, "best feasible x", size=14, fill=INK)
+    for index, direction in [(1, 1), (2, -1)]:
+        px, py = panels[index]
+        cx, cy = px + 235, py + 120
+        tx, ty = cx + direction * dx, cy + dy
+        x1, x2 = px + 72, px + 428
+        y1 = cy + offset - direction * slope * (x1 - cx)
+        y2 = cy + offset - direction * slope * (x2 - cx)
+        if index == 2:
+            svg.polygon([(x1, y1), (x2, y2), (x2, py + 218), (x1, py + 218)], fill=TEAL_LIGHT, stroke="none")
+        for scale in [1.35, 1, 0.6]:
+            svg.ellipse(cx, cy, rx * scale, ry * scale, stroke=PURPLE if scale == 1 else GRAY, stroke_width=1.8 if scale == 1 else 1.2)
+        svg.circle(cx, cy, 3, fill=GRAY, stroke=WHITE, stroke_width=1)
+        svg.line(x1, y1, x2, y2, TEAL, 3)
+        svg.circle(tx, ty, 6.5, fill=PURPLE, stroke=WHITE, stroke_width=2)
+        # Short leaders move labels away from both contours and boundaries.
+        label_x = tx + 28 if index == 1 else tx - 28
+        anchor = "start" if index == 1 else "end"
+        svg.polyline([(tx, ty + 10), (tx, py + 213), (label_x, py + 213)], stroke=GRAY, width=1.2)
+        svg.text(label_x, py + 218, "x*" if index == 1 else "binding x*", size=15, fill=PURPLE, anchor=anchor, weight=600)
+        caption = "g(x) = b  ·  Feasible choices lie on the line" if index == 1 else "g(x) ≤ b  ·  Shaded side is feasible"
+        svg.text(px + 250, py + 249, caption, size=15, anchor="middle", fill=TEAL, weight=500)
 
-    # Inequality: shaded feasible half-plane and boundary optimum.
-    px, py = panels[2]
-    svg.polygon([(px + 70, py + 185), (px + 70, py + 84), (px + 430, py + 185)], fill=TEAL_LIGHT, stroke="none")
-    svg.line(px + 70, py + 84, px + 430, py + 185, TEAL, 4)
-    for rx, ry in [(104, 52), (68, 34)]:
-        svg.ellipse(px + 320, py + 92, rx, ry, stroke=PURPLE, stroke_width=2)
-    svg.circle(px + 270, py + 140, 7, fill=PURPLE, stroke=WHITE)
-    svg.text(px + 86, py + 174, "g(x) ≤ b", size=15, fill=TEAL, weight=600)
-    svg.text(px + 286, py + 155, "binding boundary", size=14)
-
-    # Benchmark: one passive bar plus zero-net active overlay.
     px, py = panels[3]
-    svg.text(px + 78, py + 90, "w_p", size=18, weight=600)
-    svg.rect(px + 120, py + 70, 225, 34, fill=PURPLE_LIGHT, stroke=PURPLE, rx=4)
-    svg.text(px + 232, py + 93, "benchmark w_B", size=14, anchor="middle")
-    svg.rect(px + 345, py + 70, 64, 34, fill=TEAL_LIGHT, stroke=TEAL, rx=4)
-    svg.text(px + 377, py + 93, "+", size=16, fill=TEAL, anchor="middle", weight=600)
-    svg.rect(px + 120, py + 129, 64, 28, fill="#FCE8EC", stroke=ERROR, rx=4)
-    svg.text(px + 152, py + 149, "−", size=16, fill=ERROR, anchor="middle", weight=600)
-    svg.line(px + 184, py + 143, px + 345, py + 87, GRAY, 1.5, dash="5 4")
-    svg.text(px + 120, py + 188, "w_p = w_B + Delta w     and     1^T Delta w = 0", size=17, fill=INK)
+    svg.items.append(f'<text x="{px + 250}" y="{py + 92}" text-anchor="middle" font-size="25" fill="{INK}" font-weight="500">w<tspan baseline-shift="sub" font-size="16">p</tspan><tspan> = w</tspan><tspan baseline-shift="sub" font-size="16">B</tspan><tspan> + Δw</tspan></text>')
+    svg.text(px + 250, py + 119, "portfolio = benchmark + active weights", size=14, anchor="middle", fill=GRAY)
+    svg.rect(px + 74, py + 141, 160, 40, fill=TEAL_LIGHT, stroke=TEAL, rx=5)
+    svg.text(px + 154, py + 167, "+ overweight", size=15, anchor="middle", fill=TEAL, weight=500)
+    svg.rect(px + 266, py + 141, 160, 40, fill="#FCE8EC", stroke=ERROR, rx=5)
+    svg.text(px + 346, py + 167, "− underweight", size=15, anchor="middle", fill=ERROR, weight=500)
+    svg.text(px + 250, py + 213, "Σᵢ Δwᵢ = 0", size=22, anchor="middle", weight=500)
+    svg.text(px + 250, py + 249, "Same total weight; active tilts net to zero", size=15, anchor="middle", fill=GRAY)
     svg.save("optimization-types.svg")
 
 
