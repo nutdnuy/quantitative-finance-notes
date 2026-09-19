@@ -1,0 +1,139 @@
+{
+  "lesson": "volatility-models-arch",
+  "status": "publication-approved",
+  "prepared_on": "2026-09-19",
+  "source": {
+    "filename": "JA252.5 Notes.pdf",
+    "title": "Volatility Models: the ARCH framework",
+    "author": "Stephen Taylor",
+    "course": "Certificate in Quantitative Finance",
+    "lecture_date": "2025-02-27",
+    "pdf_pages": 67,
+    "page_numbering": "One-based PDF page numbers, including cover.",
+    "source_pdf_in_repository": false
+  },
+  "source_scope": "Original Thai exposition with newly constructed worked examples; no source slide reproduction or reconstructed historical observations.",
+  "page_coverage": {
+    "volatility_definitions": [
+      4,
+      7
+    ],
+    "arch_and_garch": [
+      8,
+      15
+    ],
+    "forecasting": [
+      24,
+      26
+    ],
+    "general_framework": [
+      27,
+      30
+    ],
+    "gjr_arch_m": [
+      31,
+      48
+    ],
+    "likelihood": [
+      49,
+      55
+    ],
+    "hypothesis_tests": [
+      56,
+      64
+    ],
+    "extensions": [
+      65,
+      67
+    ]
+  },
+  "conventions": {
+    "returns": "Daily log returns in decimal units; mean zero in all numerical examples.",
+    "variance": "Squared decimal returns per daily observation. Multiply by 10000 for percent-squared.",
+    "annualization_trading_days": 252,
+    "forecast_origin": "End of day t; k=1 is h_(t+1), known after observing r_t.",
+    "aggregate_variance": "Sum of conditional variance forecasts for cumulative log returns, with constant mean and martingale-difference residuals.",
+    "half_life": "Decay of variance forecast gap from long-run variance; extra periods after the first forecast.",
+    "conditional_sd_forecast": "sqrt(E_t[h_(t+k)]), not E_t[sqrt(h_(t+k))]."
+  },
+  "garch_example": {
+    "omega": 5e-06,
+    "alpha": 0.08,
+    "beta": 0.87,
+    "current_variance": 0.0001,
+    "residual": -0.03,
+    "persistence": 0.95,
+    "long_run_variance": 0.0001,
+    "next_variance": 0.000164,
+    "five_day_variance": 0.0007895604
+  },
+  "gjr_example": {
+    "omega": 5e-06,
+    "alpha": 0.03,
+    "gamma": 0.1,
+    "beta": 0.87,
+    "symmetric_innovations": true,
+    "persistence": 0.95,
+    "positive_residual_next_variance": 0.000119,
+    "negative_residual_next_variance": 0.000209
+  },
+  "likelihood_example": {
+    "data_status": "Eight handcrafted hypothetical returns, no random sampling or market fit.",
+    "returns": [
+      0.005,
+      -0.01,
+      0.02,
+      -0.03,
+      0.01,
+      0,
+      -0.005,
+      0.015
+    ],
+    "initial_variance": 0.0001,
+    "mean": 0,
+    "method": "Conditional Gaussian likelihood and a restricted educational parameter grid; not continuous MLE and no standard errors.",
+    "seeds": "Not applicable; examples and figures are deterministic."
+  },
+  "clarifications_from_source": [
+    "Radicals verified visually in source: ARCH-M uses conditional SD, not variance.",
+    "Finite unconditional variance condition distinguished from strict stationarity.",
+    "Half-life is for variance gap, not SD gap.",
+    "GJR gamma/2 requires symmetric unit-variance innovations.",
+    "Likelihood inference at a boundary requires model-specific theory; fail to reject is not acceptance.",
+    "Gaussian QMLE does not validate Normal tails."
+  ],
+  "visuals": {
+    "design_system": "QuantCorner / QuantSeras, existing light book layout with optional dark theme",
+    "route": "no-image-generator",
+    "image_generator_used": false,
+    "new_third_party_assets": false,
+    "files": [
+      "arch-update.svg",
+      "arch-forecast.svg",
+      "arch-news-impact.svg"
+    ],
+    "editable_source": "scripts/make_volatility_models_figures.py"
+  },
+  "external_references": [
+    {
+      "title": "arch analytical forecasting",
+      "url": "https://arch.readthedocs.io/en/stable/univariate/forecasting.html"
+    },
+    {
+      "title": "arch standardized Student t",
+      "url": "https://arch.readthedocs.io/en/stable/univariate/generated/arch.univariate.StudentsT.html"
+    },
+    {
+      "title": "Self and Liang (1987), boundary likelihood theory",
+      "url": "https://doi.org/10.1080/01621459.1987.10478472"
+    },
+    {
+      "title": "Engle (2001), GARCH 101",
+      "url": "https://archive.nyu.edu/handle/2451/26577"
+    }
+  ],
+  "limitations": [
+    "No empirical estimation, out-of-sample backtest, standard errors or live risk advice."
+  ],
+  "publication_authorization": "Owner explicitly requested insertion and GitHub publication after reviewing the local draft."
+}

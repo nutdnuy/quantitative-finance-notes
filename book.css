@@ -75,3 +75,10 @@
  .welcome-main .welcome-hero{padding-bottom:20px}
  .welcome-preparation,.welcome-lesson,.welcome-resources{break-inside:avoid}
 }
+
+/* Licensed editorial photograph; the image file is an unmodified Commons thumbnail. */
+.welcome-photo{margin:32px 0 40px}
+.welcome-photo img{display:block;width:100%;height:auto;border-radius:6px}
+.welcome-photo figcaption{margin-top:10px;font-size:12px;line-height:1.8;color:var(--muted)}
+.welcome-photo figcaption a{color:inherit;text-underline-offset:3px}
+@media(max-width:800px){.welcome-photo{margin:24px 0 32px}}

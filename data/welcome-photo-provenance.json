@@ -1,0 +1,18 @@
+{
+  "role": "Welcome editorial photograph",
+  "file": "assets/images/welcome-nyse.jpg",
+  "subject": "New York Stock Exchange Building, Manhattan",
+  "author": "Skypetrus (Piotr M. Kazimierczak)",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Manhattan_-_New_York_Stock_Exchange_Building_-_20190929151052.jpg",
+  "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Manhattan_-_New_York_Stock_Exchange_Building_-_20190929151052.jpg/1280px-Manhattan_-_New_York_Stock_Exchange_Building_-_20190929151052.jpg",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "changes": "Unmodified 1280px thumbnail supplied by Wikimedia; browser scales proportionally without cropping.",
+  "dimensions": [
+    1280,
+    812
+  ],
+  "sha256": "9f5574affd0908cea135eccc151ddcd2df405146dda4f41c2ec97ab8e6eab05b",
+  "visual_route": "no-image-generator",
+  "image_generator_used": false
+}

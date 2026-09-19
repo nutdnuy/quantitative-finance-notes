@@ -1415,6 +1415,62 @@ Available stable funding หารด้วย required stable funding มอง
 
 ความหมายและตัวอย่างแต่ละคำมีลิงก์กลับไปยังบทที่เกี่ยวข้อง แหล่งอ้างอิงของคำและตัวอย่างอยู่ท้ายบทเหล่านั้น
 
+<section class="glossary-group" id="group-arch-models">
+
+## แบบจำลองความผันผวนตามเวลา
+
+<section class="glossary-term" id="conditional-variance">
+
+### Conditional variance — ความแปรปรวนแบบมีเงื่อนไข
+
+ความแปรปรวนของผลตอบแทนเมื่อกำหนดข้อมูลที่รู้ ณ เวลาหนึ่ง เช่น h ของวันพรุ่งนี้ที่คำนวณจากข้อมูลถึงวันนี้ รากที่สองของ h คือ conditional volatility ทั้งสองค่าขึ้นกับแบบจำลองและชุดข้อมูลที่ใช้ ไม่ใช่ขนาดผลตอบแทนที่จะเกิดจริงแน่นอน
+
+[ดูการแยก mean, variance และ innovation](volatility-models-arch.html#arch-framework)
+
+</section>
+
+<section class="glossary-term" id="garch">
+
+### ARCH / GARCH — แบบจำลอง variance จากข้อมูลอดีต
+
+ARCH ให้ conditional variance ขึ้นกับ residual ยกกำลังสองในอดีต ส่วน GARCH เพิ่ม conditional variance ในอดีตเข้าไปด้วย GARCH(1,1) ใช้ residual ยกกำลังสองหนึ่ง lag และ variance หนึ่ง lag จึงเก็บอิทธิพลของช็อกไว้หลายวันได้ด้วยสมการสั้น ๆ
+
+[ดูสมการและตัวอย่างอัปเดต](volatility-models-arch.html#garch-recursion)
+
+</section>
+
+<section class="glossary-term" id="volatility-persistence">
+
+### Persistence / half-life — ความคงอยู่ของผลช็อก
+
+ใน GARCH(1,1) ค่า α+β กำหนดความเร็วที่ variance forecast กลับเข้าหา variance ระยะยาวเมื่อค่านี้น้อยกว่าหนึ่ง Half-life จากสูตร log(1/2)/log(α+β) วัดจำนวนช่วงเพิ่มเติมที่ทำให้ส่วนต่างของ variance ลดลงครึ่งหนึ่ง ไม่ใช่ครึ่งหนึ่งของส่วนต่าง SD
+
+[ดู variance forecasts และห้องทดลอง](volatility-models-arch.html#forecasting)
+
+</section>
+
+<section class="glossary-term" id="gjr-garch">
+
+### GJR-GARCH — แบบจำลองช็อกบวกและลบไม่สมมาตร
+
+เพิ่มพจน์สำหรับ residual ลบในสมการ variance เพื่อให้ผลตอบแทนที่ต่ำกว่า mean ส่งผลต่างจาก residual บวกขนาดเท่ากัน ภายใต้ standardized innovations ที่สมมาตร persistence เท่ากับ α+β+γ/2 หาก distribution ไม่สมมาตรต้องเปลี่ยนพจน์ γ/2 ตามโมเมนต์ของช็อกด้านลบ
+
+[ดูตัวอย่างและ news impact curve](volatility-models-arch.html#asymmetric-gjr)
+
+</section>
+
+<section class="glossary-term" id="quasi-maximum-likelihood">
+
+### QMLE — การประมาณด้วย quasi-likelihood
+
+ใช้ likelihood ของการแจกแจงที่กำหนดเป็น objective แม้การแจกแจงจริงอาจต่างกัน เช่น ใช้ Gaussian likelihood ประมาณ conditional mean และ variance ภายใต้เงื่อนไขที่เหมาะสม ต้องเลือกวิธีหา standard errors และทดสอบที่รองรับข้อสมมตินี้ การใช้ robust standard errors ไม่ได้แก้ tail probabilities ที่คำนวณจาก distribution ผิด
+
+[ดูการตรวจ residual และ Student-t](volatility-models-arch.html#residual-checks)
+
+</section>
+
+</section>
+
 
 <section class="glossary-group" id="group-exotic-options">
 

@@ -32,6 +32,8 @@ chapters:
     title: Stochastic Processes — Definitions and Examples
   - file: asset-returns-stylized-facts
     title: Asset Returns — Empirical Stylized Facts
+  - file: volatility-models-arch
+    title: Volatility Models — The ARCH Framework
   - file: regulation-basel
     title: Regulation and Basel III / IV
   - file: exotic-options

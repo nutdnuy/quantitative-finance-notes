@@ -214,3 +214,11 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 `prices-and-returns.md`, `stochastic-processes.md` และ `asset-returns-stylized-facts.md` ครอบคลุม 31 หัวข้อของสารบัญ Taylor บท 2–4 โดยเรียบเรียงใหม่ ใช้ตัวอย่างสมมติร่วมกับข้อมูล S&P 500 จริงในส่วน clustering และเก็บตารางจับคู่ใน `data/return-foundations-provenance.json`
 
 สูตรและห้องทดลองใหม่อยู่ใน `src/return-foundations.mjs` และ `src/return-foundations.jsx` สร้างภาพด้วย `python3 scripts/make_return_foundations_figures.py` สร้างและรัน Notebook ด้วย `python3 scripts/make_return_foundations_notebooks.py` และ `python3 scripts/make_stylized_facts_notebook.py` ตรวจด้วย `npm test`, `npm run build:pages`, `node qa/return-foundations-page-checks.cjs` และ `node qa/stylized-facts-page-checks.cjs` ขณะเปิด preview พอร์ต 8763
+
+## แก้บท Volatility Models — The ARCH Framework
+
+ต้นฉบับคือ `volatility-models-arch.md` ห้องทดลอง `arch-forecast-lab` อยู่ใน `src/volatility-models.jsx` สูตร JavaScript อยู่ใน `src/volatility-models.mjs` ส่วน Python สำหรับ Notebook และกราฟอยู่ใน `scripts/volatility_models_math.py` ใช้หน่วยทศนิยมสำหรับ returns และทศนิยม² สำหรับ variance; annualization ในบทใช้ 252 วันซื้อขาย
+
+หลังแก้บทหรือสมการ รัน `python3 scripts/make_volatility_models_figures.py` และ `python3 scripts/make_volatility_models_notebook.py` จากนั้น `npm test`, `npm run build:pages` และ `node qa/volatility-models-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 Notebook สร้างจาก Markdown และฝัง SVG ทั้งสามภาพไว้ คำสั่งเขียนทับเฉพาะ `notebooks/volatility-models-arch.ipynb` จึงควรเก็บการทดลองส่วนตัวในชื่ออื่น
+
+หน้า Volatility Models อยู่ถัดจาก Asset Returns — Empirical Stylized Facts ในสารบัญและหน้า Welcome การเผยแพร่ใช้ workflow Publish book ตามขั้นตอนเดียวกับบทอื่น

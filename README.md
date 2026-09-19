@@ -156,3 +156,9 @@ Notebook ใช้ Python 3, NumPy และ Jupyter/IPython ถ้ารัน 
 `prices-and-returns.md`, `stochastic-processes.md` และ `asset-returns-stylized-facts.md` ครอบคลุม 31 หัวข้อของสารบัญ Taylor บท 2–4 โดยเรียบเรียงใหม่ ใช้ตัวอย่างสมมติร่วมกับข้อมูล S&P 500 จริงในส่วน clustering และเก็บตารางจับคู่ใน `data/return-foundations-provenance.json`
 
 สูตรและห้องทดลองใหม่อยู่ใน `src/return-foundations.mjs` และ `src/return-foundations.jsx` สร้างภาพด้วย `python3 scripts/make_return_foundations_figures.py` สร้างและรัน Notebook ด้วย `python3 scripts/make_return_foundations_notebooks.py` และ `python3 scripts/make_stylized_facts_notebook.py` ตรวจด้วย `npm test`, `npm run build:pages`, `node qa/return-foundations-page-checks.cjs` และ `node qa/stylized-facts-page-checks.cjs` ขณะเปิด preview พอร์ต 8763
+
+## Volatility Models — The ARCH Framework
+
+บทต่อจาก Stylized Facts อยู่ใน `volatility-models-arch.md` ครอบคลุม ARCH/GARCH, variance forecasts, GJR, ARCH-M และ likelihood พร้อมห้องทดลองและ Notebook ใช้เอกสาร *Volatility Models: the ARCH framework* ของ Stephen Taylor (27 February 2025) เป็นแหล่งหลัก ตัวเลขและกราฟทั้งหมดคำนวณจากสมมติฐาน ไม่ใช่ผล fit ราคาตลาด ดูรายละเอียดใน `data/volatility-models-provenance.json`
+
+สร้างภาพด้วย `python3 scripts/make_volatility_models_figures.py` และสร้างพร้อมรัน Notebook ด้วย `python3 scripts/make_volatility_models_notebook.py` ตรวจผ่าน `npm test`, `npm run build:pages` และ `node qa/volatility-models-page-checks.cjs` ขณะเปิด preview พอร์ต 8763

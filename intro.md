@@ -13,6 +13,11 @@ description: เรียนการเงินเชิงปริมาณ�
 <p class="welcome-format">ตัวอย่างและสมการ   Python Notebook</p>
 </div>
 
+<figure class="welcome-photo">
+<img src="assets/images/welcome-nyse.jpg" alt="ภาพขาวดำด้านหน้าอาคาร New York Stock Exchange และอาคารสูงในย่านการเงินนิวยอร์ก" width="1280" height="812" decoding="async" fetchpriority="high">
+<figcaption>New York Stock Exchange · ภาพโดย <a href="https://commons.wikimedia.org/wiki/File:Manhattan_-_New_York_Stock_Exchange_Building_-_20190929151052.jpg">Skypetrus / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></figcaption>
+</figure>
+
 ## เริ่มจากความสุ่ม
 
 ถัาคุณอยากเรียน Quant คุณมาถูกที่แล้วเราพยายาม สร้างองค์ความรู้ ทรัพยากรที่เกี่ยวกับ Quant ให้ทุกคนเข้าถึงได้ง่าย
@@ -138,6 +143,14 @@ description: เรียนการเงินเชิงปริมาณ�
 </article>
 <article class="welcome-lesson">
 <span class="welcome-lesson-number" aria-hidden="true">14</span>
+<div><p class="welcome-lesson-label">พยากรณ์ความเสี่ยงที่เปลี่ยนทุกวัน</p>
+<h3><a href="volatility-models-arch.html">Volatility Models — The ARCH Framework</a></h3>
+<p>ช็อกวันนี้เปลี่ยนความผันผวนวันพรุ่งนี้อย่างไร และความเสี่ยงจะค่อย ๆ ลดลงเร็วแค่ไหน?</p>
+<p class="welcome-topics">ARCH · GARCH · GJR · Variance forecasts · Likelihood</p>
+<a class="welcome-text-link" href="volatility-models-arch.html">เปิดบท Volatility Models →</a></div>
+</article>
+<article class="welcome-lesson">
+<span class="welcome-lesson-number" aria-hidden="true">15</span>
 <div><p class="welcome-lesson-label">เชื่อมความเสี่ยงกับการกำกับธนาคาร</p>
 <h3><a href="regulation-basel.html">Regulation and Basel III / IV</a></h3>
 <p>มีเงินกองทุนพอรับขาดทุนแล้ว จะมีสภาพคล่องพอจ่ายเงินทันเวลาด้วยหรือไม่?</p>
@@ -153,7 +166,7 @@ description: เรียนการเงินเชิงปริมาณ�
 <a class="welcome-text-link" href="exotic-options.html">เปิดบท Exotic Options →</a></div>
 </article>
 <article class="welcome-lesson">
-<span class="welcome-lesson-number" aria-hidden="true">16</span>
+<span class="welcome-lesson-number" aria-hidden="true">17</span>
 <div><p class="welcome-lesson-label">เปลี่ยนแบบจำลองเป็นวิธีคำนวณ</p>
 <h3><a href="numerical-methods.html">Introduction to Numerical Methods</a></h3>
 <p>เมื่อไม่มีสูตรสำเร็จ จะหาราคา Option และตรวจความแม่นยำของคำตอบอย่างไร?</p>
@@ -161,7 +174,7 @@ description: เรียนการเงินเชิงปริมาณ�
 <a class="welcome-text-link" href="numerical-methods.html">เปิดบท Numerical Methods →</a></div>
 </article>
 <article class="welcome-lesson">
-<span class="welcome-lesson-number" aria-hidden="true">17</span>
+<span class="welcome-lesson-number" aria-hidden="true">18</span>
 <div><p class="welcome-lesson-label">อ่านความไวของราคา Option ให้ครบ</p>
 <h3><a href="option-greeks.html">Know Your Weapon — Option Greeks</a></h3>
 <p>เมื่อราคา เวลา และ volatility เปลี่ยน Greeks ช่วยอธิบายราคาใหม่ได้ใกล้แค่ไหน?</p>
