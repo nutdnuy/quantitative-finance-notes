@@ -5,7 +5,7 @@ description: ศัพท์ที่ใช้ในบทเรียน Quant 
 
 # อภิธานศัพท์
 
-หน้านี้รวมศัพท์ที่เราใช้ในบทเรียน **พฤติกรรมแบบสุ่มของสินทรัพย์**, **Binomial Model**, **Transition Density Functions**, **Applied Stochastic Calculus**, **Black–Scholes Model**, **Portfolio Theory**, **Optimization Problem**, **Black–Litterman Portfolio** และ **Value at Risk and Expected Shortfall** เอาไว้เปิดเทียบระหว่างอ่าน แต่ละคำมีลิงก์กลับไปดูตัวอย่างและการทดลองที่เกี่ยวข้อง
+หน้านี้รวมศัพท์ที่เราใช้ในบทเรียน **พฤติกรรมแบบสุ่มของสินทรัพย์**, **Binomial Model**, **Transition Density Functions**, **Applied Stochastic Calculus**, **Black–Scholes Model**, **Portfolio Theory**, **Optimization Problem**, **Black–Litterman Portfolio**, **Value at Risk and Expected Shortfall** และ **Asset Returns — Empirical Stylized Facts** เอาไว้เปิดเทียบระหว่างอ่าน แต่ละคำมีลิงก์กลับไปดูตัวอย่างและการทดลองที่เกี่ยวข้อง
 
 <div class="glossary-search" hidden>
 <label for="glossary-query">ค้นหาคำศัพท์</label>
@@ -1129,6 +1129,59 @@ Quantile ของการแจกแจงขาดทุน โดยระ�
 การกำหนดสถานการณ์ เช่น ราคาหุ้นร่วงหรือสภาพคล่องลดลง แล้วคำนวณมูลค่าพอร์ต ขาดทุน หรือเงินที่ต้องใช้ โดยไม่จำเป็นต้องระบุความน่าจะเป็นที่แม่นยำให้ทุกสถานการณ์ ใช้ประกอบ VaR และ ES เพื่อสำรวจความเสียหายที่แบบจำลองหลักอาจครอบคลุมไม่พอ
 
 [ดูการใช้กับการบริหารความเสี่ยง](value-at-risk-expected-shortfall.html#risk-management)
+
+</section>
+</section>
+
+---
+
+<section class="glossary-group" id="group-return-dynamics">
+
+## พฤติกรรมผลตอบแทนและข้อมูลระหว่างวัน
+
+<section class="glossary-term" id="volatility-clustering">
+
+### Volatility clustering — การเกิดกลุ่มของความผันผวน
+
+ช่วงที่ผลตอบแทนมีขนาดใหญ่เกิดติดกัน และช่วงที่มีขนาดเล็กเกิดติดกัน ขนาดหมายถึงทั้งบวกและลบ จึงไม่ได้บอกว่าหลังวันที่ลงแรง วันถัดไปต้องลงต่อ
+
+[ดูนิยามและตัวอย่าง](asset-returns-stylized-facts.html#volatility-clustering)
+
+</section>
+<section class="glossary-term" id="autocorrelation">
+
+### Autocorrelation function (ACF) — ความสัมพันธ์กับค่าในอดีต
+
+ความสัมพันธ์เชิงเส้นของอนุกรมเวลากับตัวเองเมื่อเลื่อนห่างกัน k ช่วง การดู ACF ของผลตอบแทน ขนาดผลตอบแทน และผลตอบแทนยกกำลังสองตอบคนละคำถาม ค่า ACF ใกล้ศูนย์ไม่ได้ยืนยันความเป็นอิสระ
+
+[ดูนิยามและตัวอย่าง](asset-returns-stylized-facts.html#autocorrelation)
+
+</section>
+<section class="glossary-term" id="fat-tails">
+
+### Fat tails — หางหนา
+
+การแจกแจงที่ให้โอกาสเหตุการณ์รุนแรงมากกว่า Normal ที่ใช้เทียบ ต้องระบุสเกลและเกณฑ์ของเหตุการณ์ด้วย หางหนาไม่ได้แปลว่าต้องมี variance อนันต์ และค่า kurtosis เพียงค่าเดียวไม่ได้ระบุรูปการแจกแจงทั้งหมด
+
+[ดูนิยามและตัวอย่าง](asset-returns-stylized-facts.html#fat-tails)
+
+</section>
+<section class="glossary-term" id="realized-variance">
+
+### Realized variance — ผลรวมกำลังสองของผลตอบแทนระหว่างช่วง
+
+ผลรวมของ log returns ย่อยยกกำลังสองในช่วงที่สนใจ ใช้วัดความผันแปรที่เกิดขึ้นภายในช่วงนั้น มีหน่วยผลตอบแทนยกกำลังสอง ส่วนรากที่สองเรียก realized volatility ข้อมูลช่วงเปิดตลาดเพียงอย่างเดียวไม่ครอบคลุมความเสี่ยงข้ามคืน
+
+[ดูนิยามและตัวอย่าง](asset-returns-stylized-facts.html#realized-variance)
+
+</section>
+<section class="glossary-term" id="microstructure-noise">
+
+### Market microstructure noise — ผลของกลไกซื้อขายต่อราคาที่สังเกต
+
+ความต่างระหว่างราคาที่บันทึกกับราคาแฝงในแบบจำลอง เช่น ผลจาก bid–ask spread และ tick size การเก็บราคาถี่ขึ้นอาจเพิ่มอิทธิพลของส่วนนี้ต่อ realized variance จึงต้องพิจารณาความถี่และวิธีประมาณร่วมกัน
+
+[ดูนิยามและตัวอย่าง](asset-returns-stylized-facts.html#microstructure-noise)
 
 </section>
 </section>

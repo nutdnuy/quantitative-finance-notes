@@ -59,3 +59,5 @@ img[src*="technical-lightning-satire"]{display:block;width:100%;height:auto;bord
 .parameter-stack span:nth-child(2){background:var(--comparison)}
 .parameter-stack span:nth-child(3){background:var(--muted)}
 @media(max-width:520px){.view-controls{padding:10px}.weight-row{grid-template-columns:48px minmax(0,1fr) 70px;gap:6px}.weight-axis{margin-left:54px;margin-right:76px}}
+
+.rv-latent-bar{fill:var(--comparison);opacity:.72}

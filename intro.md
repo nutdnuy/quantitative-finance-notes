@@ -104,6 +104,14 @@ description: เรียนการเงินเชิงปริมาณ�
 <p class="welcome-topics">VaR · ES · Historical simulation · Backtesting</p>
 <a class="welcome-text-link" href="value-at-risk-expected-shortfall.html">เปิดบท VaR และ ES →</a></div>
 </article>
+<article class="welcome-lesson">
+<span class="welcome-lesson-number" aria-hidden="true">10</span>
+<div><p class="welcome-lesson-label">อ่านพฤติกรรมจากข้อมูลผลตอบแทน</p>
+<h3><a href="asset-returns-stylized-facts.html">Asset Returns — Empirical Stylized Facts</a></h3>
+<p>ทิศทางผลตอบแทนสัมพันธ์กันน้อย แล้วทำไมวันที่แกว่งแรงจึงมักอยู่ติดกัน?</p>
+<p class="welcome-topics">Fat tails · Volatility clustering · ACF · Realized volatility</p>
+<a class="welcome-text-link" href="asset-returns-stylized-facts.html">เปิดบท Asset Returns →</a></div>
+</article>
 </div>
 
 ## อ่านไป ลองไป

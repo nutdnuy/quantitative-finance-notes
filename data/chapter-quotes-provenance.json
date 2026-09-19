@@ -1,6 +1,6 @@
 {
   "verified_on": "2026-09-14",
-  "scope": "One sourced epigraph for each of the nine content lessons. Welcome and the shared glossary are navigation/reference pages.",
+  "scope": "One sourced epigraph for each of the ten content lessons. Welcome and the shared glossary are navigation/reference pages.",
   "visual_route": "no-image-generator",
   "presentation": "Native Markdown blockquote with Thai translation, source-language excerpt, author and direct source link; existing fonts and theme tokens; no assets or motion.",
   "translation_credit": "Thai translations for QuantCorner; the Thorp translation and parenthetical clarification were supplied by the owner. Source-language quotations are separately identified.",
@@ -97,6 +97,16 @@
       "verified_on": "2026-09-19",
       "note": "First 20 words of the opening epigraph, ending future opportunities, followed by an ellipsis. Verified in supplied complete book PDF physical page 6. Thai translation written for QuantCorner.",
       "relation": "Using past information to manage future risk, with limitations."
+    },
+    {
+      "file": "asset-returns-stylized-facts.md",
+      "author": "Benoit Mandelbrot",
+      "language": "en",
+      "label": "The Variation of Certain Speculative Prices (1963), p. 418",
+      "url": "https://oftp.cyrax.hu/doc/mandelbrot.pdf#page=26",
+      "verified_on": "2026-09-19",
+      "note": "22-word excerpt from Section VII, inspected in the original article scan, physical PDF page 26. Leading/trailing ellipses mark omitted text. Thai translation written for QuantCorner.",
+      "relation": "Large and small changes tend to cluster in time regardless of sign."
     }
   ],
   "updated_on": "2026-09-19"

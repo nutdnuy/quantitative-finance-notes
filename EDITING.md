@@ -164,3 +164,9 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 ชื่อแสดงผลของบทเดิมคือ **Optimization Problem** แต่ชื่อไฟล์และ URL `portfolio-optimization` คงเดิมเพื่อรักษาลิงก์ การตรวจเพิ่มเติมใช้ `node qa/portfolio-learning-browser.cjs` พร้อม preview port 8763 และ `node qa/portfolio-optimization-page-checks.cjs` สำหรับ offline pages ภาพบุคคลมีเครดิตใน `THIRD_PARTY_NOTICES.md` และ provenance ของแต่ละบท
 
 สำหรับ VaR/ES ใช้ `python3 scripts/make_tail_risk_figures.py` สร้างกราฟ SVG และ `python3 scripts/make_tail_risk_notebook.py` สร้างพร้อมรัน Notebook จากต้นฉบับ Markdown ใช้ Python standard library ตรวจตัวทดลองและหน้าเว็บด้วย `node qa/tail-risk-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 สูตรตรวจรวมอยู่ใน `npm test`
+
+## แก้บท Asset Returns — Empirical Stylized Facts
+
+เนื้อหาอยู่ใน `asset-returns-stylized-facts.md` ตัวทดลองอยู่ใน `src/stylized-facts.jsx` และตัวคำนวณอยู่ใน `src/stylized-facts.mjs` ส่วน `scripts/stylized_facts_math.py` เป็นการคำนวณ Python ที่ใช้กับภาพและ Notebook โดยตรวจผลเทียบ JavaScript ใน `qa/stylized-facts-checks.mjs`
+
+หลังแก้เนื้อหาหรือสูตร รัน `python3 scripts/make_stylized_facts_figures.py` แล้ว `python3 scripts/make_stylized_facts_notebook.py` เพื่อสร้าง Notebook จาก Markdown และฝังภาพล่าสุดพร้อมผลรัน จากนั้นใช้ `npm run build:pages`, `npm test` และ `node qa/stylized-facts-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 ต้องมี Python 3 สำหรับการตรวจผลข้ามภาษา ไม่ต้องติดตั้งแพ็กเกจ Python เพิ่ม กราฟทั้งหมดใช้ข้อมูลสมมติ ห้ามนำ PDF ต้นฉบับเข้า repository

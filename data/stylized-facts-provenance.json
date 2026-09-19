@@ -1,0 +1,59 @@
+{
+  "lesson": "asset-returns-stylized-facts.md",
+  "updated": "2026-09-19",
+  "data_status": "All new charts, numerical examples and interactive inputs are hypothetical. No empirical price rows are copied or inferred from screenshots.",
+  "private_source_mapping": [{
+    "file": "JA252.4 Notes.pdf",
+    "title": "Asset Returns: Empirical Stylized Facts",
+    "author": "Stephen Taylor",
+    "date": "2025-02-25",
+    "physical_pages": 95,
+    "published": false,
+    "coverage": [
+      {"pages": "1–31", "use": "Daily returns, dividends, volatility clustering, calendar effects and descriptive statistics"},
+      {"pages": "32–58", "use": "Three stylized facts, non-normality, kurtosis, variance mixtures, autocorrelation and constant-volatility limitations"},
+      {"pages": "59–80", "use": "Trades, quotes, irregular timing, microstructure and intraday seasonality"},
+      {"pages": "81–88", "use": "Realized volatility, standardized returns, persistence and annualization"},
+      {"pages": "89–95", "use": "Intraday information, news surprises, flash crash and jumps"}
+    ]
+  }],
+  "public_sources": [
+    {"url": "https://assets.press.princeton.edu/chapters/i8055.pdf", "use": "Public introduction to Taylor's Asset Price Dynamics, Volatility, and Prediction"},
+    {"url": "https://oftp.cyrax.hu/doc/mandelbrot.pdf#page=26", "use": "Mandelbrot 1963 original article scan, printed p. 418, 22-word clustering quotation"},
+    {"url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda331.htm", "use": "Sample ACF convention and pointwise reference bounds"},
+    {"url": "https://econ.duke.edu/~boller/Published_Papers/ecta_03.pdf", "use": "Andersen, Bollerslev, Diebold and Labys 2003, Modeling and Forecasting Realized Volatility"},
+    {"url": "https://public.econ.duke.edu/~boller/research.html", "use": "Author listing of Andersen, Bollerslev, Diebold and Vega 2003, Micro Effects of Macro Announcements"},
+    {"url": "https://www.nber.org/papers/w9611", "use": "Ait-Sahalia, Mykland and Zhang, sampling under market microstructure noise, working paper 2003, published 2005"},
+    {"url": "https://www.sec.gov/news/studies/2010/marketevents-report.pdf", "use": "CFTC/SEC 30 September 2010 report on May 6 market events"}
+  ],
+  "conventions_and_corrections": [
+    "Simple and log returns distinguished; dividends included once; reinvestment assumption for cumulative wealth; portfolio aggregation uses simple returns.",
+    "Empirical regularities are not universal laws or predictions. Historical calendars are not current trading schedules.",
+    "Uncorrelated does not mean independent. Pointwise iid ACF bounds are not simultaneous confidence bands or proof of independence.",
+    "ACF uses the full-series mean and denominator. Box-Pierce/Ljung-Box null, heteroskedasticity and fitted-residual limitations stated.",
+    "Sample SD uses n-1; moment kurtosis uses m4/m2^2 with moments divided by n. Normal population kurtosis is 3, excess is 0.",
+    "Normal variance-mixture kurtosis derivation assumes a common mean and finite fourth moments. Mixtures alone do not establish temporal clustering.",
+    "Intraday variance shares sum to one; interpreting the sum as total return variance requires zero cross-interval covariances.",
+    "RV denotes sum of squared intraday log returns; realized volatility is its square root. Decimal squared units and percent squared units differ by 10000.",
+    "Open-hours RV excludes overnight variation. Annualization does not restore missing overnight risk.",
+    "Realized variance converges to quadratic variation including squared jumps; noise-free continuous variation equals integrated variance.",
+    "Independent zero-mean price noise adds expected bias 2N eta^2; one finite path need not produce monotonically ordered estimates.",
+    "Ex-post standardization with today's realized volatility is not an ex-ante forecast. Return and volatility measurement windows must match.",
+    "Slow ACF alone does not prove true long memory; approximate normality of log volatility is not a universal lognormal law."
+  ],
+  "simulations": {
+    "rng": "LCG multiplier 1664525, increment 1013904223, uint32 state; midpoint uniforms (state+.5)/2^32; Box-Muller cosine, two uniforms per normal",
+    "clustering": {"days": 600, "seed": 2524, "daily_sd": [0.005,0.025], "switch_every_days": 50, "shuffle_seed": 731, "note": "Deterministic alternating regimes for illustration, not a fitted GARCH process"},
+    "mixture": {"default_high_sd_probability": 0.2, "default_sd_ratio": 5, "normalization": "Pooled variance 1; exact tail formulas integrate to infinity", "default_kurtosis": 11.218787158145064},
+    "intraday": {"minutes": 390, "seed": 81, "noise_seed": 1081, "session_sd": 0.01, "default_noise_bps": 3, "noise": "Independent Rademacher +/- eta at every observed log price; fixed latent path and signs across controls", "default_sample_minutes": 5},
+    "intraday_profile": {"intervals": 78, "minutes_per_interval": 5, "raw_weight": "1 + 3 exp(-i/6) + 2 exp(-(77-i)/7) + optional 5 exp(-.5((i-30)/1.2)^2), i=0..77", "normalization": "Each profile sums to one; no named market or historical schedule"}
+  },
+  "assets": {
+    "route": "no-image-generator",
+    "generator": "scripts/make_stylized_facts_figures.py",
+    "math_source": "scripts/stylized_facts_math.py",
+    "files": ["assets/images/stylized-clustering.svg", "assets/images/stylized-intraday-profile.svg", "assets/images/stylized-close-vs-rv.svg"],
+    "editable_source": "Deterministic Python geometry and calculations"
+  },
+  "notebook": {"generator": "scripts/make_stylized_facts_notebook.py", "code_cells": 10, "dependencies": "Python standard library", "source": "Canonical chapter Markdown and inlined numerical helpers; embedded SVG attachments"}
+}

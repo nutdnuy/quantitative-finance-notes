@@ -114,3 +114,9 @@ Notebook ใช้ Python 3, NumPy และ Jupyter/IPython ถ้ารัน 
 `value-at-risk-expected-shortfall.md` ต่อจาก Black–Litterman โดยอธิบาย quantile ของขาดทุน, coherent risk, Normal VaR/ES, historical simulation, Monte Carlo, time scaling, Q–Q diagnostics, พอร์ตสามสินทรัพย์ และ backtesting มีตัวทดลองสามชุดกับกราฟ SVG สามภาพที่คำนวณขึ้นใหม่ ใช้ข้อมูลสมมติทั้งหมด
 
 รัน `python3 scripts/make_tail_risk_figures.py` และ `python3 scripts/make_tail_risk_notebook.py` เพื่อสร้างภาพและ Notebook พร้อมผลรัน Python standard library ตรวจเว็บด้วย `node qa/tail-risk-page-checks.cjs` รายละเอียดแหล่งที่มาและข้อแก้ไขจากเอกสารอ้างอิงอยู่ใน `data/tail-risk-provenance.json` ไม่มีการเผยแพร่ PDF หรือ workbook ต้นฉบับ
+
+## Asset Returns — Empirical Stylized Facts
+
+`asset-returns-stylized-facts.md` ต่อจาก VaR/ES โดยตรวจสมมติฐานของผลตอบแทนผ่าน volatility clustering, ACF, fat tails, variance mixtures, intraday seasonality และ realized variance มีตัวทดลองสามชุด ภาพ SVG สามภาพ และ Notebook ที่รันได้ด้วย Python standard library ข้อมูลในกราฟเป็นข้อมูลสมมติและระบุ seed แยกจากข้อค้นพบเชิงประจักษ์ในแหล่งอ้างอิง
+
+สร้างภาพด้วย `python3 scripts/make_stylized_facts_figures.py` และสร้างพร้อมรัน Notebook ด้วย `python3 scripts/make_stylized_facts_notebook.py` ตรวจตัวเลขด้วย `npm test` (ใช้ Node.js และ Python 3 เพื่อตรวจผลข้ามภาษา) และหน้าเว็บด้วย `node qa/stylized-facts-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 แหล่งที่มาอยู่ใน `data/stylized-facts-provenance.json`
