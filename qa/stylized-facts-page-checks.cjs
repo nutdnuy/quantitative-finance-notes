@@ -26,13 +26,22 @@ const lessonCount=require('yaml').parse(fs.readFileSync(path.join(root,'_toc.yml
   assert.ok(await page.locator('.katex').count()>30);
   assert.ok(await page.locator('.portfolio-figure img').evaluateAll(images=>images.length===4&&images.every(i=>i.complete&&i.naturalWidth>0)));
   const cluster=page.locator('#clustering-lab'), mix=page.locator('#variance-mixture-lab'), rv=page.locator('#realized-volatility-lab');
-  assert.match(await cluster.locator('.results').innerText(),/0.330[\s\S]*1.701%[\s\S]*5.025/);
+  const marketLabel=await cluster.locator('.lab-title').innerText();
+  assert.match(marketLabel,/S&P 500/);assert.match(marketLabel,/1999-01-05/);assert.match(marketLabel,/2018-12-31/);
+  assert.match(marketLabel,/5,030 log returns/);assert.match(marketLabel,/ไม่รวมปันผล/);
+  assert.match(await cluster.locator('.results').innerText(),/0.244[\s\S]*1.204%[\s\S]*11.169/);
+  assert.match(await cluster.locator('svg').first().locator('title').textContent(),/วันที่จริง/);
+  const originalPoints=await cluster.locator('svg').first().locator('polyline').getAttribute('points');
+  assert.equal(originalPoints.trim().split(/\s+/).length,5030);
   await cluster.locator('button').nth(1).click();
-  assert.match(await cluster.locator('.results').innerText(),/0.074[\s\S]*1.701%[\s\S]*5.025/);
+  assert.match(await cluster.locator('.results').innerText(),/0.002[\s\S]*1.204%[\s\S]*11.169/);
+  assert.match(await cluster.locator('svg').first().locator('title').textContent(),/หลังสับลำดับวัน/);
+  assert.notEqual(await cluster.locator('svg').first().locator('polyline').getAttribute('points'),originalPoints);
   await cluster.locator('button').nth(0).click();await cluster.locator('button').nth(2).click();
-  assert.match(await cluster.locator('.results strong').first().innerText(),/0.052/);
+  assert.match(await cluster.locator('.results strong').first().innerText(),/-0.070/);
   await cluster.locator('button').nth(4).click();
   assert.equal(await cluster.locator('button').nth(4).getAttribute('aria-pressed'),'true');
+  assert.match(await cluster.locator('.results strong').first().innerText(),/0.208/);
   assert.match(await mix.locator('.results').innerText(),/11.219[\s\S]*2.969%/);
   await mix.locator('input').nth(1).focus();await page.keyboard.press('Home');
   assert.match(await mix.locator('.results').innerText(),/3.000[\s\S]*0.270%/);
@@ -48,7 +57,7 @@ const lessonCount=require('yaml').parse(fs.readFileSync(path.join(root,'_toc.yml
   assert.match(await rv.locator('.results').innerText(),/1 .*390/);
   await rv.locator('input').focus();await page.keyboard.press('End');
   rvValues=await rv.locator('.results strong').allTextContents();assert.notEqual(rvValues[0],rvValues[1]);
-  report.checks.push('Default outputs; shuffle invariance; all ACF modes; mixture-to-Normal limit; zero noise and endpoint sampling; keyboard sliders');
+  report.checks.push('Real S&P 500 labels, dates and 5,030 plotted returns; empirical outputs and shuffle invariance; all ACF modes; mixture-to-Normal limit; zero noise and endpoint sampling; keyboard sliders');
   for(const theme of ['light','dark']){
     for(const width of [320,390,768,1440]){
       await page.setViewportSize({width,height:1100});await page.goto(`${base}/${slug}.html`);await ready();
@@ -81,13 +90,22 @@ const lessonCount=require('yaml').parse(fs.readFileSync(path.join(root,'_toc.yml
   report.checks.push('Eight responsive/theme states; WCAG AA automated checks; chart text bounds; new glossary terms and Thai/English/empty search; navigation and site search');
   await page.goto('file://'+path.join(root,'_site',slug+'.html'));await ready();
   assert.match(await page.locator('#variance-mixture-lab .results').innerText(),/11.219/);
+  assert.match(await page.locator('#clustering-lab .lab-title').innerText(),/S&P 500[\s\S]*1999-01-05[\s\S]*2018-12-31/);
+  assert.match(await page.locator('#clustering-lab .results').innerText(),/0.244[\s\S]*1.204%[\s\S]*11.169/);
+  const snapshotBytes=fs.readFileSync(path.join(root,'data/sp500-daily.json'));
+  assert.deepEqual(fs.readFileSync(path.join(root,'_site/data/sp500-daily.json')),snapshotBytes);
+  assert.deepEqual(fs.readFileSync(path.join(root,'_site/data/sp500-arch-8.0.0.csv.gz')),fs.readFileSync(path.join(root,'data/sp500-arch-8.0.0.csv.gz')));
   const notebook=JSON.parse(fs.readFileSync(path.join(root,'notebooks',slug+'.ipynb')));
   const source=fs.readFileSync(path.join(root,slug+'.md'));
   assert.equal(notebook.metadata.source.sha256,crypto.createHash('sha256').update(source).digest('hex'));
+  assert.equal(notebook.metadata.empirical_data.snapshot_sha256,crypto.createHash('sha256').update(snapshotBytes).digest('hex'));
+  assert.equal(notebook.metadata.empirical_data.source_sha256,'1e028cbb9c400cc018c816ccc439b33c919387e726c3ed5ca2c05c82746059de');
+  assert.equal(notebook.metadata.empirical_data.price_count,5031);assert.equal(notebook.metadata.empirical_data.return_count,5030);
+  assert.equal(notebook.metadata.empirical_data.return_start,'1999-01-05');assert.equal(notebook.metadata.empirical_data.return_end,'2018-12-31');
   assert.equal(notebook.cells.filter(c=>c.cell_type==='code').length,18);
   assert.equal(notebook.cells.reduce((n,c)=>n+Object.keys(c.attachments||{}).length,0),4);
   assert.ok(notebook.cells.filter(c=>c.cell_type==='code').every(c=>c.execution_count&&c.outputs.every(o=>o.output_type!=='error')));
-  report.checks.push('Offline export mounts all four labs; notebook source hash, four embedded figures and eighteen executed code cells');
+  report.checks.push('Offline export mounts real-data S&P 500 lab and all four labs; exported snapshot and source bytes; notebook lesson/data hashes, four embedded figures and eighteen executed code cells');
   assert.deepEqual(errors,[]);report.errors=errors;report.status='passed';
   fs.writeFileSync(path.join(__dirname,'stylized-facts-report.json'),JSON.stringify(report,null,2));
   console.log(JSON.stringify(report,null,2));await browser.close();

@@ -1,7 +1,7 @@
 {
   "lesson": "asset-returns-stylized-facts.md",
   "updated": "2026-09-19",
-  "data_status": "All new charts, numerical examples and interactive inputs are hypothetical. No empirical price rows are copied or inferred from screenshots.",
+  "data_status": "Volatility-clustering chart and lab use historical S&P 500 closing price-index observations from Yahoo Finance distributed with arch 8.0.0 (1999–2018). Other examples remain explicitly hypothetical.",
   "private_source_mapping": [
     {
       "file": "JA252.4 Notes.pdf",
@@ -62,6 +62,10 @@
     {
       "url": "https://www.sec.gov/news/studies/2010/marketevents-report.pdf",
       "use": "CFTC/SEC 30 September 2010 report on May 6 market events"
+    },
+    {
+      "url": "https://bashtage.github.io/arch/univariate/univariate_volatility_modeling.html#setup",
+      "use": "Official documentation identifying Yahoo Finance as the source of the packaged S&P 500 example"
     }
   ],
   "conventions_and_corrections": [
@@ -90,7 +94,7 @@
       ],
       "switch_every_days": 50,
       "shuffle_seed": 731,
-      "note": "Deterministic alternating regimes for illustration, not a fitted GARCH process"
+      "note": "Retained only for the Notebook known-sigma standardization illustration; the chart and shuffle lab use real S&P 500 observations."
     },
     "mixture": {
       "default_high_sd_probability": 0.2,
@@ -124,7 +128,7 @@
       "assets/images/stylized-close-vs-rv.svg",
       "assets/images/foundations-distribution-tails.svg"
     ],
-    "editable_source": "Deterministic Python geometry and calculations",
+    "editable_source": "Python chart geometry and calculations, using the pinned historical snapshot for clustering and deterministic simulations for other figures",
     "additional_generator": "scripts/make_return_foundations_figures.py",
     "additional_math_source": "scripts/return_foundations_math.py"
   },
@@ -132,7 +136,30 @@
     "generator": "scripts/make_stylized_facts_notebook.py",
     "code_cells": 18,
     "dependencies": "Python standard library",
-    "source": "Canonical chapter Markdown and inlined numerical helpers; embedded SVG attachments"
+    "source": "Canonical chapter Markdown, inlined numerical helpers, embedded S&P 500 price snapshot and SVG attachments"
   },
-  "expansion": "data/return-foundations-provenance.json"
+  "expansion": "data/return-foundations-provenance.json",
+  "empirical_data": {
+    "snapshot": "data/sp500-daily.json",
+    "original_archive": "data/sp500-arch-8.0.0.csv.gz",
+    "package_notice": "data/ARCH-LICENSE.md",
+    "preparation": "python3 scripts/sp500_data.py",
+    "source_url": "https://github.com/bashtage/arch/blob/v8.0.0/arch/data/sp500/sp500.csv.gz",
+    "source_sha256": "1e028cbb9c400cc018c816ccc439b33c919387e726c3ed5ca2c05c82746059de",
+    "retrieved_on": "2026-09-19",
+    "selection": "Entire fixed educational sample distributed with arch, not a period selected after inspecting ACF. Historical, not a current market feed.",
+    "price_dates": [
+      "1999-01-04",
+      "2018-12-31"
+    ],
+    "return_dates": [
+      "1999-01-05",
+      "2018-12-31"
+    ],
+    "prices": 5031,
+    "returns": 5030,
+    "method": "Daily ln(Close[t]/Close[t-1]), decimal units; excludes dividends. All rows retained; first close supplies baseline, no synthetic zero return, no filling of non-trading days, no clipping of extremes.",
+    "rights": "Retain the arch package notice. Original Yahoo Finance and S&P index attribution is preserved; the package license is not a new license grant over third-party market data or trademarks.",
+    "checks": "Pinned archive SHA-256; unique chronological weekdays; finite positive closes; exact Close=Adj Close in the source; Python/JavaScript return, moment and ACF agreement."
+  }
 }

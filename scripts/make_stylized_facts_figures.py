@@ -1,22 +1,27 @@
-"""Original deterministic charts, not reconstructions of historical source plots."""
+"""S&P 500 observations and explicitly hypothetical intraday illustrations."""
 import math
-from stylized_facts_math import clustered_returns, acf, intraday_profile
+from datetime import date
+from stylized_facts_math import acf, intraday_profile
+from sp500_data import load_sp500
 from make_tail_risk_figures import save, text, line, poly, PURPLE, TEAL, GRAY
 
 
 def clustering_chart():
-    returns = clustered_returns()
-    body = text(40,82,'600 simulated days · Normal shocks · SD alternates every 50 days · seed 2524',17,GRAY)
-    x = lambda t: 95+(t-1)/599*810
-    y = lambda r: 238-r*1350
-    for value in [-.06,-.03,0,.03,.06]:
+    data, dates, returns = load_sp500()
+    days = [date.fromisoformat(day).toordinal() for day in dates]
+    body = text(40,82,f'{len(returns):,} daily log returns · {dates[0]} to {dates[-1]} · excludes dividends',17,GRAY)
+    x = lambda day: 95+(day-days[0])/(days[-1]-days[0])*810
+    limit = math.ceil(max(abs(r) for r in returns)*100/3)*.03
+    y = lambda r: 238-r/limit*95
+    for value in [-limit,-limit/2,0,limit/2,limit]:
         body += line(95,y(value),905,y(value))+text(80,y(value)+5,f'{100*value:g}%',16,GRAY,'end')
     body += text(95,126,'Log return',16,GRAY)
-    body += poly([(x(i+1),y(r)) for i,r in enumerate(returns)],PURPLE,1.3)
-    for t in [1,150,300,450,600]:
-        body += text(x(t),349,str(t),16,GRAY,'middle')
-    body += text(905,378,'Day',17,GRAY,'end')
-    body += text(40,419,'Serial correlation depends on what you measure',23)
+    body += poly([(x(day),y(r)) for day,r in zip(days,returns)],PURPLE,.9)
+    ticks = [days[0]]+[date(year,1,1).toordinal() for year in [2004,2009,2014]]+[days[-1]]
+    for day in ticks:
+        body += text(x(day),359,str(date.fromordinal(day).year),16,GRAY,'middle')
+    body += text(905,388,'Date',17,GRAY,'end')
+    body += text(40,429,'Autocorrelation of returns and their absolute values',23)
     left,bottom,width,height = 95,674,810,195
     xx=lambda k:left+(k-.5)/20*width
     yy=lambda r:bottom-(r+.2)/.8*height
@@ -26,9 +31,11 @@ def clustering_chart():
         for k,r in enumerate(values[1:],1):
             body+=f'<rect x="{xx(k)+shift-4:.3f}" y="{min(yy(0),yy(r)):.3f}" width="8" height="{abs(yy(r)-yy(0)):.3f}" fill="{color}"/>'
     for k in [1,5,10,15,20]:body+=text(xx(k),700,str(k),16,GRAY,'middle')
-    body+=text(95,459,'ACF(r)',18,PURPLE)+text(235,459,'ACF(|r|)',18,TEAL)
-    body+=text(905,737,'Lag (days)',17,GRAY,'end')
-    save('stylized-clustering.svg','Small return correlation can coexist with volatility clusters', 'Simulated returns with alternating 50-day volatility regimes and sample autocorrelations of raw and absolute returns. Synthetic evidence only.',body,765)
+    body+=text(95,465,'ACF(r)',18,PURPLE)+text(235,465,'ACF(|r|)',18,TEAL)
+    body+=text(905,737,'Lag (trading observations)',17,GRAY,'end')
+    body+=text(40,778,'Source: Yahoo Finance via arch 8.0.0 · full historical sample · ln(Close / previous Close)',16,GRAY)
+    save('stylized-clustering.svg','S&amp;P 500 daily returns and volatility clustering',
+         f'Historical S&amp;P 500 price-index log returns, {dates[0]} to {dates[-1]}, {len(returns)} observations. Dividends excluded. Sample ACF uses the full-series mean and denominator. Source: Yahoo Finance via arch 8.0.0.',body,805)
 
 
 def intraday_chart():

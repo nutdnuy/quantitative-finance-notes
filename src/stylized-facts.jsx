@@ -1,22 +1,26 @@
 import React, { useMemo, useState } from 'react';
 import { Chart, Range, LabTitle, format } from './ui.jsx';
 import { normalPdf, normalCdf } from './tail-risk.mjs';
-import { acf, moments, clusteredReturns, shuffle, varianceMixture, intradaySample, realizedVariance } from './stylized-facts.mjs';
+import { acf, moments, shuffle, varianceMixture, intradaySample, realizedVariance } from './stylized-facts.mjs';
+import { sp500Data, sp500Dates, sp500Returns } from './sp500-data.mjs';
 
 export function ClusteringLab() {
   const [shuffled,setShuffled]=useState(false),[kind,setKind]=useState('absolute');
-  const original=useMemo(()=>clusteredReturns(),[]), permuted=useMemo(()=>shuffle(original),[original]);
+  const original=sp500Returns, permuted=useMemo(()=>shuffle(original),[original]);
   const returns=shuffled?permuted:original;
   const transform=r=>kind==='squared'?r*r:kind==='absolute'?Math.abs(r):r;
-  const rho=acf(returns.map(transform)), stats=moments(returns), limit=Math.max(...original.map(Math.abs))*100*1.08;
+  const rho=acf(returns.map(transform)), stats=moments(returns), limit=Math.ceil(Math.max(...original.map(Math.abs))*100/3)*3;
   const reference=1.96/Math.sqrt(returns.length);
-  return <div className="lab"><LabTitle title="สลับวันแล้วอะไรหายไป">ผลตอบแทนจำลอง 600 วัน · สลับ SD 0.5% กับ 2.5% ทุก 50 วัน · Normal shocks อิสระ · seed 2524</LabTitle>
+  const timestamps=useMemo(()=>sp500Dates.map(day=>Date.parse(day)),[]);
+  const xValues=shuffled?returns.map((_,i)=>i+1):timestamps;
+  const xTicks=shuffled?[1,1258,2515,3773,returns.length]:[timestamps[0],...['2004','2009','2014'].map(year=>Date.parse(`${year}-01-01`)),timestamps.at(-1)];
+  return <div className="lab"><LabTitle title="สลับวันของ S&P 500 แล้วอะไรหายไป">ราคาปิดดัชนีจริง · {sp500Data.return_start} ถึง {sp500Data.return_end} · {format(returns.length,0)} log returns · ไม่รวมปันผล</LabTitle>
     <div className="segmented" role="group" aria-label="ลำดับผลตอบแทน"><button aria-pressed={!shuffled} onClick={()=>setShuffled(false)}>เรียงวันเดิม</button><button aria-pressed={shuffled} onClick={()=>setShuffled(true)}>สับลำดับวัน</button></div>
-    <Chart title="ผลตอบแทนจำลองตามลำดับวัน" description={`ข้อมูล ${returns.length} ค่า ${shuffled?'สับลำดับแล้ว':'ลำดับเดิม'} ค่าเฉลี่ยและ histogram ไม่เปลี่ยนเมื่อสับลำดับ`} xDomain={[1,600]} yDomain={[-limit,limit]} xTicks={[1,150,300,450,600]} xLabel="วันลำดับที่" yLabel="Log return (%)" lines={[{values:returns.map((r,i)=>[i+1,100*r]),width:1.2}]} />
+    <Chart title={shuffled?'ผลตอบแทน S&P 500 หลังสับลำดับวัน':'ผลตอบแทน S&P 500 ตามวันที่จริง'} description={`ข้อมูล ${returns.length} ค่า ${shuffled?'สับลำดับแล้ว ไม่ใช่ลำดับตลาดจริง':'เรียงตามวันที่ซื้อขายจริง'} ค่าเฉลี่ยและ histogram ไม่เปลี่ยนเมื่อสับลำดับ`} xDomain={[xValues[0],xValues.at(-1)]} yDomain={[-limit,limit]} xTicks={xTicks} xFormat={v=>shuffled?String(v):new Date(v).getUTCFullYear()} xLabel={shuffled?'ลำดับหลังสับวัน':'ปี'} yLabel="Log return (%)" lines={[{values:returns.map((r,i)=>[xValues[i],100*r]),width:1}]} />
     <div className="segmented" role="group" aria-label="ข้อมูลที่ใช้คำนวณ ACF">{[['raw','r'],['absolute','|r|'],['squared','r²']].map(([value,label])=><button key={value} aria-pressed={kind===value} onClick={()=>setKind(value)}>ACF ของ {label}</button>)}</div>
     <Chart title={`Sample autocorrelation ของ ${kind}`} description={`Lag 1 เท่ากับ ${format(rho[1],3)} เส้นอ้างอิง iid บวกลบ ${format(reference,3)}`} xDomain={[.5,20.5]} yDomain={[-.2,.6]} xTicks={[1,5,10,15,20]} xLabel="Lag (วัน)" yLabel="Autocorrelation" yFormat={v=>format(v,2)} bars={rho.slice(1).map((y,i)=>({x:i+.7,y,width:.6}))} lines={[{values:[[.5,reference],[20.5,reference]],className:'secondary-line'},{values:[[.5,-reference],[20.5,-reference]],className:'secondary-line'}]} />
     <div className="results" aria-live="polite"><div><span>ACF ที่ lag 1</span><strong>{format(rho[1],3)}</strong><p>{kind==='raw'?'ผลตอบแทน':kind==='absolute'?'ขนาดผลตอบแทน |r|':'ผลตอบแทนยกกำลังสอง r²'}</p></div><div><span>Sample SD · ต่อวัน</span><strong>{format(stats.sd*100,3)}%</strong><p>Moment kurtosis = {format(stats.kurtosis,3)}</p></div></div>
-    <p className="lab-note">สับด้วย seed 731 โดยไม่เปลี่ยนค่าตัวเลขในชุดข้อมูล จึงได้ mean, SD, kurtosis และ histogram เดิม · เส้นประ ±1.96/√600 เป็นกรอบอ้างอิง 95% ภายใต้ iid ต่อหนึ่ง lag ไม่ใช่การยืนยันว่าผ่านการทดสอบทุก lag หรือว่าเป็น iid</p>
+    <p className="lab-note">ที่มา: <a href={sp500Data.source_url}>Yahoo Finance ผ่านชุดข้อมูล arch 8.0.0</a> · ใช้ราคาปิดทั้งชุด คำนวณ ln(Pₜ/Pₜ₋₁) โดยไม่เติมวันหยุด · สับด้วย seed 731 จึงคง mean, SD, kurtosis และ histogram เดิม · เส้นประ ±1.96/√{returns.length} เป็นกรอบอ้างอิง 95% ภายใต้ iid ต่อหนึ่ง lag ข้อมูลตลาดอาจไม่ผ่านสมมติฐานนี้</p>
   </div>;
 }
 

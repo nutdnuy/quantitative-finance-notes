@@ -24,7 +24,7 @@ inline_math: true
 
 **Stylized facts** คือรูปแบบเชิงสถิติที่พบซ้ำในข้อมูลหลายตลาดและหลายช่วงเวลา เช่น หางของการแจกแจงที่หนากว่า Normal หรือความสัมพันธ์ของขนาดผลตอบแทนระหว่างวัน เราใช้ข้อสังเกตเหล่านี้ตรวจและเลือกแบบจำลอง โดยต้องดูด้วยว่าพบในสินทรัพย์ ช่วงเวลา และความถี่ใด
 
-เนื้อหาอ้างอิงงานของ Stephen Taylor เรื่อง *Asset Price Dynamics, Volatility, and Prediction* เริ่มจากผลตอบแทนรายวัน แล้วดูว่าราคาระหว่างวันให้ข้อมูลอะไรเพิ่ม กราฟและตัวทดลองทั้งหมดใช้ข้อมูลสมมติเพื่อแยกผลของแต่ละสมมติฐาน ไม่ใช่ราคาตลาดจริงหรือผลทดสอบกลยุทธ์ลงทุน
+เนื้อหาอ้างอิงงานของ Stephen Taylor เรื่อง *Asset Price Dynamics, Volatility, and Prediction* เริ่มจากผลตอบแทนรายวัน แล้วดูว่าราคาระหว่างวันให้ข้อมูลอะไรเพิ่ม กราฟและตัวทดลอง volatility clustering ใช้ราคาปิดดัชนี S&P 500 จริงช่วง 1999–2018 ส่วนตัวอย่าง mixture และข้อมูลระหว่างวันใช้ข้อมูลสมมติเพื่อแยกผลของแต่ละสมมติฐาน
 
 อ่านพื้นฐานเพิ่มเติมได้ที่ [Prices and Returns](prices-and-returns.html) และ [Stochastic Processes](stochastic-processes.html) ส่วน [ตารางเทียบหัวข้อ](#coverage-map) ระบุที่อยู่ของเนื้อหาครบบท 2–4 ตามสารบัญ
 
@@ -196,17 +196,21 @@ $$
 
 \(\mathcal F_{t-1}\) คือข้อมูลที่รู้ก่อนเริ่มช่วง t ส่วน \(\mu_t\) และ \(\sigma_t\) เป็นค่าที่กำหนดจากข้อมูลนั้นได้ เมื่อ \(\sigma_t\) สูง ขนาด \(|r_t-\mu_t|\) มีแนวโน้มสูงขึ้น แต่เครื่องหมายยังขึ้นกับช็อก \(z_t\) การคาดการณ์ volatility จึงไม่ได้ให้คำตอบทิศทางผลตอบแทนโดยอัตโนมัติ
 
-<div class="portfolio-figure" tabindex="0" role="group" aria-label="ผลตอบแทนจำลองและ ACF ของผลตอบแทนกับขนาดผลตอบแทน เลื่อนแนวนอนเพื่อดูภาพเต็ม">
+<div class="portfolio-figure" tabindex="0" role="group" aria-label="ผลตอบแทนจริงของ S&P 500 ช่วง 1999–2018 และ ACF ของผลตอบแทนกับขนาดผลตอบแทน เลื่อนแนวนอนเพื่อดูภาพเต็ม">
 
-![ข้อมูลจำลอง 600 วันมีช่วง SD สูงและต่ำสลับกัน ACF ของขนาดผลตอบแทนสูงกว่า ACF ของผลตอบแทนดิบหลาย lag](assets/images/stylized-clustering.svg)
+![Log returns ของ S&P 500 จำนวน 5,030 ค่า ช่วง 5 มกราคม 1999 ถึง 31 ธันวาคม 2018 มีช่วงแกว่งแรงติดกัน โดย ACF lag 1 ของ r เท่ากับ −0.070 และของ |r| เท่ากับ 0.244](assets/images/stylized-clustering.svg)
 
 </div>
-<p class="figure-caption">ข้อมูลจำลองใช้ Normal shocks อิสระ และกำหนดให้ SD สลับระหว่าง 0.5% กับ 2.5% ทุก 50 วัน เรากำหนดช่วงผันผวนขึ้นเอง ไม่ได้ประมาณ GARCH จากข้อมูลตลาด</p>
+<p class="figure-caption">ราคาปิดดัชนี S&P 500 จาก Yahoo Finance ในชุดข้อมูลตัวอย่าง arch 8.0.0 ใช้ข้อมูลทั้งชุดตั้งแต่ 4 มกราคม 1999 ถึง 31 ธันวาคม 2018 จำนวน 5,031 ราคา คำนวณ log returns ได้ 5,030 ค่า โดยไม่รวมปันผล</p>
+
+คำนวณแต่ละค่าด้วย \(r_t=\log(P_t/P_{t-1})\) จากราคาปิดของวันซื้อขายที่ติดกัน ใช้ราคาแรกเป็นฐาน ไม่เติมวันหยุดและไม่ตัดวันที่แกว่งแรงออก ในตัวอย่างนี้ ACF ที่ lag 1 ของ r เท่ากับประมาณ −0.070 ส่วนของ |r| เท่ากับ 0.244 จึงเห็นความสัมพันธ์ของขนาดผลตอบแทนชัดกว่าความสัมพันธ์ของผลตอบแทนดิบ ค่านี้เป็นผลของช่วงข้อมูลที่แสดง ไม่ใช่ค่าคงที่ของตลาด
+
+ดู [ที่มาของชุดข้อมูล](https://bashtage.github.io/arch/univariate/univariate_volatility_modeling.html#setup) หรือ [ดาวน์โหลดราคาปิดและรายละเอียดการคำนวณ](data/sp500-daily.json) เพื่อคำนวณซ้ำได้
 
 ถ้าเก็บผลตอบแทนทุกค่าไว้แล้วสับลำดับวัน ค่าเฉลี่ย SD และ histogram จะเหมือนเดิม แต่วันที่แกว่งแรงจะกระจายไปอยู่คนละตำแหน่ง Histogram จึงแยกข้อมูลสองลำดับนี้ไม่ได้
 
 <div id="clustering-lab"></div>
-<noscript><p>ตัวอย่างลำดับเดิมมี ACF lag 1 ของ r ประมาณ 0.052 และของ |r| ประมาณ 0.330 เมื่อสับลำดับด้วย seed 731 ACF ของ |r| เหลือประมาณ 0.074 ดาวน์โหลด Notebook เพื่อทำการทดลองนี้</p></noscript>
+<noscript><p>S&P 500 ช่วง 1999–2018 มี ACF lag 1 ของ r ประมาณ −0.070 และของ |r| ประมาณ 0.244 เมื่อสับลำดับด้วย seed 731 ACF ของ |r| เหลือประมาณ 0.002 ดาวน์โหลด Notebook เพื่อทำการทดลองนี้</p></noscript>
 
 </section>
 
@@ -224,7 +228,7 @@ $$
 
 เราใช้ค่าเฉลี่ยของชุดเต็มและตัวหารชุดเต็มทุก lag นิยามนี้อาจต่างเล็กน้อยจากการใช้ Pearson correlation กับสองช่วงที่ตัดแล้ว เช่นฟังก์ชัน CORREL ที่หา mean ของแต่ละช่วงใหม่ สำหรับข้อมูลคงที่ทุกค่า ตัวหารเป็นศูนย์และ ACF ไม่มีนิยาม
 
-ถ้าค่าต่าง ๆ เป็น iid และมีเงื่อนไขโมเมนต์ที่เหมาะสม กรอบอ้างอิงราย lag สำหรับตัวอย่างขนาดใหญ่ประมาณได้ด้วย \(\pm1.96/\sqrt n\) เช่น n=600 ให้ประมาณ ±0.080 ดูวิธีสร้างกรอบใน [NIST, Autocorrelation Plot](https://www.itl.nist.gov/div898/handbook/eda/section3/eda331.htm)
+ถ้าค่าต่าง ๆ เป็น iid และมีเงื่อนไขโมเมนต์ที่เหมาะสม กรอบอ้างอิงราย lag สำหรับตัวอย่างขนาดใหญ่ประมาณได้ด้วย \(\pm1.96/\sqrt n\) เช่น n=5,030 ในตัวอย่าง S&P 500 ให้ประมาณ ±0.028 ดูวิธีสร้างกรอบใน [NIST, Autocorrelation Plot](https://www.itl.nist.gov/div898/handbook/eda/section3/eda331.htm)
 
 กรอบนี้ใช้กับแต่ละ lag แยกกัน เมื่อดู 20 หรือ 30 lag พร้อมกัน โอกาสเห็นจุดหลุดกรอบโดยบังเอิญจะเพิ่มขึ้น ถ้า variance เปลี่ยนตามข้อมูลในอดีต หรือมี conditional heteroskedasticity การใช้กรอบ iid กับผลตอบแทนดิบก็อาจทำให้สรุปผลคลาดเคลื่อน ส่วนค่าที่อยู่ในกรอบยังไม่เพียงพอจะยืนยันว่าข้อมูลเป็นอิสระ
 
@@ -693,7 +697,7 @@ $$
 
 </details>
 
-[ดาวน์โหลด Python Notebook](notebooks/asset-returns-stylized-facts.ipynb) เพื่อคำนวณ returns, ACF, Box–Pierce/Ljung–Box, mixture kurtosis, intraday profile และ realized variance ใช้ seed และวิธีคำนวณเดียวกับตัวทดลอง พร้อมภาพที่ฝังไว้ในไฟล์ ใช้ Python standard library ได้โดยไม่ต้องดาวน์โหลดราคาตลาด
+[ดาวน์โหลด Python Notebook](notebooks/asset-returns-stylized-facts.ipynb) เพื่อคำนวณ returns, ACF, Box–Pierce/Ljung–Box, mixture kurtosis, intraday profile และ realized variance มีราคาปิด S&P 500 ชุดเดียวกับกราฟและภาพประกอบฝังไว้ในไฟล์ ตัวอย่างจำลองกับการสับลำดับใช้ seed และวิธีคำนวณเดียวกับตัวทดลอง ใช้ Python standard library ได้โดยไม่ต้องดาวน์โหลดข้อมูลเพิ่ม
 
 </section>
 
@@ -701,6 +705,7 @@ $$
 
 ## อ่านเพิ่มเติม
 
+- [arch 8.0.0: ชุดข้อมูล S&P 500](https://github.com/bashtage/arch/tree/v8.0.0/arch/data/sp500) จาก Yahoo Finance ใช้ราคาปิดช่วง 4 มกราคม 1999 ถึง 31 ธันวาคม 2018 · [รายละเอียดข้อมูลที่ใช้ในบท](data/sp500-daily.json)
 - John P. Nolan, [*Stable Distributions*, บทนำ](https://edspace.american.edu/jpnolan/wp-content/uploads/sites/1720/2020/09/Chap1.pdf), เงื่อนไขของโมเมนต์ใน stable distributions
 - NIST, [*Measures of Skewness and Kurtosis*](https://www.itl.nist.gov/div898/handbook/eda/section3/eda35b.htm) และ [*t Distribution*](https://www.itl.nist.gov/div898/handbook/eda/section3/eda3664.htm)
 - Stephen J. Taylor, *Asset Price Dynamics, Volatility, and Prediction* (2005), บท 2, 4 และ 12 · [บทนำจาก Princeton University Press](https://assets.press.princeton.edu/chapters/i8055.pdf)

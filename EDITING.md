@@ -173,7 +173,7 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 
 เนื้อหาอยู่ใน `asset-returns-stylized-facts.md` ตัวทดลองอยู่ใน `src/stylized-facts.jsx` และตัวคำนวณอยู่ใน `src/stylized-facts.mjs` ส่วน `scripts/stylized_facts_math.py` เป็นการคำนวณ Python ที่ใช้กับภาพและ Notebook โดยตรวจผลเทียบ JavaScript ใน `qa/stylized-facts-checks.mjs`
 
-หลังแก้เนื้อหาหรือสูตร รัน `python3 scripts/make_stylized_facts_figures.py` แล้ว `python3 scripts/make_stylized_facts_notebook.py` เพื่อสร้าง Notebook จาก Markdown และฝังภาพล่าสุดพร้อมผลรัน จากนั้นใช้ `npm run build:pages`, `npm test` และ `node qa/stylized-facts-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 ต้องมี Python 3 สำหรับการตรวจผลข้ามภาษา ไม่ต้องติดตั้งแพ็กเกจ Python เพิ่ม กราฟทั้งหมดใช้ข้อมูลสมมติ ห้ามนำ PDF ต้นฉบับเข้า repository
+หลังแก้เนื้อหาหรือสูตร รัน `python3 scripts/make_stylized_facts_figures.py` แล้ว `python3 scripts/make_stylized_facts_notebook.py` เพื่อสร้าง Notebook จาก Markdown และฝังภาพล่าสุดพร้อมผลรัน จากนั้นใช้ `npm run build:pages`, `npm test` และ `node qa/stylized-facts-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 ต้องมี Python 3 สำหรับการตรวจผลข้ามภาษา ไม่ต้องติดตั้งแพ็กเกจ Python เพิ่ม กราฟ clustering ใช้ราคาปิด S&P 500 จริงช่วง 1999–2018 จาก `data/sp500-daily.json`; สร้าง snapshot ซ้ำด้วย `python3 scripts/sp500_data.py` จาก archive ที่ตรึง SHA-256 ไว้ ส่วนกราฟอื่นใช้ข้อมูลสมมติ ห้ามนำ PDF ต้นฉบับเข้า repository
 
 ## แก้บท Martingale Pricing
 
@@ -211,6 +211,6 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 
 ## Prices and Returns / Stochastic Processes / Stylized Facts
 
-`prices-and-returns.md`, `stochastic-processes.md` และ `asset-returns-stylized-facts.md` ครอบคลุม 31 หัวข้อของสารบัญ Taylor บท 2–4 โดยเรียบเรียงใหม่ ใช้ข้อมูลสมมติและเก็บตารางจับคู่ใน `data/return-foundations-provenance.json`
+`prices-and-returns.md`, `stochastic-processes.md` และ `asset-returns-stylized-facts.md` ครอบคลุม 31 หัวข้อของสารบัญ Taylor บท 2–4 โดยเรียบเรียงใหม่ ใช้ตัวอย่างสมมติร่วมกับข้อมูล S&P 500 จริงในส่วน clustering และเก็บตารางจับคู่ใน `data/return-foundations-provenance.json`
 
 สูตรและห้องทดลองใหม่อยู่ใน `src/return-foundations.mjs` และ `src/return-foundations.jsx` สร้างภาพด้วย `python3 scripts/make_return_foundations_figures.py` สร้างและรัน Notebook ด้วย `python3 scripts/make_return_foundations_notebooks.py` และ `python3 scripts/make_stylized_facts_notebook.py` ตรวจด้วย `npm test`, `npm run build:pages`, `node qa/return-foundations-page-checks.cjs` และ `node qa/stylized-facts-page-checks.cjs` ขณะเปิด preview พอร์ต 8763

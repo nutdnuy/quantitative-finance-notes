@@ -127,7 +127,7 @@ Notebook ใช้ Python 3, NumPy และ Jupyter/IPython ถ้ารัน 
 
 ## Asset Returns — Empirical Stylized Facts
 
-`asset-returns-stylized-facts.md` ต่อจาก VaR/ES โดยตรวจสมมติฐานของผลตอบแทนผ่าน volatility clustering, ACF, fat tails, variance mixtures, intraday seasonality และ realized variance มีตัวทดลองสามชุด ภาพ SVG สามภาพ และ Notebook ที่รันได้ด้วย Python standard library ข้อมูลในกราฟเป็นข้อมูลสมมติและระบุ seed แยกจากข้อค้นพบเชิงประจักษ์ในแหล่งอ้างอิง
+`asset-returns-stylized-facts.md` ต่อจาก VaR/ES โดยตรวจสมมติฐานของผลตอบแทนผ่าน volatility clustering, ACF, fat tails, variance mixtures, intraday seasonality และ realized variance มีตัวทดลองสามชุด ภาพ SVG สามภาพ และ Notebook ที่รันได้ด้วย Python standard library กราฟและตัวทดลอง clustering ใช้ราคาปิด S&P 500 จริงช่วง 1999–2018 จาก Yahoo Finance ผ่าน arch 8.0.0 ส่วน mixture และข้อมูลระหว่างวันยังเป็นตัวอย่างสมมติที่ระบุ seed
 
 สร้างภาพด้วย `python3 scripts/make_stylized_facts_figures.py` และสร้างพร้อมรัน Notebook ด้วย `python3 scripts/make_stylized_facts_notebook.py` ตรวจตัวเลขด้วย `npm test` (ใช้ Node.js และ Python 3 เพื่อตรวจผลข้ามภาษา) และหน้าเว็บด้วย `node qa/stylized-facts-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 แหล่งที่มาอยู่ใน `data/stylized-facts-provenance.json`
 
@@ -153,6 +153,6 @@ Notebook ใช้ Python 3, NumPy และ Jupyter/IPython ถ้ารัน 
 
 ## Prices and Returns / Stochastic Processes / Stylized Facts
 
-`prices-and-returns.md`, `stochastic-processes.md` และ `asset-returns-stylized-facts.md` ครอบคลุม 31 หัวข้อของสารบัญ Taylor บท 2–4 โดยเรียบเรียงใหม่ ใช้ข้อมูลสมมติและเก็บตารางจับคู่ใน `data/return-foundations-provenance.json`
+`prices-and-returns.md`, `stochastic-processes.md` และ `asset-returns-stylized-facts.md` ครอบคลุม 31 หัวข้อของสารบัญ Taylor บท 2–4 โดยเรียบเรียงใหม่ ใช้ตัวอย่างสมมติร่วมกับข้อมูล S&P 500 จริงในส่วน clustering และเก็บตารางจับคู่ใน `data/return-foundations-provenance.json`
 
 สูตรและห้องทดลองใหม่อยู่ใน `src/return-foundations.mjs` และ `src/return-foundations.jsx` สร้างภาพด้วย `python3 scripts/make_return_foundations_figures.py` สร้างและรัน Notebook ด้วย `python3 scripts/make_return_foundations_notebooks.py` และ `python3 scripts/make_stylized_facts_notebook.py` ตรวจด้วย `npm test`, `npm run build:pages`, `node qa/return-foundations-page-checks.cjs` และ `node qa/stylized-facts-page-checks.cjs` ขณะเปิด preview พอร์ต 8763
