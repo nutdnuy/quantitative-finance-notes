@@ -96,6 +96,14 @@ description: เรียนการเงินเชิงปริมาณ�
 <p class="welcome-topics">Reverse optimization · Prior · Views · Posterior</p>
 <a class="welcome-text-link" href="black-litterman.html">เปิดบท Black–Litterman Portfolio →</a></div>
 </article>
+<article class="welcome-lesson">
+<span class="welcome-lesson-number" aria-hidden="true">09</span>
+<div><p class="welcome-lesson-label">วัดขาดทุนที่ปลายหาง</p>
+<h3><a href="value-at-risk-expected-shortfall.html">Value at Risk and Expected Shortfall</a></h3>
+<p>พอร์ตอาจขาดทุนเท่าไร และเมื่อขาดทุนเกินเกณฑ์ ความเสียหายเฉลี่ยเป็นเท่าไร?</p>
+<p class="welcome-topics">VaR · ES · Historical simulation · Backtesting</p>
+<a class="welcome-text-link" href="value-at-risk-expected-shortfall.html">เปิดบท VaR และ ES →</a></div>
+</article>
 </div>
 
 ## อ่านไป ลองไป

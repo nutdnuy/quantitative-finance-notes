@@ -22,5 +22,7 @@ chapters:
     title: Optimization Problem
   - file: black-litterman
     title: Black–Litterman Portfolio
+  - file: value-at-risk-expected-shortfall
+    title: Value at Risk and Expected Shortfall
   - file: glossary
     title: อภิธานศัพท์

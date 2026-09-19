@@ -108,3 +108,9 @@ Notebook ใช้ Python 3, NumPy และ Jupyter/IPython ถ้ารัน 
 `portfolio-optimization.md` ครอบคลุมเครื่องมือ optimization ส่วน `black-litterman.md` ครอบคลุม prior, views, posterior และห้องทดลองที่ mount ด้วย `black-litterman-lab` สารบัญและ glossary เชื่อมสองหน้าแยกกัน
 
 ภาพทั้ง 14 ภาพออกแบบใหม่จาก inputs เดิม: รัน `python3 scripts/make_portfolio_optimization_figures.py` สำหรับ 13 ภาพเชิงคำนวณ และ `python3 scripts/render_optimization_roadmap.py` สำหรับ roadmap จาก Excalidraw จากนั้น `python3 scripts/make_portfolio_optimization_notebook.py` จะสร้างและรัน Notebook ทั้งสองเล่มแยก namespace กัน
+
+## Value at Risk and Expected Shortfall
+
+`value-at-risk-expected-shortfall.md` ต่อจาก Black–Litterman โดยอธิบาย quantile ของขาดทุน, coherent risk, Normal VaR/ES, historical simulation, Monte Carlo, time scaling, Q–Q diagnostics, พอร์ตสามสินทรัพย์ และ backtesting มีตัวทดลองสามชุดกับกราฟ SVG สามภาพที่คำนวณขึ้นใหม่ ใช้ข้อมูลสมมติทั้งหมด
+
+รัน `python3 scripts/make_tail_risk_figures.py` และ `python3 scripts/make_tail_risk_notebook.py` เพื่อสร้างภาพและ Notebook พร้อมผลรัน Python standard library ตรวจเว็บด้วย `node qa/tail-risk-page-checks.cjs` รายละเอียดแหล่งที่มาและข้อแก้ไขจากเอกสารอ้างอิงอยู่ใน `data/tail-risk-provenance.json` ไม่มีการเผยแพร่ PDF หรือ workbook ต้นฉบับ

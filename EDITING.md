@@ -17,6 +17,8 @@
 | เนื้อหา Portfolio Theory | `portfolio-theory.md` |
 | เนื้อหา Optimization Problem | `portfolio-optimization.md` |
 | เนื้อหา Black–Litterman | `black-litterman.md` |
+| เนื้อหา Value at Risk and Expected Shortfall | `value-at-risk-expected-shortfall.md` |
+| Notebook และห้องทดลอง VaR/ES | `notebooks/value-at-risk-expected-shortfall.ipynb`, `src/tail-risk.jsx`, `src/tail-risk.mjs` |
 | ความหมายและตัวอย่างคำศัพท์ | `glossary.md` |
 | ชื่อเว็บ ชื่อผู้เขียน รูปด้านบน ลิงก์ GitHub | `_config.yml` |
 | รายการและลำดับหัวข้อในสารบัญ | `_toc.yml` |
@@ -160,3 +162,5 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 ห้องทดลองเสริมรอบ 2026-09-18 อยู่ใน `src/optimization-learning.jsx` (constraint geometry, target portfolio, estimation burden) และ `src/learning-charts.jsx` (กราฟน้ำหนักที่รองรับค่าติดลบ) ตัวคำนวณอยู่ใน `src/portfolio-optimization.mjs` ส่วน Black–Litterman ใน `src/portfolio-optimization.jsx` รองรับการเปิด/ปิด views, Q และ Ω แยกข้อ โดย λ ตลาดคงที่และ λ ผู้ลงทุนปรับได้
 
 ชื่อแสดงผลของบทเดิมคือ **Optimization Problem** แต่ชื่อไฟล์และ URL `portfolio-optimization` คงเดิมเพื่อรักษาลิงก์ การตรวจเพิ่มเติมใช้ `node qa/portfolio-learning-browser.cjs` พร้อม preview port 8763 และ `node qa/portfolio-optimization-page-checks.cjs` สำหรับ offline pages ภาพบุคคลมีเครดิตใน `THIRD_PARTY_NOTICES.md` และ provenance ของแต่ละบท
+
+สำหรับ VaR/ES ใช้ `python3 scripts/make_tail_risk_figures.py` สร้างกราฟ SVG และ `python3 scripts/make_tail_risk_notebook.py` สร้างพร้อมรัน Notebook จากต้นฉบับ Markdown ใช้ Python standard library ตรวจตัวทดลองและหน้าเว็บด้วย `node qa/tail-risk-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 สูตรตรวจรวมอยู่ใน `npm test`

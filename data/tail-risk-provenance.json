@@ -1,0 +1,118 @@
+{
+  "lesson": "value-at-risk-expected-shortfall.md",
+  "updated": "2026-09-19",
+  "data_status": "All calculation examples, charts and interactive inputs are hypothetical or deterministic teaching constructions; no historical market prices are republished.",
+  "private_source_mapping": [
+    {
+      "file": "JA252.3 Notes.pdf",
+      "pages": "1–43",
+      "use": "Market risk; VaR/ES definitions; coherent risk; normal, historical and Monte Carlo methods; horizon; backtesting; London Whale; portfolio example. All prose rewritten and calculations recomputed.",
+      "published": false
+    },
+    {
+      "file": "JA252.3 Additional Notes.pdf",
+      "work": "Thomas S. Coleman, A Practical Guide to Risk Management (2011)",
+      "pages": "Opening epigraph and chapters 5–6",
+      "use": "Risk management framing, measurement, limitations. Public publisher link supplied.",
+      "published": false
+    },
+    {
+      "file": "JA252.3 Explorations_In_Asset_Returns.pdf",
+      "author": "Richard Diamond (2015)",
+      "use": "Return conventions, scaling and distribution diagnostics; corrections below.",
+      "published": false
+    },
+    {
+      "file": "JA252.3 Excel.xlsm",
+      "use": "Read-only inspection of historical-return and percentile workflow. No macros executed; data identity not established, so no rows copied.",
+      "published": false
+    }
+  ],
+  "public_sources": [
+    {
+      "url": "https://rpc.cfainstitute.org/research/foundation/2011/a-practical-guide-to-risk-management",
+      "use": "Coleman 2011 framing and attributed 20-word opening-epigraph excerpt with Thai translation"
+    },
+    {
+      "url": "https://arxiv.org/abs/cond-mat/0104295",
+      "use": "Acerbi and Tasche 2002; coherent ES and discontinuous distributions"
+    },
+    {
+      "url": "https://www.routledge.com/Introduction-to-Risk-Parity-and-Budgeting/Roncalli/p/book/9781032919874",
+      "use": "Roncalli portfolio example, chapter 2 pp.75–76; inputs read from attached excerpt"
+    },
+    {
+      "url": "https://www.bis.org/publications/199601-standards-supervisory-framework-use-backtesting-conjunction-internal-models-approach-market-risk-capital.pdf",
+      "use": "1996 backtesting framework; 250 observations, 99% one-day VaR; traffic-light zones; explicitly historical"
+    },
+    {
+      "url": "https://www.hsgac.senate.gov/subcommittees/investigations/rep/senate-investigations-subcommittee-holds-hearing-and-releases-report-on-jpmorgan-chase-whale-trades/",
+      "use": "2013 Senate findings about the 2012 London Whale risk limits, model changes and oversight"
+    }
+  ],
+  "corrections_and_conventions": [
+    "Positive loss L = -P&L; risk-measure axioms translated consistently to loss convention.",
+    "VaR is a quantile, not the worst possible loss; continuous/discrete exceedance distinction.",
+    "ES uses integrated quantiles; equal-weight empirical tail includes fractional boundary mass and handles ties.",
+    "Normal P&L is distinct from lognormal prices; nonlinear positions require revaluation or an appropriate approximation.",
+    "Exact z = 2.3263478740408408: 100000 * .0221 * z = 5141.228801630258; ES = 5890.123426964231. Rounded z = 2.33 gives 5149.30.",
+    "IID additive horizon approximation scales mean by T and SD by sqrt(T); logarithmic compounding and autocovariance stated.",
+    "Q-Q plotting positions (i-.5)/N avoid infinity; Q-Q does not establish temporal independence.",
+    "Histogram counts and density separated; 1+simple return, rather than simple return itself, is lognormal when log returns are normal.",
+    "Portfolio inputs are daily; full weights [488,135,315]/938; no premature weight rounding.",
+    "Basel historical green 0–4, yellow 5–9, red >=10; not presented as universal current regulation."
+  ],
+  "assets": {
+    "generator": "scripts/make_tail_risk_figures.py",
+    "files": [
+      "assets/images/tail-risk-normal.svg",
+      "assets/images/tail-risk-qq.svg",
+      "assets/images/tail-risk-exceptions.svg"
+    ],
+    "route": "no-image-generator",
+    "editable_source": "Deterministic Python geometry and data; no screenshot reuse or generated filler"
+  },
+  "notebook": {
+    "generator": "scripts/make_tail_risk_notebook.py",
+    "code_cells": 9,
+    "dependencies": "Python standard library",
+    "monte_carlo_seed": 2523,
+    "draws": 100000
+  },
+  "conventions": {
+    "empirical_quantile": "inverse empirical CDF, order ceil(N*c), roundoff correction at integer ranks",
+    "empirical_es": "average worst N*(1-c) observations with fractional boundary weight",
+    "portfolio_prices": [
+      244,
+      135,
+      315
+    ],
+    "portfolio_quantities": [
+      2,
+      1,
+      1
+    ],
+    "portfolio_means": [
+      0.005,
+      0.003,
+      0.002
+    ],
+    "portfolio_covariance": [
+      [
+        0.0004,
+        0.0003,
+        5e-05
+      ],
+      [
+        0.0003,
+        0.0009,
+        0.00018
+      ],
+      [
+        5e-05,
+        0.00018,
+        0.0001
+      ]
+    ]
+  }
+}

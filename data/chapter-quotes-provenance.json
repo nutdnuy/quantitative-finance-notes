@@ -1,6 +1,6 @@
 {
   "verified_on": "2026-09-14",
-  "scope": "One sourced epigraph for each of the eight content lessons. Welcome and the shared glossary are navigation/reference pages.",
+  "scope": "One sourced epigraph for each of the nine content lessons. Welcome and the shared glossary are navigation/reference pages.",
   "visual_route": "no-image-generator",
   "presentation": "Native Markdown blockquote with Thai translation, source-language excerpt, author and direct source link; existing fonts and theme tokens; no assets or motion.",
   "translation_credit": "Thai translations for QuantCorner; the Thorp translation and parenthetical clarification were supplied by the owner. Source-language quotations are separately identified.",
@@ -87,7 +87,17 @@
       "publisher_url": "https://rpc.cfainstitute.org/research/financial-analysts-journal/1992/faj-v48-n5-28",
       "note": "Exact first numbered principle visually checked in the original article scan on printed page 34 (PDF page 7), Combining Investor Views with Market Equilibrium. Line-break hyphenation is joined. Thai translation written for QuantCorner.",
       "relation": "The model combines information from investor views and market equilibrium, with uncertainty in both."
+    },
+    {
+      "file": "value-at-risk-expected-shortfall.md",
+      "author": "Thomas S. Coleman",
+      "language": "en",
+      "label": "A Practical Guide to Risk Management (2011), opening epigraph",
+      "url": "https://rpc.cfainstitute.org/research/foundation/2011/a-practical-guide-to-risk-management",
+      "verified_on": "2026-09-19",
+      "note": "First 20 words of the opening epigraph, ending future opportunities, followed by an ellipsis. Verified in supplied complete book PDF physical page 6. Thai translation written for QuantCorner.",
+      "relation": "Using past information to manage future risk, with limitations."
     }
   ],
-  "updated_on": "2026-09-18"
+  "updated_on": "2026-09-19"
 }

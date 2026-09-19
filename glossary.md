@@ -5,7 +5,7 @@ description: ศัพท์ที่ใช้ในบทเรียน Quant 
 
 # อภิธานศัพท์
 
-หน้านี้รวมศัพท์ที่เราใช้ในบทเรียน **พฤติกรรมแบบสุ่มของสินทรัพย์**, **Binomial Model**, **Transition Density Functions**, **Applied Stochastic Calculus**, **Black–Scholes Model**, **Portfolio Theory** และ **Optimization Problem** และ **Black–Litterman Portfolio** เอาไว้เปิดเทียบระหว่างอ่าน แต่ละคำมีลิงก์กลับไปดูตัวอย่างและการทดลองที่เกี่ยวข้อง
+หน้านี้รวมศัพท์ที่เราใช้ในบทเรียน **พฤติกรรมแบบสุ่มของสินทรัพย์**, **Binomial Model**, **Transition Density Functions**, **Applied Stochastic Calculus**, **Black–Scholes Model**, **Portfolio Theory**, **Optimization Problem**, **Black–Litterman Portfolio** และ **Value at Risk and Expected Shortfall** เอาไว้เปิดเทียบระหว่างอ่าน แต่ละคำมีลิงก์กลับไปดูตัวอย่างและการทดลองที่เกี่ยวข้อง
 
 <div class="glossary-search" hidden>
 <label for="glossary-query">ค้นหาคำศัพท์</label>
@@ -1089,6 +1089,48 @@ step ของกระบวนการต่างตัวในช่วง
 
 </section>
 
+</section>
+
+<section class="glossary-group" id="group-tail-risk">
+
+## ขาดทุนและการวัดความเสี่ยง
+
+<section class="glossary-term" id="value-at-risk">
+
+### Value at Risk (VaR) — เกณฑ์ขาดทุนที่ระดับความเชื่อมั่นหนึ่ง
+
+Quantile ของการแจกแจงขาดทุน โดยระบุระดับความเชื่อมั่นและระยะเวลาควบคู่กัน เช่น VaR 99% หนึ่งวันเป็นเกณฑ์ที่ขาดทุนมีโอกาสเกินประมาณ 1% ในแบบจำลองต่อเนื่อง VaR ไม่ได้บอกขนาดขาดทุนสูงสุดหรือค่าเฉลี่ยขาดทุนที่เกินเกณฑ์
+
+[ดูนิยามและเครื่องหมาย](value-at-risk-expected-shortfall.html#loss-and-var)
+
+</section>
+<section class="glossary-term" id="expected-shortfall">
+
+### Expected Shortfall (ES) — ค่าเฉลี่ยขาดทุนในปลายหาง
+
+ค่าเฉลี่ยของ quantile ขาดทุนตั้งแต่ระดับความเชื่อมั่น c ถึง 1 เช่น ES 99% เฉลี่ยขาดทุนในส่วนเลวร้ายที่สุด 1% สำหรับข้อมูลไม่ต่อเนื่อง ต้องแบ่งน้ำหนักค่าที่อยู่ตรงขอบให้ได้สัดส่วนหางพอดี
+
+[ดูสูตรและตัวทดลอง](value-at-risk-expected-shortfall.html#expected-shortfall)
+
+</section>
+<section class="glossary-term" id="risk-backtesting">
+
+### Risk backtesting — ตรวจค่าความเสี่ยงกับผลที่เกิดภายหลัง
+
+การเปรียบเทียบค่าความเสี่ยงที่คำนวณก่อนรู้ผลกับขาดทุนในช่วงที่พยากรณ์ การตรวจ VaR ดูทั้งจำนวนและการกระจุกตัวของ exceptions โดยต้องใช้ระยะเวลาและนิยาม P&L ให้ตรงกัน การนับ exceptions เพียงอย่างเดียวไม่ได้ตรวจความแม่นของ ES
+
+[ดูตัวอย่าง exceptions](value-at-risk-expected-shortfall.html#backtesting)
+
+</section>
+<section class="glossary-term" id="stress-testing">
+
+### Stress testing — ประเมินผลภายใต้สถานการณ์รุนแรง
+
+การกำหนดสถานการณ์ เช่น ราคาหุ้นร่วงหรือสภาพคล่องลดลง แล้วคำนวณมูลค่าพอร์ต ขาดทุน หรือเงินที่ต้องใช้ โดยไม่จำเป็นต้องระบุความน่าจะเป็นที่แม่นยำให้ทุกสถานการณ์ ใช้ประกอบ VaR และ ES เพื่อสำรวจความเสียหายที่แบบจำลองหลักอาจครอบคลุมไม่พอ
+
+[ดูการใช้กับการบริหารความเสี่ยง](value-at-risk-expected-shortfall.html#risk-management)
+
+</section>
 </section>
 
 ---
