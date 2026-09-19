@@ -1372,3 +1372,55 @@ Available stable funding หารด้วย required stable funding มอง
 ---
 
 ความหมายและตัวอย่างแต่ละคำมีลิงก์กลับไปยังบทที่เกี่ยวข้อง แหล่งอ้างอิงของคำและตัวอย่างอยู่ท้ายบทเหล่านั้น
+
+
+<section class="glossary-group" id="group-exotic-options">
+
+## สัญญา Exotic และความทรงจำของเส้นทาง
+
+<section class="glossary-term" id="exotic-option">
+
+### Exotic option — Option ที่เพิ่มเงื่อนไขจาก vanilla
+
+Option ที่กำหนด payoff วิธีสังเกตราคา วันใช้สิทธิ หรือสินทรัพย์อ้างอิงต่างจากสัญญา vanilla ต้องอ่านรายละเอียดสัญญาก่อนเลือกสูตร เช่น Asian ใช้ค่าเฉลี่ย และ Barrier มีเงื่อนไขเปิดหรือดับสิทธิ
+
+[ดูคำถามสำหรับอ่านสัญญา](exotic-options.html#contract-features)
+
+</section>
+<section class="glossary-term" id="path-state-variable">
+
+### Path state variable — ตัวแปรสรุปประวัติที่จำเป็น
+
+ตัวแปรที่เก็บส่วนของอดีตซึ่งต้องใช้คิด payoff และมูลค่า เช่น ผลรวมราคาสะสมของ Asian หรือ maximum ของ Lookback State ที่เพิ่มไม่จำเป็นต้องเพิ่มแหล่งสุ่มใหม่ ส่วน Barrier ต้องรู้สถานะเคยแตะหรือไม่ แม้ไม่เพิ่มแกนต่อเนื่องของ PDE
+
+[ดู state และจำนวนมิติ](exotic-options.html#state-variables)
+
+</section>
+<section class="glossary-term" id="asian-option">
+
+### Asian option — Option ที่อ้างอิงราคาเฉลี่ย
+
+Payoff ใช้ค่าเฉลี่ยตามกติกาสัญญา เช่น fixed-strike Call จ่ายส่วนที่ค่าเฉลี่ยสูงกว่า K ส่วน floating-strike Call จ่ายส่วนที่ราคาปลายทางสูงกว่าค่าเฉลี่ย ต้องระบุ arithmetic/geometric น้ำหนักและวัน fixing
+
+[ดู payoff แต่ละแบบ](exotic-options.html#contract-menu)
+
+</section>
+<section class="glossary-term" id="barrier-option">
+
+### Barrier option — Option ที่มีเงื่อนไขแตะระดับราคา
+
+Knock-in เปิดสิทธิเมื่อแตะระดับที่กำหนด ส่วน knock-out ดับสิทธิเมื่อแตะ การตรวจเฉพาะบางวันกับการตรวจต่อเนื่องเป็นคนละเงื่อนไข ต้องระบุ rebate และวันจ่ายด้วยถ้ามี
+
+[ดูวันตรวจและ Brownian bridge](exotic-options.html#barrier-monitoring)
+
+</section>
+<section class="glossary-term" id="fixing-update">
+
+### Fixing / updating rule — วันสังเกตและกฎอัปเดต
+
+วันที่สัญญาบันทึกราคาเพื่อนำไปปรับ state เช่น เพิ่ม S ในผลรวมสะสมของ Asian การจับคู่มูลค่าก่อนและหลัง fixing ต้องใช้ state ที่สัมพันธ์กัน การอัปเดตไม่ได้หมายถึงมี cashflow จ่ายออกเสมอ
+
+[ดูสมการก่อนและหลัง fixing](exotic-options.html#discrete-updates)
+
+</section>
+</section>

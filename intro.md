@@ -128,6 +128,14 @@ description: เรียนการเงินเชิงปริมาณ�
 <p class="welcome-topics">Capital · RWA · Leverage · LCR / NSFR · IRB</p>
 <a class="welcome-text-link" href="regulation-basel.html">เปิดบท Regulation and Basel →</a></div>
 </article>
+<article class="welcome-lesson">
+<span class="welcome-lesson-number" aria-hidden="true">EX</span>
+<div><p class="welcome-lesson-label">อ่านเงื่อนไขที่เปลี่ยนราคา Option</p>
+<h3><a href="exotic-options.html">Exotic Options</a></h3>
+<p>ถ้าปลายทางเหมือนกัน ราคาเฉลี่ยและการแตะ barrier ทำให้ payoff ต่างกันอย่างไร?</p>
+<p class="welcome-topics">Asian · Barrier · Path dependence · Monte Carlo · PDE</p>
+<a class="welcome-text-link" href="exotic-options.html">เปิดบท Exotic Options →</a></div>
+</article>
 </div>
 
 ## อ่านไป ลองไป

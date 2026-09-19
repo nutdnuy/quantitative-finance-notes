@@ -1,0 +1,58 @@
+{
+  "lesson": "exotic-options.md",
+  "updated": "2026-09-19",
+  "data_status": "All paths, contract inputs and numerical examples are hypothetical; no market observations are included.",
+  "private_source_mapping": [{
+    "file": "JA253.5 Notes.pdf",
+    "title": "Exotic Options",
+    "physical_pages": 59,
+    "published": false,
+    "coverage": [
+      {"pages": "1-9", "use": "Contract classification, time dependence and cashflows"},
+      {"pages": "10-24", "use": "Strong/weak path dependence and dimension counts"},
+      {"pages": "25-30", "use": "Order, embedded decisions and pricing methods"},
+      {"pages": "31-34", "use": "Barrier contract and PDE boundaries"},
+      {"pages": "35-47", "use": "Integral state, hedging and arithmetic Asian PDE"},
+      {"pages": "48-50", "use": "Floating-strike Asian similarity reduction"},
+      {"pages": "51-59", "use": "Discrete average and lookback updating rules"}
+    ]
+  }],
+  "public_sources": [
+    {"url": "https://people.maths.ox.ac.uk/gilesm/talks/IMACS_2013.pdf#page=10", "use": "Brownian bridge crossing probability and product survival weighting; applied here to exact log GBM with constant coefficients"},
+    {"url": "https://business.columbia.edu/faculty/research/continuity-correction-discrete-barrier-options", "use": "Broadie, Glasserman and Kou 1997: continuous versus discrete barrier monitoring"},
+    {"url": "https://arxiv.org/abs/1106.1999", "use": "Kumar, Waikos and Chakrabarty 2011: average-strike Asian PDE reference"}
+  ],
+  "conventions_and_corrections": [
+    "Cashflow uses C, not q; V-before equals V-after plus payment when states are otherwise unchanged. Constant cash payment need not change delta/gamma.",
+    "Weak barrier path dependence still requires an alive/hit flag; no added continuous state dimension on the alive PDE domain.",
+    "State dimension is distinguished from time and Brownian driver count.",
+    "Finite-variation integral state remains random through S, without a new diffusion term; no V_II or V_SI terms.",
+    "Hedging argument includes self-financing cash account; rebalancing costs are not omitted.",
+    "V=I W(S/I,t) applies to continuous floating-strike arithmetic Asian with I>0; inception I=0 is singular.",
+    "Fixing remapping with matched old/new state is a derived extension beyond page 59, not a quoted source formula.",
+    "All-exotics-OTC, never-continuous, universally-prefer-PDE and automatic-Greeks-jump claims are not adopted.",
+    "Sampling error, monitoring/numerical error and model error are separate; terminal averaging alone does not price early exercise.",
+    "Source PDF and slide screenshots are not included in the repository or deployed website."
+  ],
+  "simulations": {
+    "assumptions": "European call payoffs; no dividends, costs, rebates or early exercise; constant r and sigma; exact GBM date-to-date transitions under Q; independent standard Normal shocks; continuously compounded annual r; T in years; synthetic dollar units.",
+    "defaults": {"S0": 100, "K": 100, "H": 130, "r": 0.03, "sigma": 0.2, "T": 1, "steps": 12, "paths": 12000, "seed": 2535},
+    "asian": "Arithmetic average over jT/m, j=1,...,m; S0 excluded.",
+    "barrier_discrete": "S0 and all fixing dates through T monitored; touch counts as hit.",
+    "barrier_continuous": "Product of exact conditional log-GBM bridge survival probabilities, constant upper H; weighted discounted payoff SE across independent paths; no simulated hit count for continuous monitoring.",
+    "uncertainty": "Sample SD with N-1 denominator, SE=SD/sqrt(N), approximate Normal 95% CI; rare-event limitations stated.",
+    "rng": "Browser and Python use documented seeded generators independently; identical seeds do not imply identical paths across languages.",
+    "same_endpoint": {"A": [100,110,120,110,110], "B": [100,140,90,100,110], "K": 100, "H": 130, "payoffs_A_vanilla_asian_out": [10,12.5,10], "payoffs_B_vanilla_asian_out": [10,10,0]},
+    "cashflow_figure": {"coupon": 4, "coupon_time": 0.5, "principal": 100, "maturity": 1, "r": 0.03}
+  },
+  "assets": {
+    "route": "no-image-generator",
+    "brand": "QuantCorner / QuantSeras existing light book theme, purple/teal accents with optional dark theme",
+    "generator": "scripts/make_exotic_options_figures.py",
+    "math_source": "scripts/exotic_options_math.py",
+    "files": ["assets/images/exotic-path-payoffs.svg", "assets/images/exotic-monitoring.svg", "assets/images/exotic-cashflow-jump.svg"],
+    "editable_source": "Deterministic Python calculations and SVG geometry; no image-generation tool used"
+  },
+  "notebook": {"generator": "scripts/make_exotic_options_notebook.py", "code_cells": 9, "dependencies": "Python standard library", "source": "Canonical chapter Markdown with SHA-256; inlined Python helper functions; embedded SVG attachments"},
+  "limits": "Lesson formulates PDEs and similarity reduction but does not implement a finite-difference PDE solver. Not a market-calibrated exotic pricing system."
+}

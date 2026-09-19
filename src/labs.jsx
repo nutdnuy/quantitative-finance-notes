@@ -1,3 +1,4 @@
+import { mountExoticOptionsLabs } from './exotic-options.jsx';
 import { CapitalLab, LiquidityLab, IRBLab } from './basel.jsx';
 import { MeasureChangeLab, PricingExtensionsLab } from './martingale-pricing.jsx';
 import { ClusteringLab, MixtureLab, RealizedVolatilityLab } from './stylized-facts.jsx';
@@ -92,3 +93,5 @@ for (const [id, Component] of [['basel-capital-lab', CapitalLab], ['basel-liquid
   const target = document.getElementById(id);
   if (target) createRoot(target).render(<MotionConfig reducedMotion="user"><Component /></MotionConfig>);
 }
+
+mountExoticOptionsLabs();

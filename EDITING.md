@@ -184,3 +184,10 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 เนื้อหาอยู่ใน `regulation-basel.md` ตัวทดลองเงินกองทุน LCR และ IRB อยู่ใน `src/basel.jsx` สูตร JavaScript อยู่ใน `src/basel.mjs` และสูตร Python อยู่ใน `scripts/basel_math.py` ค่าที่สาธิตเป็นข้อมูลสมมติ ต้องแยกมาตรฐาน BCBS ออกจากการบังคับใช้ในแต่ละประเทศ และระบุช่วงเวลา/เวอร์ชันใน `data/basel-provenance.json` เมื่อแก้ข้อกำหนด
 
 หลังแก้เนื้อหาหรือสูตร รัน `python3 scripts/make_basel_figures.py` และ `python3 scripts/make_basel_notebook.py` เพื่อสร้าง SVG สามภาพและ Notebook ที่ฝังภาพพร้อมผลรัน จากนั้นตรวจ `npm run build:pages`, `npm test` และ `node qa/basel-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 การแก้ capital ratios, output floor, inflow cap หรือ IRB ต้องรักษาหน่วยและผลคำนวณระหว่างบทเรียน Python และ JavaScript ให้ตรงกัน ห้ามเผยแพร่ PDF ต้นฉบับ
+
+
+## แก้บท Exotic Options
+
+เนื้อหาอยู่ใน `exotic-options.md` สูตรและห้องทดลองอยู่ใน `src/exotic-options.mjs` กับ `src/exotic-options.jsx` ภาพสามภาพสร้างจาก `scripts/make_exotic_options_figures.py` โดยใช้สูตร Python ใน `scripts/exotic_options_math.py` หลังแก้เนื้อหารัน `python3 scripts/make_exotic_options_notebook.py` เพื่อสร้างและรัน `notebooks/exotic-options.ipynb` จาก Markdown ล่าสุด พร้อมฝังภาพ SVG
+
+ใช้ `npm run build:pages`, `npm test` และ `node qa/exotic-options-page-checks.cjs` กับ preview พอร์ต 8763 ตรวจทั้งสองธีม desktop/mobile, keyboard, glossary/search และ offline export ห้องทดลองจำกัดที่ European payoff ไม่มีปันผล ไม่มี rebate, constant-parameter GBM; Asian fixing ไม่รวม S₀ ส่วน discrete barrier ตรวจ S₀ และทุก fixing ถึง T แบบ continuous ใช้ Brownian-bridge survival weighting ต้องคงสมมติฐานนี้ให้ตรงกันระหว่างข้อความ สูตร และ Notebook

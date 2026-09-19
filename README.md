@@ -131,3 +131,10 @@ Notebook ใช้ Python 3, NumPy และ Jupyter/IPython ถ้ารัน 
 บท `regulation-basel.md` เชื่อมงบดุลและเหตุผลกำกับกับเงินกองทุน RWA, leverage, output floor, LCR/NSFR และแบบจำลองเครดิต ASRF/IRB ใช้เอกสาร *Regulation and Basel III / IV* ของ Jon Gregory (4 มีนาคม 2025) เป็นเส้นเรื่อง พร้อมตรวจนิยามกับมาตรฐาน BIS และคำนวณตัวอย่างใหม่ ข้อมูลธนาคารทั้งหมดเป็นสมมติ รายละเอียดอยู่ใน `data/basel-provenance.json` ไม่มี PDF ต้นฉบับใน repository
 
 สร้างกราฟด้วย `python3 scripts/make_basel_figures.py` และสร้างพร้อมรัน Notebook ด้วย `python3 scripts/make_basel_notebook.py` ใช้ Python standard library ตัวทดลองสามส่วนอยู่ใน `src/basel.jsx` และสูตรอยู่ใน `src/basel.mjs` ตรวจด้วย `npm test`, `npm run build:pages` และ `node qa/basel-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763
+
+
+## Exotic Options
+
+บท `exotic-options.md` เรียบเรียงจาก *Exotic Options* ในเอกสารที่ผู้ใช้ให้มา เชื่อมเงื่อนไขสัญญา Asian/Barrier/Lookback กับ Monte Carlo, integral-state PDE และกฎอัปเดตในวัน fixing มีห้องทดลองสองส่วน กราฟคำนวณสามภาพ และ Notebook ที่รันแล้ว ตัวเลขทั้งหมดเป็นข้อมูลสมมติ ไม่มี PDF ต้นฉบับใน repository รายละเอียดอยู่ใน `data/exotic-options-provenance.json`
+
+สร้างภาพด้วย `python3 scripts/make_exotic_options_figures.py` และ Notebook ด้วย `python3 scripts/make_exotic_options_notebook.py` ตรวจสูตรด้วย `npm test` และหน้าเว็บด้วย `node qa/exotic-options-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763
