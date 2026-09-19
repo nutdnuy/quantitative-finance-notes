@@ -1,0 +1,106 @@
+{
+  "lesson": "Introduction to Numerical Methods",
+  "slug": "numerical-methods",
+  "created": "2026-09-19",
+  "source": {
+    "title": "Introduction to Numerical Methods",
+    "course": "Certificate in Quantitative Finance",
+    "user_supplied_filename": "JA253.4 Notes.pdf",
+    "pages": 62,
+    "author": null,
+    "publication_year": null,
+    "coverage": {
+      "monte_carlo": "4-17",
+      "grid_and_derivatives": "18-34",
+      "terminal_and_explicit_scheme": "35-48",
+      "boundaries": "49-58",
+      "method_tradeoffs": "59-62"
+    },
+    "redistribution": "Original PDF and slide screenshots are excluded. Thai prose, calculations and figures are newly authored."
+  },
+  "supplementary_sources": [
+    {
+      "author": "Mike Giles",
+      "institution": "University of Oxford",
+      "title": "Monte Carlo Lecture 1",
+      "url": "https://people.maths.ox.ac.uk/gilesm/mc/mc/lec1.pdf",
+      "used_for": "Exact terminal GBM and Box-Muller transformation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "author": "Mike Giles",
+      "institution": "University of Oxford",
+      "title": "Monte Carlo Lecture 9",
+      "url": "https://people.maths.ox.ac.uk/gilesm/mc/mc/lec9.pdf",
+      "used_for": "Conditional strong and weak convergence orders",
+      "accessed": "2026-09-19"
+    }
+  ],
+  "assumptions": {
+    "data_status": "Hypothetical, no market data or calibration",
+    "contract": "European Call or Put, one unit, no dividends",
+    "model": "Constant-parameter risk-neutral GBM / Black-Scholes PDE",
+    "S": 100,
+    "K": 100,
+    "r": 0.03,
+    "sigma": 0.2,
+    "T": 1,
+    "price_unit": "USD",
+    "time_unit": "year",
+    "r_convention": "Continuously compounded annual rate",
+    "sigma_unit": "per square root year"
+  },
+  "monte_carlo": {
+    "method": "IID exact terminal GBM, mean discounted payoff; no antithetics",
+    "javascript_seed": 73,
+    "javascript_samples": 10000,
+    "python_seed": 2530401,
+    "python_samples": 20000,
+    "normal_generation": {
+      "javascript": "Existing seeded normalGenerator with Box-Muller",
+      "python": "random.Random(seed).gauss; Python standard-library Normal generator"
+    },
+    "se": "Sample SD of discounted payoffs divided by sqrt(N)",
+    "interval": "Approximate normal 95% interval, mean +/- 1.96 SE; sampling uncertainty only",
+    "reproducibility": "Generator-specific seeds; JavaScript and Python samples need not coincide"
+  },
+  "finite_difference": {
+    "scheme": "Forward Euler in tau=T-t; central first and second spatial derivatives",
+    "Smax": 400,
+    "space_intervals": 80,
+    "time_steps": 1000,
+    "boundary": "Analytic S=0 and asymptotic Dirichlet Smax conditions for European Call/Put",
+    "stability_check": "Sufficient nonnegative coefficient check at every interior node; negative spatial rates are checked independently of dt. Unsafe configurations return no computed price.",
+    "interpolation": "Linear in S for price and interior central-difference Greeks",
+    "theta": "Calendar-time sign, final two tau layers, USD/year",
+    "limitations": "Finite domain, mesh error, payoff kink; positivity does not establish accuracy",
+    "python_greeks": "Nearest interior node, with greek_spot explicitly reported; Python helper requires sigma>0 and T>0"
+  },
+  "editorial_clarifications": [
+    "Risk-neutral drift is not a forecast of physical returns",
+    "Exact grid-date GBM does not remove continuous monitoring error",
+    "Euler weak and strong convergence orders require conditions",
+    "Sum of twelve uniforms is not an exact Normal distribution",
+    "Increasing N does not reduce model error",
+    "Reducing dt cannot repair negative central spatial rates",
+    "Alternative gamma-zero upper boundary is not used by the lab"
+  ],
+  "visuals": {
+    "design_system": "QuantCorner / QuantSeras; existing Thai light book layout with optional dark theme",
+    "route": "no-image-generator",
+    "image_generator_used": false,
+    "assets": [
+      "assets/images/numerical-monte-carlo.svg",
+      "assets/images/numerical-finite-difference.svg",
+      "assets/images/numerical-grid-convergence.svg"
+    ],
+    "source_script": "scripts/make_numerical_methods_figures.py",
+    "meaning": "Computed hypothetical examples, not reconstructed source charts"
+  },
+  "verification": {
+    "numerical": "node qa/numerical-methods-checks.mjs",
+    "browser": "node qa/numerical-methods-page-checks.cjs",
+    "notebook": "python3 scripts/make_numerical_methods_notebook.py",
+    "build": "npm run build:pages"
+  }
+}

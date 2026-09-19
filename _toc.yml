@@ -32,5 +32,7 @@ chapters:
     title: Regulation and Basel III / IV
   - file: exotic-options
     title: Exotic Options
+  - file: numerical-methods
+    title: Introduction to Numerical Methods
   - file: glossary
     title: อภิธานศัพท์

@@ -1369,6 +1369,48 @@ Available stable funding หารด้วย required stable funding มอง
 </section>
 </section>
 
+<section class="glossary-group" id="group-numerical-methods">
+
+## การคำนวณเชิงตัวเลข
+
+<section class="glossary-term" id="finite-difference">
+
+### Finite difference — การประมาณอนุพันธ์จากค่าบนกริด
+
+แทนอนุพันธ์ด้วยผลต่างของค่าที่จุดข้างเคียง เช่น Delta จากราคาหุ้นซ้ายและขวา แล้วใช้ความสัมพันธ์เหล่านี้ประมาณคำตอบของ PDE วิธี explicit คำนวณชั้นเวลาใหม่จากค่าชั้นเดิม ต้องตรวจทั้งความละเอียดและเสถียรภาพ
+
+[ดูสูตรสามจุดและตัวอย่าง](numerical-methods.html#grid-derivatives)
+
+</section>
+<section class="glossary-term" id="boundary-condition">
+
+### Boundary condition — เงื่อนไขที่ขอบโดเมน
+
+ค่าหรือความสัมพันธ์ที่กำหนด ณ ปลายขอบเขตคำนวณ เช่นราคา European Put ที่ S=0 เท่ากับมูลค่าปัจจุบันของ strike ต้องใช้ทุกชั้นเวลาและแยกจาก terminal condition ซึ่งกำหนด payoff ณ วันหมดอายุ
+
+[ดูขอบของ European Call และ Put](numerical-methods.html#boundary-conditions)
+
+</section>
+<section class="glossary-term" id="numerical-stability">
+
+### Numerical stability — เสถียรภาพของวิธีเชิงตัวเลข
+
+การควบคุมไม่ให้ความผิดพลาดเล็ก ๆ ถูกขยายอย่างไม่เหมาะสมระหว่างคำนวณ เกณฑ์สัมประสิทธิ์ไม่ติดลบเป็นเงื่อนไขเพียงพอที่ห้องทดลอง explicit ใช้ตรวจ การผ่านเกณฑ์ยังไม่รับรองว่ากริดละเอียดหรือขอบไกลเพียงพอ
+
+[ดูการตรวจ time step และ drift](numerical-methods.html#stability)
+
+</section>
+<section class="glossary-term" id="domain-truncation">
+
+### Domain truncation error — ความคลาดเคลื่อนจากขอบเขตจำกัด
+
+ความคลาดเคลื่อนเมื่อแทนโดเมนที่ยาวถึงอนันต์ด้วยขอบจำกัด เช่น Smax ในกริดราคาหุ้น ตรวจได้โดยขยายขอบพร้อมคงความละเอียดใกล้เดิม แยกจากการลดระยะห่างระหว่างจุดกริด
+
+[ดูการเลือกขอบราคา](numerical-methods.html#boundary-conditions)
+
+</section>
+</section>
+
 ---
 
 ความหมายและตัวอย่างแต่ละคำมีลิงก์กลับไปยังบทที่เกี่ยวข้อง แหล่งอ้างอิงของคำและตัวอย่างอยู่ท้ายบทเหล่านั้น

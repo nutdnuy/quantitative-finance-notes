@@ -136,6 +136,14 @@ description: เรียนการเงินเชิงปริมาณ�
 <p class="welcome-topics">Asian · Barrier · Path dependence · Monte Carlo · PDE</p>
 <a class="welcome-text-link" href="exotic-options.html">เปิดบท Exotic Options →</a></div>
 </article>
+<article class="welcome-lesson">
+<span class="welcome-lesson-number" aria-hidden="true">14</span>
+<div><p class="welcome-lesson-label">เปลี่ยนแบบจำลองเป็นวิธีคำนวณ</p>
+<h3><a href="numerical-methods.html">Introduction to Numerical Methods</a></h3>
+<p>เมื่อไม่มีสูตรสำเร็จ จะหาราคา Option และตรวจความแม่นยำของคำตอบอย่างไร?</p>
+<p class="welcome-topics">Monte Carlo · Finite difference · Boundary conditions · Stability</p>
+<a class="welcome-text-link" href="numerical-methods.html">เปิดบท Numerical Methods →</a></div>
+</article>
 </div>
 
 ## อ่านไป ลองไป

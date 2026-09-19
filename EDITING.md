@@ -21,6 +21,8 @@
 | เนื้อหา Black–Litterman | `black-litterman.md` |
 | เนื้อหา Value at Risk and Expected Shortfall | `value-at-risk-expected-shortfall.md` |
 | Notebook และห้องทดลอง VaR/ES | `notebooks/value-at-risk-expected-shortfall.ipynb`, `src/tail-risk.jsx`, `src/tail-risk.mjs` |
+| เนื้อหา Introduction to Numerical Methods | `numerical-methods.md` |
+| Notebook และห้องทดลอง Numerical Methods | `notebooks/numerical-methods.ipynb`, `src/numerical-methods.jsx`, `src/numerical-methods.mjs` |
 | ความหมายและตัวอย่างคำศัพท์ | `glossary.md` |
 | ชื่อเว็บ ชื่อผู้เขียน รูปด้านบน ลิงก์ GitHub | `_config.yml` |
 | รายการและลำดับหัวข้อในสารบัญ | `_toc.yml` |
@@ -191,3 +193,11 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 เนื้อหาอยู่ใน `exotic-options.md` สูตรและห้องทดลองอยู่ใน `src/exotic-options.mjs` กับ `src/exotic-options.jsx` ภาพสามภาพสร้างจาก `scripts/make_exotic_options_figures.py` โดยใช้สูตร Python ใน `scripts/exotic_options_math.py` หลังแก้เนื้อหารัน `python3 scripts/make_exotic_options_notebook.py` เพื่อสร้างและรัน `notebooks/exotic-options.ipynb` จาก Markdown ล่าสุด พร้อมฝังภาพ SVG
 
 ใช้ `npm run build:pages`, `npm test` และ `node qa/exotic-options-page-checks.cjs` กับ preview พอร์ต 8763 ตรวจทั้งสองธีม desktop/mobile, keyboard, glossary/search และ offline export ห้องทดลองจำกัดที่ European payoff ไม่มีปันผล ไม่มี rebate, constant-parameter GBM; Asian fixing ไม่รวม S₀ ส่วน discrete barrier ตรวจ S₀ และทุก fixing ถึง T แบบ continuous ใช้ Brownian-bridge survival weighting ต้องคงสมมติฐานนี้ให้ตรงกันระหว่างข้อความ สูตร และ Notebook
+
+## แก้บท Introduction to Numerical Methods
+
+เนื้อหาอยู่ใน `numerical-methods.md` ห้องทดลอง Monte Carlo และ finite difference อยู่ใน `src/numerical-methods.jsx` สูตร JavaScript ใน `src/numerical-methods.mjs` และ Python ใน `scripts/numerical_methods_math.py` กำหนด European Call/Put ไม่มีปันผล ใช้ r และ σ คงที่ ตัวอย่างเริ่ม r=3%, σ=20%, S=K=100, T=1 ปี
+
+หลังแก้บท รัน `python3 scripts/make_numerical_methods_figures.py` และ `python3 scripts/make_numerical_methods_notebook.py` เพื่อสร้างกราฟ 3 ภาพและ Notebook ที่รันแล้วจาก Markdown ปัจจุบัน จากนั้น `npm run build:pages`, `npm test` และ `node qa/numerical-methods-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763
+
+กริด explicit ตรวจสัมประสิทธิ์ทุกจุดก่อนคำนวณ ค่า drift ที่ทำให้สัมประสิทธิ์ข้างหนึ่งติดลบแก้ด้วยลด time step อย่างเดียวไม่ได้ จึงคืนสถานะพร้อมเหตุผลและไม่แสดงราคาเก่า ผล Monte Carlo ต่างกันได้ระหว่าง Python กับ JavaScript เพราะใช้ตัวสุ่มคนละชุด แต่ต้องทำซ้ำได้ในแต่ละภาษาและรายงาน SE ตามชุดนั้น
