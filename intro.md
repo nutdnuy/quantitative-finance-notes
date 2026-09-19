@@ -32,21 +32,6 @@ description: เรียนการเงินเชิงปริมาณ�
 <a class="welcome-text-link" href="glossary.html">เปิดอภิธานศัพท์ประกอบการอ่าน <span aria-hidden="true">→</span></a>
 </div>
 
-<h2 id="portfolio-toolkit">Portfolio Management Toolkit Notes</h2>
-
-เริ่มต้นจากการวัดผลตอบแทน ก่อนนำไปใช้วิเคราะห์ความเสี่ยงและจัดพอร์ต
-
-<div class="welcome-lessons">
-<article class="welcome-lesson">
-<span class="welcome-lesson-number" aria-hidden="true">01</span>
-<div><p class="welcome-lesson-label">พื้นฐานการวัดผลตอบแทน</p>
-<h3><a href="returns.html">Return — Simple Return และ Log Return</a></h3>
-<p>ทำไมได้ +20% แล้วเสีย −20% เงินจึงไม่กลับมาเท่าเดิม และควรใช้ผลตอบแทนแบบไหนเมื่อรวมหลายช่วงเวลาหรือหลายสินทรัพย์?</p>
-<p class="welcome-topics">Compounding · Log return · Geometric mean · Portfolio return</p>
-<a class="welcome-text-link" href="returns.html">เปิดบท Return →</a></div>
-</article>
-</div>
-
 <h2 id="lessons">เลือกบทเรียน</h2>
 
 หากเพิ่งเริ่ม แนะนำให้อ่านตามลำดับด้านล่าง แต่ละบทต่อยอดแนวคิดจากบทก่อนหน้า หรือเลือกทบทวนหัวข้อที่สนใจได้เลย

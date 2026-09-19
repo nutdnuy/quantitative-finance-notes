@@ -6,8 +6,6 @@ options:
 
 # เพิ่มหัวข้อด้วยการเพิ่มไฟล์ Markdown แล้วเพิ่มรายการ file ด้านล่าง
 chapters:
-  - file: returns
-    title: Return — Simple Return และ Log Return
   - file: random-assets
     title: พฤติกรรมแบบสุ่มของสินทรัพย์
   - file: binomial-model
