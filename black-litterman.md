@@ -488,7 +488,6 @@ $$
 
 ## เอกสารประกอบ
 
-- *Fundamentals of Optimization and Application to Portfolio Selection*, CQF, *Part III: The Black-Litterman Model*, หน้า 101–131; เรียบเรียงจากแนวคิดและคำนวณตัวเลขใหม่ด้วยพารามิเตอร์ที่ระบุในบท
 - Fischer Black and Robert Litterman, “Global Portfolio Optimization,” *Financial Analysts Journal*, 48(5), 28–43, 1992
 - Henri Theil, *Principles of Econometrics*, Wiley, 1971
 - Guangliang He and Robert Litterman, *The Intuition Behind Black–Litterman Model Portfolios*, 1999
