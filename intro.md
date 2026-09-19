@@ -13,6 +13,8 @@ description: เรียนการเงินเชิงปริมาณ�
 <p class="welcome-format">ตัวอย่างและสมการ   Python Notebook</p>
 </div>
 
+<!-- author-profile -->
+
 <figure class="welcome-photo">
 <img src="assets/images/welcome-nyse.jpg" alt="ภาพขาวดำด้านหน้าอาคาร New York Stock Exchange และอาคารสูงในย่านการเงินนิวยอร์ก" width="1280" height="812" decoding="async" fetchpriority="high">
 <figcaption>New York Stock Exchange · ภาพโดย <a href="https://commons.wikimedia.org/wiki/File:Manhattan_-_New_York_Stock_Exchange_Building_-_20190929151052.jpg">Skypetrus / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></figcaption>

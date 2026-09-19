@@ -13,6 +13,17 @@ async function build(){
  const {marked}=await import('marked');
  const config=yaml.parse(fs.readFileSync(path.join(root,'_config.yml'),'utf8'));
  const cover=className=>`<div class="brand-cover ${className}" role="img" aria-label="${escape(config.logo_alt)}"><img class="brand-row-primary" src="${escape(config.logo)}" alt="" width="1024" height="228"><img class="brand-row-secondary" src="${escape(config.logo_secondary)}" alt="" width="1024" height="228"></div>`;
+ const profile=config.author_profile;
+ const authorLinks=profile?[
+  ['LinkedIn ของผู้เขียน',profile.linkedin],['เว็บไซต์ QuantCorner',profile.website],
+  ['เพจ Facebook QuantCorner',profile.facebook],['เข้าร่วม Discord',profile.discord]
+ ].filter(([,url])=>url):[];
+ for(const [,url] of authorLinks)if(new URL(url).protocol!=='https:')throw Error('Author links must use HTTPS');
+ const authorCard=(home=false)=>profile?`<section class="author-card${home?' author-card-welcome':''}" aria-labelledby="author-name">
+ ${profile.portrait?`<img class="author-portrait" src="${escape(profile.portrait)}" alt="ภาพการ์ตูน ${escape(profile.name)}" width="144" height="144" decoding="async">`:''}
+ <div class="author-copy"><p class="author-label">${escape(profile.label)}</p><h2 id="author-name">${escape(profile.name)}</h2>
+ <p>${escape(profile.bio)}</p><p class="author-invitation">${home?'ติดตามงานเขียนและมาเรียนรู้ Quant ไปด้วยกัน':'อ่านบทนี้แล้วอยากเรียนรู้ต่อ? ติดตามผู้เขียนและ QuantCorner ได้ที่นี่'}</p>
+ <nav class="author-links" aria-label="ติดตามผู้เขียนและ QuantCorner">${authorLinks.map(([label,url])=>`<a href="${escape(url)}">${escape(label)} <span aria-hidden="true">↗</span></a>`).join('')}</nav></div></section>`:'';
  const toc=yaml.parse(fs.readFileSync(path.join(root,'_toc.yml'),'utf8'));
  const sourcePages=[{file:toc.root},...(toc.chapters||[])];
  const seen=new Set();
@@ -52,7 +63,7 @@ async function build(){
 <button class="search-trigger" id="search-button">${icon}<span>Search</span><kbd>⌘ K</kbd></button>
 <nav class="book-nav" aria-label="สารบัญ">${nav}</nav>${localNav}
 <div class="book-sidebar-footer"><a href="${escape(page.notebook)}" download>ดาวน์โหลด Notebook</a><a href="${page.file}.md" download>ไฟล์ Markdown หน้านี้</a>${github}<button id="theme-button">พื้นหลังมืด</button></div></aside>
-<main class="book-main ${page.home?'welcome-main':'chapter'}" id="content"><div class="page-topline"><span>${escape(config.title)}</span><button id="print-button">พิมพ์หน้านี้</button></div>${page.home?cover('mobile-cover'):''}${page.body}<footer class="book-footer">${escape(config.title)}<span>โดย ${escape(config.author)}</span></footer></main></div>
+<main class="book-main ${page.home?'welcome-main':'chapter'}" id="content"><div class="page-topline"><span>${escape(config.title)}</span><button id="print-button">พิมพ์หน้านี้</button></div>${page.home?cover('mobile-cover'):''}${page.home?page.body.replace('<!-- author-profile -->',authorCard(true)):page.body+authorCard()}<footer class="book-footer">${escape(config.title)}<span>โดย ${escape(config.author)}</span></footer></main></div>
 <dialog id="search-dialog" aria-labelledby="search-title"><div class="search-dialog-heading"><h2 id="search-title">ค้นหาในสมุดบันทึก</h2><button id="close-search" aria-label="ปิดการค้นหา">ปิด</button></div><label for="search-input" class="sr-only">คำค้นหา</label><input id="search-input" type="search" placeholder="ลองค้นหา volatility หรือ ความผันผวน" autocomplete="off"><p id="search-status" role="status"></p><div id="search-results"></div></dialog>
 <script src="search-index.js" defer></script><script src="site.js" defer></script>${page.home?'':'<script src="app.js" defer></script>'}</body></html>`;
   fs.writeFileSync(path.join(root,page.href),html);
