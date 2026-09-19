@@ -1,0 +1,159 @@
+{
+  "lesson": "Know Your Weapon — Option Greeks",
+  "slug": "option-greeks",
+  "created": "2026-09-19",
+  "source": {
+    "filename": "JA253.9 Notes.pdf",
+    "title": "Know Your Weapon, Parts 1–2",
+    "author": "Espen Gaarder Haug",
+    "pdf_pages": 42,
+    "numbered_slides": 42,
+    "note": "Pairs of slides are repeated in the supplied PDF. Private source retained locally; no PDF or slide captures distributed.",
+    "sha256": "d81a4556255aa800ad6a410de0613344e128ebde7cf47cde967bdf585b18f1be"
+  },
+  "data_status": "All numerical examples and charts are hypothetical, computed from explicit generalized BSM inputs; no empirical market data.",
+  "baseline": {
+    "S": 100,
+    "K": 100,
+    "r": 0.05,
+    "b": 0.05,
+    "sigma": 0.2,
+    "T": 1,
+    "kind": "call",
+    "price_unit": "currency per one underlying unit",
+    "rates": "annual continuous decimal rates",
+    "time": "remaining years"
+  },
+  "conventions": [
+    "Raw volatility derivatives use decimal sigma; vega per vol point divides by 100; vomma per vol-point squared divides by 10000.",
+    "Time Greeks use elapsed calendar time: theta=-V_T, charm=-delta_T, color=-gamma_T, veta=-vega_T; daily sensitivities divide by 365.",
+    "Rho fixed b equals -T V; fixed yield means db/dr=1.",
+    "Ordinary unadjusted spot delta inversion, not forward or premium-adjusted delta.",
+    "All smooth Greeks require S,K,sigma,T strictly positive.",
+    "Partial derivatives hold other pricing inputs fixed; smile dynamics need separately specified total derivatives."
+  ],
+  "corrections": [
+    {
+      "slides": [
+        7
+      ],
+      "issue": "Call strike-from-delta is missing minus sign before inverse normal.",
+      "resolution": "Use exp((b+sigma²/2)T - sigma sqrt(T) invN(delta/A)); verify by round-trip."
+    },
+    {
+      "slides": [
+        12,
+        21,
+        22,
+        35,
+        36
+      ],
+      "issue": "Remaining-time label and calendar-time signs mixed.",
+      "resolution": "Declare calendar-time conventions and verify using decreasing remaining maturity."
+    },
+    {
+      "slides": [
+        14
+      ],
+      "issue": "Saddle Gamma needs generalized r/b dependence.",
+      "resolution": "T*=1/[2(2b-r+sigma²)] if denominator positive; stationary point is not global maximum."
+    },
+    {
+      "slides": [
+        23
+      ],
+      "issue": "Speed stencil labeled central is shifted relative to S.",
+      "resolution": "Use symmetric points S±h and S±2h with denominator 2h³."
+    },
+    {
+      "slides": [
+        27
+      ],
+      "issue": "Global vega maximum needs domain conditions.",
+      "resolution": "T=1/(2r) requires r>0 and optimizing both S and T at fixed K."
+    },
+    {
+      "slides": [
+        31,
+        33
+      ],
+      "issue": "VegaP and Vega leverage prose mix absolute and relative vol units.",
+      "resolution": "Explicit shock sizes: .01 raw-vega per vol point; .01 sigma raw-vega per 1% relative vol."
+    },
+    {
+      "slides": [
+        37
+      ],
+      "issue": "Missing sigma in Call theta first term and driftless theta; Put labels repeat Call.",
+      "resolution": "Re-derive theta and check price finite difference."
+    },
+    {
+      "slides": [
+        38
+      ],
+      "issue": "Rho requires carry-response convention.",
+      "resolution": "Show both fixed b and fixed yield."
+    },
+    {
+      "slides": [
+        40
+      ],
+      "issue": "Put strike-from-probability uses inverse normal of a negative probability.",
+      "resolution": "Use positive p in invN(p) with positive sign in exponent."
+    },
+    {
+      "slides": [
+        40,
+        41
+      ],
+      "issue": "C_KK labeled risk-neutral density omits reversal of discount.",
+      "resolution": "f_Q=exp(rT) C_KK; C_KK is discounted state-price density."
+    },
+    {
+      "slides": [
+        42
+      ],
+      "issue": "Ever-ITM formula contains discounting and corresponds to cash-at-hit.",
+      "resolution": "Distinguish Q(tau<=T) from E_Q[exp(-r tau) 1(tau<=T)]."
+    }
+  ],
+  "references": [
+    {
+      "title": "Black and Scholes (1973)",
+      "url": "https://doi.org/10.1086/260062"
+    },
+    {
+      "title": "Breeden and Litzenberger (1978)",
+      "url": "https://doi.org/10.1086/260661"
+    },
+    {
+      "title": "Uwe Wystup, FX Greeks",
+      "url": "https://www.mathfinance.com/wp-content/uploads/2025/02/Wystup-FXcolumn-Greeks.pdf"
+    },
+    {
+      "title": "RiskFlow, FX and Equity valuation / One Touch",
+      "url": "https://riskflow.readthedocs.io/en/latest/Valuation/FX_and_Equity/"
+    }
+  ],
+  "visual": {
+    "brand": "QuantCorner / QuantSeras",
+    "route": "no-image-generator",
+    "assets": [
+      "assets/images/option-greeks-delta-probability.svg",
+      "assets/images/option-greeks-taylor.svg",
+      "assets/images/option-greeks-higher-profiles.svg"
+    ],
+    "generator": "scripts/make_option_greeks_figures.py",
+    "notes": "Deterministic calculated SVG and React charts. No generated artwork or third-party visual assets."
+  },
+  "limitations": [
+    "European generalized BSM only; no American exercise, jump simulation, transaction costs or smile calibration.",
+    "Greek approximations are local and do not guarantee realized P&L or successful hedging.",
+    "Historical market screenshots in the PDF are not reused."
+  ],
+  "checks": [
+    "qa/option-greeks-checks.mjs",
+    "qa/option-greeks-page-checks.cjs",
+    "scripts/make_option_greeks_notebook.py"
+  ]
+}

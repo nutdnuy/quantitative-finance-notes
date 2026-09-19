@@ -143,3 +143,10 @@ Notebook ใช้ Python 3, NumPy และ Jupyter/IPython ถ้ารัน 
 บท `exotic-options.md` เรียบเรียงจาก *Exotic Options* ในเอกสารที่ผู้ใช้ให้มา เชื่อมเงื่อนไขสัญญา Asian/Barrier/Lookback กับ Monte Carlo, integral-state PDE และกฎอัปเดตในวัน fixing มีห้องทดลองสองส่วน กราฟคำนวณสามภาพ และ Notebook ที่รันแล้ว ตัวเลขทั้งหมดเป็นข้อมูลสมมติ ไม่มี PDF ต้นฉบับใน repository รายละเอียดอยู่ใน `data/exotic-options-provenance.json`
 
 สร้างภาพด้วย `python3 scripts/make_exotic_options_figures.py` และ Notebook ด้วย `python3 scripts/make_exotic_options_notebook.py` ตรวจสูตรด้วย `npm test` และหน้าเว็บด้วย `node qa/exotic-options-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763
+
+
+## Know Your Weapon — Option Greeks
+
+`option-greeks.md` ต่อยอด Black–Scholes ด้วย generalized carry, Greek units, Delta/strike conventions, higher Greeks, numerical derivatives, probability และ smile risk โดยเรียบเรียงจากเอกสาร *Know Your Weapon* ของ Espen Haug ที่ผู้ใช้ให้ ตัวเลขและกราฟทั้งหมดคำนวณใหม่จากสมมติฐาน รายละเอียดการตรวจแก้สูตรต้นทางอยู่ใน `data/option-greeks-provenance.json` ไม่เผยแพร่ PDF ต้นฉบับ
+
+ใช้ `python3 scripts/make_option_greeks_figures.py` สร้าง SVG 3 ภาพ และ `python3 scripts/make_option_greeks_notebook.py` สร้างพร้อมรัน Notebook แบบ self-contained ตรวจสูตรด้วย `node qa/option-greeks-checks.mjs` และหน้าเว็บด้วย `node qa/option-greeks-page-checks.cjs` ขณะเปิด preview พอร์ต 8763

@@ -144,6 +144,14 @@ description: เรียนการเงินเชิงปริมาณ�
 <p class="welcome-topics">Monte Carlo · Finite difference · Boundary conditions · Stability</p>
 <a class="welcome-text-link" href="numerical-methods.html">เปิดบท Numerical Methods →</a></div>
 </article>
+<article class="welcome-lesson">
+<span class="welcome-lesson-number" aria-hidden="true">15</span>
+<div><p class="welcome-lesson-label">อ่านความไวของราคา Option ให้ครบ</p>
+<h3><a href="option-greeks.html">Know Your Weapon — Option Greeks</a></h3>
+<p>เมื่อราคา เวลา และ volatility เปลี่ยน Greeks ช่วยอธิบายราคาใหม่ได้ใกล้แค่ไหน?</p>
+<p class="welcome-topics">Delta · Gamma · Vanna / Vomma · Smile · Numerical Greeks</p>
+<a class="welcome-text-link" href="option-greeks.html">เปิดบท Option Greeks →</a></div>
+</article>
 </div>
 
 ## อ่านไป ลองไป

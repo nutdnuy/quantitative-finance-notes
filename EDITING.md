@@ -201,3 +201,10 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 หลังแก้บท รัน `python3 scripts/make_numerical_methods_figures.py` และ `python3 scripts/make_numerical_methods_notebook.py` เพื่อสร้างกราฟ 3 ภาพและ Notebook ที่รันแล้วจาก Markdown ปัจจุบัน จากนั้น `npm run build:pages`, `npm test` และ `node qa/numerical-methods-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763
 
 กริด explicit ตรวจสัมประสิทธิ์ทุกจุดก่อนคำนวณ ค่า drift ที่ทำให้สัมประสิทธิ์ข้างหนึ่งติดลบแก้ด้วยลด time step อย่างเดียวไม่ได้ จึงคืนสถานะพร้อมเหตุผลและไม่แสดงราคาเก่า ผล Monte Carlo ต่างกันได้ระหว่าง Python กับ JavaScript เพราะใช้ตัวสุ่มคนละชุด แต่ต้องทำซ้ำได้ในแต่ละภาษาและรายงาน SE ตามชุดนั้น
+
+
+## แก้บท Know Your Weapon — Option Greeks
+
+เนื้อหาอยู่ใน `option-greeks.md` สูตร JavaScript อยู่ใน `src/option-greeks.mjs` และตัวทดลอง 3 ส่วนอยู่ใน `src/option-greeks.jsx` สูตร Python สำหรับ Notebook และกราฟอยู่ใน `scripts/option_greeks_math.py` ต้องคง convention เดียวกัน: volatility/interest เป็นทศนิยม, T เป็นปีคงเหลือ, time Greeks เป็นอนุพันธ์ต่อเวลาปฏิทิน, Rho แยก fixed b กับ fixed yield และ Delta inversion เป็น ordinary spot Delta ที่ไม่ปรับ premium
+
+หลังแก้บทหรือสมการ รัน `python3 scripts/make_option_greeks_figures.py` และ `python3 scripts/make_option_greeks_notebook.py` จากนั้น `npm run build:pages`, `npm test` และ `node qa/option-greeks-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 สคริปต์ Notebook เขียนทับเฉพาะ `notebooks/option-greeks.ipynb` ให้เก็บการทดลองส่วนตัวในชื่ออื่น สูตรในเอกสารต้นทางบางแห่งมีพิมพ์ตกและใช้ convention ต่างกัน ดู correction log ใน provenance ก่อนปรับสูตรตาม PDF

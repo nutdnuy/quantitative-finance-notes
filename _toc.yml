@@ -34,5 +34,7 @@ chapters:
     title: Exotic Options
   - file: numerical-methods
     title: Introduction to Numerical Methods
+  - file: option-greeks
+    title: Know Your Weapon — Option Greeks
   - file: glossary
     title: อภิธานศัพท์

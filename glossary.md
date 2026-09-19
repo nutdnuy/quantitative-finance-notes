@@ -1466,3 +1466,66 @@ Knock-in เปิดสิทธิเมื่อแตะระดับท�
 
 </section>
 </section>
+
+
+---
+
+<section class="glossary-group" id="group-option-sensitivities">
+
+## ความไวของราคา Option และ conventions
+
+<section class="glossary-term" id="cost-of-carry">
+
+### Cost of carry — อัตราถือครองสุทธิ
+
+อัตรา b ใน generalized BSM ที่กำหนด forward เป็น S exp(bT) หุ้นที่จ่าย dividend yield q ต่อเนื่องใช้ b=r−q; futures pricing ที่ใช้ F เป็นราคาอ้างอิงใช้ b=0 ต้องระบุว่า b เปลี่ยนตาม r หรือคงที่เมื่อคำนวณ Rho
+
+[ดูสูตรและขอบเขต](option-greeks.html#model-and-market)
+
+</section>
+<section class="glossary-term" id="option-elasticity">
+
+### Option elasticity — ความไวของราคา Option แบบเปอร์เซ็นต์
+
+Omega = S × Delta / V ใช้ประมาณเปอร์เซ็นต์เปลี่ยนของราคา Option ต่อเปอร์เซ็นต์เปลี่ยนของ underlying ขนาดเล็ก โดยถือ inputs อื่นคงที่ มีเครื่องหมายตาม Delta และไม่เสถียรเมื่อ premium ใกล้ศูนย์
+
+[ดูตัวอย่าง leverage เฉพาะที่](option-greeks.html#delta-and-elasticity)
+
+</section>
+<section class="glossary-term" id="delta-mirror-strike">
+
+### Delta mirror strikes — คู่ Strike ที่มี Delta ตรงข้ามกัน
+
+Strike ของ Call กับ Put ที่ทำให้ ordinary spot Delta มีขนาดเท่ากันและเครื่องหมายตรงข้าม ภายใต้ maturity, carry และ volatility เดียวกัน ผลคูณของ strikes คือ S² exp[(2b+σ²)T] ไม่ใช่คู่ strike ที่มี ITM probability เท่ากัน
+
+[ดูสูตรและทดลองหา Strike](option-greeks.html#delta-strikes)
+
+</section>
+<section class="glossary-term" id="vanna">
+
+### Vanna — ความไวของ Delta ต่อ Volatility
+
+อนุพันธ์ผสม ∂²V/(∂S∂σ) เท่ากับการเปลี่ยน Vega ต่อ spot เมื่อราคาเป็นฟังก์ชันเรียบ Vanna เป็นบวกหรือลบได้ ต้องระบุว่า volatility วัดเป็นทศนิยมหรือจุดเปอร์เซ็นต์
+
+[ดูพจน์ผสมของราคา](option-greeks.html#higher-greeks)
+
+</section>
+<section class="glossary-term" id="vomma">
+
+### Vomma / Volga — ความโค้งของราคาต่อ Volatility
+
+อนุพันธ์ ∂²V/∂σ² หรือการเปลี่ยน Vega เมื่อ volatility เปลี่ยน ภายใต้ BSM เท่ากับ raw Vega × d₁d₂/σ และอาจติดลบใกล้ forward ได้ การเป็น long Vega จึงไม่ได้แปลว่า Vomma เป็นบวกเสมอ
+
+[ดูสูตรและห้องทดลอง](option-greeks.html#higher-greeks)
+
+</section>
+<section class="glossary-term" id="risk-neutral-density">
+
+### Risk-neutral density — ความหนาแน่นภายใต้มาตรวัดเพื่อการคิดราคา
+
+ความหนาแน่นของราคาสินทรัพย์ปลายทางภายใต้ Q เมื่อดอกเบี้ยแน่นอนหาได้จาก exp(rT) คูณอนุพันธ์อันดับสองของราคา European Call ตาม strike ส่วนอนุพันธ์ที่ยังไม่ถอน discount เป็น state-price density ต้องใช้เส้นราคาเต็มเมื่อมี smile และไม่ตีความเป็นการแจกแจงภายใต้โลกจริงโดยอัตโนมัติ
+
+[ดูความสัมพันธ์ Breeden–Litzenberger](option-greeks.html#probability-greeks)
+
+</section>
+</section>
