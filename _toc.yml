@@ -16,6 +16,8 @@ chapters:
     title: Applied Stochastic Calculus
   - file: black-scholes-model
     title: Black-Scholes Model
+  - file: martingale-pricing
+    title: Martingale Pricing
   - file: portfolio-theory
     title: Portfolio Theory
   - file: portfolio-optimization

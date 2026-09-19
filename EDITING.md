@@ -14,6 +14,8 @@
 | เนื้อหา Transition Density Functions | `transition-density-functions.md` |
 | เนื้อหา Applied Stochastic Calculus | `applied-stochastic-calculus.md` |
 | เนื้อหา Black–Scholes Model | `black-scholes-model.md` |
+| เนื้อหา Martingale Pricing | `martingale-pricing.md` |
+| Notebook และห้องทดลอง Martingale Pricing | `notebooks/martingale-pricing.ipynb`, `src/martingale-pricing.jsx`, `src/martingale-pricing.mjs` |
 | เนื้อหา Portfolio Theory | `portfolio-theory.md` |
 | เนื้อหา Optimization Problem | `portfolio-optimization.md` |
 | เนื้อหา Black–Litterman | `black-litterman.md` |
@@ -170,3 +172,9 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 เนื้อหาอยู่ใน `asset-returns-stylized-facts.md` ตัวทดลองอยู่ใน `src/stylized-facts.jsx` และตัวคำนวณอยู่ใน `src/stylized-facts.mjs` ส่วน `scripts/stylized_facts_math.py` เป็นการคำนวณ Python ที่ใช้กับภาพและ Notebook โดยตรวจผลเทียบ JavaScript ใน `qa/stylized-facts-checks.mjs`
 
 หลังแก้เนื้อหาหรือสูตร รัน `python3 scripts/make_stylized_facts_figures.py` แล้ว `python3 scripts/make_stylized_facts_notebook.py` เพื่อสร้าง Notebook จาก Markdown และฝังภาพล่าสุดพร้อมผลรัน จากนั้นใช้ `npm run build:pages`, `npm test` และ `node qa/stylized-facts-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 ต้องมี Python 3 สำหรับการตรวจผลข้ามภาษา ไม่ต้องติดตั้งแพ็กเกจ Python เพิ่ม กราฟทั้งหมดใช้ข้อมูลสมมติ ห้ามนำ PDF ต้นฉบับเข้า repository
+
+## แก้บท Martingale Pricing
+
+เนื้อหาอยู่ใน `martingale-pricing.md` ห้องทดลองสองส่วนอยู่ใน `src/martingale-pricing.jsx` และสูตรอยู่ใน `src/martingale-pricing.mjs` ใช้กราฟ SVG จากการคำนวณ ตัวอย่างทั้งหมดเป็นสมมติฐาน ห้องทดลอง P/Q ใช้ seed 2532 และ terminal GBM 20,000 ตัวอย่าง โดยวิธีถ่วงน้ำหนักใช้ค่าเฉลี่ย Z × discounted payoff ไม่หารด้วยผลรวมน้ำหนัก
+
+เมื่อแก้บท รัน `python3 scripts/make_martingale_pricing_notebook.py` เพื่อสร้างและรัน Notebook ด้วย Python standard library จากนั้นรัน `npm test`, `npm run build:pages` และ `node qa/martingale-pricing-page-checks.cjs` ขณะเปิด preview พอร์ต 8763 รักษาความแตกต่างของ P/Q, dividend yield ต่อปีกับ yield สะสม, variance กับ volatility และวันหมดอายุ Option กับวันครบกำหนด Futures

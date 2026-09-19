@@ -74,6 +74,14 @@ description: เรียนการเงินเชิงปริมาณ�
 </article>
 <article class="welcome-lesson">
 <span class="welcome-lesson-number" aria-hidden="true">06</span>
+<div><p class="welcome-lesson-label">คิดราคาผ่านความน่าจะเป็น</p>
+<h3><a href="martingale-pricing.html">Martingale Pricing</a></h3>
+<p>ทำไมค่าเฉลี่ยภายใต้ Q จึงให้ราคา Option และการเปลี่ยนมาตรวัดทำงานอย่างไร?</p>
+<p class="welcome-topics">Girsanov · Numeraire · Feynman–Kac · Black–76</p>
+<a class="welcome-text-link" href="martingale-pricing.html">เปิดบท Martingale Pricing →</a></div>
+</article>
+<article class="welcome-lesson">
+<span class="welcome-lesson-number" aria-hidden="true">07</span>
 <div><p class="welcome-lesson-label">จัดพอร์ตจากผลตอบแทนและความเสี่ยง</p>
 <h3><a href="portfolio-theory.html">Portfolio Theory</a></h3>
 <p>สัดส่วนลงทุนและ correlation เปลี่ยนความเสี่ยงของพอร์ตอย่างไร?</p>
@@ -81,7 +89,7 @@ description: เรียนการเงินเชิงปริมาณ�
 <a class="welcome-text-link" href="portfolio-theory.html">เปิดบท Portfolio Theory →</a></div>
 </article>
 <article class="welcome-lesson">
-<span class="welcome-lesson-number" aria-hidden="true">07</span>
+<span class="welcome-lesson-number" aria-hidden="true">08</span>
 <div><p class="welcome-lesson-label">เปลี่ยนเกณฑ์ให้เป็นน้ำหนักพอร์ต</p>
 <h3><a href="portfolio-optimization.html">Optimization Problem</a></h3>
 <p>เราจะเขียน objective และ constraints อย่างไรให้ optimizer คำนวณพอร์ตได้?</p>
@@ -89,7 +97,7 @@ description: เรียนการเงินเชิงปริมาณ�
 <a class="welcome-text-link" href="portfolio-optimization.html">เปิดบท Optimization Problem →</a></div>
 </article>
 <article class="welcome-lesson">
-<span class="welcome-lesson-number" aria-hidden="true">08</span>
+<span class="welcome-lesson-number" aria-hidden="true">09</span>
 <div><p class="welcome-lesson-label">ผสมพอร์ตตลาดกับมุมมองของเรา</p>
 <h3><a href="black-litterman.html">Black–Litterman Portfolio</a></h3>
 <p>จะรวม prior กับ views ที่มีความไม่แน่นอน แล้วนำไปจัดพอร์ตอย่างไร?</p>
@@ -97,7 +105,7 @@ description: เรียนการเงินเชิงปริมาณ�
 <a class="welcome-text-link" href="black-litterman.html">เปิดบท Black–Litterman Portfolio →</a></div>
 </article>
 <article class="welcome-lesson">
-<span class="welcome-lesson-number" aria-hidden="true">09</span>
+<span class="welcome-lesson-number" aria-hidden="true">10</span>
 <div><p class="welcome-lesson-label">วัดขาดทุนที่ปลายหาง</p>
 <h3><a href="value-at-risk-expected-shortfall.html">Value at Risk and Expected Shortfall</a></h3>
 <p>พอร์ตอาจขาดทุนเท่าไร และเมื่อขาดทุนเกินเกณฑ์ ความเสียหายเฉลี่ยเป็นเท่าไร?</p>
@@ -105,7 +113,7 @@ description: เรียนการเงินเชิงปริมาณ�
 <a class="welcome-text-link" href="value-at-risk-expected-shortfall.html">เปิดบท VaR และ ES →</a></div>
 </article>
 <article class="welcome-lesson">
-<span class="welcome-lesson-number" aria-hidden="true">10</span>
+<span class="welcome-lesson-number" aria-hidden="true">11</span>
 <div><p class="welcome-lesson-label">อ่านพฤติกรรมจากข้อมูลผลตอบแทน</p>
 <h3><a href="asset-returns-stylized-facts.html">Asset Returns — Empirical Stylized Facts</a></h3>
 <p>ทิศทางผลตอบแทนสัมพันธ์กันน้อย แล้วทำไมวันที่แกว่งแรงจึงมักอยู่ติดกัน?</p>

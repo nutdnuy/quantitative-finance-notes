@@ -192,5 +192,82 @@
       "course": "18.S096 Fall 2013",
       "url": "https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/d19208c017ada04f9261cfb41ab8d702_MIT18_S096F13_lecnote19.pdf"
     }
+  ],
+  "additional_sources_reviewed": [
+    {
+      "reviewed_at": "2026-09-19",
+      "provided_filename": "JA253.1 Notes.pdf",
+      "title_visible": "The Black–Scholes Model",
+      "pages": 74,
+      "sha256": "33092c0ea678a217d9eccb1722e4b74add65126db53451d8edbae8547dcdb5a3",
+      "relationship": "Distinct user-provided lecture; overlaps with the existing chapter. Original 108-page source record retained.",
+      "coverage": "Existing lesson covers assumptions, PDE, replication, heat equation, call/put/digital formulas, dividends/FX/carry and principal Greeks. Exhaustive digital-Greeks formula catalogue not reproduced.",
+      "source_topic_map": [
+        {
+          "pages": [
+            1,
+            7
+          ],
+          "topics": [
+            "model and assumptions"
+          ]
+        },
+        {
+          "pages": [
+            8,
+            18
+          ],
+          "topics": [
+            "Delta hedge",
+            "PDE",
+            "replication",
+            "terminal conditions"
+          ]
+        },
+        {
+          "pages": [
+            19,
+            22
+          ],
+          "topics": [
+            "dividends",
+            "FX",
+            "carry"
+          ]
+        },
+        {
+          "pages": [
+            23,
+            38
+          ],
+          "topics": [
+            "heat equation",
+            "payoff integral"
+          ]
+        },
+        {
+          "pages": [
+            39,
+            55
+          ],
+          "topics": [
+            "Call",
+            "Put",
+            "cash binaries"
+          ]
+        },
+        {
+          "pages": [
+            56,
+            74
+          ],
+          "topics": [
+            "Greeks",
+            "dividend sensitivity"
+          ]
+        }
+      ],
+      "access": "Read locally only; no PDF or page images redistributed."
+    }
   ]
 }

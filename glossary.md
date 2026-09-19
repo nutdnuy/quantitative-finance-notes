@@ -440,6 +440,102 @@ Cash-or-nothing Call จ่ายเงินคงที่ A เมื่อ�
 
 </section>
 
+<section class="glossary-group" id="group-martingale-pricing">
+
+## Martingale และการเปลี่ยนมาตรวัด
+
+<section class="glossary-term" id="filtration">
+
+### Filtration — ลำดับข้อมูลที่มีตามเวลา
+
+เขียนเป็น ℱₜ คือข้อมูลที่ทราบถึงเวลา t โดยข้อมูลสะสมเพิ่มได้เมื่อเวลาผ่านไป กลยุทธ์ซื้อขายต้องอาศัยข้อมูลที่มีอยู่ขณะตัดสินใจ ไม่ใช้อนาคตที่ยังไม่เกิด
+
+[ดูตลาดและข้อมูล](martingale-pricing.html#market-and-information)
+
+</section>
+
+<section class="glossary-term" id="martingale">
+
+### Martingale — กระบวนการที่ค่าเฉลี่ยอนาคตเมื่อรู้ปัจจุบันเท่ากับค่าปัจจุบัน
+
+กระบวนการที่ปรับตามข้อมูลปัจจุบัน มีค่าคาดหมายสัมบูรณ์จำกัด และ Eᴽ[Mᵤ | ℱₜ] = Mₜ เมื่อ u ≥ t ต้องระบุทั้งมาตรวัดและข้อมูลที่ใช้ เส้นทางยังผันผวนได้ สำหรับหุ้นไม่มีปันผลใน Black–Scholes ราคา S/B เป็น martingale ภายใต้ Q
+
+[ดูการคิดลดและ martingale](martingale-pricing.html#discounted-martingale)
+
+</section>
+
+<section class="glossary-term" id="radon-nikodym-density">
+
+### Radon–Nikodym density — น้ำหนักสำหรับเปลี่ยนมาตรวัด
+
+Z = dQ/dP ใช้เปลี่ยนค่าคาดหมายจาก P เป็น Q ผ่าน Eᴽ[X] = Eᴾ[ZX] โดย Eᴾ[Z] = 1 เมื่อ Z เป็นบวกเกือบแน่นอน สองมาตรวัดจะให้เหตุการณ์ที่มีโอกาสศูนย์ตรงกัน แต่ความน่าจะเป็นของเหตุการณ์อื่นอาจต่างกัน
+
+[ดูการถ่วงน้ำหนักเส้นทาง](martingale-pricing.html#girsanov)
+
+</section>
+
+<section class="glossary-term" id="girsanov-theorem">
+
+### Girsanov’s theorem — ทฤษฎีบทการเปลี่ยน drift ผ่านมาตรวัด
+
+ภายใต้เงื่อนไขของ density process ทฤษฎีบทระบุว่าการเพิ่มพจน์ drift ที่เหมาะสมให้ Brownian motion เดิมจะเป็น Brownian motion ภายใต้มาตรวัดใหม่ ใน Black–Scholes ใช้ Wᴽ = Wᴾ + θt คู่กับ Zₜ = exp(−θWᴾₜ − θ²t/2)
+
+[ดู Girsanov และ Novikov](martingale-pricing.html#girsanov)
+
+</section>
+
+<section class="glossary-term" id="market-price-of-risk">
+
+### Market price of risk — ผลตอบแทนส่วนเกินต่อหน่วยความเสี่ยง
+
+ใน GBM ไม่มีปันผล θ = (μ − r)/σ เป็นอัตราผลตอบแทนคาดหมายส่วนเกินหาร volatility ใช้กำหนดการเปลี่ยน drift จาก P ไป Q ไม่ใช่ค่าธรรมเนียมหรือราคา Option
+
+[ดู θ ในการเปลี่ยนมาตรวัด](martingale-pricing.html#girsanov)
+
+</section>
+
+<section class="glossary-term" id="complete-market">
+
+### Complete market — ตลาดที่เลียนแบบ claims ในขอบเขตได้
+
+ทุก payoff ในกลุ่มที่พิจารณาสร้างได้ด้วยพอร์ต self-financing ของสินทรัพย์ที่ซื้อขายอยู่ ใน Black–Scholes มาตรฐานที่มี Brownian source เดียวและ σ≠0 ภายใต้เงื่อนไขที่เหมาะสม จึงมี pricing measure เดียวสำหรับ numeraire ที่กำหนด No-arbitrage เพียงอย่างเดียวไม่ได้ทำให้ทุกตลาด complete
+
+[ดูการเลียนแบบและความเป็นเอกลักษณ์ของราคา](martingale-pricing.html#fundamental-pricing)
+
+</section>
+
+<section class="glossary-term" id="numeraire">
+
+### Numeraire — หน่วยสินทรัพย์ที่ใช้วัดมูลค่า
+
+สินทรัพย์หรือพอร์ต self-financing ที่ซื้อขายได้และมีมูลค่าบวกอย่างเคร่งครัด ใช้เป็นตัวหารมูลค่า ต้องเลือกคู่กับมาตรวัด Qᴺ ที่เหมาะสม เช่น บัญชีเงินสดกับ Q หรือหุ้นไม่มีปันผลกับ Qˢ ภายใต้เงื่อนไขที่ทำให้การเปลี่ยนมาตรวัดถูกต้อง
+
+[ดูความหมายของ Φ(d₁) และ Φ(d₂)](martingale-pricing.html#numeraire)
+
+</section>
+
+<section class="glossary-term" id="feynman-kac">
+
+### Feynman–Kac — ความเชื่อมโยงระหว่าง PDE กับค่าคาดหมาย
+
+ภายใต้เงื่อนไขความเรียบและ integrability ที่เหมาะสม คำตอบ PDE แบบ parabolic เขียนเป็นค่าคาดหมายของ payoff ที่คิดลดได้ ต้องใช้ drift และมาตรวัดเดียวกันทั้งสองด้าน ทฤษฎีบทไม่ได้เลือก pricing measure ให้โดยอัตโนมัติ
+
+[ดู PDE กับค่าเฉลี่ย](martingale-pricing.html#feynman-kac)
+
+</section>
+
+<section class="glossary-term" id="black-76">
+
+### Black–76 — สูตร European Option บนราคา Futures
+
+สูตรสำหรับราคาอ้างอิง Futures ที่เป็น lognormal ภายใต้ pricing measure และอัตราดอกเบี้ย deterministic สำหรับ Option แบบชำระ premium ล่วงหน้าและจ่าย payoff ที่วันหมดอายุ ใช้ discount factor คูณทั้งสองพจน์ ต้องแยกวันหมดอายุ Option ออกจากวันครบกำหนด Futures
+
+[ดูสูตรและห้องทดลอง Black–76](martingale-pricing.html#black-76)
+
+</section>
+
+</section>
+
 <section class="glossary-group" id="group-returns">
 
 ## ผลตอบแทนและการวัดความผันผวน

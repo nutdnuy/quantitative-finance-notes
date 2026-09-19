@@ -17,6 +17,7 @@ binomial-model.md              บทเรียน Binomial Model และก
 transition-density-functions.md  ความหนาแน่นการเปลี่ยนสถานะและสมการ Kolmogorov
 applied-stochastic-calculus.md  Itô’s lemma การแปลงแบบจำลองและการจำลอง SDE
 black-scholes-model.md         Delta hedge, สูตรราคาและ Greeks ของ Black–Scholes
+martingale-pricing.md          การเปลี่ยนมาตรวัด, Girsanov, numeraire, Feynman–Kac และ Black–76
 portfolio-theory.md            การจัดพอร์ต Mean–Variance, Sharpe ratio, CAPM และ factor models
 portfolio-optimization.md      Optimization, OLS/GLS, Lagrange, KKT และ active portfolio
 black-litterman.md             Prior, views, posterior และห้องทดลอง Black–Litterman
@@ -68,6 +69,10 @@ npm run build
 ไฟล์ HTML ไม่อยู่ใน Git; รัน build ก่อนเปิดไฟล์ในเครื่อง หรือใช้ `npm run build:pages` เพื่อสร้างโฟลเดอร์ `_site/` สำหรับโฮสต์เว็บโดยเฉพาะ ระบบจะตรวจลิงก์ รูป และฟอนต์ภายในก่อนเผยแพร่
 
 ## เนื้อหาและแหล่งที่มา
+
+บท **Martingale Pricing** ต่อจาก Black–Scholes ใช้เอกสาร *Martingales Theory: Application to Option Pricing — Black-Scholes All Over Again* ที่ผู้ใช้ให้มา อธิบาย self-financing, P/Q, Girsanov, numeraire และ Feynman–Kac ก่อนขยายไป continuous dividends, deterministic term structures และ Black–76 พร้อมห้องทดลองสองส่วนและตัวอย่างสมมติที่คำนวณใหม่ รายละเอียดและการแก้สมการต้นฉบับอยู่ใน `data/martingale-pricing-provenance.json` ไม่เผยแพร่ PDF ต้นฉบับ
+
+สร้างและรัน Notebook ด้วย `python3 scripts/make_martingale_pricing_notebook.py` ใช้ Python standard library; ตรวจตัวเลขด้วย `npm test` และตรวจ responsive, interactions, glossary, accessibility และ offline ด้วย `node qa/martingale-pricing-page-checks.cjs` ขณะเปิด preview พอร์ต 8763
 
 บท **Optimization Problem และ Black–Litterman** ต่อจาก Portfolio Theory ใช้เอกสาร *Fundamentals of Optimization and Application to Portfolio Selection* ที่ผู้ใช้ให้มาเป็นเส้นเรื่อง ตั้งแต่ objective, gradient/Hessian, OLS/GLS และ Lagrange ไปจนถึง Black–Litterman, KKT และ active portfolio สูตรและตัวเลขที่พิมพ์คลาดในเอกสารต้นทางได้รับการคำนวณใหม่ ตัวอย่างสี่สินทรัพย์เป็นข้อมูลสมมติ ไม่มีชื่อสินทรัพย์หรือช่วงตลาดจริง รายละเอียดอยู่ใน `data/portfolio-optimization-provenance.json`
 

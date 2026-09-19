@@ -1,0 +1,254 @@
+{
+  "recorded_at": "2026-09-19",
+  "chapter": "martingale-pricing.md",
+  "source": {
+    "provided_filename": "JA253.2 Notes.pdf",
+    "title_visible": "CQF Module 3 — Martingales Theory: Application to Option Pricing — Black-Scholes All Over Again",
+    "visible_course": "CQF",
+    "physical_pages": 120,
+    "displayed_slide_numbers": "1–118, followed by two bibliography pages also labeled 118/118",
+    "sha256": "2a427782633a35977b3ffd9690f21774ac97e69fb42dc1f3c014dd495ae2df5c",
+    "individual_author": "No individual authorship asserted from PDF metadata.",
+    "publication_date": "Not established; PDF metadata is not treated as publication date.",
+    "access": "User-supplied private PDF, read locally. No PDF, source pages, logos, or page screenshots redistributed.",
+    "method": "Local text extraction plus visual verification of key formulas; original Thai explanation and recomputed examples."
+  },
+  "source_topic_map": [
+    {
+      "pages": [
+        4,
+        8
+      ],
+      "topics": [
+        "market assumptions",
+        "filtration",
+        "stock and money-market account"
+      ]
+    },
+    {
+      "pages": [
+        9,
+        22
+      ],
+      "topics": [
+        "self-financing",
+        "admissible strategies",
+        "arbitrage"
+      ]
+    },
+    {
+      "pages": [
+        23,
+        27
+      ],
+      "topics": [
+        "discounted stock"
+      ]
+    },
+    {
+      "pages": [
+        28,
+        48
+      ],
+      "topics": [
+        "P and Q",
+        "Radon–Nikodym density",
+        "Girsanov",
+        "Novikov"
+      ]
+    },
+    {
+      "pages": [
+        49,
+        62
+      ],
+      "topics": [
+        "fundamental asset pricing formula",
+        "replication",
+        "completeness"
+      ]
+    },
+    {
+      "pages": [
+        63,
+        87
+      ],
+      "topics": [
+        "lognormal payoff integral",
+        "cash/asset digitals",
+        "stock numeraire"
+      ]
+    },
+    {
+      "pages": [
+        88,
+        90
+      ],
+      "topics": [
+        "numeraire pair"
+      ]
+    },
+    {
+      "pages": [
+        91,
+        95
+      ],
+      "topics": [
+        "Feynman–Kac",
+        "PDE and expectation"
+      ]
+    },
+    {
+      "pages": [
+        96,
+        99
+      ],
+      "topics": [
+        "continuous dividend yield"
+      ]
+    },
+    {
+      "pages": [
+        100,
+        103
+      ],
+      "topics": [
+        "deterministic time-varying parameters"
+      ]
+    },
+    {
+      "pages": [
+        104,
+        115
+      ],
+      "topics": [
+        "Black-76",
+        "options on futures"
+      ]
+    },
+    {
+      "pages": [
+        116,
+        120
+      ],
+      "topics": [
+        "conclusion and bibliography"
+      ]
+    }
+  ],
+  "editorial_corrections": [
+    "Self-financing is imposed through trading gains; changing holdings does not justify discarding product-rule terms.",
+    "Restrict trading strategies to an admissible class, and add true-martingale/integrability conditions before conditional expectation (source p56).",
+    "Novikov is sufficient, not necessary or equivalent (source p80).",
+    "Complete-market uniqueness is qualified by Brownian filtration, nonzero volatility and the eligible claim class.",
+    "Numeraire is a strictly positive traded self-financing asset/portfolio under suitable measure-change assumptions, not any positive process (source p89).",
+    "The probabilistic approach does recover Delta through differentiation/Ito; avoid the categorical source p87 claim.",
+    "Define physical mu as total expected return in the dividend section; include dividends in discounted gains.",
+    "Use the final correct dividend formula, not the inconsistent intermediate reinvested-stock equality on source p99.",
+    "Integrated variance A replaces sigma squared times tau, not sigma squared alone (source p102).",
+    "Separate option expiry T from futures delivery U; payoff is G(F_T), not G(S_T) (source pp109–115).",
+    "Black-76 examples assume an upfront premium and cash payoff at option expiry; deterministic rates permit the forward/futures equality in the specified carry model.",
+    "Equivalent measures preserve null events, not physical forecasts; Phi(d2) belongs to Q and Phi(d1) to the stock measure for non-dividend-paying stocks.",
+    "The source lessons are paraphrased and reorganized, not reproduced as full slide translations."
+  ],
+  "examples": {
+    "status": "Hypothetical model inputs; no empirical market observations.",
+    "units": "Price units per one underlying unit; time in years; continuously compounded rates per year; volatility per square-root year.",
+    "base": {
+      "S": 100,
+      "K": 100,
+      "mu": 0.12,
+      "r": 0.05,
+      "sigma": 0.2,
+      "tau": 1,
+      "analytic_call": 10.450583572185558,
+      "analytic_put": 5.573526022257
+    },
+    "dividend": {
+      "yield": 0.02,
+      "call": 9.227005508154036,
+      "put": 6.330080627549918
+    },
+    "term_structure": {
+      "segments": [
+        {
+          "duration": 0.5,
+          "r": 0.04,
+          "D": 0.01,
+          "sigma": 0.1
+        },
+        {
+          "duration": 0.5,
+          "r": 0.06,
+          "D": 0.03,
+          "sigma": 0.3
+        }
+      ],
+      "R": 0.05,
+      "Y": 0.02,
+      "A": 0.05
+    },
+    "black76": {
+      "F": 100,
+      "K": 100,
+      "r": 0.05,
+      "sigmaF": 0.2,
+      "tau": 1,
+      "call_and_put": 7.57708214642728
+    }
+  },
+  "web_labs": {
+    "mounts": [
+      "measure-change-lab",
+      "pricing-extensions-lab"
+    ],
+    "model": "Exact terminal GBM; no Euler discretization.",
+    "monte_carlo_samples": 20000,
+    "seed": 2532,
+    "rng": "Existing project normalGenerator (32-bit linear congruential generator with multiplier 1664525 and increment 1013904223, plus Box–Muller).",
+    "coupling": "Common standard Normal draws for physical and direct pricing-measure simulations; this is a variance-reducing comparison, not an assertion that both simulated prices are the same sample path under two measures.",
+    "weighted_estimator": "Mean of Z times discounted payoff, without sample normalization; SE computed from the weighted observations.",
+    "chart": "Theoretical unconditional discounted stock means, explicitly distinguished from simulated price paths and conditional martingale definition.",
+    "limits": "Finite-sample error and model error distinguished; likelihood weighting may have large variance."
+  },
+  "notebook": {
+    "file": "notebooks/martingale-pricing.ipynb",
+    "generator": "scripts/make_martingale_pricing_notebook.py",
+    "dependencies": "Python standard library",
+    "source": "Canonical chapter Markdown with SHA256 recorded in notebook metadata.",
+    "rng": "Python random.Random; separate labeled seed and samples, not claimed identical to JavaScript."
+  },
+  "visuals": {
+    "route": "no-image-generator",
+    "design_system": "Existing QuantCorner light book with purple/teal chart roles and optional dark mode.",
+    "implementation": "Native React/SVG computed from the mathematical model. No new third-party artwork or image generation."
+  },
+  "supplementary_primary_references": [
+    {
+      "title": "The Black-Scholes Model",
+      "author": "Martin Haugh",
+      "url": "https://www.columbia.edu/~mh2078/FoundationsFE/BlackScholes.pdf"
+    },
+    {
+      "title": "Stochastic Calculus: An Introduction with Applications",
+      "author": "Gregory F. Lawler",
+      "url": "https://www.math.uchicago.edu/~lawler/finbook.pdf",
+      "sections": [
+        "4.3",
+        "5.3",
+        "5.4",
+        "5.5",
+        "5.6",
+        "5.7"
+      ]
+    }
+  ],
+  "verification_commands": [
+    "python3 scripts/make_martingale_pricing_notebook.py",
+    "npm test",
+    "npm run build:pages",
+    "node qa/martingale-pricing-page-checks.cjs",
+    "npm run check:site",
+    "git diff --check"
+  ]
+}
