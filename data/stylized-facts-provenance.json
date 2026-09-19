@@ -2,29 +2,67 @@
   "lesson": "asset-returns-stylized-facts.md",
   "updated": "2026-09-19",
   "data_status": "All new charts, numerical examples and interactive inputs are hypothetical. No empirical price rows are copied or inferred from screenshots.",
-  "private_source_mapping": [{
-    "file": "JA252.4 Notes.pdf",
-    "title": "Asset Returns: Empirical Stylized Facts",
-    "author": "Stephen Taylor",
-    "date": "2025-02-25",
-    "physical_pages": 95,
-    "published": false,
-    "coverage": [
-      {"pages": "1–31", "use": "Daily returns, dividends, volatility clustering, calendar effects and descriptive statistics"},
-      {"pages": "32–58", "use": "Three stylized facts, non-normality, kurtosis, variance mixtures, autocorrelation and constant-volatility limitations"},
-      {"pages": "59–80", "use": "Trades, quotes, irregular timing, microstructure and intraday seasonality"},
-      {"pages": "81–88", "use": "Realized volatility, standardized returns, persistence and annualization"},
-      {"pages": "89–95", "use": "Intraday information, news surprises, flash crash and jumps"}
-    ]
-  }],
+  "private_source_mapping": [
+    {
+      "file": "JA252.4 Notes.pdf",
+      "title": "Asset Returns: Empirical Stylized Facts",
+      "author": "Stephen Taylor",
+      "date": "2025-02-25",
+      "physical_pages": 95,
+      "published": false,
+      "coverage": [
+        {
+          "pages": "1–31",
+          "use": "Daily returns, dividends, volatility clustering, calendar effects and descriptive statistics"
+        },
+        {
+          "pages": "32–58",
+          "use": "Three stylized facts, non-normality, kurtosis, variance mixtures, autocorrelation and constant-volatility limitations"
+        },
+        {
+          "pages": "59–80",
+          "use": "Trades, quotes, irregular timing, microstructure and intraday seasonality"
+        },
+        {
+          "pages": "81–88",
+          "use": "Realized volatility, standardized returns, persistence and annualization"
+        },
+        {
+          "pages": "89–95",
+          "use": "Intraday information, news surprises, flash crash and jumps"
+        }
+      ]
+    }
+  ],
   "public_sources": [
-    {"url": "https://assets.press.princeton.edu/chapters/i8055.pdf", "use": "Public introduction to Taylor's Asset Price Dynamics, Volatility, and Prediction"},
-    {"url": "https://oftp.cyrax.hu/doc/mandelbrot.pdf#page=26", "use": "Mandelbrot 1963 original article scan, printed p. 418, 22-word clustering quotation"},
-    {"url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda331.htm", "use": "Sample ACF convention and pointwise reference bounds"},
-    {"url": "https://econ.duke.edu/~boller/Published_Papers/ecta_03.pdf", "use": "Andersen, Bollerslev, Diebold and Labys 2003, Modeling and Forecasting Realized Volatility"},
-    {"url": "https://public.econ.duke.edu/~boller/research.html", "use": "Author listing of Andersen, Bollerslev, Diebold and Vega 2003, Micro Effects of Macro Announcements"},
-    {"url": "https://www.nber.org/papers/w9611", "use": "Ait-Sahalia, Mykland and Zhang, sampling under market microstructure noise, working paper 2003, published 2005"},
-    {"url": "https://www.sec.gov/news/studies/2010/marketevents-report.pdf", "use": "CFTC/SEC 30 September 2010 report on May 6 market events"}
+    {
+      "url": "https://assets.press.princeton.edu/chapters/i8055.pdf",
+      "use": "Public introduction to Taylor's Asset Price Dynamics, Volatility, and Prediction"
+    },
+    {
+      "url": "https://oftp.cyrax.hu/doc/mandelbrot.pdf#page=26",
+      "use": "Mandelbrot 1963 original article scan, printed p. 418, 22-word clustering quotation"
+    },
+    {
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda331.htm",
+      "use": "Sample ACF convention and pointwise reference bounds"
+    },
+    {
+      "url": "https://econ.duke.edu/~boller/Published_Papers/ecta_03.pdf",
+      "use": "Andersen, Bollerslev, Diebold and Labys 2003, Modeling and Forecasting Realized Volatility"
+    },
+    {
+      "url": "https://public.econ.duke.edu/~boller/research.html",
+      "use": "Author listing of Andersen, Bollerslev, Diebold and Vega 2003, Micro Effects of Macro Announcements"
+    },
+    {
+      "url": "https://www.nber.org/papers/w9611",
+      "use": "Ait-Sahalia, Mykland and Zhang, sampling under market microstructure noise, working paper 2003, published 2005"
+    },
+    {
+      "url": "https://www.sec.gov/news/studies/2010/marketevents-report.pdf",
+      "use": "CFTC/SEC 30 September 2010 report on May 6 market events"
+    }
   ],
   "conventions_and_corrections": [
     "Simple and log returns distinguished; dividends included once; reinvestment assumption for cumulative wealth; portfolio aggregation uses simple returns.",
@@ -43,17 +81,58 @@
   ],
   "simulations": {
     "rng": "LCG multiplier 1664525, increment 1013904223, uint32 state; midpoint uniforms (state+.5)/2^32; Box-Muller cosine, two uniforms per normal",
-    "clustering": {"days": 600, "seed": 2524, "daily_sd": [0.005,0.025], "switch_every_days": 50, "shuffle_seed": 731, "note": "Deterministic alternating regimes for illustration, not a fitted GARCH process"},
-    "mixture": {"default_high_sd_probability": 0.2, "default_sd_ratio": 5, "normalization": "Pooled variance 1; exact tail formulas integrate to infinity", "default_kurtosis": 11.218787158145064},
-    "intraday": {"minutes": 390, "seed": 81, "noise_seed": 1081, "session_sd": 0.01, "default_noise_bps": 3, "noise": "Independent Rademacher +/- eta at every observed log price; fixed latent path and signs across controls", "default_sample_minutes": 5},
-    "intraday_profile": {"intervals": 78, "minutes_per_interval": 5, "raw_weight": "1 + 3 exp(-i/6) + 2 exp(-(77-i)/7) + optional 5 exp(-.5((i-30)/1.2)^2), i=0..77", "normalization": "Each profile sums to one; no named market or historical schedule"}
+    "clustering": {
+      "days": 600,
+      "seed": 2524,
+      "daily_sd": [
+        0.005,
+        0.025
+      ],
+      "switch_every_days": 50,
+      "shuffle_seed": 731,
+      "note": "Deterministic alternating regimes for illustration, not a fitted GARCH process"
+    },
+    "mixture": {
+      "default_high_sd_probability": 0.2,
+      "default_sd_ratio": 5,
+      "normalization": "Pooled variance 1; exact tail formulas integrate to infinity",
+      "default_kurtosis": 11.218787158145064
+    },
+    "intraday": {
+      "minutes": 390,
+      "seed": 81,
+      "noise_seed": 1081,
+      "session_sd": 0.01,
+      "default_noise_bps": 3,
+      "noise": "Independent Rademacher +/- eta at every observed log price; fixed latent path and signs across controls",
+      "default_sample_minutes": 5
+    },
+    "intraday_profile": {
+      "intervals": 78,
+      "minutes_per_interval": 5,
+      "raw_weight": "1 + 3 exp(-i/6) + 2 exp(-(77-i)/7) + optional 5 exp(-.5((i-30)/1.2)^2), i=0..77",
+      "normalization": "Each profile sums to one; no named market or historical schedule"
+    }
   },
   "assets": {
     "route": "no-image-generator",
     "generator": "scripts/make_stylized_facts_figures.py",
     "math_source": "scripts/stylized_facts_math.py",
-    "files": ["assets/images/stylized-clustering.svg", "assets/images/stylized-intraday-profile.svg", "assets/images/stylized-close-vs-rv.svg"],
-    "editable_source": "Deterministic Python geometry and calculations"
+    "files": [
+      "assets/images/stylized-clustering.svg",
+      "assets/images/stylized-intraday-profile.svg",
+      "assets/images/stylized-close-vs-rv.svg",
+      "assets/images/foundations-distribution-tails.svg"
+    ],
+    "editable_source": "Deterministic Python geometry and calculations",
+    "additional_generator": "scripts/make_return_foundations_figures.py",
+    "additional_math_source": "scripts/return_foundations_math.py"
   },
-  "notebook": {"generator": "scripts/make_stylized_facts_notebook.py", "code_cells": 10, "dependencies": "Python standard library", "source": "Canonical chapter Markdown and inlined numerical helpers; embedded SVG attachments"}
+  "notebook": {
+    "generator": "scripts/make_stylized_facts_notebook.py",
+    "code_cells": 18,
+    "dependencies": "Python standard library",
+    "source": "Canonical chapter Markdown and inlined numerical helpers; embedded SVG attachments"
+  },
+  "expansion": "data/return-foundations-provenance.json"
 }

@@ -26,6 +26,8 @@ inline_math: true
 
 เนื้อหาอ้างอิงงานของ Stephen Taylor เรื่อง *Asset Price Dynamics, Volatility, and Prediction* เริ่มจากผลตอบแทนรายวัน แล้วดูว่าราคาระหว่างวันให้ข้อมูลอะไรเพิ่ม กราฟและตัวทดลองทั้งหมดใช้ข้อมูลสมมติเพื่อแยกผลของแต่ละสมมติฐาน ไม่ใช่ราคาตลาดจริงหรือผลทดสอบกลยุทธ์ลงทุน
 
+อ่านพื้นฐานเพิ่มเติมได้ที่ [Prices and Returns](prices-and-returns.html) และ [Stochastic Processes](stochastic-processes.html) ส่วน [ตารางเทียบหัวข้อ](#coverage-map) ระบุที่อยู่ของเนื้อหาครบบท 2–4 ตามสารบัญ
+
 <section id="return-conventions">
 
 ## จากราคาไปเป็นผลตอบแทน
@@ -69,6 +71,112 @@ Taylor จัดข้อสังเกตหลักของผลตอบ�
 ค่าเฉลี่ยรายวันมักมีขนาดเล็กเมื่อเทียบกับ SD เมื่อใช้ข้อมูลช่วงสั้นแล้วแปลงค่าเฉลี่ยเป็นรายปี ความคลาดเคลื่อนของค่าประมาณก็ขยายตามไปด้วย ส่วน SD ที่คำนวณจากช่วงวิกฤตย่อมต่างจากช่วงตลาดสงบ
 
 Taylor ยังยกตัวอย่าง calendar effects เช่น ความต่างของผลตอบแทนตามวันในสัปดาห์ ต้นเดือน เดือนมกราคม และก่อนวันหยุด ผลที่พบอาจอ่อนลงเมื่อเปลี่ยนช่วงข้อมูล และการทดสอบหลายเงื่อนไขย้อนหลังอาจทำให้เราเลือกผลที่เด่นเพราะความบังเอิญ ก่อนนำไปใช้จึงต้องทดสอบกับข้อมูลนอกช่วงประมาณค่าและหักต้นทุนซื้อขายด้วย
+
+</section>
+
+<section id="summary-statistics">
+
+## สถิติสรุปต้องบอกทั้งค่าและนิยาม
+
+ให้ r₁,…,rₙ เป็น log returns ในช่วงเวลาเดียวกัน กำหนดค่าเฉลี่ยและ central moments ของตัวอย่างเป็น
+
+$$
+\bar r=\frac1n\sum_{t=1}^nr_t,\qquad
+m_j=\frac1n\sum_{t=1}^n(r_t-\bar r)^j,\qquad
+s^2=\frac{n}{n-1}m_2.
+$$
+
+s² ใช้ตัวหาร n−1 ส่วน m₂ ใช้ n การประมาณ variance แบบ s² ไม่มี bias ภายใต้ iid ที่มี variance จำกัด แต่เมื่อข้อมูลพึ่งพากัน คุณสมบัตินี้ต้องพิจารณาใหม่ การรายงานต้องระบุด้วยว่าเป็น simple หรือ log return และวัดเป็นทศนิยมหรือเปอร์เซ็นต์
+
+ตัวอย่างสมมติห้าค่า −2%, −1%, 0%, 1%, 6% ให้
+
+| สถิติ | ค่า | อ่านอย่างไร |
+|---|---:|---|
+| จำนวนข้อมูล | 5 | ใช้สาธิตสูตร ไม่พอประมาณหางของตลาด |
+| ค่าเฉลี่ย | 0.8000% | ไวต่อวันที่ +6% |
+| Median | 0% | ค่ากลางเมื่อเรียงข้อมูล |
+| Sample SD | 3.1145% | ขนาดการกระจายรอบ mean ใช้ n−1 |
+| Minimum / Maximum | −2% / 6% | ช่วงที่เกิดในตัวอย่าง ไม่ใช่ขอบเขตของประชากร |
+| Moment skewness | 1.0392 | ตัวอย่างมีหางยาวด้านบวก |
+| Moment kurtosis | 2.6688 | ใช้ m₄/m₂²; Normal ประชากรมีค่า 3 |
+
+สถิติแต่ละตัวใช้ข้อมูลคนละด้าน Median ไม่ได้บอก variance และ SD ไม่ได้บอกว่าหางด้านไหนยาวกว่า หากสองชุดมี mean และ SD เท่ากัน ยังต้องดู histogram, quantiles และลำดับเวลา
+
+เมื่อเพิ่มข้อมูลใหม่ ให้ใช้ช่วงตัวอย่างเดียวกันในการเทียบสินทรัพย์ และรายงานจำนวนข้อมูลที่ถูกตัดหรือขาดไปด้วย การเลือกช่วงหลังเห็นผลแล้วอาจทำให้สถิติดูสอดคล้องกับข้อสรุปที่ต้องการเกินจริง
+
+</section>
+
+<section id="average-returns-risk-premia">
+
+## ค่าเฉลี่ยผลตอบแทนกับ risk premium
+
+ผลตอบแทนส่วนเกินที่เกิดขึ้นจริงคือ \(R_t^e=R_t-R_{f,t}\) โดย Rf เป็นผลตอบแทนสินทรัพย์ปลอดความเสี่ยงสำหรับช่วงถือและสกุลเงินเดียวกัน ส่วน risk premium ที่คาดไว้ก่อนลงทุนคือ
+
+$$
+\operatorname{RP}_t=\mathbb E[R_t-R_{f,t}\mid\mathcal F_{t-1}].
+$$
+
+ค่าเฉลี่ยผลตอบแทนส่วนเกินในอดีตใช้ประมาณ premium ได้ภายใต้สมมติฐานว่าช่วงข้อมูลนั้นยังเกี่ยวข้องกับอนาคต แต่ผลตอบแทนที่เกิดขึ้นจริงรวมช็อกที่ไม่คาดไว้ด้วย จึงอาจติดลบแม้ premium ที่คาดไว้เป็นบวก
+
+การใช้ log excess return \(r_t-r_{f,t}\) ต้องระบุให้ชัด เพราะไม่เท่ากับ simple excess return แม้ค่าจะใกล้กันเมื่อผลตอบแทนเล็ก หาก log return แจกแจง N(μ,σ²) จะมี \(\mathbb E[R]=e^{\mu+\sigma^2/2}-1\) ขณะที่อัตราเติบโตจาก mean log เท่ากับ \(e^\mu-1\)
+
+การประมาณ mean ต้องใช้ข้อมูลมากเพราะสัญญาณรายวันเล็กเมื่อเทียบกับความผันผวน ภายใต้ iid ค่า standard error ของ mean เท่ากับ s/√n เช่น สมมติ mean รายวัน 0.04%, SD 1.2% และ n=2,520 วัน
+
+$$
+252\bar r=10.08\%,\qquad
+\operatorname{SE}(252\bar r)=\frac{252(0.012)}{\sqrt{2520}}\approx6.024\%.
+$$
+
+ตัวเลข 10.08% เป็นค่าเฉลี่ย log return ที่แปลงเป็นรายปี ส่วน 6.024% เป็น standard error ของค่าประมาณนั้น ไม่ใช่ SD ของผลตอบแทนรายปี ตัวอย่างนี้แสดงว่าข้อมูลสิบปีตามสมมติฐาน 252 วันต่อปีอาจยังให้ mean ที่ไม่แม่น หากมี serial dependence ต้องรวม autocovariance หรือใช้วิธีประมาณ standard error ที่รองรับ dependence
+
+การเทียบ premium หุ้น พันธบัตร หรือสกุลเงินต้องระบุช่วงเวลา ปันผล ต้นทุน และ benchmark ควบคู่กัน ผลตอบแทนย้อนหลังสูงอาจมาจากความเสี่ยงที่รับหรือช็อกที่ดีในช่วงนั้น การเรียกว่า alpha ต้องระบุโมเดลผลตอบแทนที่ใช้เทียบเพิ่มด้วย
+
+</section>
+
+<section id="standard-deviations">
+
+## SD เปลี่ยนตามความถี่และช่วงตัวอย่าง
+
+Sample SD จากข้อมูลทั้งช่วงให้ขนาดความผันผวนเฉลี่ยในช่วงนั้น ส่วน rolling SD คำนวณใหม่จากหน้าต่างล่าสุด เช่น n วัน จึงเปลี่ยนเมื่อข้อมูลใหม่เข้ามาและข้อมูลเก่าออกไป
+
+$$
+s_{t,n}^2=\frac1{n-1}\sum_{j=0}^{n-1}(r_{t-j}-\bar r_{t,n})^2.
+$$
+
+หน้าต่างสั้นตอบสนองเร็วแต่ค่าประมาณแกว่งมาก หน้าต่างยาวเรียบกว่าแต่รวมสภาวะเก่ามากขึ้น วันที่รุนแรงหนึ่งวันจะมีผลต่อ rolling SD จนกว่าจะหลุดจากหน้าต่าง อ่านตัวทดลองประกอบใน [บทพฤติกรรมแบบสุ่มของสินทรัพย์](random-assets.html)
+
+สำหรับกระบวนการ weak stationary ความแปรปรวนของผลตอบแทนรวม h ช่วงคือ
+
+$$
+\operatorname{Var}\!\left(\sum_{j=1}^{h}r_{t+j}\right)
+=h\gamma_0+2\sum_{k=1}^{h-1}(h-k)\gamma_k.
+$$
+
+สูตร √h ใช้ได้เมื่อ covariance ข้ามช่วงเป็นศูนย์และ variance ต่อช่วงเท่ากัน การมี marginal Normal ไม่ได้ทำให้พจน์ covariance หายไปเอง ตัวอย่างสองวันมี SD วันละ 1% และ correlation 0.3 จะมี SD รวม \(\sqrt{2(0.01)^2(1+0.3)}\approx1.6125\%\) เทียบกับ 1.4142% เมื่อ correlation เป็นศูนย์
+
+การ annualize SD รายวันด้วย √252 จึงต้องบอกสมมติฐานและจำนวนวัน ส่วน SD กับ standard error ตอบคนละคำถาม: SD วัดการกระจายของผลตอบแทน แต่ standard error วัดความคลาดเคลื่อนของค่าประมาณ
+
+</section>
+
+<section id="calendar-effects">
+
+## Calendar effects และการทดสอบซ้ำหลายครั้ง
+
+หัวข้อ calendar effects ครอบคลุมทั้งค่าเฉลี่ยและความผันผวนตามวันในสัปดาห์ ช่วงเปลี่ยนเดือน เดือนมกราคม และรอบวันหยุด ผลของปฏิทินอาจต่างกันตามตลาดและช่วงศึกษา วันที่อยู่ติดวันหยุดยังครอบคลุมเวลาปฏิทินไม่เท่ากับวันซื้อขายทั่วไป
+
+วิธีประมาณ mean ตามวันในสัปดาห์คือใช้ dummy regression
+
+$$
+r_t=\alpha+\sum_{d=2}^{5}\beta_d\,1\{D_t=d\}+u_t.
+$$
+
+Dₜ=1 เป็นวันอ้างอิง α คือ mean ของวันนั้น ส่วน βd คือความต่างจากวันอ้างอิง หากใช้ intercept พร้อม dummy ครบทั้งห้าวัน จะมีตัวแปรซ้ำเชิงเส้น ต้องตัดวันหนึ่งออกหรือใช้ dummy ห้าตัวโดยไม่มี intercept
+
+การทดสอบว่า mean ต่างกันตามวันพิจารณาสมมติฐานร่วม β₂=⋯=β₅=0 และเลือก standard errors ให้รองรับ heteroskedasticity หรือ autocorrelation ตามข้อมูล หากสนใจ volatility ให้ศึกษาขนาดผลตอบแทนหรือ variance ตามวันแยกจาก regression ของ mean
+
+การลองหลายเดือน หลายวัน และหลายตลาดเพิ่มโอกาสพบผลที่ดูมีนัยสำคัญโดยบังเอิญ ต้องแยกช่วงค้นหารูปแบบออกจากช่วงทดสอบ ระบุจำนวนสมมติฐานที่ลอง และประเมินหลังหักต้นทุนซื้อขาย ตารางผลที่เลือกมาเฉพาะข้อที่ผ่านไม่แสดงความเสี่ยงจากการค้นหานี้
+
+แม้ช็อกของแต่ละวันเป็นอิสระ mean ที่เปลี่ยนตามวันก็สร้าง ACF แบบคาบได้เมื่อใช้ mean รวม ดูสูตรและตัวทดลองใน [ภาคผนวก calendar effects](#calendar-acf-appendix)
 
 </section>
 
@@ -150,6 +258,77 @@ $$
 Normal มี κ=3 และ excess kurtosis เท่ากับ κ−3 ในตัวทดลองใช้ moment estimator \(\widehat\kappa=m_4/m_2^2\) โดย \(m_j=n^{-1}\sum_t(r_t-\bar r)^j\) ส่วน SD ที่รายงานใช้ตัวหาร n−1 โปรแกรมที่ปรับ small-sample bias หรือรายงานเฉพาะ excess kurtosis จะให้ตัวเลขคนละนิยาม
 
 Kurtosis ไวต่อข้อมูลปลายหางเพราะยกกำลังสี่ ตัวเลขสูงไม่ได้บอกความเบ้ และไม่ได้ระบุว่า distribution ต้องเป็น Student-t หรือมี variance อนันต์ การทดสอบ normality ด้วย \((\widehat\kappa-3)/\sqrt{24/n}\) อาศัย iid Normal null และการประมาณตัวอย่างใหญ่ จึงไม่ควรใช้ standard error นี้ตรง ๆ กับข้อมูลที่มี volatility clustering
+
+</section>
+
+<section id="skewness">
+
+## Skewness บอกว่าหางด้านไหนยาวกว่า
+
+เมื่อโมเมนต์อันดับสามมีค่าจำกัด population skewness และ moment estimator ของตัวอย่างคือ
+
+$$
+S=\frac{\mathbb E[(r-\mu)^3]}{\sigma^3},\qquad
+\widehat S=\frac{m_3}{m_2^{3/2}}.
+$$
+
+ค่าบวกสอดคล้องกับความไม่สมมาตรด้านบวก ส่วนค่าลบสอดคล้องกับด้านขาดทุน โปรแกรมบางตัวปรับ bias ของตัวอย่าง จึงควรตรวจนิยามก่อนเทียบตัวเลข ถ้าสลับเครื่องหมายผลตอบแทนทุกค่า skewness จะเปลี่ยนเครื่องหมาย แต่ SD และ kurtosis เท่าเดิม
+
+ตัวอย่างห้าค่า −2%, −1%, 0%, 1%, 6% มี skewness ประมาณ 1.0392 เมื่อกลับเครื่องหมายทุกค่าได้ −1.0392 ขณะที่ sample SD ยังเป็น 3.1145% และ kurtosis 2.6688 ทั้งคู่
+
+Skewness ศูนย์อย่างเดียวไม่รับรอง symmetry และ symmetry ก็ยังไม่ได้แปลว่าเป็น Normal การมี finite sample moments ยังไม่พิสูจน์ว่า population moments มีค่าจำกัด เพราะข้อมูลที่เก็บมามีจำนวนจำกัดเสมอ
+
+ภายใต้ iid Normal และตัวอย่างใหญ่ standard error ของ moment skewness ประมาณ √(6/n) ส่วน kurtosis ใช้ √(24/n) ข้อจำกัดเรื่อง volatility clustering ใช้กับทั้งสองสูตร ดูนิยามใน [NIST, Measures of Skewness and Kurtosis](https://www.itl.nist.gov/div898/handbook/eda/section3/eda35b.htm)
+
+</section>
+
+<section id="distribution-shape">
+
+## ดูรูปการแจกแจงให้พ้นจากสถิติไม่กี่ค่า
+
+Histogram ขึ้นกับความกว้างและจุดเริ่มของ bin ถ้าเปลี่ยน bin แล้วข้อสรุปเรื่องหลายยอดหายไป ควรตรวจวิธีแสดงผลก่อนตีความว่าเป็นหลายสภาวะ ส่วน density estimate ก็ขึ้นกับ bandwidth เช่นกัน
+
+Q–Q plot เทียบ quantiles ของข้อมูลกับการแจกแจงที่เลือก จุดปลายที่เบนจากเส้นตรงช่วยให้เห็นความต่างของหาง ดูตัวอย่างใน [บท VaR/ES](value-at-risk-expected-shortfall.html#distribution-checks) ถ้าต้องการวัดหางโดยตรง อาจรายงานสัดส่วนที่เกิน ±3 SD และแยกสองหางออกจากกันด้วย
+
+การมี kurtosis สูงบอกว่ากำลังสี่ของค่าที่ห่าง mean มีน้ำหนักมาก แต่ไม่ได้บอกรูปทรงทุกส่วนหรือรับรองว่าจุดยอดต้องสูงเสมอไป ควรอ่านควบคู่กับ quantiles, ความเบ้ และกราฟ
+
+การเพิ่มช่วงถืออาจทำให้ส่วนกลางดูใกล้ Normal ขึ้น ขณะที่หางยังต่างอยู่ อีกทั้งผลตอบแทนหลายวันที่คำนวณแบบหน้าต่างซ้อนกันใช้ข้อมูลร่วมกัน จึงเกิด dependence จากการสร้างข้อมูลได้เอง ต้องระบุว่าใช้ช่วงทับกันหรือไม่
+
+</section>
+
+<section id="return-distributions">
+
+## เลือก probability distribution สำหรับผลตอบแทน
+
+การแจกแจง marginal อธิบายค่าที่พบเมื่อรวมข้อมูล แต่ยังต้องมีแบบจำลองความสัมพันธ์ข้ามเวลาเพิ่มเติม ตารางนี้เปรียบเทียบตัวเลือกโดยระบุเงื่อนไขของโมเมนต์
+
+| การแจกแจง | จุดที่ใช้ได้ | ข้อจำกัดหรือเงื่อนไข |
+|---|---|---|
+| Normal | คำนวณสะดวก มี mean/variance และทุกโมเมนต์ | Symmetric และ kurtosis 3 จึงอาจครอบคลุมหางไม่พอ |
+| Student-t | Symmetric และหางลดช้ากว่า Normal | Mean มีเมื่อ ν>1, variance มีเมื่อ ν>2, kurtosis มีเมื่อ ν>4 |
+| Skewed distributions | แยกพฤติกรรมหางบวกและลบได้ | ต้องระบุ parameterization และตรวจโมเมนต์ของแบบที่ใช้ |
+| Normal variance mixture | รวมหลายสเกลของ volatility | ต้องกำหนด dynamics ของสภาวะเพิ่มเพื่ออธิบาย clustering |
+| Stable distributions ที่ α<2 | ใช้ศึกษาหางแบบกำลังและการรวมตัวแปรในตระกูล stable | Variance อนันต์ จึงใช้ SD และ √time scaling แบบ finite variance ไม่ได้ |
+
+ถ้า T มี Student-t degrees of freedom ν>2 ตัวแปร \(Z=T\sqrt{(\nu-2)/\nu}\) จะมี variance 1 จึงเทียบกับ Standard Normal ที่สเกลเท่ากันได้ โดยมี density
+
+$$
+f_Z(z)=\frac{\Gamma((\nu+1)/2)}{\sqrt{\pi(\nu-2)}\,\Gamma(\nu/2)}
+\left(1+\frac{z^2}{\nu-2}\right)^{-(\nu+1)/2}.
+$$
+
+สำหรับ ν>4 ค่า kurtosis เท่ากับ \(3+6/(\nu-4)\) เช่น ν=5 ให้ 9 และ ν=10 ให้ 4 ที่ 2<ν≤4 variance ยังมีค่าจำกัด แต่ fourth moment ไม่มีค่าจำกัด ส่วน symmetry ของ Student-t ยังอยู่แม้ third moment ไม่ได้มีอยู่ ดูเงื่อนไขจาก [NIST, t Distribution](https://www.itl.nist.gov/div898/handbook/eda/section3/eda3664.htm)
+
+<div class="portfolio-figure" tabindex="0" role="group" aria-label="เปรียบเทียบ Normal กับ Student-t ที่ variance เท่ากัน เลื่อนแนวนอนเพื่อดูภาพเต็ม">
+
+![Density ของ Standard Normal และ Student-t 5 องศาอิสระที่ปรับ variance เป็นหนึ่ง แยกดูส่วนกลางและหางด้านขวา](assets/images/foundations-distribution-tails.svg)
+
+</div>
+<p class="figure-caption">เส้นทฤษฎีที่ mean 0 และ variance 1 เท่ากัน ใช้แกนแนวตั้ง logarithmic ในช่องหางเพื่อเห็นความต่างที่ค่า density ต่ำ ไม่มีข้อมูลตลาดในภาพ</p>
+
+ราคาที่เป็น Lognormal ไม่ได้หมายความว่า returns เป็น Lognormal: ภายใต้ GBM พารามิเตอร์คงที่ log return เป็น Normal ส่วน 1+simple return เป็น Lognormal การใช้ Normal หรือ Student-t ที่รองรับค่าทั้งเส้นจำนวนกับ simple return ยังอาจให้ R<−100% จึงต้องตรวจความหมายทางเศรษฐกิจของตัวแปรที่เลือก
+
+การเลือก distribution ควรเทียบทั้งส่วนกลางและหางที่ใช้ตัดสินใจ รวมถึงตรวจข้อมูลนอกช่วงประมาณค่า การเพิ่มพารามิเตอร์ให้ fit ข้อมูลเดิมดีขึ้นอย่างเดียวไม่รับรองว่าพยากรณ์ดีขึ้น
 
 </section>
 
@@ -333,6 +512,163 @@ ACF ของ volatility ที่ลดลงช้าเป็นลักษ�
 
 </section>
 
+<section id="transformed-autocorrelations">
+
+## ACF ของผลตอบแทนที่แปลงแล้ว
+
+นอกจาก r เราอาจคำนวณ ACF ของ |r|, r² หรือ \(|r|^\delta\) เมื่อ δ>0 เพื่อดูความสัมพันธ์ของขนาดผลตอบแทน กำลังที่ต่างกันให้น้ำหนักกับเหตุการณ์รุนแรงต่างกัน r² ไวต่อค่าปลายหางมากกว่า |r| ส่วนการเลือก δ หลังลองหลายค่าแล้วต้องนับเป็นการค้นหาหลายสมมติฐานด้วย
+
+Population ACF ของ r² ต้องมี Var(r²) จำกัด จึงต้องการ fourth moment ของ r ส่วน ACF ของ |r| ต้องมี second moment ของ r ในข้อมูล finite sample เราคำนวณได้แม้เงื่อนไขของประชากรอาจไม่ผ่าน จึงต้องระวังการตีความและการใช้ standard errors
+
+หาก ACF ของ r ต่ำ แต่ของ |r| หรือ r² สูง แสดงว่าข้อมูลมีความสัมพันธ์ที่ ACF ของ r จับไม่ได้ ตัวทดลอง [สลับลำดับวัน](#clustering-lab) ให้เห็นผลนี้โดยเก็บค่าทุกตัวเหมือนเดิม แล้วเปลี่ยนเพียงลำดับเวลา
+
+ภายใต้ stationary Gaussian process ที่มี mean ศูนย์ มีความสัมพันธ์ \(\operatorname{Corr}(r_t^2,r_{t-k}^2)=\rho_k^2\) เราจึงใช้กรณีนี้เป็น benchmark ได้ แต่หากช็อกไม่ Gaussian ต้องมีพจน์จาก fourth cumulant เพิ่มตาม [ภาคผนวก](#squared-linear-appendix)
+
+</section>
+
+<section id="nonlinearity">
+
+## Uncorrelated แต่ dependent: ตัวอย่างที่คำนวณได้
+
+ให้ \(\varepsilon_t\overset{\rm iid}{\sim}N(0,1)\) และกำหนด \(X_t=\varepsilon_t\varepsilon_{t-1}\) จะได้ E[Xₜ]=0, E[Xₜ²]=1 และ E[Xₜ⁴]=9
+
+ที่ lag 1 ผลคูณ \(X_tX_{t-1}=\varepsilon_t\varepsilon_{t-1}^2\varepsilon_{t-2}\) มีค่าคาดหมายศูนย์ เพราะ εₜ และ εₜ₋₂ เป็นอิสระและมี mean ศูนย์ lag ที่มากกว่านั้นก็มี covariance ศูนย์เช่นกัน
+
+เมื่อยกกำลังสองกลับได้
+
+$$
+\mathbb E[X_t^2X_{t-1}^2]
+=\mathbb E[\varepsilon_t^2]\mathbb E[\varepsilon_{t-1}^4]\mathbb E[\varepsilon_{t-2}^2]
+=1\times3\times1=3.
+$$
+$$
+\operatorname{Cov}(X_t^2,X_{t-1}^2)=3-1=2,\qquad
+\operatorname{Corr}(X_t^2,X_{t-1}^2)=\frac{2}{9-1}=\frac14.
+$$
+
+นี่เป็นกระบวนการ strictly stationary และ white noise ตามนิยาม second moments แต่ไม่เป็นอิสระ เมื่อกำหนดข้อมูลอดีตเป็นช็อก ε ทั้งหมดจนถึง t−1 จะมี conditional mean ศูนย์ และ conditional variance εₜ₋₁² จึงมีความเสี่ยงที่เปลี่ยนตามข้อมูลเก่า
+
+ตัวอย่างนี้ช่วยแยกการพยากรณ์ mean ออกจาก variance การพบ dependence ในข้อมูลตลาดยังต้องตรวจว่าเกิดจาก nonlinear dynamics, non-Gaussian shocks, ปฏิทิน หรือการเปลี่ยนสภาวะ การดู ACF เพียงชุดเดียวไม่สามารถเลือกคำอธิบายแทนการทดสอบเหล่านี้ได้
+
+</section>
+
+<section id="calendar-acf-appendix">
+
+## ภาคผนวก: ACF ที่เกิดจากวันในสัปดาห์
+
+สมมติ \(r_t=m_{d(t)}+\varepsilon_t\) โดย m₁,…,m₅ เป็น mean ของห้าวัน และ εₜ เป็น iid mean ศูนย์ variance sε² ใช้ปฏิทินสมมติที่มีห้าวันสม่ำเสมอและไม่มีวันหยุด
+
+ให้ \(\bar m=5^{-1}\sum_dm_d\) และ a_d=m_d−m̄ เมื่อเฉลี่ยจุดเริ่มต้นของสัปดาห์ทั้งห้าแบบเท่ากัน จะได้สำหรับ k≥1
+
+$$
+\gamma_0=\frac15\sum_{d=1}^5a_d^2+s_\varepsilon^2,\qquad
+\gamma_k=\frac15\sum_{d=1}^5a_da_{d-k},\qquad
+\rho_k=\frac{\gamma_k}{\gamma_0}.
+$$
+
+ดัชนีวันวนกลับทุกห้าวัน สูตรเป็น ACF ของแบบจำลองที่สุ่ม phase เริ่มต้นอย่างสม่ำเสมอ หรือเป็น pooled covariance ที่เฉลี่ยครบทุก phase สำหรับปฏิทินคงที่ mean เปลี่ยนตามวัน กระบวนการเดิมจึงไม่ weak stationary ตามนิยาม mean คงที่ ต้องระบุการเฉลี่ยนี้ก่อนเรียกผลว่า ACF ทฤษฎี
+
+ตัวอย่างสมมติ m=(−0.4%, 0.1%, 0.1%, 0.1%, 0.1%) และ SD ของ noise 1% ให้ m̄=0, variance ของ mean ตามวันเท่ากับ 0.000004 และ variance รวม 0.000104 จึงได้ ρ₁≈−0.009615 และ ρ₅≈0.038462 แม้ ε แต่ละวันเป็นอิสระ
+
+<div id="calendar-acf-lab"></div>
+
+ถ้าหัก mean ของวันนั้นที่ทราบจริงออก จะเหลือ εₜ ซึ่งมี ACF ศูนย์ทุก lag บวก แต่ในข้อมูลจริงเราต้องประมาณ mean เหล่านี้ การปรับค่าและทดสอบในข้อมูลชุดเดียวกันจึงต้องคำนึงถึง estimation error ด้วย
+
+ปฏิทินอาจเปลี่ยน variance แทน mean ได้เช่นกัน ให้ \(r_t=\sigma_{d(t)}z_t\) โดย z เป็น iid mean ศูนย์ variance 1 จะยังมี ACF ของ r เป็นศูนย์ แต่ mean ของ r² ตามวันเท่ากับ σ_d² ความเป็นคาบนี้จึงสร้าง ACF ใน squared returns แบบ pooled ได้ ควรปรับ mean ตามวันของตัวแปรที่กำลังวิเคราะห์ หรือปรับสเกลด้วย σ_d เมื่อโมเดลรองรับ
+
+</section>
+
+<section id="squared-linear-appendix">
+
+## ภาคผนวก: ACF ของ squared linear process
+
+ให้กระบวนการ mean ศูนย์เป็น \(X_t=\sum_{j\geq0}\psi_j\varepsilon_{t-j}\) โดย innovations เป็น iid mean ศูนย์ variance σ² และมี fourth moment จำกัด กำหนด ψ_j=0 เมื่อ j<0 และสมมติผลรวมลู่เข้าพอให้คำนวณ fourth moments ได้ เช่น \(\sum|\psi_j|<\infty\)
+
+ให้ \(c_4=\mathbb E[\varepsilon_t^4]-3\sigma^4\) เป็น fourth cumulant ของ innovation เมื่อขยายผลคูณ Xₜ²Xₜ₋ₖ² พจน์ที่จับคู่ช็อกคนละเวลาจะให้ส่วนของ covariance กำลังสอง ส่วนที่ช็อกทั้งสี่ตัวอยู่เวลาเดียวกันให้พจน์ c₄
+
+$$
+\operatorname{Cov}(X_t^2,X_{t-k}^2)
+=2\gamma_k^2+c_4\sum_{j=0}^{\infty}\psi_j^2\psi_{j+k}^2,
+$$
+$$
+\operatorname{Var}(X_t^2)=2\gamma_0^2+c_4\sum_{j=0}^{\infty}\psi_j^4,
+\qquad
+\gamma_k=\sigma^2\sum_{j=0}^{\infty}\psi_j\psi_{j+k}.
+$$
+
+ACF ของ X² คือบรรทัดแรกหารด้วย variance ในบรรทัดที่สอง เมื่อ variance นั้นเป็นบวก สำหรับ Gaussian innovations c₄=0 จึงลดรูปเป็น ρₖ² เช่น Gaussian AR(1) ที่ φ=0.6 มี ρ₁=0.6 แต่ squared-return correlation ที่ lag 1 เท่ากับ 0.36
+
+สำหรับ MA(1) ที่ ψ₀=1, ψ₁=θ และ σ²=1 สูตรให้
+
+$$
+\operatorname{Corr}(X_t^2,X_{t-1}^2)
+=\frac{(2+c_4)\theta^2}{2(1+\theta^2)^2+c_4(1+\theta^4)}.
+$$
+
+ถ้า θ=0.5 และช็อกเป็น Gaussian จะได้ 0.16 แต่ถ้า innovation มี variance 1 และ kurtosis 6 จะมี c₄=3 และได้ประมาณ 0.198020 การยกกำลังสอง ACF ของผลตอบแทนอย่างเดียวจึงใช้แทนสูตรทั่วไปไม่ได้
+
+สูตรทั้งหมดนี้ใช้ X ที่มี mean ศูนย์ หากใช้ผลตอบแทนที่ mean ไม่เป็นศูนย์ ต้อง center ก่อนหรือรวมพจน์ที่เกิดจาก mean เพิ่ม ตัวอย่างและการตรวจด้วยการแจกแจง innovations แบบไม่ต่อเนื่องอยู่ใน Notebook
+
+</section>
+
+<section id="model-selection-checks">
+
+## เลือกสิ่งที่จะตรวจจากคำถามที่ต้องตอบ
+
+| งานที่จะทำ | สิ่งที่ต้องตรวจให้ตรงกับงาน |
+|---|---|
+| ประมาณผลตอบแทนเฉลี่ยหรือ premium | นิยาม return, benchmark, ความคลาดเคลื่อนของ mean และช่วงข้อมูล |
+| พยากรณ์ mean | ACF ของ r, ปฏิทิน, แบบจำลองเชิงเส้น/ไม่เชิงเส้น และผลนอกช่วงประมาณ |
+| พยากรณ์ volatility | ACF ของ absolute returns กับ r², การเปลี่ยนสภาวะ และ standardized residuals |
+| ประเมิน VaR/ES | การแจกแจงของ standardized shocks, หางทั้งสองด้าน และ backtesting |
+| ใช้ข้อมูลระหว่างวัน | ช่วงเวลาเก็บราคา, microstructure noise, overnight และ jumps |
+
+ก่อนรายงานผลจากโมเดล ให้ระบุว่าข้อมูลใดรู้ได้ ณ เวลาพยากรณ์ แล้วเก็บช่วงทดสอบที่ไม่ได้ใช้เลือกพารามิเตอร์ไว้ตรวจผล เปรียบเทียบกับแบบจำลองพื้นฐานบนข้อมูลและระยะเวลาพยากรณ์เดียวกัน
+
+</section>
+
+<section id="coverage-map">
+
+## ตารางเทียบหัวข้อกับสารบัญบท 2–4
+
+ตารางนี้เทียบกับภาพสารบัญที่ให้มาและ [สารบัญฉบับผู้เขียน](https://www.lancaster.ac.uk/people/afasjt/apdvp_contents.pdf#page=3) หัวข้อ 4.14 ที่ถูกตัดขอบในภาพตรวจจากสารบัญฉบับเต็มแล้ว เนื้อหาเรียบเรียงใหม่พร้อมตัวอย่างคำนวณ ครอบคลุมหัวข้อทั้ง 31 ข้อ โดยไม่ได้อ้างว่าเป็นคำแปลทุกหน้าหรือใช้ชุดข้อมูลเดียวกับหนังสือ
+
+| หัวข้อเดิม | อ่านในบทเรียน |
+|---|---|
+| 2.1 Introduction | [เปิดหัวข้อ](prices-and-returns.html#introduction) |
+| 2.2 Two Examples of Price Series | [เปิดหัวข้อ](prices-and-returns.html#two-price-series) |
+| 2.3 Data-Collection Issues | [เปิดหัวข้อ](prices-and-returns.html#data-collection) |
+| 2.4 Two Returns Series | [เปิดหัวข้อ](prices-and-returns.html#two-return-series) |
+| 2.5 Definitions of Returns | [เปิดหัวข้อ](prices-and-returns.html#return-definitions) |
+| 2.6 Further Examples of Time Series of Returns | [เปิดหัวข้อ](prices-and-returns.html#other-return-series) |
+| 3.1 Introduction | [เปิดหัวข้อ](stochastic-processes.html#introduction) |
+| 3.2 Random Variables | [เปิดหัวข้อ](stochastic-processes.html#random-variables) |
+| 3.3 Stationary Stochastic Processes | [เปิดหัวข้อ](stochastic-processes.html#stationarity) |
+| 3.4 Uncorrelated Processes | [เปิดหัวข้อ](stochastic-processes.html#uncorrelated-processes) |
+| 3.5 ARMA Processes | [เปิดหัวข้อ](stochastic-processes.html#arma) |
+| 3.6 Examples of ARMA(1, 1) Specifications | [เปิดหัวข้อ](stochastic-processes.html#arma-examples) |
+| 3.7 ARIMA Processes | [เปิดหัวข้อ](stochastic-processes.html#arima) |
+| 3.8 ARFIMA Processes | [เปิดหัวข้อ](stochastic-processes.html#arfima) |
+| 3.9 Linear Stochastic Processes | [เปิดหัวข้อ](stochastic-processes.html#linear-processes) |
+| 3.10 Continuous-Time Stochastic Processes | [เปิดหัวข้อ](stochastic-processes.html#continuous-time) |
+| 3.11 Notation for Random Variables and Observations | [เปิดหัวข้อ](stochastic-processes.html#notation) |
+| 4.1 Introduction | [เปิดหัวข้อ](asset-returns-stylized-facts.html#daily-evidence) |
+| 4.2 Summary Statistics | [เปิดหัวข้อ](asset-returns-stylized-facts.html#summary-statistics) |
+| 4.3 Average Returns and Risk Premia | [เปิดหัวข้อ](asset-returns-stylized-facts.html#average-returns-risk-premia) |
+| 4.4 Standard Deviations | [เปิดหัวข้อ](asset-returns-stylized-facts.html#standard-deviations) |
+| 4.5 Calendar Effects | [เปิดหัวข้อ](asset-returns-stylized-facts.html#calendar-effects) |
+| 4.6 Skewness and Kurtosis | [เปิดหัวข้อ](asset-returns-stylized-facts.html#skewness) · [Kurtosis](#fat-tails) |
+| 4.7 The Shape of the Returns Distribution | [เปิดหัวข้อ](asset-returns-stylized-facts.html#distribution-shape) |
+| 4.8 Probability Distributions for Returns | [เปิดหัวข้อ](asset-returns-stylized-facts.html#return-distributions) |
+| 4.9 Autocorrelations of Returns | [เปิดหัวข้อ](asset-returns-stylized-facts.html#autocorrelation) |
+| 4.10 Autocorrelations of Transformed Returns | [เปิดหัวข้อ](asset-returns-stylized-facts.html#transformed-autocorrelations) |
+| 4.11 Nonlinearity of the Returns Process | [เปิดหัวข้อ](asset-returns-stylized-facts.html#nonlinearity) |
+| 4.12 Concluding Remarks | [เปิดหัวข้อ](asset-returns-stylized-facts.html#model-selection-checks) |
+| 4.13 Appendix: Autocorrelation Caused by Day-of-the-Week Effects | [เปิดหัวข้อ](asset-returns-stylized-facts.html#calendar-acf-appendix) |
+| 4.14 Appendix: Autocorrelations of a Squared Linear Process | [เปิดหัวข้อ](asset-returns-stylized-facts.html#squared-linear-appendix) |
+
+</section>
+
 <section id="exercises">
 
 ## ทดลองและตรวจคำตอบ
@@ -365,6 +701,8 @@ ACF ของ volatility ที่ลดลงช้าเป็นลักษ�
 
 ## อ่านเพิ่มเติม
 
+- John P. Nolan, [*Stable Distributions*, บทนำ](https://edspace.american.edu/jpnolan/wp-content/uploads/sites/1720/2020/09/Chap1.pdf), เงื่อนไขของโมเมนต์ใน stable distributions
+- NIST, [*Measures of Skewness and Kurtosis*](https://www.itl.nist.gov/div898/handbook/eda/section3/eda35b.htm) และ [*t Distribution*](https://www.itl.nist.gov/div898/handbook/eda/section3/eda3664.htm)
 - Stephen J. Taylor, *Asset Price Dynamics, Volatility, and Prediction* (2005), บท 2, 4 และ 12 · [บทนำจาก Princeton University Press](https://assets.press.princeton.edu/chapters/i8055.pdf)
 - Benoit Mandelbrot, [*The Variation of Certain Speculative Prices* (1963)](https://oftp.cyrax.hu/doc/mandelbrot.pdf), โดยเฉพาะข้อสังเกตเรื่องการเกิดกลุ่มของความผันผวนในหน้า 418
 - NIST, [*Autocorrelation Plot*](https://www.itl.nist.gov/div898/handbook/eda/section3/eda331.htm), นิยาม sample ACF และกรอบอ้างอิง

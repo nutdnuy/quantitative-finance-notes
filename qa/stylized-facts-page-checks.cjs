@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const root=path.resolve(__dirname,'..'), slug='asset-returns-stylized-facts';
-const base='http://127.0.0.1:8763';
+const base=process.env.QA_BASE||'http://127.0.0.1:8763';
 const lessonCount=require('yaml').parse(fs.readFileSync(path.join(root,'_toc.yml'),'utf8')).chapters.filter(c=>c.file!=='glossary').length;
 (async()=>{
   const browser=await chromium.launch({headless:true});
@@ -13,7 +13,7 @@ const lessonCount=require('yaml').parse(fs.readFileSync(path.join(root,'_toc.yml
   page.on('pageerror',e=>errors.push(e.message));
   page.on('response',r=>{if(r.status()>=400)errors.push(`${r.status()} ${r.url()}`);});
   async function ready(){
-    await page.waitForFunction(()=>document.querySelectorAll('.lab').length===3);
+    await page.waitForFunction(()=>document.querySelectorAll('.lab').length===4);
     await page.evaluate(()=>document.fonts.ready);
     await page.addStyleTag({content:'html,*{scroll-behavior:auto!important}'});
   }
@@ -24,7 +24,7 @@ const lessonCount=require('yaml').parse(fs.readFileSync(path.join(root,'_toc.yml
   await page.goto(`${base}/${slug}.html`);await ready();
   assert.equal(await page.locator('.katex-error').count(),0);
   assert.ok(await page.locator('.katex').count()>30);
-  assert.ok(await page.locator('.portfolio-figure img').evaluateAll(images=>images.length===3&&images.every(i=>i.complete&&i.naturalWidth>0)));
+  assert.ok(await page.locator('.portfolio-figure img').evaluateAll(images=>images.length===4&&images.every(i=>i.complete&&i.naturalWidth>0)));
   const cluster=page.locator('#clustering-lab'), mix=page.locator('#variance-mixture-lab'), rv=page.locator('#realized-volatility-lab');
   assert.match(await cluster.locator('.results').innerText(),/0.330[\s\S]*1.701%[\s\S]*5.025/);
   await cluster.locator('button').nth(1).click();
@@ -84,10 +84,10 @@ const lessonCount=require('yaml').parse(fs.readFileSync(path.join(root,'_toc.yml
   const notebook=JSON.parse(fs.readFileSync(path.join(root,'notebooks',slug+'.ipynb')));
   const source=fs.readFileSync(path.join(root,slug+'.md'));
   assert.equal(notebook.metadata.source.sha256,crypto.createHash('sha256').update(source).digest('hex'));
-  assert.equal(notebook.cells.filter(c=>c.cell_type==='code').length,10);
-  assert.equal(notebook.cells.reduce((n,c)=>n+Object.keys(c.attachments||{}).length,0),3);
+  assert.equal(notebook.cells.filter(c=>c.cell_type==='code').length,18);
+  assert.equal(notebook.cells.reduce((n,c)=>n+Object.keys(c.attachments||{}).length,0),4);
   assert.ok(notebook.cells.filter(c=>c.cell_type==='code').every(c=>c.execution_count&&c.outputs.every(o=>o.output_type!=='error')));
-  report.checks.push('Offline export mounts all three labs; notebook source hash, three embedded figures and ten executed code cells');
+  report.checks.push('Offline export mounts all four labs; notebook source hash, four embedded figures and eighteen executed code cells');
   assert.deepEqual(errors,[]);report.errors=errors;report.status='passed';
   fs.writeFileSync(path.join(__dirname,'stylized-facts-report.json'),JSON.stringify(report,null,2));
   console.log(JSON.stringify(report,null,2));await browser.close();

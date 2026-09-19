@@ -26,6 +26,10 @@ chapters:
     title: Black–Litterman Portfolio
   - file: value-at-risk-expected-shortfall
     title: Value at Risk and Expected Shortfall
+  - file: prices-and-returns
+    title: Prices and Returns
+  - file: stochastic-processes
+    title: Stochastic Processes — Definitions and Examples
   - file: asset-returns-stylized-facts
     title: Asset Returns — Empirical Stylized Facts
   - file: regulation-basel

@@ -1,0 +1,283 @@
+{
+  "updated": "2026-09-19",
+  "scope": "All 31 headings from Taylor chapters 2, 3 and 4 supplied in two screenshots; 4.14 confirmed in the author-hosted complete contents. Existing high-frequency coverage retained.",
+  "source_access": "User-provided JA252.4 lecture notes and screenshots, author-hosted contents/preface/introduction, and primary teaching references. The full book chapters 2–4 were not supplied or claimed to have been read. New lesson prose, examples and derivations cover the topics independently, not as a full translation.",
+  "contents_url": "https://www.lancaster.ac.uk/people/afasjt/apdvp_contents.pdf",
+  "coverage": [
+    {
+      "section": "2.1",
+      "title": "Introduction",
+      "file": "prices-and-returns.md",
+      "anchor": "introduction"
+    },
+    {
+      "section": "2.2",
+      "title": "Two Examples of Price Series",
+      "file": "prices-and-returns.md",
+      "anchor": "two-price-series"
+    },
+    {
+      "section": "2.3",
+      "title": "Data-Collection Issues",
+      "file": "prices-and-returns.md",
+      "anchor": "data-collection"
+    },
+    {
+      "section": "2.4",
+      "title": "Two Returns Series",
+      "file": "prices-and-returns.md",
+      "anchor": "two-return-series"
+    },
+    {
+      "section": "2.5",
+      "title": "Definitions of Returns",
+      "file": "prices-and-returns.md",
+      "anchor": "return-definitions"
+    },
+    {
+      "section": "2.6",
+      "title": "Further Examples of Time Series of Returns",
+      "file": "prices-and-returns.md",
+      "anchor": "other-return-series"
+    },
+    {
+      "section": "3.1",
+      "title": "Introduction",
+      "file": "stochastic-processes.md",
+      "anchor": "introduction"
+    },
+    {
+      "section": "3.2",
+      "title": "Random Variables",
+      "file": "stochastic-processes.md",
+      "anchor": "random-variables"
+    },
+    {
+      "section": "3.3",
+      "title": "Stationary Stochastic Processes",
+      "file": "stochastic-processes.md",
+      "anchor": "stationarity"
+    },
+    {
+      "section": "3.4",
+      "title": "Uncorrelated Processes",
+      "file": "stochastic-processes.md",
+      "anchor": "uncorrelated-processes"
+    },
+    {
+      "section": "3.5",
+      "title": "ARMA Processes",
+      "file": "stochastic-processes.md",
+      "anchor": "arma"
+    },
+    {
+      "section": "3.6",
+      "title": "Examples of ARMA(1, 1) Specifications",
+      "file": "stochastic-processes.md",
+      "anchor": "arma-examples"
+    },
+    {
+      "section": "3.7",
+      "title": "ARIMA Processes",
+      "file": "stochastic-processes.md",
+      "anchor": "arima"
+    },
+    {
+      "section": "3.8",
+      "title": "ARFIMA Processes",
+      "file": "stochastic-processes.md",
+      "anchor": "arfima"
+    },
+    {
+      "section": "3.9",
+      "title": "Linear Stochastic Processes",
+      "file": "stochastic-processes.md",
+      "anchor": "linear-processes"
+    },
+    {
+      "section": "3.10",
+      "title": "Continuous-Time Stochastic Processes",
+      "file": "stochastic-processes.md",
+      "anchor": "continuous-time"
+    },
+    {
+      "section": "3.11",
+      "title": "Notation for Random Variables and Observations",
+      "file": "stochastic-processes.md",
+      "anchor": "notation"
+    },
+    {
+      "section": "4.1",
+      "title": "Introduction",
+      "file": "asset-returns-stylized-facts.md",
+      "anchor": "daily-evidence"
+    },
+    {
+      "section": "4.2",
+      "title": "Summary Statistics",
+      "file": "asset-returns-stylized-facts.md",
+      "anchor": "summary-statistics"
+    },
+    {
+      "section": "4.3",
+      "title": "Average Returns and Risk Premia",
+      "file": "asset-returns-stylized-facts.md",
+      "anchor": "average-returns-risk-premia"
+    },
+    {
+      "section": "4.4",
+      "title": "Standard Deviations",
+      "file": "asset-returns-stylized-facts.md",
+      "anchor": "standard-deviations"
+    },
+    {
+      "section": "4.5",
+      "title": "Calendar Effects",
+      "file": "asset-returns-stylized-facts.md",
+      "anchor": "calendar-effects"
+    },
+    {
+      "section": "4.6",
+      "title": "Skewness and Kurtosis",
+      "file": "asset-returns-stylized-facts.md",
+      "anchor": "skewness",
+      "additional_anchors": [
+        "fat-tails"
+      ]
+    },
+    {
+      "section": "4.7",
+      "title": "The Shape of the Returns Distribution",
+      "file": "asset-returns-stylized-facts.md",
+      "anchor": "distribution-shape"
+    },
+    {
+      "section": "4.8",
+      "title": "Probability Distributions for Returns",
+      "file": "asset-returns-stylized-facts.md",
+      "anchor": "return-distributions"
+    },
+    {
+      "section": "4.9",
+      "title": "Autocorrelations of Returns",
+      "file": "asset-returns-stylized-facts.md",
+      "anchor": "autocorrelation"
+    },
+    {
+      "section": "4.10",
+      "title": "Autocorrelations of Transformed Returns",
+      "file": "asset-returns-stylized-facts.md",
+      "anchor": "transformed-autocorrelations"
+    },
+    {
+      "section": "4.11",
+      "title": "Nonlinearity of the Returns Process",
+      "file": "asset-returns-stylized-facts.md",
+      "anchor": "nonlinearity"
+    },
+    {
+      "section": "4.12",
+      "title": "Concluding Remarks",
+      "file": "asset-returns-stylized-facts.md",
+      "anchor": "model-selection-checks"
+    },
+    {
+      "section": "4.13",
+      "title": "Appendix: Autocorrelation Caused by Day-of-the-Week Effects",
+      "file": "asset-returns-stylized-facts.md",
+      "anchor": "calendar-acf-appendix"
+    },
+    {
+      "section": "4.14",
+      "title": "Appendix: Autocorrelations of a Squared Linear Process",
+      "file": "asset-returns-stylized-facts.md",
+      "anchor": "squared-linear-appendix"
+    }
+  ],
+  "public_sources": [
+    "https://online.stat.psu.edu/stat510/Lesson01",
+    "https://online.stat.psu.edu/stat510/Lesson02",
+    "https://online.stat.psu.edu/stat510/Lesson13",
+    "https://otexts.com/fpp3/stationarity.html",
+    "https://www.stat.berkeley.edu/~aditya/Site/Statistics_153%3B_Spring_2012_files/Spring2012Statistics153LectureEight.pdf",
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35b.htm",
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda3664.htm",
+    "https://edspace.american.edu/jpnolan/wp-content/uploads/sites/1720/2020/09/Chap1.pdf"
+  ],
+  "examples": {
+    "price_a": [
+      100,
+      102,
+      101,
+      103,
+      102,
+      104
+    ],
+    "price_b": [
+      100,
+      98,
+      103,
+      99,
+      106,
+      104
+    ],
+    "summary_returns": [
+      -0.02,
+      -0.01,
+      0,
+      0.01,
+      0.06
+    ],
+    "arma": {
+      "seed": 303,
+      "burn_in": 1000,
+      "observations": 600,
+      "innovation": "iid Standard Normal, LCG/Box-Muller from stylized-facts helper",
+      "ma_sign": "positive theta convention",
+      "slider_range": [
+        -0.9,
+        0.9
+      ]
+    },
+    "calendar": {
+      "means": [
+        -0.004,
+        0.001,
+        0.001,
+        0.001,
+        0.001
+      ],
+      "noise_sd": 0.01,
+      "phase": "Uniform random starting phase, or pooled moments over all five phases. A fixed calendar mean is cyclostationary, not weak stationary.",
+      "holidays": "None in teaching model"
+    },
+    "squared_linear": {
+      "mean": 0,
+      "innovations": "iid finite fourth moment",
+      "cumulant": "E[e^4]-3 Var(e)^2",
+      "exact_non_gaussian_check": "Support +/-sqrt(6),0 with probabilities 1/12,1/12,5/6; variance1 kurtosis6; enumerate 27 triples"
+    }
+  },
+  "assets": {
+    "route": "no-image-generator",
+    "generator": "scripts/make_return_foundations_figures.py",
+    "files": [
+      "assets/images/foundations-prices-returns.svg",
+      "assets/images/foundations-arma-acf.svg",
+      "assets/images/foundations-distribution-tails.svg"
+    ],
+    "status": "All original calculated charts; hypothetical data or theoretical formulas; no source screenshots or market data copied"
+  },
+  "notebooks": {
+    "generators": [
+      "scripts/make_return_foundations_notebooks.py",
+      "scripts/make_stylized_facts_notebook.py"
+    ],
+    "code_cells": {
+      "prices-and-returns": 4,
+      "stochastic-processes": 8,
+      "asset-returns-stylized-facts": 18
+    },
+    "dependencies": "Python standard library only"
+  }
+}

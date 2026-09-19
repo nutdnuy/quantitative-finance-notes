@@ -1529,3 +1529,79 @@ Strike ของ Call กับ Put ที่ทำให้ ordinary spot Delta
 
 </section>
 </section>
+
+<section class="glossary-group" id="group-return-foundations">
+
+## ราคา ผลตอบแทน และกระบวนการสุ่ม
+
+<section class="glossary-term" id="stationarity">
+
+### Stationarity — คุณสมบัติที่คงเดิมเมื่อเลื่อนเวลา
+
+Weak stationarity กำหนดให้ mean คงที่ variance มีค่าจำกัดและคงที่ และ covariance ขึ้นกับระยะห่างเวลา ส่วน strict stationarity กำหนดให้ joint distribution ไม่เปลี่ยนเมื่อเลื่อนเวลาทุกตำแหน่งพร้อมกัน
+
+[ดูสมการและตัวอย่าง](stochastic-processes.html#stationarity)
+
+</section>
+
+<section class="glossary-term" id="white-noise">
+
+### White noise — ชุดช็อกที่ไม่มีสหสัมพันธ์ข้ามเวลา
+
+กระบวนการที่ mean เป็นศูนย์ variance คงที่และมีค่าจำกัด และ covariance เป็นศูนย์ทุก lag ที่ไม่เป็นศูนย์ เงื่อนไขนี้ยังไม่รับประกัน independence; ต้องระบุเพิ่มหากต้องการ iid white noise
+
+[ดูสมการและตัวอย่าง](stochastic-processes.html#uncorrelated-processes)
+
+</section>
+
+<section class="glossary-term" id="arma">
+
+### ARMA — Autoregressive moving average
+
+แบบจำลองเชิงเส้นที่รวมค่ากระบวนการในอดีตกับ innovation ปัจจุบันและอดีต ต้องระบุเครื่องหมายของพจน์ MA และตรวจเงื่อนไข stationarity กับ invertibility ก่อนใช้สูตร ACF
+
+[ดูสมการและตัวอย่าง](stochastic-processes.html#arma)
+
+</section>
+
+<section class="glossary-term" id="arima">
+
+### ARIMA — ARMA ของข้อมูลที่ผ่านการหาผลต่าง
+
+กำหนดให้ผลต่างลำดับ d ของอนุกรมเป็น ARMA ตัวอย่าง random walk ต้องหาผลต่างหนึ่งครั้งเพื่อได้ white noise การหาผลต่างเกินจำเป็นอาจเพิ่ม dependence และ variance
+
+[ดูสมการและตัวอย่าง](stochastic-processes.html#arima)
+
+</section>
+
+<section class="glossary-term" id="arfima">
+
+### ARFIMA — แบบจำลองที่หาผลต่างแบบเศษส่วน
+
+ขยายลำดับผลต่าง d ให้เป็นจำนวนจริง สำหรับ ARFIMA(0,d,0) เมื่อ 0<d<0.5 จะมี long memory: ACF ลดลงช้าตามกำลังของ lag ต่างจากการลดลงแบบเรขาคณิตของ ARMA
+
+[ดูสมการและตัวอย่าง](stochastic-processes.html#arfima)
+
+</section>
+
+<section class="glossary-term" id="skewness">
+
+### Skewness — ความเบ้
+
+โมเมนต์กลางลำดับสามหารด้วย SD ยกกำลังสาม เมื่อโมเมนต์มีอยู่ ค่าบวกและลบสะท้อนความไม่สมมาตรคนละด้าน ค่าเป็นศูนย์เพียงอย่างเดียวไม่รับประกันว่าการแจกแจงสมมาตร
+
+[ดูสมการและตัวอย่าง](asset-returns-stylized-facts.html#skewness)
+
+</section>
+
+<section class="glossary-term" id="risk-premium">
+
+### Risk premium — ส่วนชดเชยความเสี่ยง
+
+ผลตอบแทนคาดหวังของสินทรัพย์ลบผลตอบแทนปลอดความเสี่ยงที่ตรงกันทั้งช่วงเวลาและสกุลเงิน ต่างจาก realized excess return ซึ่งคำนวณจากผลตอบแทนที่เกิดขึ้นแล้ว
+
+[ดูสมการและตัวอย่าง](asset-returns-stylized-facts.html#average-returns-risk-premia)
+
+</section>
+
+</section>

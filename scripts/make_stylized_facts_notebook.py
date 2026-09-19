@@ -5,6 +5,7 @@ import re
 import sys
 from pathlib import Path
 import make_portfolio_optimization_notebook as nb
+from return_foundations_snippets import STYLIZED_SNIPPETS
 
 ROOT=Path(__file__).resolve().parents[1]
 SLUG='asset-returns-stylized-facts'
@@ -84,14 +85,16 @@ print("In market data, same-day realized volatility is known only after observin
 }
 
 
+SNIPPETS.update(STYLIZED_SNIPPETS)
+
 if __name__=='__main__':
     source=(ROOT/f'{SLUG}.md').read_text()
     body=re.sub(r'\A---\n.*?\n---\n','',source,flags=re.S)
-    body=re.sub(r'<div id="(?:clustering|variance-mixture|realized-volatility)-lab"></div>','',body)
+    body=re.sub(r'<div id="(?:clustering|variance-mixture|realized-volatility|calendar-acf)-lab"></div>','',body)
     nb.cells,nb.namespace=[],{}
     nb.markdown('# Python lab: Asset Returns — Empirical Stylized Facts\n\nใช้ Python standard library กด Run All ตามลำดับ ข้อมูลทั้งหมดจำลองด้วย seed ที่ระบุ ภาพประกอบฝังอยู่ในไฟล์แล้ว')
     nb.markdown(body.split('<section id="',1)[0])
-    helper=(ROOT/'scripts/stylized_facts_math.py').read_text()
+    helper=(ROOT/'scripts/stylized_facts_math.py').read_text()+'\n'+(ROOT/'scripts/return_foundations_math.py').read_text().replace('from stylized_facts_math import normal_generator, moments','')
     nb.code(helper+'''\n\ndef close(a,b,tol=1e-10):
     assert math.isclose(a,b,rel_tol=tol,abs_tol=tol),(a,b)
 print("Loaded self-contained functions. Simulated data only; no remote downloads.")''')

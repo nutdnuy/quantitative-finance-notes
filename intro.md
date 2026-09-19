@@ -114,6 +114,22 @@ description: เรียนการเงินเชิงปริมาณ�
 </article>
 <article class="welcome-lesson">
 <span class="welcome-lesson-number" aria-hidden="true">11</span>
+<div><p class="welcome-lesson-label">เตรียมข้อมูลและคำนวณผลตอบแทน</p>
+<h3><a href="prices-and-returns.html">Prices and Returns</a></h3>
+<p>ราคา ปันผล และวิธีปรับข้อมูลเปลี่ยนผลตอบแทนที่เราคำนวณอย่างไร?</p>
+<p class="welcome-topics">Time series · Data quality · Simple / log returns · Compounding</p>
+<a class="welcome-text-link" href="prices-and-returns.html">เปิดบท Prices and Returns →</a></div>
+</article>
+<article class="welcome-lesson">
+<span class="welcome-lesson-number" aria-hidden="true">12</span>
+<div><p class="welcome-lesson-label">สร้างแบบจำลองความสัมพันธ์ข้ามเวลา</p>
+<h3><a href="stochastic-processes.html">Stochastic Processes — Definitions and Examples</a></h3>
+<p>Stationarity และ independence ต่างกันอย่างไร และ ARMA อธิบายอะไรได้บ้าง?</p>
+<p class="welcome-topics">Random variables · White noise · ARMA · ARIMA · ARFIMA</p>
+<a class="welcome-text-link" href="stochastic-processes.html">เปิดบท Stochastic Processes →</a></div>
+</article>
+<article class="welcome-lesson">
+<span class="welcome-lesson-number" aria-hidden="true">13</span>
 <div><p class="welcome-lesson-label">อ่านพฤติกรรมจากข้อมูลผลตอบแทน</p>
 <h3><a href="asset-returns-stylized-facts.html">Asset Returns — Empirical Stylized Facts</a></h3>
 <p>ทิศทางผลตอบแทนสัมพันธ์กันน้อย แล้วทำไมวันที่แกว่งแรงจึงมักอยู่ติดกัน?</p>
@@ -121,7 +137,7 @@ description: เรียนการเงินเชิงปริมาณ�
 <a class="welcome-text-link" href="asset-returns-stylized-facts.html">เปิดบท Asset Returns →</a></div>
 </article>
 <article class="welcome-lesson">
-<span class="welcome-lesson-number" aria-hidden="true">12</span>
+<span class="welcome-lesson-number" aria-hidden="true">14</span>
 <div><p class="welcome-lesson-label">เชื่อมความเสี่ยงกับการกำกับธนาคาร</p>
 <h3><a href="regulation-basel.html">Regulation and Basel III / IV</a></h3>
 <p>มีเงินกองทุนพอรับขาดทุนแล้ว จะมีสภาพคล่องพอจ่ายเงินทันเวลาด้วยหรือไม่?</p>
@@ -137,7 +153,7 @@ description: เรียนการเงินเชิงปริมาณ�
 <a class="welcome-text-link" href="exotic-options.html">เปิดบท Exotic Options →</a></div>
 </article>
 <article class="welcome-lesson">
-<span class="welcome-lesson-number" aria-hidden="true">14</span>
+<span class="welcome-lesson-number" aria-hidden="true">16</span>
 <div><p class="welcome-lesson-label">เปลี่ยนแบบจำลองเป็นวิธีคำนวณ</p>
 <h3><a href="numerical-methods.html">Introduction to Numerical Methods</a></h3>
 <p>เมื่อไม่มีสูตรสำเร็จ จะหาราคา Option และตรวจความแม่นยำของคำตอบอย่างไร?</p>
@@ -145,7 +161,7 @@ description: เรียนการเงินเชิงปริมาณ�
 <a class="welcome-text-link" href="numerical-methods.html">เปิดบท Numerical Methods →</a></div>
 </article>
 <article class="welcome-lesson">
-<span class="welcome-lesson-number" aria-hidden="true">15</span>
+<span class="welcome-lesson-number" aria-hidden="true">17</span>
 <div><p class="welcome-lesson-label">อ่านความไวของราคา Option ให้ครบ</p>
 <h3><a href="option-greeks.html">Know Your Weapon — Option Greeks</a></h3>
 <p>เมื่อราคา เวลา และ volatility เปลี่ยน Greeks ช่วยอธิบายราคาใหม่ได้ใกล้แค่ไหน?</p>

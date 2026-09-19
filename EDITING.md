@@ -208,3 +208,9 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 เนื้อหาอยู่ใน `option-greeks.md` สูตร JavaScript อยู่ใน `src/option-greeks.mjs` และตัวทดลอง 3 ส่วนอยู่ใน `src/option-greeks.jsx` สูตร Python สำหรับ Notebook และกราฟอยู่ใน `scripts/option_greeks_math.py` ต้องคง convention เดียวกัน: volatility/interest เป็นทศนิยม, T เป็นปีคงเหลือ, time Greeks เป็นอนุพันธ์ต่อเวลาปฏิทิน, Rho แยก fixed b กับ fixed yield และ Delta inversion เป็น ordinary spot Delta ที่ไม่ปรับ premium
 
 หลังแก้บทหรือสมการ รัน `python3 scripts/make_option_greeks_figures.py` และ `python3 scripts/make_option_greeks_notebook.py` จากนั้น `npm run build:pages`, `npm test` และ `node qa/option-greeks-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 สคริปต์ Notebook เขียนทับเฉพาะ `notebooks/option-greeks.ipynb` ให้เก็บการทดลองส่วนตัวในชื่ออื่น สูตรในเอกสารต้นทางบางแห่งมีพิมพ์ตกและใช้ convention ต่างกัน ดู correction log ใน provenance ก่อนปรับสูตรตาม PDF
+
+## Prices and Returns / Stochastic Processes / Stylized Facts
+
+`prices-and-returns.md`, `stochastic-processes.md` และ `asset-returns-stylized-facts.md` ครอบคลุม 31 หัวข้อของสารบัญ Taylor บท 2–4 โดยเรียบเรียงใหม่ ใช้ข้อมูลสมมติและเก็บตารางจับคู่ใน `data/return-foundations-provenance.json`
+
+สูตรและห้องทดลองใหม่อยู่ใน `src/return-foundations.mjs` และ `src/return-foundations.jsx` สร้างภาพด้วย `python3 scripts/make_return_foundations_figures.py` สร้างและรัน Notebook ด้วย `python3 scripts/make_return_foundations_notebooks.py` และ `python3 scripts/make_stylized_facts_notebook.py` ตรวจด้วย `npm test`, `npm run build:pages`, `node qa/return-foundations-page-checks.cjs` และ `node qa/stylized-facts-page-checks.cjs` ขณะเปิด preview พอร์ต 8763

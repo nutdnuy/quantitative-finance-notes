@@ -1,6 +1,6 @@
 {
   "verified_on": "2026-09-14",
-  "scope": "One sourced epigraph for each of the ten content lessons. Welcome and the shared glossary are navigation/reference pages.",
+  "scope": "Sourced epigraphs for the lessons recorded below. Welcome and glossary are navigation/reference pages.",
   "visual_route": "no-image-generator",
   "presentation": "Native Markdown blockquote with Thai translation, source-language excerpt, author and direct source link; existing fonts and theme tokens; no assets or motion.",
   "translation_credit": "Thai translations for QuantCorner; the Thorp translation and parenthetical clarification were supplied by the owner. Source-language quotations are separately identified.",
@@ -107,6 +107,26 @@
       "verified_on": "2026-09-19",
       "note": "22-word excerpt from Section VII, inspected in the original article scan, physical PDF page 26. Leading/trailing ellipses mark omitted text. Thai translation written for QuantCorner.",
       "relation": "Large and small changes tend to cluster in time regardless of sign."
+    },
+    {
+      "file": "prices-and-returns.md",
+      "author": "Stephen J. Taylor",
+      "language": "en",
+      "label": "Asset Price Dynamics, Volatility, and Prediction (2005), Preface, p. xiii",
+      "url": "https://www.lancaster.ac.uk/people/afasjt/apdvp_contents.pdf",
+      "verified_on": "2026-09-19",
+      "note": "13-word complete opening sentence. Original Thai translation.",
+      "relation": "Empirically credible modeling of changing asset prices."
+    },
+    {
+      "file": "stochastic-processes.md",
+      "author": "Stephen J. Taylor",
+      "language": "en",
+      "label": "Asset Price Dynamics, Volatility, and Prediction (2005), Chapter 1, p. 1",
+      "url": "https://www.lancaster.ac.uk/people/afasjt/apdvp_contents.pdf",
+      "verified_on": "2026-09-19",
+      "note": "8-word clause excerpt beginning We seek statements, followed by ellipsis. Original Thai translation.",
+      "relation": "Empirically credible modeling of changing asset prices."
     }
   ],
   "updated_on": "2026-09-19"

@@ -150,3 +150,9 @@ Notebook ใช้ Python 3, NumPy และ Jupyter/IPython ถ้ารัน 
 `option-greeks.md` ต่อยอด Black–Scholes ด้วย generalized carry, Greek units, Delta/strike conventions, higher Greeks, numerical derivatives, probability และ smile risk โดยเรียบเรียงจากเอกสาร *Know Your Weapon* ของ Espen Haug ที่ผู้ใช้ให้ ตัวเลขและกราฟทั้งหมดคำนวณใหม่จากสมมติฐาน รายละเอียดการตรวจแก้สูตรต้นทางอยู่ใน `data/option-greeks-provenance.json` ไม่เผยแพร่ PDF ต้นฉบับ
 
 ใช้ `python3 scripts/make_option_greeks_figures.py` สร้าง SVG 3 ภาพ และ `python3 scripts/make_option_greeks_notebook.py` สร้างพร้อมรัน Notebook แบบ self-contained ตรวจสูตรด้วย `node qa/option-greeks-checks.mjs` และหน้าเว็บด้วย `node qa/option-greeks-page-checks.cjs` ขณะเปิด preview พอร์ต 8763
+
+## Prices and Returns / Stochastic Processes / Stylized Facts
+
+`prices-and-returns.md`, `stochastic-processes.md` และ `asset-returns-stylized-facts.md` ครอบคลุม 31 หัวข้อของสารบัญ Taylor บท 2–4 โดยเรียบเรียงใหม่ ใช้ข้อมูลสมมติและเก็บตารางจับคู่ใน `data/return-foundations-provenance.json`
+
+สูตรและห้องทดลองใหม่อยู่ใน `src/return-foundations.mjs` และ `src/return-foundations.jsx` สร้างภาพด้วย `python3 scripts/make_return_foundations_figures.py` สร้างและรัน Notebook ด้วย `python3 scripts/make_return_foundations_notebooks.py` และ `python3 scripts/make_stylized_facts_notebook.py` ตรวจด้วย `npm test`, `npm run build:pages`, `node qa/return-foundations-page-checks.cjs` และ `node qa/stylized-facts-page-checks.cjs` ขณะเปิด preview พอร์ต 8763
