@@ -125,3 +125,9 @@ Notebook ใช้ Python 3, NumPy และ Jupyter/IPython ถ้ารัน 
 `asset-returns-stylized-facts.md` ต่อจาก VaR/ES โดยตรวจสมมติฐานของผลตอบแทนผ่าน volatility clustering, ACF, fat tails, variance mixtures, intraday seasonality และ realized variance มีตัวทดลองสามชุด ภาพ SVG สามภาพ และ Notebook ที่รันได้ด้วย Python standard library ข้อมูลในกราฟเป็นข้อมูลสมมติและระบุ seed แยกจากข้อค้นพบเชิงประจักษ์ในแหล่งอ้างอิง
 
 สร้างภาพด้วย `python3 scripts/make_stylized_facts_figures.py` และสร้างพร้อมรัน Notebook ด้วย `python3 scripts/make_stylized_facts_notebook.py` ตรวจตัวเลขด้วย `npm test` (ใช้ Node.js และ Python 3 เพื่อตรวจผลข้ามภาษา) และหน้าเว็บด้วย `node qa/stylized-facts-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 แหล่งที่มาอยู่ใน `data/stylized-facts-provenance.json`
+
+## Regulation and Basel III / IV
+
+บท `regulation-basel.md` เชื่อมงบดุลและเหตุผลกำกับกับเงินกองทุน RWA, leverage, output floor, LCR/NSFR และแบบจำลองเครดิต ASRF/IRB ใช้เอกสาร *Regulation and Basel III / IV* ของ Jon Gregory (4 มีนาคม 2025) เป็นเส้นเรื่อง พร้อมตรวจนิยามกับมาตรฐาน BIS และคำนวณตัวอย่างใหม่ ข้อมูลธนาคารทั้งหมดเป็นสมมติ รายละเอียดอยู่ใน `data/basel-provenance.json` ไม่มี PDF ต้นฉบับใน repository
+
+สร้างกราฟด้วย `python3 scripts/make_basel_figures.py` และสร้างพร้อมรัน Notebook ด้วย `python3 scripts/make_basel_notebook.py` ใช้ Python standard library ตัวทดลองสามส่วนอยู่ใน `src/basel.jsx` และสูตรอยู่ใน `src/basel.mjs` ตรวจด้วย `npm test`, `npm run build:pages` และ `node qa/basel-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763

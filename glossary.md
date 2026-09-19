@@ -1282,6 +1282,93 @@ Quantile ของการแจกแจงขาดทุน โดยระ�
 </section>
 </section>
 
+<section class="glossary-group" id="bank-regulation-terms">
+
+## เงินกองทุนและสภาพคล่องของธนาคาร
+
+<section class="glossary-term" id="risk-weighted-assets">
+
+### Risk-weighted assets (RWA) — สินทรัพย์เสี่ยง
+
+ฐานความเสี่ยงที่ใช้เป็นตัวหารของอัตราส่วนเงินกองทุน วิธีคำนวณต่างกันตามประเภทความเสี่ยงและแนวทางกำกับ ในตัวอย่างเครดิตอย่างง่ายคือ EAD คูณ risk weight ซึ่งไม่ใช่โอกาสผิดนัดโดยตรง
+
+[ดูเงินกองทุนและตัวอย่าง RWA](regulation-basel.html#capital-and-rwa)
+
+</section>
+<section class="glossary-term" id="basel-leverage-ratio">
+
+### Basel leverage ratio — อัตราส่วนเงินกองทุนต่อ exposure ที่ไม่ถ่วงความเสี่ยง
+
+Tier 1 capital หารด้วย exposure measure ตามเกณฑ์ ซึ่งรวมการปรับรายการในและนอกงบดุล จึงไม่จำเป็นต้องเท่ากับสินทรัพย์รวมทางบัญชี ใช้เสริมข้อจำกัดเงินกองทุนที่อาศัย RWA
+
+[ดู leverage และ output floor](regulation-basel.html#leverage-and-floor)
+
+</section>
+<section class="glossary-term" id="liquidity-coverage-ratio">
+
+### Liquidity Coverage Ratio (LCR) — อัตราส่วนรองรับสภาพคล่องระยะสั้น
+
+HQLA ที่เข้าเกณฑ์หารด้วยกระแสเงินสดไหลออกสุทธิภายใต้สถานการณ์ตึงเครียด 30 วันปฏิทิน เกณฑ์พื้นฐานคืออย่างน้อย 100% ในภาวะปกติ การคำนวณทั่วไปจำกัด inflows ที่นำมาหักไม่เกิน 75% ของ outflows
+
+[ดูสูตร เพดาน inflow และตัวทดลอง](regulation-basel.html#liquidity-coverage)
+
+</section>
+<section class="glossary-term" id="net-stable-funding-ratio">
+
+### Net Stable Funding Ratio (NSFR) — อัตราส่วนแหล่งเงินทุนที่มั่นคง
+
+Available stable funding หารด้วย required stable funding มองโครงสร้างการจัดหาเงินในกรอบหนึ่งปี โดยถ่วงน้ำหนักแหล่งเงินทุนและสินทรัพย์ตามคุณสมบัติที่กำหนด เกณฑ์พื้นฐานคืออย่างน้อย 100%
+
+[ดูตัวอย่าง ASF และ RSF](regulation-basel.html#stable-funding)
+
+</section>
+<section class="glossary-term" id="probability-of-default">
+
+### Probability of default (PD) — ความน่าจะเป็นที่จะผิดนัด
+
+โอกาสที่ลูกหนี้จะผิดนัดในช่วงเวลาที่ระบุ เช่น หนึ่งปี ต้องระบุนิยาม default และวิธีประมาณด้วย PD ไม่ใช่สัดส่วนเงินที่สูญเสียเมื่อผิดนัด และไม่ใช่ risk weight
+
+[ดูตัวอย่าง PD × LGD × EAD](regulation-basel.html#expected-credit-loss)
+
+</section>
+<section class="glossary-term" id="loss-given-default">
+
+### Loss given default (LGD) — สัดส่วนความสูญเสียเมื่อผิดนัด
+
+สัดส่วนของ exposure ที่สูญเสียเมื่อเกิด default หลังพิจารณาการเรียกคืนตามนิยามของแบบจำลอง ค่า LGD อาจเปลี่ยนตามหลักประกันและภาวะเศรษฐกิจ บทตัวอย่างถือค่านี้คงที่
+
+[ดู expected credit loss](regulation-basel.html#expected-credit-loss)
+
+</section>
+<section class="glossary-term" id="exposure-at-default">
+
+### Exposure at default (EAD) — ยอด exposure ณ เวลาผิดนัด
+
+จำนวนเงินที่มีความเสี่ยงเมื่อคู่สัญญาผิดนัด อาจต่างจากยอดคงค้างวันนี้ เช่น วงเงินที่ยังไม่ได้เบิกอาจถูกใช้ก่อน default ค่าที่ใช้ต้องสอดคล้องกับผลิตภัณฑ์และวิธีคำนวณ
+
+[ดูแบบจำลองเครดิตอย่างง่าย](regulation-basel.html#expected-credit-loss)
+
+</section>
+<section class="glossary-term" id="asrf">
+
+### Asymptotic Single Risk Factor (ASRF) — แบบจำลองเครดิตปัจจัยร่วมเดียว
+
+แบบจำลองที่เชื่อม default ของลูกหนี้ผ่านปัจจัย Gaussian ร่วม และอาศัยพอร์ตที่กระจายตัวดีมากเพื่อลดความเสี่ยงเฉพาะราย พารามิเตอร์ asset correlation ของตัวแปรแฝงไม่ใช่ correlation ของ default indicators โดยตรง
+
+[ดู conditional PD และสูตรขาดทุนที่ปลายหาง](regulation-basel.html#asrf-model)
+
+</section>
+<section class="glossary-term" id="internal-ratings-based">
+
+### Internal Ratings-Based approach (IRB) — วิธีเครดิตที่ใช้การจัดอันดับภายใน
+
+แนวทางคำนวณเงินกองทุนเครดิตที่อนุญาตให้ธนาคารประมาณพารามิเตอร์บางส่วนภายใต้เงื่อนไขและการอนุมัติ สูตรและ supervisory parameters ยังถูกกำหนดตามประเภท exposure จึงไม่ใช่การเลือกแบบจำลองได้อย่างอิสระทั้งหมด
+
+[ดูสูตร corporate IRB และตัวทดลอง](regulation-basel.html#irb-formula)
+
+</section>
+</section>
+
 ---
 
 ความหมายและตัวอย่างแต่ละคำมีลิงก์กลับไปยังบทที่เกี่ยวข้อง แหล่งอ้างอิงของคำและตัวอย่างอยู่ท้ายบทเหล่านั้น

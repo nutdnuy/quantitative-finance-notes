@@ -28,5 +28,7 @@ chapters:
     title: Value at Risk and Expected Shortfall
   - file: asset-returns-stylized-facts
     title: Asset Returns — Empirical Stylized Facts
+  - file: regulation-basel
+    title: Regulation and Basel III / IV
   - file: glossary
     title: อภิธานศัพท์

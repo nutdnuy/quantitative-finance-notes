@@ -120,6 +120,14 @@ description: เรียนการเงินเชิงปริมาณ�
 <p class="welcome-topics">Fat tails · Volatility clustering · ACF · Realized volatility</p>
 <a class="welcome-text-link" href="asset-returns-stylized-facts.html">เปิดบท Asset Returns →</a></div>
 </article>
+<article class="welcome-lesson">
+<span class="welcome-lesson-number" aria-hidden="true">12</span>
+<div><p class="welcome-lesson-label">เชื่อมความเสี่ยงกับการกำกับธนาคาร</p>
+<h3><a href="regulation-basel.html">Regulation and Basel III / IV</a></h3>
+<p>มีเงินกองทุนพอรับขาดทุนแล้ว จะมีสภาพคล่องพอจ่ายเงินทันเวลาด้วยหรือไม่?</p>
+<p class="welcome-topics">Capital · RWA · Leverage · LCR / NSFR · IRB</p>
+<a class="welcome-text-link" href="regulation-basel.html">เปิดบท Regulation and Basel →</a></div>
+</article>
 </div>
 
 ## อ่านไป ลองไป

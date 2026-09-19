@@ -178,3 +178,9 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 เนื้อหาอยู่ใน `martingale-pricing.md` ห้องทดลองสองส่วนอยู่ใน `src/martingale-pricing.jsx` และสูตรอยู่ใน `src/martingale-pricing.mjs` ใช้กราฟ SVG จากการคำนวณ ตัวอย่างทั้งหมดเป็นสมมติฐาน ห้องทดลอง P/Q ใช้ seed 2532 และ terminal GBM 20,000 ตัวอย่าง โดยวิธีถ่วงน้ำหนักใช้ค่าเฉลี่ย Z × discounted payoff ไม่หารด้วยผลรวมน้ำหนัก
 
 เมื่อแก้บท รัน `python3 scripts/make_martingale_pricing_notebook.py` เพื่อสร้างและรัน Notebook ด้วย Python standard library จากนั้นรัน `npm test`, `npm run build:pages` และ `node qa/martingale-pricing-page-checks.cjs` ขณะเปิด preview พอร์ต 8763 รักษาความแตกต่างของ P/Q, dividend yield ต่อปีกับ yield สะสม, variance กับ volatility และวันหมดอายุ Option กับวันครบกำหนด Futures
+
+## แก้บท Regulation and Basel III / IV
+
+เนื้อหาอยู่ใน `regulation-basel.md` ตัวทดลองเงินกองทุน LCR และ IRB อยู่ใน `src/basel.jsx` สูตร JavaScript อยู่ใน `src/basel.mjs` และสูตร Python อยู่ใน `scripts/basel_math.py` ค่าที่สาธิตเป็นข้อมูลสมมติ ต้องแยกมาตรฐาน BCBS ออกจากการบังคับใช้ในแต่ละประเทศ และระบุช่วงเวลา/เวอร์ชันใน `data/basel-provenance.json` เมื่อแก้ข้อกำหนด
+
+หลังแก้เนื้อหาหรือสูตร รัน `python3 scripts/make_basel_figures.py` และ `python3 scripts/make_basel_notebook.py` เพื่อสร้าง SVG สามภาพและ Notebook ที่ฝังภาพพร้อมผลรัน จากนั้นตรวจ `npm run build:pages`, `npm test` และ `node qa/basel-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 การแก้ capital ratios, output floor, inflow cap หรือ IRB ต้องรักษาหน่วยและผลคำนวณระหว่างบทเรียน Python และ JavaScript ให้ตรงกัน ห้ามเผยแพร่ PDF ต้นฉบับ

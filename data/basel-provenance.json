@@ -1,0 +1,171 @@
+{
+  "lesson": "regulation-basel.md",
+  "review_date": "2026-09-19",
+  "source_document": {
+    "filename": "JA252.6 Notes-1.pdf",
+    "title": "Regulation and Basel III / IV",
+    "author": "Jon Gregory",
+    "date": "2025-03-04",
+    "pages": 86,
+    "distribution": "User-supplied teaching material; original PDF and slide images excluded from repository",
+    "sha256": "f563e2036db4d73c3cca92ec34701f8eee841b61c490050eedaf108895920b8d"
+  },
+  "coverage": {
+    "5-15": "Rationale, balance sheet, capital and liquidity",
+    "17-23": "Risk types and economic capital",
+    "25-35": "BCBS, pillars, RWA, capital, leverage and methodologies",
+    "37-41": "LCR and NSFR; historical bank snapshots replaced by hypothetical examples",
+    "43-55": "Credit capital, conditional default, ASRF and IRB",
+    "61-68": "Ratings, transition matrices, expected loss and Euler allocation",
+    "69-86": "Reference screenshots replaced by direct official standards"
+  },
+  "official_sources": [
+    {
+      "id": "RBC20",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/rbc/20/inforce/2023-01-01/published/2020-11-26",
+      "supports": "Capital minima and aggregate output floor"
+    },
+    {
+      "id": "RBC30",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/rbc/30/inforce/2019-12-15/published/2019-12-15",
+      "supports": "Capital buffers"
+    },
+    {
+      "id": "LEV20",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/lev/20/inforce/2023-01-01/published/2020-03-27",
+      "supports": "Tier 1 leverage ratio"
+    },
+    {
+      "id": "LCR20",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/lcr/20/inforce/2019-12-15/published/2022-12-08",
+      "supports": "LCR normal-time threshold and buffer use"
+    },
+    {
+      "id": "LCR40",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/lcr/40/inforce/2019-12-15/published/2023-03-30",
+      "supports": "Stressed outflows and 75% aggregate inflow cap"
+    },
+    {
+      "id": "NSF20",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/nsf/20/inforce/2019-12-15/published/2019-12-15",
+      "supports": "NSFR horizon and threshold"
+    },
+    {
+      "id": "CRE31",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/cre/31/inforce/2023-01-01/published/2020-03-27",
+      "supports": "Corporate IRB risk weight functions"
+    },
+    {
+      "id": "MAR33",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/mar/33/inforce/2023-01-01/published/2020-06-05",
+      "supports": "ES-based market risk internal models"
+    },
+    {
+      "id": "OPE25",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/ope/25/inforce/2023-01-01/published/2024-07-05",
+      "supports": "Revised standardised operational-risk approach"
+    },
+    {
+      "id": "IRB explanatory note",
+      "url": "https://www.bis.org/bcbs/irbriskweight.pdf",
+      "supports": "ASRF model assumptions"
+    },
+    {
+      "id": "BCBS final reforms",
+      "url": "https://www.bis.org/publications/201712-standards-basel-iii-finalising-post-crisis-reforms",
+      "supports": "Finalising Basel III and replacing legacy operational risk approaches"
+    }
+  ],
+  "corrections_and_clarifications": [
+    "PDF page54 has sqrt(1-rho^2); use sqrt(1-rho) consistent with latent asset-correlation model and CRE31.",
+    "PDF page54 PD(99.9%) values 3.78%/17.86% are stressed PD minus ordinary PD, not stressed PD itself.",
+    "Separate loss quantile from unexpected loss above EL; do not subtract EL twice.",
+    "NSFR uses >=100%, not >100%.",
+    "CCyB is jurisdiction-dependent, generally 0-2.5% within the framework and may exceed that range; not fixed2.5%.",
+    "4.5/6/8% minima are nested; separate AT1 1.5% and Tier2 2% issuance not mandatory.",
+    "Common equity is equity, not accounting liabilities; regulatory capital is not a stock of cash.",
+    "Euler risk contribution includes exposure weight times marginal derivative.",
+    "Legacy operational methodology menu and bank/deposit-insurance snapshots not presented as current rules."
+  ],
+  "hypothetical_examples": {
+    "capital": {
+      "currency_unit": "million THB",
+      "cet1": 60,
+      "at1": 10,
+      "tier2": 20,
+      "rwa": 600,
+      "leverage_exposure": 1000,
+      "capital_buffer_scope": "conservation buffer only; other buffers excluded"
+    },
+    "floor": {
+      "pre_floor_rwa": 400,
+      "standardised_rwa": 800,
+      "floor": 0.725,
+      "effective_rwa": 580,
+      "scope": "aggregate illustration at fully phased-in reference; not a claim of current local implementation"
+    },
+    "lcr": {
+      "hqla": 120,
+      "outflows": 160,
+      "inflows": 60,
+      "net_outflows": 100,
+      "ratio": 1.2,
+      "cap": 0.75,
+      "scope": "inputs already eligible/weighted, no special exemptions"
+    },
+    "nsfr": {
+      "asf": 575,
+      "rsf": 605,
+      "after_funding_shift_asf": 625,
+      "weights": "Assigned purely to illustrate arithmetic, not a regulatory classification lookup"
+    },
+    "irb": {
+      "pd": 0.01,
+      "lgd": 0.45,
+      "maturity": 2.5,
+      "ead": 100,
+      "confidence": 0.999,
+      "model": "Nondefaulted non-SME corporate, no financial institution correlation multiplier",
+      "capital_rate": 0.07385344111364114,
+      "rwa": 92.31680139205143,
+      "omitted": "historical1.06, input eligibility checks/floors except UI range, output floor, buffers, provisions comparison and model permission"
+    },
+    "source_examples_recomputed": [
+      {
+        "pd": 0.0012,
+        "lgd": 0.6,
+        "maturity": 5,
+        "stress_pd": 0.038952209632398815,
+        "capital_rate": 0.05599330043484108
+      },
+      {
+        "pd": 0.023,
+        "lgd": 0.45,
+        "maturity": 5,
+        "stress_pd": 0.2015945232899462,
+        "capital_rate": 0.12076398455928555
+      }
+    ]
+  },
+  "visual_production": {
+    "route": "no-image-generator",
+    "design_system": "QuantCorner / QuantSeras; existing light book with purple/teal and optional dark theme",
+    "method": "Original deterministic SVG data charts with embedded existing local Roboto fonts, React controls using existing UI primitives",
+    "image_generator_used": false,
+    "third_party_visuals_added": false,
+    "source_script": "scripts/make_basel_figures.py",
+    "assets": [
+      "assets/images/basel-capital.svg",
+      "assets/images/basel-liquidity.svg",
+      "assets/images/basel-irb.svg"
+    ]
+  },
+  "reproducibility": {
+    "randomness": "No random sampling in primary charts or labs; deterministic formulas",
+    "python": "Python standard library statistics.NormalDist",
+    "javascript": "Existing normal CDF/quantile helpers; cross-language checks",
+    "notebook_generator": "scripts/make_basel_notebook.py",
+    "math_checks": "qa/basel-checks.mjs",
+    "browser_checks": "qa/basel-page-checks.cjs"
+  }
+}
