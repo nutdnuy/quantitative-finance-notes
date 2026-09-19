@@ -91,10 +91,10 @@ description: เรียนการเงินเชิงปริมาณ�
 <article class="welcome-lesson">
 <span class="welcome-lesson-number" aria-hidden="true">08</span>
 <div><p class="welcome-lesson-label">ผสมพอร์ตตลาดกับมุมมองของเรา</p>
-<h3><a href="black-litterman.html">Black–Litterman</a></h3>
+<h3><a href="black-litterman.html">Black–Litterman Portfolio</a></h3>
 <p>จะรวม prior กับ views ที่มีความไม่แน่นอน แล้วนำไปจัดพอร์ตอย่างไร?</p>
 <p class="welcome-topics">Reverse optimization · Prior · Views · Posterior</p>
-<a class="welcome-text-link" href="black-litterman.html">เปิดบท Black–Litterman →</a></div>
+<a class="welcome-text-link" href="black-litterman.html">เปิดบท Black–Litterman Portfolio →</a></div>
 </article>
 </div>
 

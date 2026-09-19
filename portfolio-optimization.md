@@ -704,9 +704,9 @@ subject to \(\mathbf 1^\top\Delta\mathbf w=0\) และข้อจำกัด
 
 <section id="black-litterman">
 
-## อ่านต่อ: Black–Litterman
+## อ่านต่อ: Black–Litterman Portfolio
 
-เมื่อกำหนด objective และ constraints ได้แล้ว ขั้นต่อไปคือเลือก expected returns ที่จะส่งเข้า optimizer [บท Black–Litterman](black-litterman.html#black-litterman) ใช้สินทรัพย์สมมติและ covariance ชุดเดียวกัน เพื่อหา prior จากพอร์ตตลาดและผสมมุมมองของผู้ลงทุนพร้อมความไม่แน่นอน
+เมื่อกำหนด objective และ constraints ได้แล้ว ขั้นต่อไปคือเลือก expected returns ที่จะส่งเข้า optimizer [บท Black–Litterman Portfolio](black-litterman.html#black-litterman) ใช้สินทรัพย์สมมติและ covariance ชุดเดียวกัน เพื่อหา prior จากพอร์ตตลาดและผสมมุมมองของผู้ลงทุนพร้อมความไม่แน่นอน
 
 <p id="experiments">ลองปรับความไม่แน่นอนของ views และ risk aversion ได้ใน <a href="black-litterman.html#experiments">ห้องทดลอง Black–Litterman</a></p>
 

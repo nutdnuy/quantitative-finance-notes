@@ -31,7 +31,7 @@ notebooks/transition-density-functions.ipynb  Python Notebook ของบท Tr
 notebooks/applied-stochastic-calculus.ipynb  Python Notebook ของบท Applied Stochastic Calculus
 notebooks/black-scholes-model.ipynb  Python Notebook ของบท Black-Scholes Model
 notebooks/portfolio-optimization.ipynb  Python Notebook ของบท Optimization Problem
-notebooks/black-litterman.ipynb  Python Notebook ของบท Black–Litterman
+notebooks/black-litterman.ipynb  Python Notebook ของบท Black–Litterman Portfolio
 assets/images/                 รูปและคำสั่งที่ใช้สร้างภาพ
 book.css                       หน้าตา Welcome และสารบัญ
 style.css                      หน้าตาบทเรียนและกราฟ

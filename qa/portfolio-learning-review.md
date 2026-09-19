@@ -31,3 +31,13 @@ Scope: Optimization Problem (existing portfolio-optimization URL), Black–Litte
 - git diff --check passed.
 
 These checks validate the educational examples and browser behavior. The examples use hypothetical inputs, not fitted market data. Publication status is reported separately after the deployment workflow and live checks.
+
+## Black–Litterman Part III extension — 2026-09-19
+
+- Renamed the chapter to Black–Litterman Portfolio while retaining URLs and anchors; updated Welcome, sidebar, glossary overview and the preceding chapter's link.
+- Read source PDF pages 101–131 and visually checked the Bayes and posterior formulas on pages 106, 124 and 126. Mapped coverage and corrections in the chapter provenance; no private PDF/pages were published.
+- Added motivation, Bayes with a worked event example, market-prior choice, dimensions and four Omega methods, posterior covariance, GLS equivalence and allocation at lambda 0.1, 1, 2.24 and 6.
+- Corrected likelihood terminology, qualified GMV/mean estimation, monthly/annual tau interpretation, and the conditions behind the Kelly comparison.
+- Executed all 8 Black–Litterman notebook code cells. Verified Bayesian update and GLS means agree, covariance-update and inverse-precision forms agree, and allocation first-order/budget identities hold.
+- npm test, build:pages (718 local references), offline page checks and the existing BL interaction/browser suite passed. Final all-equation rendering and new anchors checked after the last prose edits.
+- Visually inspected desktop intro and mobile intro, posterior formulas and allocation table. Wide equations and tables retain the existing horizontal-scroll treatment.

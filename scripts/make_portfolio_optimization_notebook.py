@@ -281,6 +281,67 @@ for enabled, scales, q in [((True,False),(.25,1),Q), ((True,True),(1,4),Q), ((Tr
 """
 
 
+snippets['bayes-foundation'] = '''prior_event = .50
+signal_if_event, signal_if_not_event = .70, .30
+marginal = signal_if_event*prior_event + signal_if_not_event*(1-prior_event)
+posterior_event = signal_if_event*prior_event/marginal
+close(marginal, .50)
+close(posterior_event, .70)
+print(f"Illustrative event Bayes: prior={prior_event:.0%}, posterior={posterior_event:.0%}")
+print("This binary-event example is separate from the Gaussian BL expected-return model.")'''
+
+snippets['posterior-uncertainty'] = '''K = matmul(tau_sigma, transpose(P))
+# Solve (P tau Sigma P' + Omega) Z = K' one column at a time.
+Z = transpose([solve(system, row) for row in K])
+reduction = matmul(K, Z)
+M = [[tau_sigma[i][j]-reduction[i][j] for j in range(4)] for i in range(4)]
+expected_diagonal = [2.7664972316625232e-5, 5.476629739153461e-5,
+                     .00032039215253564017, .0019606964734960497]
+for i in range(4):
+    close(M[i][i], expected_diagonal[i], tol=1e-12)
+    assert 0 < M[i][i] <= tau_sigma[i][i]
+    for j in range(4):
+        close(M[i][j], M[j][i], tol=1e-12)
+# Check uncertainty reduction on independent test directions.
+for v in [[1,0,0,0],[1,1,1,1],[-1,0,1,0],[.2,-.4,.7,-.1]]:
+    assert dot(v,matvec(M,v)) > 0
+    assert dot(v,matvec(reduction,v)) >= -1e-12
+print("Posterior covariance of the mean (not return covariance):")
+for row in M:
+    print([f"{value:.10f}" for value in row])
+print("Prior view means:", matvec(P, prior))
+print("View innovation Q-P prior:", innovation)
+print("Predictive covariance would be Sigma+M under the additional conditional-return model.")'''
+
+snippets['mixed-estimation'] = '''# Independently reconstruct the GLS/precision normal equations.
+identity = [[float(i==j) for j in range(4)] for i in range(4)]
+prior_precision = transpose([solve(tau_sigma,col) for col in transpose(identity)])
+omega_inverse_P = transpose([solve(omega,col) for col in transpose(P)])
+view_precision = matmul(transpose(P),omega_inverse_P)
+precision = [[prior_precision[i][j]+view_precision[i][j] for j in range(4)] for i in range(4)]
+prior_rhs = matvec(prior_precision,prior)
+view_rhs = matvec(transpose(P),solve(omega,Q))
+gls_mean = solve(precision,[a+b for a,b in zip(prior_rhs,view_rhs)])
+gls_covariance = transpose([solve(precision,col) for col in transpose(identity)])
+for i in range(4):
+    close(gls_mean[i],posterior[i],tol=1e-10)
+    for j in range(4):
+        close(gls_covariance[i][j],M[i][j],tol=1e-12)
+print("GLS and Bayesian means agree:", gls_mean)
+print("Inverse precision and covariance-update forms agree entry by entry.")'''
+
+snippets['risk-aversion-allocation'] = '''direction = solve(SIGMA,posterior)
+for investor_lambda in [.1,1,2.24,6]:
+    weights = [x/investor_lambda for x in direction]
+    cash = 1-sum(weights)
+    close(sum(weights)+cash,1)
+    # First-order condition of the mean-variance objective.
+    for marginal_risk, expected_return in zip(matvec(SIGMA,weights),posterior):
+        close(investor_lambda*marginal_risk,expected_return)
+    print(f"lambda={investor_lambda}: risky weights={[round(100*w,4) for w in weights]}, risk-free={100*cash:.4f}%")
+print("Market lambda remains 2.24. Lambda=1 is not universally exact Kelly for annual simple returns.")'''
+
+
 def markdown(text):
     text = re.sub(r'<h1[^>]*>(.*?)</h1>', r'# \1', text)
     text = re.sub(r'<noscript>.*?</noscript>', '', text, flags=re.S)
@@ -352,4 +413,4 @@ def build_notebook(slug, title):
 
 if __name__ == '__main__':
     build_notebook('portfolio-optimization', 'Optimization Problem')
-    build_notebook('black-litterman', 'Black–Litterman')
+    build_notebook('black-litterman', 'Black–Litterman Portfolio')

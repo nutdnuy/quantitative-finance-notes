@@ -6,7 +6,7 @@ const {pathToFileURL}=require('node:url');
 const root=path.resolve(__dirname,'..');
 const pageURL=name=>pathToFileURL(path.join(root,name)).href;
 const report={status:'running',checks:[],states:[],errors:[],externalRequests:[]};
-const chapters=[['portfolio-optimization','Optimization Problem',11],['black-litterman','Black–Litterman',3]];
+const chapters=[['portfolio-optimization','Optimization Problem',11],['black-litterman','Black–Litterman Portfolio',3]];
 const terms=[['objective-function','optimization-problem'],['gradient','gradient-hessian'],['hessian','gradient-hessian'],['ordinary-least-squares','regression-optimization'],['generalized-least-squares','regression-optimization'],['lagrange-multiplier','lagrange-method'],['reverse-optimization','black-litterman'],['black-litterman','black-litterman'],['kkt-conditions','inequality-constraints'],['active-weight','benchmark-active']];
 (async()=>{
  const browser=await chromium.launch();const page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'});

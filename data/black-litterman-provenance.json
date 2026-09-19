@@ -62,5 +62,32 @@
     ],
     "litterman_portrait": "Linked interview only; no open reuse license established for Jake Armour photograph.",
     "date": "2026-09-18"
+  },
+  "part_iii_revision": {
+    "date": "2026-09-19",
+    "title": "Black–Litterman Portfolio",
+    "source_file": "JA252.2 Notes1 (1).pdf",
+    "sha256": "eebd6f73231ea0c249afb91aaf551dd45d9e54f3a2898fac88d5e8bf66106c20",
+    "pages": [
+      101,
+      131
+    ],
+    "coverage": {
+      "101-104": "motivation, two derivations, roadmap",
+      "105-107": "Bayes and terminology; biographical digression omitted",
+      "108-118": "choice of prior, reverse optimization, lambda and tau",
+      "119-123": "views, dimensions, independence and four Omega methods",
+      "124-126": "posterior mean and covariance",
+      "127-131": "allocation and four risk-aversion examples"
+    },
+    "corrections": [
+      "Likelihood is p(Q|mu), not likelihood times prior",
+      "GMV weights do not require means, but expected GMV return does",
+      "Prior is informative, conditional on equilibrium assumptions",
+      "Tau=1/120 is a teaching assumption; monthly count alone does not justify annual mean covariance",
+      "Recomputed all values with lambda_market exactly 2.24 rather than mixing rounded inputs",
+      "Lambda=1 is not universally exact Kelly or an investor-wide risk threshold"
+    ],
+    "private_source_published": false
   }
 }
