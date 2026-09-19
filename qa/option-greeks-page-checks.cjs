@@ -97,7 +97,11 @@ function textOutsideSvg(svg) {
     await assertNumber('[data-greeks-higher="theta-day"]', result.theta / 365);
     assert.match(await page.locator('#greeks-higher-lab svg title').textContent(), new RegExp(`${metric}.*${kind}`, 'i'));
   }
-  async function capture(selector, name) { await page.locator(selector).screenshot({ path: path.join(__dirname, `option-greeks-${name}.png`) }); }
+  async function capture(selector, name) {
+    // Tall element screenshots otherwise place the sticky mobile header across
+    // the middle of the captured element. This affects capture only, not QA.
+    await page.locator(selector).screenshot({ path: path.join(__dirname, `option-greeks-${name}.png`), style: '.book-mobile-header{visibility:hidden!important}' });
+  }
 
   try {
     await openLesson();
