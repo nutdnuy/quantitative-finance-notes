@@ -37,10 +37,10 @@ async function build(){
   if(meta.inline_math===true)source=source.replace(/\\\(([\s\S]+?)\\\)/g,(_,tex)=>{const n=inlineEquations.length;inlineEquations.push(katex.renderToString(tex.trim(),{displayMode:false,throwOnError:true,output:'htmlAndMathml',strict:'ignore'}));return `INLINEEQUATION${n}END`;});
   let body=marked.parse(source).replace(/INLINEEQUATION(\d+)END/g,(_,i)=>inlineEquations[Number(i)]).replace(/EQUATION_(\d+)_END/g,(_,i)=>equations[Number(i)]).replaceAll('<pre>','<pre tabindex="0" aria-label="ตัวอย่างโค้ด Python">');
   const headings=[],ids=new Map();
-  body=body.replace(/<h([1-3])(?: id="([^"]+)")?>([\s\S]*?)<\/h\1>/g,(_,level,existingId,text)=>{let base=existingId||slug(text)||'heading',n=(ids.get(base)||0)+1;ids.set(base,n);const id=n===1?base:`${base}-${n}`;if(level==='2')headings.push({id,title:plain(text)});return `<h${level} id="${id}">${text}</h${level}>`;});
+  body=body.replace(/<h([1-3])>([\s\S]*?)<\/h\1>/g,(_,level,text)=>{let base=slug(text)||'heading',n=(ids.get(base)||0)+1;ids.set(base,n);const id=n===1?base:`${base}-${n}`;if(level==='2')headings.push({id,title:plain(text)});return `<h${level} id="${id}">${text}</h${level}>`;});
   body=body.replace(/href="([a-z0-9-]+)\.md(#[^"]*)?"(?! download)/g,(_,file,hash='')=>`href="${file===toc.root?'index':file}.html${hash}"`);
   body=body.replace(/<a href="glossary\.html#[^"]+"/g,link=>link+' class="glossary-link"');
-  return {file,href:index===0?'index.html':file+'.html',title:item.title||meta.title||file,description:meta.description||config.title,notebook:meta.notebook||config.notebook,author:meta.author||config.author,showAuthorProfile:meta.author_profile!==false,body,headings,home:index===0};
+  return {file,href:index===0?'index.html':file+'.html',title:item.title||meta.title||file,description:meta.description||config.title,notebook:meta.notebook||config.notebook,body,headings,home:index===0};
  });
  const icon=fs.readFileSync(path.join(root,'assets/icons/search.svg'),'utf8').replace(/<svg\b/,'<svg aria-hidden="true" focusable="false"');
  const search=[];
@@ -63,7 +63,7 @@ async function build(){
 <button class="search-trigger" id="search-button">${icon}<span>Search</span><kbd>⌘ K</kbd></button>
 <nav class="book-nav" aria-label="สารบัญ">${nav}</nav>${localNav}
 <div class="book-sidebar-footer"><a href="${escape(page.notebook)}" download>ดาวน์โหลด Notebook</a><a href="${page.file}.md" download>ไฟล์ Markdown หน้านี้</a>${github}<button id="theme-button">พื้นหลังมืด</button></div></aside>
-<main class="book-main ${page.home?'welcome-main':'chapter'}" id="content"><div class="page-topline"><span>${escape(config.title)}</span><button id="print-button">พิมพ์หน้านี้</button></div>${page.home?cover('mobile-cover'):''}${page.home?page.body.replace('<!-- author-profile -->',authorCard(true)):page.body+(page.showAuthorProfile?authorCard():'')}<footer class="book-footer">${escape(config.title)}<span>โดย ${escape(page.author)}</span></footer></main></div>
+<main class="book-main ${page.home?'welcome-main':'chapter'}" id="content"><div class="page-topline"><span>${escape(config.title)}</span><button id="print-button">พิมพ์หน้านี้</button></div>${page.home?cover('mobile-cover'):''}${page.home?page.body.replace('<!-- author-profile -->',authorCard(true)):page.body+authorCard()}<footer class="book-footer">${escape(config.title)}<span>โดย ${escape(config.author)}</span></footer></main></div>
 <dialog id="search-dialog" aria-labelledby="search-title"><div class="search-dialog-heading"><h2 id="search-title">ค้นหาในสมุดบันทึก</h2><button id="close-search" aria-label="ปิดการค้นหา">ปิด</button></div><label for="search-input" class="sr-only">คำค้นหา</label><input id="search-input" type="search" placeholder="ลองค้นหา volatility หรือ ความผันผวน" autocomplete="off"><p id="search-status" role="status"></p><div id="search-results"></div></dialog>
 <script src="search-index.js" defer></script><script src="site.js" defer></script>${page.home?'':'<script src="app.js" defer></script>'}</body></html>`;
   fs.writeFileSync(path.join(root,page.href),html);

@@ -185,16 +185,6 @@ description: เรียนการเงินเชิงปริมาณ�
 </article>
 </div>
 
-## The Magnificent Jump
-
-สุรพัศ หอมชุ่ม · Math Nerd
-
-- [ตอนที่ 1 · Intro](magnificent-jump-intro.html)
-- [ตอนที่ 2 · นาฬิกาสุ่ม (random clock)](magnificent-jump-random-clock.html)
-- [ตอนที่ 3 · Variance Gamma Process](magnificent-jump-variance-gamma.html)
-
-[ดาวน์โหลด Notebook รวม 3 ตอน](notebooks/the-magnificent-jump.ipynb)
-
 ## อ่านไป ลองไป
 
 - **ดูความหมายก่อนแทนสูตร** — เริ่มจากตัวอย่างเล็ก ๆ แล้วอธิบายให้ได้ว่าแต่ละตัวแปรหมายถึงอะไร
