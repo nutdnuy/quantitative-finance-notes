@@ -5,7 +5,7 @@
   "scripts": {
     "build": "node build.cjs",
     "build:pages": "npm run build && node scripts/export-pages.cjs",
-    "test": "node qa/math-checks.mjs && node qa/binomial-checks.mjs && node qa/transition-density-checks.mjs && node qa/stochastic-calculus-checks.mjs && node qa/black-scholes-checks.mjs && node qa/portfolio-checks.mjs && node qa/portfolio-optimization-checks.mjs && node qa/tail-risk-checks.mjs && node qa/stylized-facts-checks.mjs && node qa/basel-checks.mjs && node qa/martingale-pricing-checks.mjs && node qa/exotic-options-checks.mjs && node qa/numerical-methods-checks.mjs && node qa/option-greeks-checks.mjs && node qa/return-foundations-checks.mjs && node qa/volatility-models-checks.mjs && node qa/pairs-trading-checks.mjs",
+    "test": "node qa/math-checks.mjs && node qa/binomial-checks.mjs && node qa/transition-density-checks.mjs && node qa/stochastic-calculus-checks.mjs && node qa/black-scholes-checks.mjs && node qa/portfolio-checks.mjs && node qa/portfolio-optimization-checks.mjs && node qa/tail-risk-checks.mjs && node qa/stylized-facts-checks.mjs && node qa/basel-checks.mjs && node qa/martingale-pricing-checks.mjs && node qa/exotic-options-checks.mjs && node qa/numerical-methods-checks.mjs && node qa/option-greeks-checks.mjs && node qa/return-foundations-checks.mjs && node qa/volatility-models-checks.mjs",
     "dev": "node serve.cjs",
     "check:site": "node qa/welcome-checks.cjs"
   },

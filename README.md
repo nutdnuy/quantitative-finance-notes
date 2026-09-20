@@ -69,12 +69,6 @@ npm run build
 
 ไฟล์ HTML ไม่อยู่ใน Git; รัน build ก่อนเปิดไฟล์ในเครื่อง หรือใช้ `npm run build:pages` เพื่อสร้างโฟลเดอร์ `_site/` สำหรับโฮสต์เว็บโดยเฉพาะ ระบบจะตรวจลิงก์ รูป และฟอนต์ภายในก่อนเผยแพร่
 
-## ซีรีส์ Statistical Arbitrage / Pairs Trading
-
-อ่านตามลำดับ `statistical-arbitrage.md`, `pairs-trading-cointegration.md`, `pairs-trading-backtest.md` และ `pairs-trading-ml.md` มีกราฟ SVG จากข้อมูลสมมติ 8 ภาพ ห้องทดลอง 3 ชุด และ Notebook `notebooks/pairs-trading.ipynb` ภาพ NYSE เป็นภาพจริงที่ตรวจสิทธิ์แล้ว; PDF ต้นทางไม่เผยแพร่ใน repository ดู `data/pairs-trading-provenance.json` และ `THIRD_PARTY_NOTICES.md`
-
-สร้างภาพด้วย `python3 scripts/make_pairs_trading_figures.py` และสร้างพร้อมรัน Notebook ด้วย `python3 scripts/make_pairs_trading_notebook.py` ต้องมี NumPy, SciPy, statsmodels และ Matplotlib ตามส่วน setup ใน Notebook ตรวจ JavaScript ด้วย `npm test` และหน้าเว็บด้วย `node qa/pairs-trading-page-checks.cjs` ขณะเปิด preview พอร์ต 8763 ตัวอย่าง ML แยกชุดข้อมูลจากตัวทดลอง Backtest; ผลเป็น simulation และไม่ได้แสดงความสามารถทำกำไรจากตลาดจริง
-
 ## เนื้อหาและแหล่งที่มา
 
 บท **Martingale Pricing** ต่อจาก Black–Scholes ใช้เอกสาร *Martingales Theory: Application to Option Pricing — Black-Scholes All Over Again* ที่ผู้ใช้ให้มา อธิบาย self-financing, P/Q, Girsanov, numeraire และ Feynman–Kac ก่อนขยายไป continuous dividends, deterministic term structures และ Black–76 พร้อมห้องทดลองสองส่วนและตัวอย่างสมมติที่คำนวณใหม่ รายละเอียดและการแก้สมการต้นฉบับอยู่ใน `data/martingale-pricing-provenance.json` ไม่เผยแพร่ PDF ต้นฉบับ

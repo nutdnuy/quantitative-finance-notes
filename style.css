@@ -63,8 +63,3 @@ img[src*="technical-lightning-satire"]{display:block;width:100%;height:auto;bord
 .rv-latent-bar{fill:var(--comparison);opacity:.72}
 
 .numerical-choice label{display:block;font-size:14px;font-weight:500;margin-bottom:12px}.numerical-choice select{width:100%}.numerical-lab .results strong{font-size:clamp(24px,3vw,36px)}
-
-/* Pairs series: native charts remain readable and keyboard-scrollable on phones. */
-.pairs-figure{margin:32px 0;max-width:100%}.pairs-figure>img{display:block;width:100%;height:auto;border-radius:4px}.pairs-figure figcaption{font-size:14px;line-height:1.65;color:var(--muted);margin-top:12px}.pairs-chart-scroll{max-width:100%;overflow-x:auto;background:#fff;border:1px solid var(--border);border-radius:4px}.pairs-chart-scroll img{display:block;width:100%;min-width:720px;height:auto}.pairs-chart-scroll a{display:block}.pairs-chart-scroll:focus-visible,.pairs-chart-scroll a:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
-
-.pairs-chart-hint{font-size:13px;color:var(--muted);margin:0 0 8px;line-height:1.5}

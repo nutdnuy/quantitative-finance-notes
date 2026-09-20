@@ -42,13 +42,5 @@ chapters:
     title: Introduction to Numerical Methods
   - file: option-greeks
     title: Know Your Weapon — Option Greeks
-  - file: statistical-arbitrage
-    title: Statistical Arbitrage · Pairs Trading
-  - file: pairs-trading-cointegration
-    title: Pairs Trading 2 · Cointegration
-  - file: pairs-trading-backtest
-    title: Pairs Trading 3 · Signals & Backtest
-  - file: pairs-trading-ml
-    title: Pairs Trading 4 · Clustering, PCA & Prediction
   - file: glossary
     title: อภิธานศัพท์

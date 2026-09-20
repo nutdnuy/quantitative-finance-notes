@@ -185,45 +185,6 @@ description: เรียนการเงินเชิงปริมาณ�
 </article>
 </div>
 
-## ซีรีส์ Statistical Arbitrage / Pairs Trading
-
-เริ่มจากการถือ Long–Short สองขา แล้วตรวจความสัมพันธ์ของราคา สร้างกติกาซื้อขาย และทดสอบโมเดลทำนายด้วยข้อมูลที่แยกตามเวลา ซีรีส์นี้มีภาพจากการคำนวณ ห้องทดลองปรับค่า และ Python Notebook
-
-<div class="welcome-lessons">
-<article class="welcome-lesson">
-<span class="welcome-lesson-number" aria-hidden="true">19</span>
-<div><p class="welcome-lesson-label">เริ่มจากสองขาของพอร์ต</p>
-<h3><a href="statistical-arbitrage.html">Statistical Arbitrage · Pairs Trading</a></h3>
-<p>กำไรของ Long–Short, ฐานเงินทุน และความต่างของ Hedge ratio</p>
-<p class="welcome-topics">Long–Short · Dollar neutral · Market beta</p>
-<a class="welcome-text-link" href="statistical-arbitrage.html">อ่านตอนนี้ →</a></div>
-</article>
-<article class="welcome-lesson">
-<span class="welcome-lesson-number" aria-hidden="true">20</span>
-<div><p class="welcome-lesson-label">ตรวจความสัมพันธ์ของราคา</p>
-<h3><a href="pairs-trading-cointegration.html">Pairs Trading 2 · Cointegration</a></h3>
-<p>หักแนวโน้มร่วม สร้าง residual และอ่านผลทดสอบพร้อมข้อจำกัด</p>
-<p class="welcome-topics">Stationarity · Engle–Granger · Half-life</p>
-<a class="welcome-text-link" href="pairs-trading-cointegration.html">อ่านตอนนี้ →</a></div>
-</article>
-<article class="welcome-lesson">
-<span class="welcome-lesson-number" aria-hidden="true">21</span>
-<div><p class="welcome-lesson-label">ติดตามเงินตั้งแต่เปิดจนปิดสถานะ</p>
-<h3><a href="pairs-trading-backtest.html">Pairs Trading 3 · Signals & Backtest</a></h3>
-<p>สร้างคำสั่งจาก z-score แล้วนับกำไรขาดทุนหลังต้นทุนทั้งสองขา</p>
-<p class="welcome-topics">Lagged execution · Trade blotter · Drawdown</p>
-<a class="welcome-text-link" href="pairs-trading-backtest.html">อ่านตอนนี้ →</a></div>
-</article>
-<article class="welcome-lesson">
-<span class="welcome-lesson-number" aria-hidden="true">22</span>
-<div><p class="welcome-lesson-label">ตรวจโมเดลกับวิธีง่าย</p>
-<h3><a href="pairs-trading-ml.html">Pairs Trading 4 · Clustering, PCA & Prediction</a></h3>
-<p>คัดกลุ่มหุ้นและทำนาย residual ด้วยข้อมูล train, validation และ test</p>
-<p class="welcome-topics">Clustering · PCA · Ridge · Python Notebook</p>
-<a class="welcome-text-link" href="pairs-trading-ml.html">อ่านตอนนี้ →</a></div>
-</article>
-</div>
-
 ## อ่านไป ลองไป
 
 - **ดูความหมายก่อนแทนสูตร** — เริ่มจากตัวอย่างเล็ก ๆ แล้วอธิบายให้ได้ว่าแต่ละตัวแปรหมายถึงอะไร
