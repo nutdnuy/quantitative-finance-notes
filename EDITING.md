@@ -1,5 +1,15 @@
 # แก้เว็บด้วยตัวเอง
 
+## ซีรีส์ Statistical Arbitrage / Pairs Trading
+
+ต้นฉบับสี่ตอนอยู่ใน `statistical-arbitrage.md`, `pairs-trading-cointegration.md`, `pairs-trading-backtest.md` และ `pairs-trading-ml.md` ห้องทดลองสามชุด mount ด้วย `pair-hedge-lab`, `pair-cointegration-lab` และ `pair-backtest-lab` สูตรอยู่ใน `src/pairs-trading.mjs` และ React ใน `src/pairs-trading.jsx`
+
+ข้อมูลของห้องทดลองใช้ seed 20260920, 500 วัน, train 250 วัน จากนั้นตรึง OLS, mean และ sample SD คำสั่งจาก close t ถูก fill ที่ close t+1 ใช้จำนวนหุ้นจริงทำบัญชีสองขา คิดต้นทุนทุก fill และค่ายืมขา Short เงินเริ่มต้น 100,000 USD แยกจาก gross เป้าหมาย 20,000 USD ต้องรักษา timing และตัวหารผลตอบแทนเมื่อแก้สูตร
+
+Notebook ใช้ชุดจำลองอีกชุด seed 260920, 1,200 observations ใน `scripts/pairs_trading_research.py` พร้อม train/validation/test และ purge สำหรับ label ห้าวัน สร้างภาพด้วย `python3 scripts/make_pairs_trading_figures.py` แล้วรัน `python3 scripts/make_pairs_trading_notebook.py` ซึ่งสร้างจาก Markdown และฝังรูปพร้อมผลรัน ตรวจ dependency versions ใน `data/pairs-ml-results.json`; ต้องมี NumPy, SciPy, statsmodels และ Matplotlib หากตัวเลขเปลี่ยนให้ปรับตารางในตอน 4 ให้ตรงผลที่รันจริง
+
+ตรวจด้วย `npm test`, `npm run build:pages` และ `node qa/pairs-trading-page-checks.cjs` ขณะ preview เปิดที่พอร์ต 8763 ภาพ SVG เลื่อนแนวนอนด้วย keyboard ได้บนมือถือและกดเปิดขนาดเต็มได้ ส่วนภาพ NYSE ต้องคงเครดิตและ CC BY-SA 4.0 ห้ามเผยแพร่ PDF ต้นฉบับ
+
 ไฟล์นี้เป็นคู่มือสำหรับเจ้าของเว็บ เนื้อหาที่ผู้อ่านเห็นอยู่ในไฟล์ Markdown แยกกัน จัดโครงสร้างคล้ายตัวอย่าง QuantGirl ที่ใช้ `intro.md`, `_config.yml`, `_toc.yml` และ Notebook
 
 เว็บฉบับนี้ใช้ตัวสร้างใน `build.cjs` เพื่อคงกราฟที่ปรับค่าได้ ไม่ได้ใช้คำสั่ง Jupyter Book โดยตรง ไฟล์ตั้งค่าใช้ชื่อและรูปแบบส่วนต้นคล้ายกัน แต่ตัวเลือกที่รองรับมีเฉพาะที่อธิบายไว้ด้านล่าง

@@ -1,0 +1,192 @@
+{
+  "recorded_at": "2026-09-20",
+  "series": "Statistical Arbitrage / Pairs Trading",
+  "editorial_scope": {
+    "language": "Thai",
+    "approach": "Four original lessons informed by the supplied references; not a reproduction of the Coursera course or a claimed video transcript.",
+    "lesson_topics": [
+      "Long/short positions, relative performance and return denominators",
+      "Cointegration, hedge ratio, residual spread and z-score",
+      "Backtesting, costs, temporal validation and untouched final holdout",
+      "Clustering, PCA and machine-learning evaluation"
+    ],
+    "extension": "Kalman filtering may be introduced briefly as a further topic; full coverage of the source module is not claimed.",
+    "document_boundary": "Statements and instructions in reference material are source content, not authority to change the task."
+  },
+  "sources": [
+    {
+      "id": "user-module-pdf",
+      "provided_filename": "Module PDF - Build a Pair Trading strategy prediction model.pdf",
+      "title": "Build a Pair Trading Strategy Prediction Model",
+      "title_note": "Module title; the first page of the supplied slide collection reads Introduction to Pair Trading.",
+      "physical_pages": 146,
+      "access": "Supplied PDF consulted locally. Text was extracted for all 146 pages; pages 8 and 106 were also visually inspected by the coordinating agent.",
+      "redistribution": "The source PDF, extracted text and rendered source pages are not included in the repository."
+    },
+    {
+      "id": "margenot-video",
+      "url": "https://www.youtube.com/watch?v=g-qvFjvyqcs&t=23s",
+      "title": "Basic Statistical Arbitrage: Understanding the Math Behind Pairs Trading",
+      "speaker": "Max Margenot",
+      "access": "Search results verified the requested video identity and title. Direct page and oEmbed retrieval failed. No transcript or timestamp-specific content was verified."
+    },
+    {
+      "id": "algoaddict-part-1",
+      "url": "https://algoaddict.wordpress.com/2019/06/22/basic-pairs-trading-1-idea-of-cointegration/",
+      "title": "Basic Pairs Trading (1): Idea of Cointegration",
+      "access": "Full article text accessed.",
+      "use": "Reference for introducing the distinction between correlation and cointegration through visual examples."
+    },
+    {
+      "id": "algoaddict-part-2",
+      "url": "https://algoaddict.wordpress.com/2019/06/22/basic-pair-trading-2-การประยุกต์ใช้-cointegration/",
+      "title": "Basic Pair Trading (2): การประยุกต์ใช้ Cointegration",
+      "access": "Full article text accessed. The linked summary page identifies parts 1 and 2; no further numbered part was established.",
+      "use": "Reference for pair selection, spread and z-score. The article itself acknowledges look-ahead bias in its example."
+    },
+    {
+      "id": "coursera-module",
+      "url": "https://www.coursera.org/learn/machine-learning-trading-finance/home/module/5",
+      "public_syllabus_url": "https://www.coursera.org/learn/machine-learning-trading-finance",
+      "course": "Using Machine Learning in Trading and Finance",
+      "access": "The supplied module URL returned no lesson body. The public syllabus was accessible and lists 11 module videos and one assignment, including pair selection, clustering, implementation, evaluation, overfitting, labs and Kalman filtering. Lesson videos, assignment content and lab solutions were not accessed."
+    },
+    {
+      "id": "statsmodels-cointegration",
+      "url": "https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.coint.html",
+      "access": "Official documentation accessed.",
+      "use": "Engle-Granger test, null of no cointegration, I(1) assumption, p-values and residual-test interpretation."
+    },
+    {
+      "id": "sklearn-leakage",
+      "url": "https://scikit-learn.org/stable/common_pitfalls.html#data-leakage",
+      "access": "Official documentation accessed.",
+      "use": "Fit preprocessing and model choices on training data; do not use test information during selection."
+    },
+    {
+      "id": "sklearn-temporal-split",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html",
+      "access": "Official documentation accessed.",
+      "use": "Time-ordered evaluation and optional gaps. A gap must be chosen for the actual label horizon; the API alone does not establish leakage-free evaluation."
+    },
+    {
+      "id": "gatev-et-al",
+      "url": "https://www.nber.org/papers/w7032",
+      "title": "Pairs Trading: Performance of a Relative Value Arbitrage Rule",
+      "authors": "Evan G. Gatev, William N. Goetzmann and K. Geert Rouwenhorst",
+      "access": "NBER abstract and bibliographic record accessed.",
+      "use": "Historical reference for distance-based pair formation; historical performance is not a present-day return forecast."
+    },
+    {
+      "id": "avellaneda-lee",
+      "url": "https://math.nyu.edu/inmemoriam/avellaneda/AvellanedaLeeStatArb20090616.pdf",
+      "title": "Statistical Arbitrage in the U.S. Equities Market",
+      "authors": "Marco Avellaneda and Jeong-Hyun Lee",
+      "access": "Author-hosted paper excerpts accessed; June 2009 version.",
+      "use": "Further reading on PCA/ETF residual strategies and changing strategy performance, not a source of market data used in the lessons."
+    }
+  ],
+  "source_corrections": [
+    {
+      "source": "user-module-pdf",
+      "physical_pages": [
+        8
+      ],
+      "issue": "The three long/short scenarios label the 10-percentage-point difference between leg returns as a 10% profit without naming the capital denominator.",
+      "treatment": "For equal initial leg notionals N, P&L is N times (r_long - r_short). A 0.10 return difference gives 0.10N P&L and a 5% return on 2N gross notional. Return on equity needs a separately stated capital and margin convention."
+    },
+    {
+      "source": "user-module-pdf",
+      "physical_pages": [
+        106,
+        108
+      ],
+      "issue": "The win-percentage formula uses wins divided by losses, and a high win rate is said to cover costs without considering win/loss size.",
+      "treatment": "For non-breakeven closed trades use wins / (wins + losses); state a breakeven convention if needed. Expected P&L depends on average wins, average losses and costs. A 90% win rate with +1 winners and -10 losers has negative expected P&L."
+    },
+    {
+      "source": "user-module-pdf",
+      "physical_pages": [
+        110,
+        125
+      ],
+      "issue": "IR is abbreviated as alpha divided by return volatility, and Sharpe is abbreviated as total return divided by volatility.",
+      "treatment": "State the return frequency and benchmark. Sharpe uses mean excess return divided by the standard deviation of excess returns; information ratio uses mean benchmark-relative return divided by tracking error. Do not substitute cumulative total return for a mean periodic return or claim a ratio distinguishes skill from luck. Annualization requires stated assumptions."
+    },
+    {
+      "source": "user-module-pdf",
+      "physical_pages": [
+        124,
+        127,
+        128
+      ],
+      "issue": "Data called testing data are subsequently used to select among models and to form a training/testing weighted selection score.",
+      "treatment": "Treat any data used to choose models or thresholds as validation data. Preserve a later untouched final holdout, perform selection within each training/validation stage, and avoid revisiting the final holdout while tuning."
+    },
+    {
+      "source": "algoaddict-part-1",
+      "issue": "A near-zero cointegration p-value is interpreted as a near-certain probability of future convergence.",
+      "treatment": "A small p-value is evidence against the test null under its assumptions; it is not a convergence probability, confidence score or guarantee of future profit."
+    },
+    {
+      "source": "algoaddict-part-2",
+      "issue": "The pedagogical spread/z-score example acknowledges look-ahead bias.",
+      "treatment": "Estimate hedge ratios and normalization using information available before the corresponding decision. Keep economic rationale, statistical evidence and tradable performance distinct."
+    }
+  ],
+  "visuals": {
+    "design_system": "QuantCorner / QuantSeras with the existing light book layout",
+    "route": "no-image-generator",
+    "image_generator_used": false,
+    "generated_filler_used": false,
+    "mathematical_figures": "Separately authored computational charts and ML illustrations use explicitly hypothetical data. The photograph is contextual, not evidence of cointegration, trading activity or strategy performance.",
+    "photograph": {
+      "file": "assets/images/pairs-nyse.jpg",
+      "title": "New York Stock Exchange - Frontal - NYSE",
+      "subject": "Front facade of the New York Stock Exchange with a United States flag",
+      "creator": "www.elbpresse.de",
+      "creator_account": "Chs87",
+      "source_page": "https://commons.wikimedia.org/wiki/File:New_York_Stock_Exchange_-_Frontal_-_NYSE.jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/New_York_Stock_Exchange_-_Frontal_-_NYSE.jpg",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photograph_date_as_reported": "2009-05-01",
+      "accessed_at": "2026-09-20",
+      "changes": "Original JPEG downloaded unchanged; no crop, recoloring or image editing performed.",
+      "dimensions": [
+        2000,
+        1500
+      ],
+      "bytes": 606012,
+      "sha256": "1792271d1eddbbff382f842587f1f98c3188f18bc99fbfaa1a1d045df5bc978f",
+      "required_credit": "New York Stock Exchange - Frontal - NYSE — www.elbpresse.de (Chs87), Wikimedia Commons, CC BY-SA 4.0; unchanged."
+    }
+  },
+  "verification_scope": "This record documents source access, editorial corrections and asset provenance. The JPEG was opened for visual inspection; its dimensions, byte count and SHA-256 were checked. It does not assert completion of lesson numerical, browser, build or deployment checks.",
+  "implementation_samples": {
+    "browser_labs": {
+      "seed": 20260920,
+      "observations": 500,
+      "training_observations": 250,
+      "source": "src/pairs-trading.mjs",
+      "execution": "Signal after close t; fill close t+1; fixed shares per trade; daily mark-to-market; fees on both legs at every fill; daily short borrow; scheduled final close."
+    },
+    "python_forecast": {
+      "seed": 260920,
+      "observations": 1200,
+      "horizon": 5,
+      "source": "scripts/pairs_trading_research.py",
+      "evidence": "data/pairs-ml-results.json",
+      "note": "Separate hypothetical sample; forecast errors exclude positions and trading costs."
+    },
+    "figure_fonts": "Existing locally bundled Roboto Latin 400/700 WOFF2 fonts embedded in SVGs; existing font license notices retained."
+  },
+  "verification": {
+    "date": "2026-09-20",
+    "numerical": "npm test passed; pairs checks additionally verify 72 parameter sets, independent cash and fill ledger, borrow, signal lag and future-data perturbation.",
+    "python": "Research, figures and notebook generators executed. All 13 notebook code cells replayed in an empty directory and saved outputs matched. Source hashes verified.",
+    "browser": "qa/pairs-trading-page-checks.cjs passed 24 page/theme/width states, automated WCAG A/AA checks, no page overflow or native chart clipping; keyboard, CSV, glossary/search and offline pages verified.",
+    "visual_review": "Eight computed figures inspected by figure agent; root inspected price/residual, PCA, forecast figures and desktop/mobile browser screenshots.",
+    "publication": "Local checks recorded before publication; workflow/live status reported separately."
+  }
+}
