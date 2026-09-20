@@ -1,5 +1,9 @@
 # Sources and notices
 
+## The Magnificent Jump — 2026-09-20
+
+The three-part article and its notebook reproduce the owner-supplied [QuantCorner article](https://qc-variance-gamma-model.nutdnuy.chatgpt.site/) by **สุรพัศ หอมชุ่ม · Math Nerd**, retaining the original wording, formula symbols and signature. Copyright and attribution remain with the original author; no new license is asserted. The source content and retrieval hash are recorded in `data/magnificent-jump-source.json` and `data/magnificent-jump-provenance.json`. The original PDF is not redistributed. Separately labelled figures are new, reproducible hypothetical calculations; their mathematical reference is [Madan, Carr & Chang (1998)](https://engineering.nyu.edu/sites/default/files/2018-09/CarrEuropeanFinReview1998.pdf).
+
 ## Harry Markowitz portrait — 2026-09-18
 
 `assets/images/harry-markowitz.jpg` is the unmodified portrait from [Rady School of Management, UC San Diego](https://rady.ucsd.edu/faculty-research/faculty/emeriti-faculty/harry-markowitz.html), retrieved for the Portfolio Theory chapter. The source page does not state an open reuse license; copyright remains with the respective rights holder, and redistribution permission is not asserted. Source URL and file hash are recorded in `data/portfolio-provenance.json`. The HTML caption and Notebook credit the source.

@@ -1,0 +1,43 @@
+{
+  "source_url": "https://qc-variance-gamma-model.nutdnuy.chatgpt.site/",
+  "author": "สุรพัศ หอมชุ่ม · Math Nerd",
+  "source_html_sha256": "f63069b19098eb623d23013095fdcb80c7c6edcffa62c4cfaf860c666ffb5500",
+  "source_snapshot_sha256": "35f212a494f44d2d37461b029cffa89d29bc70640a66820a3320b28b446d4cd1",
+  "preservation": "All 85 article blocks retain their exact text and formula symbols, in order. Only layout, heading levels, three-part navigation and separately labelled visualizations are added. No copyediting or mathematical correction of the original article.",
+  "parts": [
+    {
+      "file": "magnificent-jump-intro.md",
+      "source_blocks": [
+        0,
+        12
+      ]
+    },
+    {
+      "file": "magnificent-jump-random-clock.md",
+      "source_blocks": [
+        13,
+        39
+      ]
+    },
+    {
+      "file": "magnificent-jump-variance-gamma.md",
+      "source_blocks": [
+        40,
+        84
+      ]
+    }
+  ],
+  "visual_route": "no-image-generator",
+  "design_system": "QuantCorner / QuantSeras, existing light book layout",
+  "viz_reference": "https://engineering.nyu.edu/sites/default/files/2018-09/CarrEuropeanFinReview1998.pdf",
+  "visualizations": [
+    "Viz เพิ่มเติม · ตัวอย่างสมมติ: เปรียบเทียบ Normal กับ symmetric Variance Gamma ที่มีค่าเฉลี่ย 0 และ variance 0.04 เท่ากัน กำหนด T = 1, θ = 0, σ = 0.2, ν = 1, μ = 1 กรณีนี้ VG เป็น Laplace distribution กราฟขวาใช้แกนความหนาแน่นแบบ log; ไม่ใช่ข้อมูลตลาด",
+    "Viz เพิ่มเติม · ตัวอย่างจำลอง Gamma clock หนึ่งเส้นทาง: μ = 1, ν = 0.25, T = 1 ปี แบ่ง 180 time steps, seed = 2026092002 ใช้ Gamma increments ที่มี shape = Δt/ν และ scale = ν ภาพแสดงค่าบนกริดเวลา ไม่ได้แสดงทุก jump ระหว่างจุดสังเกต",
+    "Viz เพิ่มเติม · จำลอง X(T) = θG + σ√G Z โดย G เป็น Gamma(shape = T/ν, scale = ν) และ Z เป็น Standard Normal ที่เป็นอิสระจาก G ใช้ T = 1, ν = 0.4, σ = 0.2, μ = 1 และ θ = −0.15, 0, 0.15 จำนวน 160,000 ตัวอย่างต่อค่า θ, seed = 2026092003 เป็น histogram จากข้อมูลจำลอง ไม่ใช่ผล fit ตลาดหรือการคำนวณราคา Option"
+  ],
+  "notebook": {
+    "file": "notebooks/the-magnificent-jump.ipynb",
+    "cells": 96,
+    "executed_code_cells": 4
+  }
+}

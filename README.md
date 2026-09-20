@@ -162,3 +162,9 @@ Notebook ใช้ Python 3, NumPy และ Jupyter/IPython ถ้ารัน 
 บทต่อจาก Stylized Facts อยู่ใน `volatility-models-arch.md` ครอบคลุม ARCH/GARCH, variance forecasts, GJR, ARCH-M และ likelihood พร้อมห้องทดลองและ Notebook ใช้เอกสาร *Volatility Models: the ARCH framework* ของ Stephen Taylor (27 February 2025) เป็นแหล่งหลัก ตัวเลขและกราฟทั้งหมดคำนวณจากสมมติฐาน ไม่ใช่ผล fit ราคาตลาด ดูรายละเอียดใน `data/volatility-models-provenance.json`
 
 สร้างภาพด้วย `python3 scripts/make_volatility_models_figures.py` และสร้างพร้อมรัน Notebook ด้วย `python3 scripts/make_volatility_models_notebook.py` ตรวจผ่าน `npm test`, `npm run build:pages` และ `node qa/volatility-models-page-checks.cjs` ขณะเปิด preview พอร์ต 8763
+
+## The Magnificent Jump — three-part original article
+
+The article by สุรพัศ หอมชุ่ม · Math Nerd is preserved from the [provided source](https://qc-variance-gamma-model.nutdnuy.chatgpt.site/) in `magnificent-jump-intro.md`, `magnificent-jump-random-clock.md`, and `magnificent-jump-variance-gamma.md`. All 85 original content blocks, including formula symbols and spelling, remain in order. Added visualizations are labelled and use hypothetical data. The complete notebook is `notebooks/the-magnificent-jump.ipynb`.
+
+Regenerate with `python3 scripts/make_magnificent_jump_notebook.py` (Beautiful Soup, nbformat, NumPy, Matplotlib, fonttools and brotli). This overwrites only this series' pages, notebook, figures and provenance. Run `npm run build:pages`, then check preservation with `python3 qa/magnificent-jump-source-checks.py`. The notebook runs independently with Python 3, NumPy and Matplotlib. See `data/magnificent-jump-provenance.json` for attribution, source hashes and simulation parameters.

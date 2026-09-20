@@ -42,5 +42,11 @@ chapters:
     title: Introduction to Numerical Methods
   - file: option-greeks
     title: Know Your Weapon — Option Greeks
+  - file: magnificent-jump-intro
+    title: The Magnificent Jump · ตอนที่ 1
+  - file: magnificent-jump-random-clock
+    title: The Magnificent Jump · ตอนที่ 2
+  - file: magnificent-jump-variance-gamma
+    title: The Magnificent Jump · ตอนที่ 3
   - file: glossary
     title: อภิธานศัพท์

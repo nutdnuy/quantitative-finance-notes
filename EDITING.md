@@ -222,3 +222,11 @@ GitHub Actions จะตรวจและสร้างเว็บให้�
 หลังแก้บทหรือสมการ รัน `python3 scripts/make_volatility_models_figures.py` และ `python3 scripts/make_volatility_models_notebook.py` จากนั้น `npm test`, `npm run build:pages` และ `node qa/volatility-models-page-checks.cjs` ขณะเปิด preview ที่พอร์ต 8763 Notebook สร้างจาก Markdown และฝัง SVG ทั้งสามภาพไว้ คำสั่งเขียนทับเฉพาะ `notebooks/volatility-models-arch.ipynb` จึงควรเก็บการทดลองส่วนตัวในชื่ออื่น
 
 หน้า Volatility Models อยู่ถัดจาก Asset Returns — Empirical Stylized Facts ในสารบัญและหน้า Welcome การเผยแพร่ใช้ workflow Publish book ตามขั้นตอนเดียวกับบทอื่น
+
+## The Magnificent Jump: preserve the original wording
+
+The three pages `magnificent-jump-intro.md`, `magnificent-jump-random-clock.md`, and `magnificent-jump-variance-gamma.md` reproduce the supplied article without copyediting. The 85 ordered source blocks live in `data/magnificent-jump-source.json`; preserve spelling and formula symbols. Three-part boundaries are blocks 0–12, 13–39, and 40–84.
+
+Run `python3 scripts/make_magnificent_jump_notebook.py` to rebuild the three pages, SVG figures and executed `notebooks/the-magnificent-jump.ipynb`. Authoring dependencies are Beautiful Soup, nbformat, NumPy, Matplotlib, fonttools and brotli. Visualization code and captions are in `scripts/magnificent_jump_viz.py`; only this separately labelled material should change without explicit permission to edit the original. Check `python3 qa/magnificent-jump-source-checks.py` after `npm run build:pages`.
+
+The `author` frontmatter sets the page footer attribution. `author_profile: false` omits the site's default author profile, so the guest article is credited to สุรพัศ หอมชุ่ม · Math Nerd.
